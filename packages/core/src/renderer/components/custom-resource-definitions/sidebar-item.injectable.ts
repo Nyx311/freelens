@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import customResourceDefinitionsRouteInjectable from "../../../common/front-end-routing/routes/cluster/custom-resources/custom-resource-definitions.injectable";
 import navigateToCustomResourceDefinitionsInjectable from "../../../common/front-end-routing/routes/cluster/custom-resources/navigate-to-custom-resource-definitions.injectable";
@@ -18,7 +19,7 @@ const customResourceDefinitionsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: customResourcesSidebarItemInjectable.id,
-      title: "Definitions",
+      title: t("Definitions"),
       onClick: di.inject(navigateToCustomResourceDefinitionsInjectable),
       isActive: di.inject(routeIsActiveInjectable, customResourceDefinitionsRoute),
       isVisible: customResourceDefinitionsRoute.isEnabled,

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { noop, waitUntilDefined } from "@freelensapp/utilities";
@@ -58,9 +59,12 @@ const sendCommandInjectable = getInjectable({
       const shellIsReady = when(() => terminalApi.isReady);
       const notifyVeryLong = setTimeout(() => {
         shellIsReady.cancel();
-        showSuccessNotification("If terminal shell is not ready please check your shell init files, if applicable.", {
-          timeout: 4_000,
-        });
+        showSuccessNotification(
+          t("If terminal shell is not ready please check your shell init files, if applicable."),
+          {
+            timeout: 4_000,
+          },
+        );
       }, 10_000);
 
       await shellIsReady.catch(noop);

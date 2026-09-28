@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { backoffCaller, byOrderNumber, withConcurrencyLimit } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -41,7 +42,7 @@ const requestApiResourcesInjectable = getInjectable({
         const result = await backoffCaller(() => apiVersionRequester.request(cluster), {
           onIntermediateError: (error, attempt) => {
             broadcastConnectionUpdate({
-              message: `Failed to list kube API resource kinds, attempt ${attempt}: ${error}`,
+              message: t("Failed to list kube API resource kinds, attempt {{attempt}}: {{error}}", { attempt, error }),
               level: "warning",
             });
             logger.warn(`[LIST-API-RESOURCES]: failed to list kube api resources: ${error}`, {
@@ -69,7 +70,7 @@ const requestApiResourcesInjectable = getInjectable({
       for (const result of results) {
         if (!result.callWasSuccessful) {
           broadcastConnectionUpdate({
-            message: `Kube APIs under "${result.listGroup.path}" may not be displayed`,
+            message: t('Kube APIs under "{{path}}" may not be displayed', { path: result.listGroup.path }),
             level: "warning",
           });
           continue;

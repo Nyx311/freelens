@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import endpointSlicesRouteInjectable from "../../../common/front-end-routing/routes/cluster/network/endpoint-slices/endpoint-slices-route.injectable";
 import navigateToEndpointSlicesInjectable from "../../../common/front-end-routing/routes/cluster/network/endpoint-slices/navigate-to-endpoint-slices.injectable";
@@ -19,7 +20,7 @@ const endpointSlicesSidebarItemInjectable = getInjectable({
 
     return {
       parentId: networkSidebarItemInjectable.id,
-      title: "Endpoint Slices",
+      title: t("Endpoint Slices"),
       onClick: di.inject(navigateToEndpointSlicesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

@@ -5,7 +5,7 @@
  */
 
 import "./view.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -49,11 +49,11 @@ class NonInjectedRoles extends React.Component<Dependencies> {
             [columnId.age]: (role) => -role.getCreationTimestamp(),
           }}
           searchFilters={[(role) => role.getSearchFields()]}
-          renderHeaderTitle="Roles"
+          renderHeaderTitle={t("Roles")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(role) => [
             <WithTooltip>{role.getName()}</WithTooltip>,
@@ -62,7 +62,7 @@ class NonInjectedRoles extends React.Component<Dependencies> {
           ]}
           addRemoveButtons={{
             onAdd: () => openAddRoleDialog(),
-            addTooltip: "Create new Role",
+            addTooltip: t("Create new Role"),
           }}
         />
         <AddRoleDialog />

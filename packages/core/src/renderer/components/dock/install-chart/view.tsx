@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./install-chart.scss";
 
 import { Button } from "@freelensapp/button";
@@ -48,25 +49,25 @@ const NonInjectedInstallChart = observer(({ model: model, tabId }: InstallChartP
         <p>
           <Icon material="check" big sticker />
         </p>
-        <p>Installation complete!</p>
+        <p>{t("Installation complete!")}</p>
         <div className="flex gap-3 items-center">
           <Button
             autoFocus
             primary
-            label="View Helm Release"
+            label={t("View Helm Release")}
             onClick={prevDefault(model.navigateToInstalledRelease)}
             data-testid={`show-release-${installed.release.name}-for-${tabId}`}
           />
           <Button
             plain
             active
-            label="Show Notes"
+            label={t("Show Notes")}
             onClick={model.executionOutput.show}
             data-testid={`show-execution-output-for-${installed.release.name}-in-${tabId}`}
           />
         </div>
         <LogsDialog
-          title="Helm Chart Install"
+          title={t("Helm Chart Install")}
           isOpen={model.executionOutput.isShown.get()}
           close={model.executionOutput.close}
           logs={installed.log}
@@ -83,9 +84,9 @@ const NonInjectedInstallChart = observer(({ model: model, tabId }: InstallChartP
         tabId={tabId}
         controls={
           <div className="install-controls flex gap-2 items-center">
-            <span>Chart</span>
-            <Badge label={model.chartName} title="Repo/Name" />
-            <span>Version</span>
+            <span>{t("Chart")}</span>
+            <Badge label={model.chartName} title={t("Repo/Name")} />
+            <span>{t("Version")}</span>
             <Select
               className="chart-version"
               value={version.value.get()}
@@ -94,7 +95,7 @@ const NonInjectedInstallChart = observer(({ model: model, tabId }: InstallChartP
               menuPlacement="top"
               id={`install-chart-version-select-for-${tabId}`}
             />
-            <span>Namespace</span>
+            <span>{t("Namespace")}</span>
             <NamespaceSelect
               showIcons={false}
               menuPlacement="top"
@@ -103,15 +104,15 @@ const NonInjectedInstallChart = observer(({ model: model, tabId }: InstallChartP
               id={`install-chart-namespace-select-for-${tabId}`}
             />
             <Input
-              placeholder="Name (optional)"
-              title="Release name"
+              placeholder={t("Name (optional)")}
+              title={t("Release name")}
               maxLength={50}
               value={customName.value.get()}
               onChange={customName.onChange}
               data-testid={`install-chart-custom-name-input-for-${tabId}`}
             />
             <Checkbox
-              label="Force conflicts"
+              label={t("Force conflicts")}
               value={model.forceConflicts.value.get()}
               onChange={model.forceConflicts.onChange}
             />
@@ -120,7 +121,7 @@ const NonInjectedInstallChart = observer(({ model: model, tabId }: InstallChartP
         error={errorInConfiguration.value.get()}
         submit={model.install}
         disableSubmit={!model.isValid} // !namespace
-        submitLabel="Install"
+        submitLabel={t("Install")}
         submittingMessage="Installing..."
         showSubmitClose={false}
         cancelTestId={`cancel-install-chart-from-tab-for-${tabId}`}

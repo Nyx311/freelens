@@ -5,11 +5,12 @@
  */
 
 import "./port-forwards.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
+import { Trans } from "react-i18next";
 import navigateToPortForwardsInjectable from "../../../common/front-end-routing/routes/cluster/network/port-forwards/navigate-to-port-forwards.injectable";
 import portForwardStoreInjectable from "../../port-forward/port-forward-store/port-forward-store.injectable";
 import { ItemListLayout } from "../item-object-list/list-layout";
@@ -106,10 +107,11 @@ class NonInjectedPortForwards extends React.Component<Dependencies> {
 
     return (
       <div>
-        <>
-          {"Stop forwarding from "}
-          <b>{forwardPorts}</b>?
-        </>
+        <Trans
+          i18nKey="Stop forwarding from <strong>{{ports}}</strong>?"
+          values={{ ports: forwardPorts }}
+          components={{ strong: <b /> }}
+        />
       </div>
     );
   }
@@ -133,16 +135,21 @@ class NonInjectedPortForwards extends React.Component<Dependencies> {
             [columnId.status]: (item) => item.getStatus(),
           }}
           searchFilters={[(item) => item.getSearchFields()]}
-          renderHeaderTitle="Port Forwarding"
+          renderHeaderTitle={t("Port Forwarding")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Kind", className: "kind", sortBy: columnId.kind, id: columnId.kind },
-            { title: "Pod Port", className: "port", sortBy: columnId.port, id: columnId.port },
-            { title: "Local Port", className: "forwardPort", sortBy: columnId.forwardPort, id: columnId.forwardPort },
-            { title: "Protocol", className: "protocol", sortBy: columnId.protocol, id: columnId.protocol },
-            { title: "Address", className: "address", sortBy: columnId.address, id: columnId.address },
-            { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Kind"), className: "kind", sortBy: columnId.kind, id: columnId.kind },
+            { title: t("Pod Port"), className: "port", sortBy: columnId.port, id: columnId.port },
+            {
+              title: t("Local Port"),
+              className: "forwardPort",
+              sortBy: columnId.forwardPort,
+              id: columnId.forwardPort,
+            },
+            { title: t("Protocol"), className: "protocol", sortBy: columnId.protocol, id: columnId.protocol },
+            { title: t("Address"), className: "address", sortBy: columnId.address, id: columnId.address },
+            { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
           ]}
           renderTableContents={(item) => [
             <WithTooltip>{item.getName()}</WithTooltip>,
@@ -152,7 +159,7 @@ class NonInjectedPortForwards extends React.Component<Dependencies> {
             <WithTooltip>{item.getForwardPort()}</WithTooltip>,
             <WithTooltip>{item.getProtocol()}</WithTooltip>,
             <WithTooltip>{item.getAddress()}</WithTooltip>,
-            { title: <WithTooltip>{item.getStatus()}</WithTooltip>, className: item.getStatus().toLowerCase() },
+            { title: <WithTooltip>{t(item.getStatus())}</WithTooltip>, className: item.getStatus().toLowerCase() },
           ]}
           renderItemMenu={(pf) => (
             <PortForwardMenu portForward={pf} removeConfirmationMessage={this.renderRemoveDialogMessage([pf])} />

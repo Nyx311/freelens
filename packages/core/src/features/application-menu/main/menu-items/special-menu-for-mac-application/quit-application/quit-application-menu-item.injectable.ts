@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import isMacInjectable from "../../../../../../common/vars/is-mac.injectable";
 import requestQuitOfAppInjectable from "../../../../../../main/electron-app/features/require-quit.injectable";
@@ -18,7 +19,7 @@ const quitApplicationMenuItemInjectable = getInjectable({
     return {
       kind: "clickable-menu-item" as const,
       id: "quit",
-      label: "Quit",
+      label: t("Quit"),
       parentId: isMac ? "mac" : "file",
       orderNumber: isMac ? 140 : 70,
       keyboardShortcut: isMac ? "Cmd+Q" : "Alt+F4",

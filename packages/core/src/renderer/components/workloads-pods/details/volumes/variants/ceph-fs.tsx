@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -33,21 +34,21 @@ const NonInjectedCephFs = (props: PodVolumeVariantSpecificProps<"cephfs"> & Depe
 
   return (
     <>
-      <DrawerItem name="Monitors">
+      <DrawerItem name={t("Monitors")}>
         <ul>
           {monitors.map((monitor) => (
             <li key={monitor}>{monitor}</li>
           ))}
         </ul>
       </DrawerItem>
-      <DrawerItem name="Mount Path">{path}</DrawerItem>
-      <DrawerItem name="Username">{user}</DrawerItem>
+      <DrawerItem name={t("Mount Path")}>{path}</DrawerItem>
+      <DrawerItem name={t("Username")}>{user}</DrawerItem>
       {secretRef ? (
-        <LocalRef pod={pod} title="Secret" kubeRef={secretRef} api={secretApi} />
+        <LocalRef pod={pod} title={t("Secret")} kubeRef={secretRef} api={secretApi} />
       ) : (
-        <DrawerItem name="Secret Filepath">{secretFile}</DrawerItem>
+        <DrawerItem name={t("Secret Filepath")}>{secretFile}</DrawerItem>
       )}
-      <DrawerItem name="Readonly" data-testid="cephfs-readonly">
+      <DrawerItem name={t("Readonly")} data-testid="cephfs-readonly">
         {readOnly.toString()}
       </DrawerItem>
     </>

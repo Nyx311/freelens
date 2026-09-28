@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./lease-details.scss";
 
 import { observer } from "mobx-react";
@@ -23,19 +24,19 @@ export class LeaseDetails extends React.Component<LeaseDetailsProps> {
 
     return (
       <div className="LeaseDetails">
-        <DrawerItem name="Holder Identity">{lease.getHolderIdentity()}</DrawerItem>
+        <DrawerItem name={t("Holder Identity")}>{lease.getHolderIdentity()}</DrawerItem>
 
-        <DrawerItem name="Lease Duration Seconds">{lease.getLeaseDurationSeconds()}</DrawerItem>
+        <DrawerItem name={t("Lease Duration Seconds")}>{lease.getLeaseDurationSeconds()}</DrawerItem>
 
-        <DrawerItem name="Lease Transitions" hidden={lease.getLeaseTransitions() === undefined}>
+        <DrawerItem name={t("Lease Transitions")} hidden={lease.getLeaseTransitions() === undefined}>
           {lease.getLeaseTransitions()}
         </DrawerItem>
 
-        <DrawerItem name="Acquire Time" hidden={lease.getAcquireTime() === ""}>
+        <DrawerItem name={t("Acquire Time")} hidden={lease.getAcquireTime() === ""}>
           {lease.getAcquireTime()}
         </DrawerItem>
 
-        <DrawerItem name="Renew Time">{lease.getRenewTime()}</DrawerItem>
+        <DrawerItem name={t("Renew Time")}>{lease.getRenewTime()}</DrawerItem>
       </div>
     );
   }

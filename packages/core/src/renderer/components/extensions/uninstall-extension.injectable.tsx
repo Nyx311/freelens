@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -61,9 +62,7 @@ const uninstallExtensionInjectable = getInjectable({
 
         showSuccessNotification(
           <p>
-            {"Extension "}
-            <b>{displayName}</b>
-            {" successfully uninstalled!"}
+            {t("Extension")} <b>{displayName}</b> {t("successfully uninstalled!")}
           </p>,
         );
 
@@ -74,10 +73,7 @@ const uninstallExtensionInjectable = getInjectable({
         logger.info(`[EXTENSION-UNINSTALL]: uninstalling ${displayName} has failed: ${error}`, { error });
         showErrorNotification(
           <p>
-            {"Uninstalling extension "}
-            <b>{displayName}</b>
-            {" has failed: "}
-            <em>{message}</em>
+            {t("Uninstalling extension")} <b>{displayName}</b> {t("has failed:")} <em>{message}</em>
           </p>,
         );
 

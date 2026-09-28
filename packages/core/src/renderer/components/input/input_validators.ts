@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { namedCaptures } from "@freelensapp/utilities";
 import fse from "fs-extra";
 
@@ -138,13 +139,13 @@ export function unionInputValidatorsAsync(
 
 export const isRequired = inputValidator({
   condition: ({ required }) => required,
-  message: () => `This field is required`,
+  message: () => t("This field is required"),
   validate: (value) => !!value.trim(),
 });
 
 export const isEmail = inputValidator({
   condition: ({ type }) => type === "email",
-  message: () => `Wrong email format`,
+  message: () => t("Wrong email format"),
   validate: (value) =>
     !!value.match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -161,7 +162,7 @@ export const isNumber = inputValidator({
       .filter(Boolean)
       .join(", ");
 
-    return `Invalid number${minMax ? ` (${minMax})` : ""}`;
+    return minMax ? t("Invalid number ({{range}})", { range: minMax }) : t("Invalid number");
   },
   validate: (value, { min, max } = {}) => {
     const numVal = +value;
@@ -176,7 +177,7 @@ export const isNumber = inputValidator({
 
 export const isUrl = inputValidator({
   condition: ({ type }) => type === "url",
-  message: () => `Wrong url format`,
+  message: () => t("Wrong url format"),
   validate: (value) => {
     try {
       return Boolean(new URL(value));
@@ -198,7 +199,7 @@ export const extensionNameInstallCaptures = (value: string) =>
 
 export const isExtensionNameInstall = inputValidator({
   condition: ({ type }) => type === "text",
-  message: () => "Not an extension name with optional version",
+  message: () => t("Not an extension name with optional version"),
   validate: (value) => isExtensionNameInstallRegex.test(value),
 });
 
@@ -207,20 +208,20 @@ export const isPath = asyncInputValidator({
   condition: ({ type }) => type === "text",
   validate: async (value) => {
     if (!(await fse.pathExists(value))) {
-      throw new Error(`"${value}" is not a valid file path`);
+      throw new Error(t('"{{value}}" is not a valid file path', { value }));
     }
   },
 });
 
 export const minLength = inputValidator({
   condition: ({ minLength }) => !!minLength,
-  message: (value, { minLength = 0 } = {}) => `Minimum length is ${minLength}`,
+  message: (value, { minLength = 0 } = {}) => t("Minimum length is {{minLength}}", { minLength }),
   validate: (value, { minLength = 0 } = {}) => value.length >= minLength,
 });
 
 export const maxLength = inputValidator({
   condition: ({ maxLength }) => !!maxLength,
-  message: (value, { maxLength = 0 } = {}) => `Maximum length is ${maxLength}`,
+  message: (value, { maxLength = 0 } = {}) => t("Maximum length is {{maxLength}}", { maxLength }),
   validate: (value, { maxLength = 0 } = {}) => value.length <= maxLength,
 });
 
@@ -228,7 +229,9 @@ const systemNameMatcher = /^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[
 
 export const systemName = inputValidator({
   message: () =>
-    `A System Name must be lowercase DNS labels separated by dots. DNS labels are alphanumerics and dashes enclosed by alphanumerics.`,
+    t(
+      "A System Name must be lowercase DNS labels separated by dots. DNS labels are alphanumerics and dashes enclosed by alphanumerics.",
+    ),
   validate: (value) => !!value.match(systemNameMatcher),
 });
 
@@ -237,12 +240,14 @@ const systemNamesMatcher =
 
 export const systemNames = inputValidator({
   message: () =>
-    `A System Name must be lowercase DNS labels separated by dots. DNS labels are alphanumerics and dashes enclosed by alphanumerics.`,
+    t(
+      "A System Name must be lowercase DNS labels separated by dots. DNS labels are alphanumerics and dashes enclosed by alphanumerics.",
+    ),
   validate: (value) => !!value.match(systemNamesMatcher),
 });
 
 export const accountId = inputValidator({
-  message: () => `Invalid account ID`,
+  message: () => t("Invalid account ID"),
   validate: (value) => isEmail.validate(value) || systemName.validate(value),
 });
 

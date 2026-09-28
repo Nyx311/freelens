@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./runtime-classes.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -56,11 +57,26 @@ class NonInjectedRuntimeClasses extends React.Component<RuntimeClassesProps & De
             [columnId.age]: (rc) => -rc.getCreationTimestamp(),
           }}
           searchFilters={[(rc) => rc.getSearchFields()]}
-          renderHeaderTitle="Runtime Classes"
+          renderHeaderTitle={t("Runtime Classes")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Handler", className: "handler", sortBy: columnId.handler, id: columnId.handler },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Handler"),
+              className: "handler",
+              sortBy: columnId.handler,
+              id: columnId.handler,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(rc) => [
             <WithTooltip>{rc.getName()}</WithTooltip>,

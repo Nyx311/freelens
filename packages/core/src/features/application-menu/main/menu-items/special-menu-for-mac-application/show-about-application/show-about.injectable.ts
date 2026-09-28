@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import * as semver from "semver";
@@ -37,23 +38,23 @@ const showAboutInjectable = getInjectable({
 
       const appInfo = [
         `${appName}: ${buildVersion}`,
-        `Extension API: ${extensionApiVersion}`,
-        `Electron: ${process.versions.electron}`,
-        `Chrome: ${process.versions.chrome}`,
-        `Node: ${process.versions.node}`,
-        `Platform: ${process.platform}`,
-        `Architecture: ${process.arch}`,
+        t("Extension API: {{version}}", { version: extensionApiVersion }),
+        t("Electron: {{version}}", { version: process.versions.electron }),
+        t("Chrome: {{version}}", { version: process.versions.chrome }),
+        t("Node: {{version}}", { version: process.versions.node }),
+        t("Platform: {{platform}}", { platform: process.platform }),
+        t("Architecture: {{architecture}}", { architecture: process.arch }),
         applicationCopyright,
       ];
 
-      const buttons = ["Close"];
+      const buttons = [t("Close")];
 
       try {
         const latestVersion = await getLatestVersion("@freelensapp/core");
         if (latestVersion && semver.gt(latestVersion, buildVersion)) {
           newVersion = latestVersion;
-          appInfo.push("", `Latest version: ${latestVersion}`);
-          buttons.push("Open Release Notes");
+          appInfo.push("", t("Latest version: {{version}}", { version: latestVersion }));
+          buttons.push(t("Open Release Notes"));
         }
       } catch (error) {
         logger.error(`[SHOW-ABOUT]: Failed to check latest version: ${error}`);

@@ -6,6 +6,7 @@
 
 import os from "node:os";
 import path from "node:path";
+import { t } from "@freelensapp/i18n";
 import { getOrInsertWith } from "@freelensapp/utilities";
 import { TerminalChannels, type TerminalMessage } from "../../common/terminal/channels";
 import { clearKubeconfigEnvVars } from "../utils/clear-kube-env-vars";
@@ -247,7 +248,7 @@ export abstract class ShellSession {
   protected async openShellProcess(shell: string, args: string[], env: Record<string, string | undefined>) {
     const cwd = await this.getCwd(env);
 
-    this.status.info("Starting shell ...");
+    this.status.info(t("Starting shell ..."));
 
     const { shellProcess, resume } = this.ensureShellProcess(shell, args, env, cwd);
 
@@ -270,7 +271,7 @@ export abstract class ShellSession {
 
         this.send({
           type: TerminalChannels.STDOUT,
-          data: `\n\x1b[0m\x1b[1m[Process exited with code ${exitCode}]`,
+          data: `\n\x1b[0m\x1b[1m${t("[Process exited with code {{code}}]", { code: exitCode })}`,
         });
       }
     });
@@ -387,7 +388,7 @@ export abstract class ShellSession {
     const shell = this.dependencies.userShellSetting.get() || this.dependencies.defaultShell;
 
     if (reportStatus) {
-      this.status.info("Resolving shell environment ...");
+      this.status.info(t("Resolving shell environment ..."));
     }
 
     const result = await this.dependencies.computeShellEnvironment(shell);

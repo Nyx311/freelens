@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import isMacInjectable from "../../../../../../common/vars/is-mac.injectable";
 import productNameInjectable from "../../../../../../common/vars/product-name.injectable";
@@ -23,7 +24,7 @@ const aboutMenuItemInjectable = getInjectable({
       id: "about",
       parentId: isMac ? "mac" : "help",
       orderNumber: isMac ? 10 : 40,
-      label: `About ${productName}`,
+      label: t("About {{productName}}", { productName }),
 
       onClick() {
         showAbout();

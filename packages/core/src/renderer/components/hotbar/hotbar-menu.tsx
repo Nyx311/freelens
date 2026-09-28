@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./hotbar-menu.scss";
 
 import {
@@ -258,7 +259,7 @@ const NonInjectedHotbarMenu = observer((props: Dependencies & HotbarMenuProps) =
         tooltip={`${item.entity.name} (${item.entity.source})`}
         menuItems={[
           {
-            title: "Remove from Hotbar",
+            title: t("Remove from Hotbar"),
             onClick: () => removeItem(item.entity.uid),
           },
         ]}
@@ -325,6 +326,34 @@ const NonInjectedHotbarMenu = observer((props: Dependencies & HotbarMenuProps) =
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
+          accessibility={{
+            screenReaderInstructions: {
+              draggable: t(`
+    To pick up a draggable item, press the space bar.
+    While dragging, use the arrow keys to move the item.
+    Press space again to drop the item in its new position, or press escape to cancel.
+  `),
+            },
+            announcements: {
+              onDragStart: ({ active }) => t("Picked up draggable item {{id}}.", { id: active.id }),
+              onDragOver: ({ active, over }) =>
+                over
+                  ? t("Draggable item {{id}} was moved over droppable area {{overId}}.", {
+                      id: active.id,
+                      overId: over.id,
+                    })
+                  : t("Draggable item {{id}} is no longer over a droppable area.", { id: active.id }),
+              onDragEnd: ({ active, over }) =>
+                over
+                  ? t("Draggable item {{id}} was dropped over droppable area {{overId}}", {
+                      id: active.id,
+                      overId: over.id,
+                    })
+                  : t("Draggable item {{id}} was dropped.", { id: active.id }),
+              onDragCancel: ({ active }) =>
+                t("Dragging was cancelled. Draggable item {{id}} was dropped.", { id: active.id }),
+            },
+          }}
           onDragStart={onDragStart}
           onDragOver={onDragOver}
           onDragEnd={onDragEnd}

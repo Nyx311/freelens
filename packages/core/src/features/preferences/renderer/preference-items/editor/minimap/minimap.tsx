@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubHeader } from "../../../../../../renderer/components/layout/sub-header";
@@ -20,12 +21,12 @@ interface Dependencies {
 
 const minimapPositionOptions = (["left", "right"] as const).map((side) => ({
   value: side,
-  label: side,
+  label: t(side),
 }));
 
 const NonInjectedMinimap = observer(({ state: { editorConfiguration } }: Dependencies) => (
   <section>
-    <SubTitle title="Minimap" />
+    <SubTitle title={t("Minimap")} />
 
     <div className="flex gap-2 justify-between">
       <div className="flex gap-2 items-center">
@@ -33,11 +34,11 @@ const NonInjectedMinimap = observer(({ state: { editorConfiguration } }: Depende
           checked={editorConfiguration.minimap.enabled}
           onChange={() => (editorConfiguration.minimap.enabled = !editorConfiguration.minimap.enabled)}
         >
-          Show minimap
+          {t("Show minimap")}
         </Switch>
       </div>
       <div className="flex gap-2 items-center">
-        <SubHeader compact>Position</SubHeader>
+        <SubHeader compact>{t("Position")}</SubHeader>
         <Select
           id="minimap-input"
           themeName="lens"

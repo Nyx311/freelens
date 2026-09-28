@@ -58,6 +58,10 @@ const userPreferenceDescriptorsInjectable = getInjectable({
         fromStore: (val) => val || "",
         toStore: (val) => val || undefined,
       }),
+      language: getPreferenceDescriptor<string>({
+        fromStore: (val) => val || "system",
+        toStore: (val) => (!val || val === "system" ? undefined : val),
+      }),
       localeTimezone: getPreferenceDescriptor<string>({
         fromStore: (val) => val || currentTimezone,
         toStore: (val) => (!val || val === currentTimezone ? undefined : val),

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import i18n from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
 import emitAppEventInjectable from "../../../../common/app-event-bus/emit-event.injectable";
@@ -35,7 +36,7 @@ const createApplicationWindowInjectable = getInjectable({
           defaultHeight: 900,
           defaultWidth: 1440,
           getContentSource: () => ({
-            url: `https://renderer.freelens.app:${lensProxyPort.get()}`,
+            url: `https://renderer.freelens.app:${lensProxyPort.get()}?freelensLocale=${encodeURIComponent(i18n.language)}`,
           }),
           resizable: true,
           windowFrameUtilitiesAreShown: isMac,

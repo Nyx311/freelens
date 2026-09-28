@@ -6,6 +6,7 @@
 
 import "./pods.scss";
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { interval } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -56,7 +57,7 @@ const NonInjectedPods = observer((props: Dependencies) => {
           (pod) => pod.status?.podIP,
           (pod) => pod.getNodeName(),
         ]}
-        renderHeaderTitle="Pods"
+        renderHeaderTitle={t("Pods")}
         renderTableHeader={[]}
         renderTableContents={() => []}
         columns={columns}

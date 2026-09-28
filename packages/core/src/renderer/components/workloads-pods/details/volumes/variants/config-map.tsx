@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { configMapApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { LocalRef } from "../variant-helpers";
@@ -23,7 +24,7 @@ const NonInjectedConfigMap = (props: PodVolumeVariantSpecificProps<"configMap"> 
     configMapApi,
   } = props;
 
-  return <LocalRef pod={pod} title="Name" kubeRef={{ name }} api={configMapApi} />;
+  return <LocalRef pod={pod} title={t("Name")} kubeRef={{ name }} api={configMapApi} />;
 };
 
 export const ConfigMap = withInjectables<Dependencies, PodVolumeVariantSpecificProps<"configMap">>(

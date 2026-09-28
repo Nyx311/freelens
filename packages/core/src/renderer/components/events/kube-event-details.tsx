@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { type KubeEvent, KubeObject } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { cssNames } from "@freelensapp/utilities";
@@ -76,18 +77,18 @@ class NonInjectedKubeEventDetails extends React.Component<KubeEventDetailsProps 
     return (
       <div>
         <DrawerTitle>
-          <span>Events</span>
+          <span>{t("Events")}</span>
         </DrawerTitle>
         {events.length > 0 && (
           <div className={styles.KubeEventDetails}>
             {sortEvents(events)?.map((event) => (
               <div className={styles.event} key={event.getId()}>
                 <div className={cssNames(styles.title, { [styles.warning]: event.isWarning() })}>{event.message}</div>
-                <DrawerItem name="Source">{event.getSource()}</DrawerItem>
-                <DrawerItem name="Count">{event.getCount()}</DrawerItem>
-                <DrawerItem name="Sub-object">{event.involvedObject.fieldPath}</DrawerItem>
+                <DrawerItem name={t("Source")}>{event.getSource()}</DrawerItem>
+                <DrawerItem name={t("Count")}>{event.getCount()}</DrawerItem>
+                <DrawerItem name={t("Sub-object")}>{event.involvedObject.fieldPath}</DrawerItem>
                 {event.lastTimestamp && (
-                  <DrawerItem name="Last seen">
+                  <DrawerItem name={t("Last seen")}>
                     <DurationAbsoluteTimestamp timestamp={event.lastTimestamp} />
                   </DrawerItem>
                 )}
@@ -95,7 +96,7 @@ class NonInjectedKubeEventDetails extends React.Component<KubeEventDetailsProps 
             ))}
           </div>
         )}
-        {events.length === 0 && <div className={styles.empty}>No events found</div>}
+        {events.length === 0 && <div className={styles.empty}>{t("No events found")}</div>}
       </div>
     );
   }

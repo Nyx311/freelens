@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./leases.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -53,12 +54,32 @@ class NonInjectedLease extends React.Component<LeaseProps & Dependencies> {
             [columnId.age]: (lease) => -lease.getCreationTimestamp(),
           }}
           searchFilters={[(lease) => lease.getSearchFields()]}
-          renderHeaderTitle="Leases"
+          renderHeaderTitle={t("Leases")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Holder", className: "holder", sortBy: columnId.holder, id: columnId.holder },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Holder"),
+              className: "holder",
+              sortBy: columnId.holder,
+              id: columnId.holder,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(lease) => [
             <WithTooltip>{lease.getName()}</WithTooltip>,

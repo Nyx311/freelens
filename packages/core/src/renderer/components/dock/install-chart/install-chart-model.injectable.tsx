@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { waitUntilDefined } from "@freelensapp/utilities";
 import { getInjectable, lifecycleEnum } from "@ogre-tools/injectable";
 import { action, computed, observable, runInAction } from "mobx";
@@ -271,9 +272,9 @@ export class InstallChartModel {
 
     return (
       <p>
-        {"Chart Release "}
+        {`${t("Chart Release")} `}
         <b>{installed.release.name}</b>
-        {" successfully created."}
+        {` ${t("successfully created.")}`}
       </p>
     );
   };

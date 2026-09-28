@@ -6,6 +6,7 @@
 
 import "./welcome.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -39,16 +40,17 @@ const NonInjectedWelcome = observer(({ welcomeMenuItems, productName, newVersion
 
         <div className="flex justify-center">
           <div style={{ width: `${defaultWidth}px` }} data-testid="welcome-text-container">
-            <h2>{`Welcome to ${productName}!`}</h2>
+            <h2>{t("Welcome to {{product}}!", { product: productName })}</h2>
 
             <p>
-              To get you started we have auto-detected your clusters in your kubeconfig file and added them to the
-              catalog, your centralized view for managing all your cloud-native resources.
+              {t(
+                "To get you started we have auto-detected your clusters in your kubeconfig file and added them to the catalog, your centralized view for managing all your cloud-native resources.",
+              )}
               <br />
               <br />
-              {"If you have any questions or feedback, please join us on our "}
+              {t("If you have any questions or feedback, please join us on our ")}
               <a href={forumsUrl} target="_blank" rel="noreferrer" className="link">
-                Github repository
+                {t("Github repository")}
               </a>
               .
             </p>

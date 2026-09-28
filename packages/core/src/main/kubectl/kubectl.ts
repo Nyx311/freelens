@@ -7,6 +7,7 @@
 import { createHash, randomBytes } from "node:crypto";
 import fs from "node:fs";
 import { setTimeout as delay } from "node:timers/promises";
+import { t } from "@freelensapp/i18n";
 import { hasTypedProperty, isObject, isString, json } from "@freelensapp/utilities";
 import { noop } from "es-toolkit";
 import { ensureDir, pathExists } from "fs-extra";
@@ -222,8 +223,11 @@ export class Kubectl {
     } catch (err) {
       this.dependencies.logger.error("Failed to get binary directory", err);
       opts?.onProblem?.(
-        `Failed to prepare the kubectl v${this.kubectlVersion} directory (${this.reasonOf(err)}) - ` +
-          `using the bundled v${this.dependencies.bundledKubectlVersion}`,
+        t("Failed to prepare the kubectl v{{version}} directory ({{reason}}) - using the bundled v{{bundledVersion}}", {
+          version: this.kubectlVersion,
+          reason: this.reasonOf(err),
+          bundledVersion: this.dependencies.bundledKubectlVersion,
+        }),
       );
 
       return "";
@@ -337,8 +341,13 @@ export class Kubectl {
     if (Kubectl.invalidBundle) {
       this.dependencies.logger.error(`Detected invalid bundle binary, returning ...`);
       opts?.onProblem?.(
-        `The bundled kubectl v${this.dependencies.bundledKubectlVersion} is not usable, so kubectl ` +
-          `v${this.kubectlVersion} was not prepared - using whichever kubectl is on PATH`,
+        t(
+          "The bundled kubectl v{{bundledVersion}} is not usable, so kubectl v{{version}} was not prepared - using whichever kubectl is on PATH",
+          {
+            bundledVersion: this.dependencies.bundledKubectlVersion,
+            version: this.kubectlVersion,
+          },
+        ),
       );
 
       return false;
@@ -362,9 +371,15 @@ export class Kubectl {
           `instead; set the "Path to kubectl binary" preference (kubectlBinariesPath) to use a different one.`,
       );
       opts?.onProblem?.(
-        `No verified checksum is pinned for kubectl v${this.kubectlVersion} on ` +
-          `${this.dependencies.normalizedDownloadPlatform}/${this.dependencies.normalizedDownloadArch}, so it was ` +
-          `not downloaded - using the bundled v${this.dependencies.bundledKubectlVersion}`,
+        t(
+          "No verified checksum is pinned for kubectl v{{version}} on {{platform}}/{{arch}}, so it was not downloaded - using the bundled v{{bundledVersion}}",
+          {
+            version: this.kubectlVersion,
+            platform: this.dependencies.normalizedDownloadPlatform,
+            arch: this.dependencies.normalizedDownloadArch,
+            bundledVersion: this.dependencies.bundledKubectlVersion,
+          },
+        ),
       );
 
       return false;
@@ -385,8 +400,11 @@ export class Kubectl {
           this.dependencies.logger.debug(`[KUBECTL]: Releasing lock for ${this.kubectlVersion}`);
           await release();
           opts?.onProblem?.(
-            `Failed to download kubectl v${this.kubectlVersion} (${this.reasonOf(error)}) - ` +
-              `using the bundled v${this.dependencies.bundledKubectlVersion}`,
+            t("Failed to download kubectl v{{version}} ({{reason}}) - using the bundled v{{bundledVersion}}", {
+              version: this.kubectlVersion,
+              reason: this.reasonOf(error),
+              bundledVersion: this.dependencies.bundledKubectlVersion,
+            }),
           );
 
           return false;
@@ -397,15 +415,17 @@ export class Kubectl {
         // validates it (macOS code signing, Windows real-time scanning), which
         // is seconds to tens of seconds. Nothing here can make it shorter, so
         // the least it can do is say what is being waited on.
-        opts?.onPhase?.(`Verifying kubectl v${this.kubectlVersion} ...`);
+        opts?.onPhase?.(t("Verifying kubectl v{{version}} ...", { version: this.kubectlVersion }));
         isValid = await this.checkBinary(this.path, false);
 
         if (!isValid) {
           this.dependencies.logger.debug(`[KUBECTL]: Releasing lock for ${this.kubectlVersion}`);
           await release();
           opts?.onProblem?.(
-            `The downloaded kubectl v${this.kubectlVersion} did not run properly - ` +
-              `using the bundled v${this.dependencies.bundledKubectlVersion}`,
+            t("The downloaded kubectl v{{version}} did not run properly - using the bundled v{{bundledVersion}}", {
+              version: this.kubectlVersion,
+              bundledVersion: this.dependencies.bundledKubectlVersion,
+            }),
           );
 
           return false;
@@ -416,8 +436,10 @@ export class Kubectl {
         this.dependencies.logger.debug(`[KUBECTL]: Releasing lock for ${this.kubectlVersion}`);
         await release();
         opts?.onProblem?.(
-          `The local kubectl v${this.kubectlVersion} did not run properly - ` +
-            `using the bundled v${this.dependencies.bundledKubectlVersion}`,
+          t("The local kubectl v{{version}} did not run properly - using the bundled v{{bundledVersion}}", {
+            version: this.kubectlVersion,
+            bundledVersion: this.dependencies.bundledKubectlVersion,
+          }),
         );
 
         return false;
@@ -430,8 +452,11 @@ export class Kubectl {
     } catch (error) {
       this.dependencies.logger.error(`[KUBECTL]: Failed to get a lock for ${this.kubectlVersion}`, error);
       opts?.onProblem?.(
-        `Failed to get a lock for kubectl v${this.kubectlVersion} (${this.reasonOf(error)}) - ` +
-          `using the bundled v${this.dependencies.bundledKubectlVersion}`,
+        t("Failed to get a lock for kubectl v{{version}} ({{reason}}) - using the bundled v{{bundledVersion}}", {
+          version: this.kubectlVersion,
+          reason: this.reasonOf(error),
+          bundledVersion: this.dependencies.bundledKubectlVersion,
+        }),
       );
 
       return false;
@@ -443,8 +468,11 @@ export class Kubectl {
 
     if (!checksum) {
       throw new Error(
-        `No verified checksum is pinned for kubectl ${this.kubectlVersion} on ` +
-          `${this.dependencies.normalizedDownloadPlatform}/${this.dependencies.normalizedDownloadArch}`,
+        t("No verified checksum is pinned for kubectl {{version}} on {{platform}}/{{arch}}", {
+          version: this.kubectlVersion,
+          platform: this.dependencies.normalizedDownloadPlatform,
+          arch: this.dependencies.normalizedDownloadArch,
+        }),
       );
     }
 
@@ -458,10 +486,10 @@ export class Kubectl {
     });
 
     if (!response.callWasSuccessful) {
-      throw new Error(`Failed to download kubectl binary: ${response.error}`);
+      throw new Error(t("Failed to download kubectl binary: {{error}}", { error: response.error }));
     }
     if (!response.response || response.response.length == 0) {
-      throw new Error(`Empty content of kubectl binary`);
+      throw new Error(t("Empty content of kubectl binary"));
     }
 
     // The bytes must not be launchable before they have been verified, and that
@@ -489,8 +517,15 @@ export class Kubectl {
 
       if (digest !== checksum.sha256) {
         throw new Error(
-          `Checksum mismatch for kubectl ${this.kubectlVersion} downloaded from ${this.url}: ` +
-            `expected sha256 ${checksum.sha256}, got ${digest}`,
+          t(
+            "Checksum mismatch for kubectl {{version}} downloaded from {{url}}: expected sha256 {{expected}}, got {{actual}}",
+            {
+              version: this.kubectlVersion,
+              url: this.url,
+              expected: checksum.sha256,
+              actual: digest,
+            },
+          ),
         );
       }
 

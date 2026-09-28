@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -55,13 +56,13 @@ class NonInjectedHelmReleaseMenu extends React.Component<HelmReleaseMenuProps & 
       <>
         {hasRollback && (
           <MenuItem onClick={this.rollback}>
-            <Icon material="history" interactive={toolbar} tooltip="Rollback" />
-            <span className="title">Rollback</span>
+            <Icon material="history" interactive={toolbar} tooltip={t("Rollback")} />
+            <span className="title">{t("Rollback")}</span>
           </MenuItem>
         )}
         <MenuItem onClick={this.upgrade} data-testid={`upgrade-chart-menu-item-for-${release.getId()}`}>
-          <Icon material="refresh" interactive={toolbar} tooltip="Upgrade" />
-          <span className="title">Upgrade</span>
+          <Icon material="refresh" interactive={toolbar} tooltip={t("Upgrade")} />
+          <span className="title">{t("Upgrade")}</span>
         </MenuItem>
       </>
     );
@@ -82,7 +83,7 @@ class NonInjectedHelmReleaseMenu extends React.Component<HelmReleaseMenuProps & 
         removeAction={this.remove}
         removeConfirmationMessage={() => (
           <p>
-            Remove Helm Release <b>{release.name}</b>?
+            {t("Remove Helm Release")} <b>{release.name}</b>?
           </p>
         )}
       >

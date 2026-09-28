@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import configMapsRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/config-maps/config-maps-route.injectable";
 import navigateToConfigMapsInjectable from "../../../common/front-end-routing/routes/cluster/config/config-maps/navigate-to-config-maps.injectable";
@@ -19,7 +20,7 @@ const configMapsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Config Maps",
+      title: t("Config Maps"),
       onClick: di.inject(navigateToConfigMapsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

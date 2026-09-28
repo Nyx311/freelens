@@ -5,7 +5,7 @@
  */
 
 import "./view.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -48,10 +48,10 @@ class NonInjectedClusterRoles extends React.Component<Dependencies> {
             [columnId.age]: (clusterRole) => -clusterRole.getCreationTimestamp(),
           }}
           searchFilters={[(clusterRole) => clusterRole.getSearchFields()]}
-          renderHeaderTitle="Cluster Roles"
+          renderHeaderTitle={t("Cluster Roles")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(clusterRole) => [
             <WithTooltip>{clusterRole.getName()}</WithTooltip>,
@@ -59,7 +59,7 @@ class NonInjectedClusterRoles extends React.Component<Dependencies> {
           ]}
           addRemoveButtons={{
             onAdd: () => openAddClusterRoleDialog(),
-            addTooltip: "Create new ClusterRole",
+            addTooltip: t("Create new ClusterRole"),
           }}
         />
         <AddClusterRoleDialog />

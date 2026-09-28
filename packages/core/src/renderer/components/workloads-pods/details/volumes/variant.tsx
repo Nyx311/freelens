@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { DrawerItem } from "../../../drawer";
 import { AwsElasticBlockStore } from "./variants/aws-elastic-block-store";
@@ -279,7 +280,7 @@ export function VolumeVariant(props: VolumeVariantProps) {
   const result = renderVolumeVariant(props);
 
   if (!result) {
-    return <p>Error! Unknown pod volume kind</p>;
+    return <p>{t("Error! Unknown pod volume kind")}</p>;
   }
 
   const { kind, element } = result;
@@ -287,9 +288,9 @@ export function VolumeVariant(props: VolumeVariantProps) {
 
   return (
     <>
-      <DrawerItem name="Kind">
+      <DrawerItem name={t("Kind")}>
         {kind}
-        {isDeprecated && <Icon title="Deprecated" material="warning_amber" />}
+        {isDeprecated && <Icon title={t("Deprecated")} material="warning_amber" />}
       </DrawerItem>
       {element}
     </>

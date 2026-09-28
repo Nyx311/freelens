@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToWorkloadsOverviewInjectable from "../../../common/front-end-routing/routes/cluster/workloads/overview/navigate-to-workloads-overview.injectable";
 import workloadsOverviewRouteInjectable from "../../../common/front-end-routing/routes/cluster/workloads/overview/workloads-overview-route.injectable";
@@ -19,7 +20,7 @@ const workloadsOverviewSidebarItemInjectable = getInjectable({
 
     return {
       parentId: workloadsSidebarItemInjectable.id,
-      title: "Overview",
+      title: t("Overview"),
       onClick: di.inject(navigateToWorkloadsOverviewInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

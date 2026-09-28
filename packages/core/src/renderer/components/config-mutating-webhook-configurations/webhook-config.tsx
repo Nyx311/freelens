@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import React from "react";
 import { Badge } from "../badge";
 import { DrawerItem } from "../drawer";
@@ -18,10 +19,10 @@ interface WebhookProps {
 export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
   return (
     <>
-      <DrawerItem name="Name" className={styles.firstItem}>
+      <DrawerItem name={t("Name")} className={styles.firstItem}>
         <strong>{webhook.name}</strong>
       </DrawerItem>
-      <DrawerItem name="Client Config">
+      <DrawerItem name={t("Client Config")}>
         {webhook.clientConfig?.service?.name && (
           <div>
             <div>Name: {webhook.clientConfig.service.name}</div>
@@ -29,16 +30,18 @@ export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
           </div>
         )}
       </DrawerItem>
-      <DrawerItem name="Match Policy">{webhook.matchPolicy}</DrawerItem>
-      <DrawerItem name="Failure Policy">{webhook.failurePolicy}</DrawerItem>
-      <DrawerItem name="Admission Review Versions">{webhook.admissionReviewVersions?.join(", ")}</DrawerItem>
-      {webhook.reinvocationPolicy && <DrawerItem name="Reinvocation Policy">{webhook.reinvocationPolicy}</DrawerItem>}
-      <DrawerItem name="Side Effects">{webhook.sideEffects}</DrawerItem>
-      <DrawerItem name="Timeout Seconds">{webhook.timeoutSeconds}</DrawerItem>
+      <DrawerItem name={t("Match Policy")}>{webhook.matchPolicy}</DrawerItem>
+      <DrawerItem name={t("Failure Policy")}>{webhook.failurePolicy}</DrawerItem>
+      <DrawerItem name={t("Admission Review Versions")}>{webhook.admissionReviewVersions?.join(", ")}</DrawerItem>
+      {webhook.reinvocationPolicy && (
+        <DrawerItem name={t("Reinvocation Policy")}>{webhook.reinvocationPolicy}</DrawerItem>
+      )}
+      <DrawerItem name={t("Side Effects")}>{webhook.sideEffects}</DrawerItem>
+      <DrawerItem name={t("Timeout Seconds")}>{webhook.timeoutSeconds}</DrawerItem>
       <DrawerItem name="Namespace Selector">
         {webhook.namespaceSelector && (
           <div>
-            <div>Match Expressions:</div>
+            <div>{t("Match Expressions:")}</div>
             {webhook.namespaceSelector.matchExpressions?.map((expression, index) => (
               <div key={index}>
                 <div>Key: {expression.key}</div>
@@ -48,7 +51,7 @@ export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
             ))}
             {webhook.namespaceSelector.matchLabels && (
               <div>
-                <div>Match Labels:</div>
+                <div>{t("Match Labels:")}</div>
                 <div className={styles.matchLabels}>
                   {Object.entries(webhook.namespaceSelector.matchLabels).map(([key, value], index) => (
                     <Badge label={`${key}=${value ?? ""}`} key={index} />
@@ -59,10 +62,10 @@ export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
           </div>
         )}
       </DrawerItem>
-      <DrawerItem name="Object Selector">
+      <DrawerItem name={t("Object Selector")}>
         {webhook.objectSelector && (
           <div>
-            <div>Match Expressions:</div>
+            <div>{t("Match Expressions:")}</div>
             {webhook.objectSelector.matchExpressions?.map((expression, index) => (
               <div key={index}>
                 <div>Key: {expression.key}</div>
@@ -72,7 +75,7 @@ export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
             ))}
             {webhook.objectSelector.matchLabels && (
               <div>
-                <div>Match Labels:</div>
+                <div>{t("Match Labels:")}</div>
                 <div className={styles.matchLabels}>
                   {Object.entries(webhook.objectSelector.matchLabels).map(([key, value], index) => (
                     <Badge label={`${key}=${value ?? ""}`} key={index} />
@@ -83,7 +86,7 @@ export const WebhookConfig: React.FC<WebhookProps> = ({ webhook }) => {
           </div>
         )}
       </DrawerItem>
-      <DrawerItem name="Rules" className={styles.lastItem}>
+      <DrawerItem name={t("Rules")} className={styles.lastItem}>
         {webhook.rules?.map((rule, index) => (
           <div key={index}>
             <div>API Groups: {rule.apiGroups.join(", ")}</div>

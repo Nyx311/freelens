@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./logs-dialog.scss";
 
 import { Button } from "@freelensapp/button";
@@ -42,14 +43,14 @@ const NonInjectedLogsDialog = (props: LogsDialogProps & Dependencies) => {
                 plain
                 onClick={() => {
                   clipboard.writeText(logs);
-                  showSuccessNotification(`Logs copied to clipboard.`);
+                  showSuccessNotification(t("Logs copied to clipboard."));
                 }}
               >
                 <Icon material="assignment" />
-                {" Copy to clipboard"}
+                {` ${t("Copy to clipboard")}`}
               </Button>
               <Button plain onClick={dialogProps.close}>
-                Close
+                {t("Close")}
               </Button>
             </div>
           }

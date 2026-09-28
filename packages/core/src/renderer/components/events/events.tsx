@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./events.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -138,9 +139,7 @@ class NonInjectedEvents extends React.Component<Dependencies & EventsProps> {
         info: (
           <span>
             {"("}
-            {visibleItems.length}
-            {" of "}
-            <a onClick={navigateToEvents}>{items.length}</a>
+            {visibleItems.length} {t("of")} <a onClick={navigateToEvents}>{items.length}</a>
             {")"}
           </span>
         ),
@@ -151,7 +150,12 @@ class NonInjectedEvents extends React.Component<Dependencies & EventsProps> {
       info: (
         <>
           {info}
-          <Icon small material="help_outline" className="help-icon" tooltip={`Limited to ${eventStore.limit}`} />
+          <Icon
+            small
+            material="help_outline"
+            className="help-icon"
+            tooltip={t("Limited to {{limit}}", { limit: eventStore.limit })}
+          />
         </>
       ),
       title,
@@ -169,7 +173,7 @@ class NonInjectedEvents extends React.Component<Dependencies & EventsProps> {
         tableId="events"
         store={eventStore}
         className={cssNames("Events", className, { compact })}
-        renderHeaderTitle="Events"
+        renderHeaderTitle={t("Events")}
         customizeHeader={this.customizeHeader}
         isSelectable={false}
         getItems={() => this.visibleItems}
@@ -187,14 +191,52 @@ class NonInjectedEvents extends React.Component<Dependencies & EventsProps> {
           (event) => event.involvedObject.name,
         ]}
         renderTableHeader={[
-          { title: "Type", className: "type", sortBy: columnId.type, id: columnId.type },
-          { title: "Message", className: "message", id: columnId.message },
-          { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-          { title: "Involved Object", className: "object", sortBy: columnId.object, id: columnId.object },
-          { title: "Source", className: "source", id: columnId.source },
-          { title: "Count", className: "count", sortBy: columnId.count, id: columnId.count },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-          { title: "Last Seen", className: "last-seen", sortBy: columnId.lastSeen, id: columnId.lastSeen },
+          {
+            title: t("Type"),
+            className: "type",
+            sortBy: columnId.type,
+            id: columnId.type,
+          },
+          {
+            title: t("Message"),
+            className: "message",
+            id: columnId.message,
+          },
+          {
+            title: t("Namespace"),
+            className: "namespace",
+            sortBy: columnId.namespace,
+            id: columnId.namespace,
+          },
+          {
+            title: t("Involved Object"),
+            className: "object",
+            sortBy: columnId.object,
+            id: columnId.object,
+          },
+          {
+            title: t("Source"),
+            className: "source",
+            id: columnId.source,
+          },
+          {
+            title: t("Count"),
+            className: "count",
+            sortBy: columnId.count,
+            id: columnId.count,
+          },
+          {
+            title: t("Age"),
+            className: "age",
+            sortBy: columnId.age,
+            id: columnId.age,
+          },
+          {
+            title: t("Last Seen"),
+            className: "last-seen",
+            sortBy: columnId.lastSeen,
+            id: columnId.lastSeen,
+          },
         ]}
         renderTableContents={(event) => {
           const { involvedObject, type, message } = event;

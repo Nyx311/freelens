@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import defaultShellInjectable from "../../../common/vars/default-shell.injectable";
 import isWindowsInjectable from "../../../common/vars/is-windows.injectable";
@@ -43,7 +44,10 @@ const computeShellEnvironmentInjectable = getInjectable({
       if (controller.signal.aborted) {
         return {
           callWasSuccessful: false,
-          error: `Resolving shell environment is taking very long. Please review your shell configuration: ${result.error}`,
+          error: t(
+            "Resolving shell environment is taking very long. Please review your shell configuration: {{error}}",
+            { error: result.error },
+          ),
         };
       }
 

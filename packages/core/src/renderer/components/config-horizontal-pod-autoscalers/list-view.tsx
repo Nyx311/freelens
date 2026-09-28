@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./list-view.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -91,16 +92,53 @@ class NonInjectedHorizontalPodAutoscalers extends React.Component<Dependencies> 
             [columnId.age]: (hpa) => -hpa.getCreationTimestamp(),
           }}
           searchFilters={[(hpa) => hpa.getSearchFields()]}
-          renderHeaderTitle="Horizontal Pod Autoscalers"
+          renderHeaderTitle={t("Horizontal Pod Autoscalers")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Metrics", className: "metrics", id: columnId.metrics },
-            { title: "Min Pods", className: "min-pods", sortBy: columnId.minPods, id: columnId.minPods },
-            { title: "Max Pods", className: "max-pods", sortBy: columnId.maxPods, id: columnId.maxPods },
-            { title: "Replicas", className: "replicas", sortBy: columnId.replicas, id: columnId.replicas },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Conditions", className: "conditions scrollable", id: columnId.conditions },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Metrics"),
+              className: "metrics",
+              id: columnId.metrics,
+            },
+            {
+              title: t("Min Pods"),
+              className: "min-pods",
+              sortBy: columnId.minPods,
+              id: columnId.minPods,
+            },
+            {
+              title: t("Max Pods"),
+              className: "max-pods",
+              sortBy: columnId.maxPods,
+              id: columnId.maxPods,
+            },
+            {
+              title: t("Replicas"),
+              className: "replicas",
+              sortBy: columnId.replicas,
+              id: columnId.replicas,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
+            {
+              title: t("Conditions"),
+              className: "conditions scrollable",
+              id: columnId.conditions,
+            },
           ]}
           renderTableContents={(hpa) => [
             <WithTooltip>{hpa.getName()}</WithTooltip>,

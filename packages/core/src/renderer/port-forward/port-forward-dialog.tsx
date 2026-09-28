@@ -6,6 +6,7 @@
 
 import "./port-forward-dialog.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { cssNames } from "@freelensapp/utilities";
@@ -92,7 +93,14 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
 
         if (wasRunning && portForward.status === "Disabled") {
           this.props.notifyErrorPortForwarding(
-            `Error occurred starting port-forward, the local port ${portForward.forwardPort} may not be available or the ${portForward.kind} ${portForward.name} may not be reachable`,
+            t(
+              "Error occurred starting port-forward; the local port {{port}} may not be available or the {{kind}} {{name}} may not be reachable",
+              {
+                port: portForward.forwardPort,
+                kind: portForward.kind,
+                name: portForward.name,
+              },
+            ),
           );
         }
       } else {
@@ -101,7 +109,14 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
 
         if (portForward.status === "Disabled") {
           this.props.notifyErrorPortForwarding(
-            `Error occurred starting port-forward, the local port ${portForward.forwardPort} may not be available or the ${portForward.kind} ${portForward.name} may not be reachable`,
+            t(
+              "Error occurred starting port-forward; the local port {{port}} may not be available or the {{kind}} {{name}} may not be reachable",
+              {
+                port: portForward.forwardPort,
+                kind: portForward.kind,
+                name: portForward.name,
+              },
+            ),
           );
         } else {
           // if this is the first port-forward show the about notification
@@ -124,29 +139,24 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
   renderContents(data: PortForwardDialogData) {
     return (
       <Wizard
-        header={
-          <h5>
-            {"Port Forwarding for "}
-            <span>{data.portForward.name}</span>
-          </h5>
-        }
+        header={<h5>{t("Port Forwarding for {{name}}", { name: data.portForward.name })}</h5>}
         done={this.props.model.close}
       >
         <WizardStep
           contentClass="flex gap-2 flex-col"
           next={() => this.startPortForward(data)}
-          nextLabel={this.currentPort === 0 ? "Start" : "Modify"}
+          nextLabel={this.currentPort === 0 ? t("Start") : t("Modify")}
         >
           <div className="flex flex-col gap-2">
             <div className="input-container flex items-center">
               <div className="current-address" data-testid="current-address">
-                Addresses to listen on (comma separated):
+                {t("Addresses to listen on (comma separated):")}
               </div>
               <Icon
                 material="info"
-                tooltip="Only accepts IP addresses or localhost as a value. When localhost is
-	supplied, kubectl will try to bind on both 127.0.0.1 and ::1 and will fail if neither of these addresses are
-	available to bind."
+                tooltip={t(
+                  "Only accepts IP addresses or localhost as a value. When localhost is\n\tsupplied, kubectl will try to bind on both 127.0.0.1 and ::1 and will fail if neither of these addresses are\n\tavailable to bind.",
+                )}
               />
               <Input
                 className="portInput"
@@ -157,7 +167,7 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
             </div>
             <div className="input-container flex items-center">
               <div className="current-port" data-testid="current-port">
-                Local port to forward from:
+                {t("Local port to forward from:")}
               </div>
               <Input
                 className="portInput"
@@ -165,7 +175,7 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
                 min="0"
                 max="65535"
                 value={this.desiredPort === 0 ? "" : String(this.desiredPort)}
-                placeholder={"Random"}
+                placeholder={t("Random")}
                 onChange={this.changePort}
                 autoFocus
               />
@@ -178,7 +188,7 @@ class NonInjectedPortForwardDialog extends Component<PortForwardDialogProps & De
             />
             <Checkbox
               data-testid="port-forward-open"
-              label="Open in Browser"
+              label={t("Open in Browser")}
               value={data.openInBrowser}
               onChange={(value) => (data.openInBrowser = value)}
             />

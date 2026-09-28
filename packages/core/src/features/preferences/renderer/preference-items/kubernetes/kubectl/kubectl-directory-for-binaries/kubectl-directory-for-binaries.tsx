@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { useState } from "react";
@@ -29,7 +30,7 @@ const NonInjectedKubectlDirectoryForBinaries = observer(({ state, defaultPathFor
 
   return (
     <section>
-      <SubTitle title="Directory for binaries" />
+      <SubTitle title={t("Directory for binaries")} />
       <Input
         theme="round-black"
         value={downloadPath}
@@ -39,7 +40,7 @@ const NonInjectedKubectlDirectoryForBinaries = observer(({ state, defaultPathFor
         onBlur={save}
         disabled={!state.downloadKubectlBinaries}
       />
-      <div className="hint">The directory to download binaries into.</div>
+      <div className="hint">{t("The directory to download binaries into.")}</div>
     </section>
   );
 });

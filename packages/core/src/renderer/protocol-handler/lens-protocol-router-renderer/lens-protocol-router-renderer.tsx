@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { ipcRenderer } from "electron";
 import * as proto from "../../../common/protocol-handler";
 import { foldAttemptResults, ProtocolHandlerInvalid, RouteAttempt } from "../../../common/protocol-handler";
@@ -31,11 +32,7 @@ export class LensProtocolRouterRenderer extends proto.LensProtocolRouter {
 
       if (foldAttemptResults(mainAttemptResult, rendererAttempt) === RouteAttempt.MISSING) {
         this.dependencies.showShortInfoNotification(
-          <p>
-            {"Unknown action "}
-            <code>{rawUrl}</code>
-            {". Are you on the latest version?"}
-          </p>,
+          <p>{t("Unknown action {{url}}. Are you on the latest version?", { url: rawUrl })}</p>,
         );
       }
     });
@@ -45,19 +42,18 @@ export class LensProtocolRouterRenderer extends proto.LensProtocolRouter {
       switch (foldAttemptResults(mainAttemptResult, rendererAttempt)) {
         case RouteAttempt.MISSING:
           this.dependencies.showShortInfoNotification(
-            <p>
-              {"Unknown action "}
-              <code>{rawUrl}</code>
-              {". Are you on the latest version of the extension?"}
-            </p>,
+            <p>{t("Unknown action {{url}}. Are you on the latest version of the extension?", { url: rawUrl })}</p>,
           );
           break;
         case RouteAttempt.MISSING_EXTENSION:
           this.dependencies.showShortInfoNotification(
             <p>
-              {"Missing extension for action "}
-              <code>{rawUrl}</code>
-              {". Not able to find extension in our known list. Try installing it manually."}
+              {t(
+                "Missing extension for action {{url}}. Not able to find extension in our known list. Try installing it manually.",
+                {
+                  url: rawUrl,
+                },
+              )}
             </p>,
           );
           break;
@@ -66,12 +62,9 @@ export class LensProtocolRouterRenderer extends proto.LensProtocolRouter {
     ipcRenderer.on(ProtocolHandlerInvalid, (event, error: string, rawUrl: string) => {
       this.dependencies.showErrorNotification(
         <>
+          <p>{t("Failed to route {{url}}.", { url: rawUrl })}</p>
           <p>
-            {"Failed to route "}
-            <code>{rawUrl}</code>.
-          </p>
-          <p>
-            <b>Error:</b> {error}
+            <b>{t("Error:")}</b> {error}
           </p>
         </>,
       );

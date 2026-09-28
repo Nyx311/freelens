@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./dock.scss";
 
 import { ErrorBoundary } from "@freelensapp/error-boundary";
@@ -168,16 +169,20 @@ class NonInjectedDock extends React.Component<DockProps & Dependencies> {
               <MenuActions
                 id="menu-actions-for-dock"
                 usePortal
-                triggerIcon={{ material: "add", className: "new-dock-tab", tooltip: "New tab" }}
+                triggerIcon={{
+                  material: "add",
+                  className: "new-dock-tab",
+                  tooltip: t("New tab"),
+                }}
                 closeOnScroll={false}
               >
                 <MenuItem className="create-terminal-tab" onClick={() => this.props.createTerminalTab()}>
                   <Icon small material="terminal" />
-                  Terminal session
+                  {t("Terminal session")}
                 </MenuItem>
                 <MenuItem className="create-resource-tab" onClick={() => this.props.createResourceTab()}>
                   <Icon small material="create" />
-                  Create resource
+                  {t("Create resource")}
                 </MenuItem>
               </MenuActions>
             </div>
@@ -185,12 +190,12 @@ class NonInjectedDock extends React.Component<DockProps & Dependencies> {
               <>
                 <Icon
                   material={fullSize ? "fullscreen_exit" : "fullscreen"}
-                  tooltip={fullSize ? "Exit full size mode" : "Fit to window"}
+                  tooltip={fullSize ? t("Exit full size mode") : t("Fit to window")}
                   onClick={toggleFillSize}
                 />
                 <Icon
                   material={`keyboard_arrow_${isOpen ? "down" : "up"}`}
-                  tooltip={isOpen ? "Minimize" : "Open"}
+                  tooltip={isOpen ? t("Minimize") : t("Open")}
                   onClick={toggle}
                 />
               </>

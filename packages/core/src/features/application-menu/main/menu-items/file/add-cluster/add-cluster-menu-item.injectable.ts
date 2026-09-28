@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToAddClusterInjectable from "../../../../../../common/front-end-routing/routes/add-cluster/navigate-to-add-cluster.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -19,7 +20,7 @@ const addClusterMenuItemInjectable = getInjectable({
       parentId: "file",
       id: "add-cluster",
       orderNumber: 10,
-      label: "Add Cluster",
+      label: t("Add Cluster"),
       keyboardShortcut: "CmdOrCtrl+Shift+A",
 
       onClick: () => {

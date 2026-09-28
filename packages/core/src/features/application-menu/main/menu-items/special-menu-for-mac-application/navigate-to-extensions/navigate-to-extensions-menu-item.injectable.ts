@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToExtensionsInjectable from "../../../../../../common/front-end-routing/routes/extensions/navigate-to-extensions.injectable";
 import isMacInjectable from "../../../../../../common/vars/is-mac.injectable";
@@ -21,7 +22,7 @@ const navigateToExtensionsMenuItem = getInjectable({
       parentId: isMac ? "mac" : "file",
       id: "navigate-to-extensions",
       orderNumber: isMac ? 50 : 40,
-      label: "Extensions",
+      label: t("Extensions"),
       keyboardShortcut: isMac ? "CmdOrCtrl+Shift+E" : "Ctrl+Shift+E",
 
       onClick: () => {

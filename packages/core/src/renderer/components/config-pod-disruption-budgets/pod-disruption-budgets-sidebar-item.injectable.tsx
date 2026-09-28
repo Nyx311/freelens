@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToPodDisruptionBudgetsInjectable from "../../../common/front-end-routing/routes/cluster/config/pod-disruption-budgets/navigate-to-pod-disruption-budgets.injectable";
 import podDisruptionBudgetsRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/pod-disruption-budgets/pod-disruption-budgets-route.injectable";
@@ -19,7 +20,7 @@ const podDisruptionBudgetsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Pod Disruption Budgets",
+      title: t("Pod Disruption Budgets"),
       onClick: di.inject(navigateToPodDisruptionBudgetsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

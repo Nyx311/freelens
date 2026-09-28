@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { mapValues } from "es-toolkit";
 import { observer } from "mobx-react";
@@ -61,29 +62,29 @@ const NonInjectedNodeCharts = observer(({ activeTheme, selectedMetricsTimeRange 
     CPU: [
       {
         id: `${id}-cpuUsage`,
-        label: `Usage`,
-        tooltip: `CPU cores usage`,
+        label: t("Usage"),
+        tooltip: t("CPU cores usage"),
         borderColor: "#00a7a0",
         data: convertNodeMetricValuesToChartData(cpuUsage),
       },
       {
         id: `${id}-cpuRequests`,
-        label: `Requests`,
-        tooltip: `CPU requests`,
+        label: t("Requests"),
+        tooltip: t("CPU requests"),
         borderColor: "#30b24d",
         data: convertNodeMetricValuesToChartData(cpuRequests),
       },
       {
         id: `${id}-cpuAllocatableCapacity`,
-        label: `Allocatable Capacity`,
-        tooltip: `CPU allocatable capacity`,
+        label: t("Allocatable Capacity"),
+        tooltip: t("CPU allocatable capacity"),
         borderColor: "#032b4d",
         data: convertNodeMetricValuesToChartData(cpuAllocatableCapacity),
       },
       {
         id: `${id}-cpuCapacity`,
-        label: `Capacity`,
-        tooltip: `CPU capacity`,
+        label: t("Capacity"),
+        tooltip: t("CPU capacity"),
         borderColor: chartCapacityColor,
         data: convertNodeMetricValuesToChartData(cpuCapacity),
       },
@@ -91,36 +92,36 @@ const NonInjectedNodeCharts = observer(({ activeTheme, selectedMetricsTimeRange 
     Memory: [
       {
         id: `${id}-memoryUsage`,
-        label: `Usage`,
-        tooltip: `Memory usage`,
+        label: t("Usage"),
+        tooltip: t("Memory usage"),
         borderColor: "#c93dce",
         data: convertNodeMetricValuesToChartData(memoryUsage),
       },
       {
         id: `${id}-workloadMemoryUsage`,
-        label: `Workload Memory Usage`,
-        tooltip: `Workload memory usage`,
+        label: t("Workload Memory Usage"),
+        tooltip: t("Workload memory usage"),
         borderColor: "#9cd3ce",
         data: convertNodeMetricValuesToChartData(workloadMemoryUsage),
       },
       {
         id: "memoryRequests",
-        label: `Requests`,
-        tooltip: `Memory requests`,
+        label: t("Requests"),
+        tooltip: t("Memory requests"),
         borderColor: "#30b24d",
         data: convertNodeMetricValuesToChartData(memoryRequests),
       },
       {
         id: `${id}-memoryAllocatableCapacity`,
-        label: `Allocatable Capacity`,
-        tooltip: `Memory allocatable capacity`,
+        label: t("Allocatable Capacity"),
+        tooltip: t("Memory allocatable capacity"),
         borderColor: "#032b4d",
         data: convertNodeMetricValuesToChartData(memoryAllocatableCapacity),
       },
       {
         id: `${id}-memoryCapacity`,
-        label: `Capacity`,
-        tooltip: `Memory capacity`,
+        label: t("Capacity"),
+        tooltip: t("Memory capacity"),
         borderColor: chartCapacityColor,
         data: convertNodeMetricValuesToChartData(memoryCapacity),
       },
@@ -128,15 +129,15 @@ const NonInjectedNodeCharts = observer(({ activeTheme, selectedMetricsTimeRange 
     Disk: [
       {
         id: `${id}-fsUsage`,
-        label: `Usage`,
-        tooltip: `Node filesystem usage in bytes`,
+        label: t("Usage"),
+        tooltip: t("Node filesystem usage in bytes"),
         borderColor: "#ffc63d",
         data: convertNodeMetricValuesToChartData(fsUsage),
       },
       {
         id: `${id}-fsSize`,
-        label: `Size`,
-        tooltip: `Node filesystem size in bytes`,
+        label: t("Size"),
+        tooltip: t("Node filesystem size in bytes"),
         borderColor: chartCapacityColor,
         data: convertNodeMetricValuesToChartData(fsSize),
       },
@@ -144,15 +145,15 @@ const NonInjectedNodeCharts = observer(({ activeTheme, selectedMetricsTimeRange 
     Pods: [
       {
         id: `${id}-podUsage`,
-        label: `Usage`,
-        tooltip: `Number of running Pods`,
+        label: t("Usage"),
+        tooltip: t("Number of running Pods"),
         borderColor: "#30b24d",
         data: convertNodeMetricValuesToChartData(podUsage),
       },
       {
         id: `${id}-podCapacity`,
-        label: `Capacity`,
-        tooltip: `Node Pods capacity`,
+        label: t("Capacity"),
+        tooltip: t("Node Pods capacity"),
         borderColor: chartCapacityColor,
         data: convertNodeMetricValuesToChartData(podCapacity),
       },

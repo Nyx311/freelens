@@ -6,6 +6,7 @@
 
 import "./storage-class-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { StorageClass } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -69,17 +70,17 @@ class NonInjectedStorageClassDetails extends React.Component<StorageClassDetails
     return (
       <div className="StorageClassDetails">
         {provisioner && (
-          <DrawerItem name="Provisioner" labelsOnly>
+          <DrawerItem name={t("Provisioner")} labelsOnly>
             <Badge label={provisioner} />
           </DrawerItem>
         )}
-        <DrawerItem name="Volume Binding Mode">{storageClass.getVolumeBindingMode()}</DrawerItem>
-        <DrawerItem name="Reclaim Policy">{storageClass.getReclaimPolicy()}</DrawerItem>
+        <DrawerItem name={t("Volume Binding Mode")}>{storageClass.getVolumeBindingMode()}</DrawerItem>
+        <DrawerItem name={t("Reclaim Policy")}>{storageClass.getReclaimPolicy()}</DrawerItem>
 
-        {mountOptions && <DrawerItem name="Mount Options">{mountOptions.join(", ")}</DrawerItem>}
+        {mountOptions && <DrawerItem name={t("Mount Options")}>{mountOptions.join(", ")}</DrawerItem>}
         {parameters && (
           <>
-            <DrawerTitle>Parameters</DrawerTitle>
+            <DrawerTitle>{t("Parameters")}</DrawerTitle>
             {Object.entries(parameters).map(([name, value]) => (
               <DrawerItem key={name + value} name={startCase(name)}>
                 {value}

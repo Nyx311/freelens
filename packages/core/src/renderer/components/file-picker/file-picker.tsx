@@ -7,6 +7,7 @@
 import "./file-picker.scss";
 
 import path from "node:path";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Spinner } from "@freelensapp/spinner";
 import { sum } from "es-toolkit";
@@ -104,12 +105,12 @@ class DefaultedFilePicker extends React.Component<FilePickerProps & typeof defau
           files.length = maxLimit;
           break;
         case OverLimitStyle.REJECT:
-          throw `Too many files. Expected at most ${maxLimit}. Got ${files.length}.`;
+          throw t("Too many files. Expected at most {{maxLimit}}. Got {{count}}.", { maxLimit, count: files.length });
       }
     }
 
     if (files.length < minLimit) {
-      throw `Too many files. Expected at most ${maxLimit}. Got ${files.length}.`;
+      throw t("Too many files. Expected at most {{maxLimit}}. Got {{count}}.", { maxLimit, count: files.length });
     }
 
     return files;
@@ -126,7 +127,11 @@ class DefaultedFilePicker extends React.Component<FilePickerProps & typeof defau
         const firstFileToLarge = files.find((file) => file.size > maxSize);
 
         if (firstFileToLarge) {
-          throw `${firstFileToLarge.name} is too large. Maximum size is ${maxSize}. Has size of ${firstFileToLarge.size}`;
+          throw t("{{name}} is too large. Maximum size is {{maxSize}}. Has size of {{size}}", {
+            name: firstFileToLarge.name,
+            maxSize,
+            size: firstFileToLarge.size,
+          });
         }
 
         return files;
@@ -162,7 +167,10 @@ class DefaultedFilePicker extends React.Component<FilePickerProps & typeof defau
         return files;
       }
       case OverTotalSizeLimitStyle.REJECT:
-        throw `Total file size to upload is too large. Expected at most ${maxTotalSize}. Found ${totalSize}.`;
+        throw t("Total file size to upload is too large. Expected at most {{maxTotalSize}}. Found {{totalSize}}.", {
+          maxTotalSize,
+          totalSize,
+        });
     }
   }
 

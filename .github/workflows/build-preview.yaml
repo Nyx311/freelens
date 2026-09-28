@@ -1,0 +1,108 @@
+name: Build preview
+
+on:
+  push:
+    branches:
+      - feature/i18n
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    name: Windows x64 installer
+    runs-on: windows-2025
+    timeout-minutes: 60
+
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      DO_NOT_TRACK: "1"
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: Setup pnpm
+        run: corepack enable
+
+      - name: Get pnpm cache directory
+        run: echo "pnpm_cache_dir=$(pnpm store path)" >> "$GITHUB_ENV"
+
+      - name: Use pnpm cache
+        uses: actions/cache@v6
+        with:
+          path: ${{ env.pnpm_cache_dir }}
+          key: windows-x64-preview-node-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            windows-x64-preview-node-
+
+      - name: Disable pre post scripts for pnpm
+        run: pnpm config set enablePrePostScripts false --location project
+
+      - name: Install pnpm dependencies
+        id: install-pnpm
+        run: pnpm install --color=always --prefer-offline --frozen-lockfile
+        continue-on-error: true
+
+      - name: Install pnpm dependencies (retry)
+        if: steps.install-pnpm.outcome == 'failure'
+        run: pnpm install --color=always --prefer-offline --frozen-lockfile
+
+      - name: Install Electron binary
+        working-directory: freelens
+        run: node "$(node -p "require.resolve('electron/install.js')")"
+
+      - name: Build packages
+        run: pnpm --color=always --stream build
+        env:
+          TURBO_CONCURRENCY: "2"
+
+      - name: Build extra resources
+        id: build-resources
+        run: pnpm --color=always build:resources
+        continue-on-error: true
+
+      - name: Build extra resources (retry)
+        if: steps.build-resources.outcome == 'failure'
+        run: pnpm --color=always build:resources
+
+      - name: Get electron-builder path
+        working-directory: freelens
+        run: echo "ELECTRON_BUILDER_PATH=$(node -p "require.resolve('electron-builder/cli')")" >> "$GITHUB_ENV"
+
+      - name: Deploy production node_modules
+        run: |
+          pnpm deploy --legacy --prod --filter=freelens freelens/node_modules_prod
+          mv freelens/node_modules freelens/node_modules_dev
+          mv freelens/node_modules_prod freelens/node_modules
+
+      - name: Build Windows installer
+        working-directory: freelens
+        run: node "$ELECTRON_BUILDER_PATH" --publish never --win nsis --x64 -c.win.signExecutable=false
+        env:
+          npm_config_user_agent: pnpm
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v7
+        with:
+          name: Freelens-preview-windows-x64-${{ github.run_number }}
+          path: freelens/dist/*.exe
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./view.scss";
 
 import { formatJSONValue, safeJSONPathValue } from "@freelensapp/utilities";
@@ -92,14 +93,24 @@ class NonInjectedCustomResources extends React.Component<Dependencies> {
           customizeHeader={({ searchProps, ...headerPlaceholders }) => ({
             searchProps: {
               ...searchProps,
-              placeholder: `${crd.getResourceKind()} search ...`,
+              placeholder: t("{{resourceName}} search ...", { resourceName: crd.getResourceKind() }),
             },
             ...headerPlaceholders,
           })}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
             isNamespaced
-              ? { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace }
+              ? {
+                  title: t("Namespace"),
+                  className: "namespace",
+                  sortBy: columnId.namespace,
+                  id: columnId.namespace,
+                }
               : undefined,
             ...extraColumns.map(({ name }) => ({
               title: startCase(name),
@@ -108,7 +119,12 @@ class NonInjectedCustomResources extends React.Component<Dependencies> {
               id: name,
               "data-testid": `custom-resource-column-title-${name.toLowerCase().replace(/\s+/g, "-")}`,
             })),
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(customResource) => [
             <WithTooltip>{customResource.getName()}</WithTooltip>,
@@ -123,8 +139,12 @@ class NonInjectedCustomResources extends React.Component<Dependencies> {
           ]}
           failedToLoadMessage={
             <>
-              <p>{`Failed to load ${crd.getPluralName()}`}</p>
-              {!version.served && <p>{`Preferred version (${crd.getGroup()}/${version.name}) is not served`}</p>}
+              <p>{t("Failed to load {{name}}", { name: crd.getPluralName() })}</p>
+              {!version.served && (
+                <p>
+                  {t("Preferred version ({{version}}) is not served", { version: `${crd.getGroup()}/${version.name}` })}
+                </p>
+              )}
             </>
           }
         />

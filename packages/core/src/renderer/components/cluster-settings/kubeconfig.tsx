@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { shell } from "electron";
 import { observer } from "mobx-react";
 import React from "react";
@@ -27,7 +28,7 @@ export class ClusterKubeconfig extends React.Component<ClusterKubeconfigProps> {
   render() {
     return (
       <Notice className="mb-14 mt-3">
-        <SubTitle title="Kubeconfig" />
+        <SubTitle title={t("Kubeconfig")} />
         <span>
           <a className="link value" onClick={this.openKubeconfig}>
             {this.props.cluster.kubeConfigPath.get()}

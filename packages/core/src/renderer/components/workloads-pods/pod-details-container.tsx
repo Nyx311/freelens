@@ -6,6 +6,7 @@
 
 import "./pod-details-container.scss";
 
+import { t } from "@freelensapp/i18n";
 import { podDetailsContainerMetricsInjectionToken } from "@freelensapp/metrics";
 import { cssNames, isDefined } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -58,12 +59,17 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
 
     return (
       <span className={cssNames("status", containerStatusClassName(container, status))}>
-        {state}
-        {container.type === "initContainers" ? ", init" : ""}
-        {container.type === "ephemeralContainers" ? ", ephemeral" : ""}
-        {status?.restartCount ? ", restarted" : ""}
-        {status?.ready ? ", ready" : ""}
-        {terminated ? ` - ${terminated.reason} (exit code: ${terminated.exitCode})` : ""}
+        {t(state)}
+        {container.type === "initContainers" ? `, ${t("init")}` : ""}
+        {container.type === "ephemeralContainers" ? `, ${t("ephemeral")}` : ""}
+        {status?.restartCount ? `, ${t("restarted")}` : ""}
+        {status?.ready ? `, ${t("ready")}` : ""}
+        {terminated
+          ? t(" - {{reason}} (exit code: {{code}})", {
+              reason: terminated.reason,
+              code: terminated.exitCode,
+            })
+          : ""}
       </span>
     );
   }
@@ -77,13 +83,14 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
         <span>
           {lastState}
           <br />
-          {`Reason: ${terminated.reason} - exit code: ${terminated.exitCode}`}
+          {t("Reason: {{reason}} - exit code: {{code}}", {
+            reason: terminated.reason,
+            code: terminated.exitCode,
+          })}
           <br />
-          {"Started: "}
-          {<DurationAbsoluteTimestamp timestamp={terminated.startedAt} />}
+          {t("Started:")} {<DurationAbsoluteTimestamp timestamp={terminated.startedAt} />}
           <br />
-          {"Finished: "}
-          {<DurationAbsoluteTimestamp timestamp={terminated.finishedAt} />}
+          {t("Finished:")} {<DurationAbsoluteTimestamp timestamp={terminated.finishedAt} />}
           <br />
         </span>
       );
@@ -124,20 +131,20 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
           </>
         )}
         {targetContainerName && (
-          <DrawerItem name="Target Container">
+          <DrawerItem name={t("Target Container")}>
             <a href={`#pod-container-id-${pod.getName()}-${targetContainerName}`}>{targetContainerName}</a>
           </DrawerItem>
         )}
-        {status && <DrawerItem name="Status">{this.renderStatus(container, status)}</DrawerItem>}
-        {lastState && <DrawerItem name="Last Status">{this.renderLastState(lastState, status)}</DrawerItem>}
-        <DrawerItem name="Image">
+        {status && <DrawerItem name={t("Status")}>{this.renderStatus(container, status)}</DrawerItem>}
+        {lastState && <DrawerItem name={t("Last Status")}>{this.renderLastState(lastState, status)}</DrawerItem>}
+        <DrawerItem name={t("Image")}>
           <Badge label={image} tooltip={imageId} />
         </DrawerItem>
         {imagePullPolicy && imagePullPolicy !== "IfNotPresent" && (
-          <DrawerItem name="ImagePullPolicy">{imagePullPolicy}</DrawerItem>
+          <DrawerItem name={t("ImagePullPolicy")}>{imagePullPolicy}</DrawerItem>
         )}
         {ports && ports.length > 0 && (
-          <DrawerItem name="Ports">
+          <DrawerItem name={t("Ports")}>
             {ports.filter(isDefined).map((port) => (
               <PodContainerPort
                 pod={pod}
@@ -149,7 +156,7 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
         )}
         {<ContainerEnvironment pod={pod} container={container} namespace={pod.getNs()} />}
         {volumeMounts && volumeMounts.length > 0 && (
-          <DrawerItem name="Mounts">
+          <DrawerItem name={t("Mounts")}>
             {volumeMounts.map((mount) => {
               const { name, mountPath, readOnly } = mount;
 
@@ -163,32 +170,32 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
           </DrawerItem>
         )}
         {liveness.length > 0 && (
-          <DrawerItem name="Liveness" labelsOnly>
+          <DrawerItem name={t("Liveness")} labelsOnly>
             {liveness.map((value, index) => (
               <Badge key={index} label={value} />
             ))}
           </DrawerItem>
         )}
         {readiness.length > 0 && (
-          <DrawerItem name="Readiness" labelsOnly>
+          <DrawerItem name={t("Readiness")} labelsOnly>
             {readiness.map((value, index) => (
               <Badge key={index} label={value} />
             ))}
           </DrawerItem>
         )}
         {startup.length > 0 && (
-          <DrawerItem name="Startup" labelsOnly>
+          <DrawerItem name={t("Startup")} labelsOnly>
             {startup.map((value, index) => (
               <Badge key={index} label={value} />
             ))}
           </DrawerItem>
         )}
-        {command && <DrawerItem name="Command">{command.join(" ")}</DrawerItem>}
+        {command && <DrawerItem name={t("Command")}>{command.join(" ")}</DrawerItem>}
 
-        {args && <DrawerItem name="Arguments">{args.join(" ")}</DrawerItem>}
+        {args && <DrawerItem name={t("Arguments")}>{args.join(" ")}</DrawerItem>}
 
         {requests.length > 0 && (
-          <DrawerItem name="Requests" labelsOnly>
+          <DrawerItem name={t("Requests")} labelsOnly>
             {requests.map(([key, value], index) => (
               <Badge key={index} label={`${key}=${value}`} />
             ))}
@@ -196,14 +203,14 @@ class NonInjectedPodDetailsContainer extends React.Component<PodDetailsContainer
         )}
 
         {limits.length > 0 && (
-          <DrawerItem name="Limits" labelsOnly>
+          <DrawerItem name={t("Limits")} labelsOnly>
             {limits.map(([key, value], index) => (
               <Badge key={index} label={`${key}=${value}`} />
             ))}
           </DrawerItem>
         )}
         {resizePolicy && resizePolicy.length > 0 && (
-          <DrawerItem name="Resize Policy" labelsOnly>
+          <DrawerItem name={t("Resize Policy")} labelsOnly>
             {resizePolicy.map(({ resourceName, restartPolicy }, index) => (
               <Badge key={`${resourceName}-${restartPolicy}-${index}`} label={`${resourceName}=${restartPolicy}`} />
             ))}

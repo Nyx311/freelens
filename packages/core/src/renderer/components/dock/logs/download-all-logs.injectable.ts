@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -30,7 +31,7 @@ const downloadAllLogsInjectable = getInjectable({
       if (logs) {
         openSaveFileDialog(`${query.container}.log`, logs, "text/plain");
       } else {
-        showErrorNotification("No logs to download");
+        showErrorNotification(t("No logs to download"));
       }
     };
   },

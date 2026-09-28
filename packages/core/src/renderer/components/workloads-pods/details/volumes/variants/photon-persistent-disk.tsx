@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { DrawerItem } from "../../../../drawer";
 
 import type { VolumeVariantComponent } from "../variant-helpers";
@@ -12,7 +13,7 @@ export const PhotonPersistentDisk: VolumeVariantComponent<"photonPersistentDisk"
   variant: { pdID, fsType = "ext4" },
 }) => (
   <>
-    <DrawerItem name="Persistent Disk ID">{pdID}</DrawerItem>
-    <DrawerItem name="Filesystem Type">{fsType}</DrawerItem>
+    <DrawerItem name={t("Persistent Disk ID")}>{pdID}</DrawerItem>
+    <DrawerItem name={t("Filesystem Type")}>{fsType}</DrawerItem>
   </>
 );

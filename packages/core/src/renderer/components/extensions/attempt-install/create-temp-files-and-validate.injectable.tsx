@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -67,13 +68,10 @@ const createTempFilesAndValidateInjectable = getInjectable({
         showErrorNotification(
           <div className="flex flex-col gap-2">
             <p>
-              {"Installing "}
-              <em>{fileName}</em>
-              {" has failed, skipping."}
+              {t("Installing")} <em>{fileName}</em> {t("has failed, skipping.")}
             </p>
             <p>
-              {"Reason: "}
-              <em>{message}</em>
+              {t("Reason:")} <em>{message}</em>
             </p>
           </div>,
         );

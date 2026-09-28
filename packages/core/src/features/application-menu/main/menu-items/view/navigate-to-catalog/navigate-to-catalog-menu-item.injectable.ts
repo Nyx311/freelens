@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToCatalogInjectable from "../../../../../../common/front-end-routing/routes/catalog/navigate-to-catalog.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -19,7 +20,7 @@ const navigateToCatalogMenuItemInjectable = getInjectable({
       parentId: "view",
       id: "navigate-to-catalog",
       orderNumber: 10,
-      label: "Catalog",
+      label: t("Catalog"),
       keyboardShortcut: "Shift+CmdOrCtrl+C",
 
       onClick: () => {

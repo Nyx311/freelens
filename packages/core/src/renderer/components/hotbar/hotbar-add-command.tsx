@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import addHotbarInjectable from "../../../features/hotbar/storage/common/add.injectable";
@@ -33,7 +34,7 @@ const NonInjectedHotbarAddCommand = observer(({ closeCommandOverlay, addHotbar, 
   return (
     <>
       <Input
-        placeholder="Hotbar name"
+        placeholder={t("Hotbar name")}
         autoFocus={true}
         theme="round-black"
         data-test-id="command-palette-hotbar-add-name"
@@ -43,7 +44,7 @@ const NonInjectedHotbarAddCommand = observer(({ closeCommandOverlay, addHotbar, 
         showValidationLine={true}
       />
       <small className="hint">
-        Please provide a new hotbar name (Press &quot;Enter&quot; to confirm or &quot;Escape&quot; to cancel)
+        {t('Please provide a new hotbar name (Press "Enter" to confirm or "Escape" to cancel)')}
       </small>
     </>
   );

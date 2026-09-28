@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import reloadCurrentApplicationWindowInjectable from "../../../../../../main/start-main-application/lens-window/reload-current-application-window.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -19,7 +20,7 @@ const reloadMenuItemInjectable = getInjectable({
       parentId: "view",
       id: "reload",
       orderNumber: 60,
-      label: "Reload",
+      label: t("Reload"),
       keyboardShortcut: "CmdOrCtrl+R",
 
       onClick: () => {

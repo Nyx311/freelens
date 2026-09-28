@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { TabKind } from "../dock/store";
 import dockStoreInjectable from "../dock/store.injectable";
@@ -18,7 +19,7 @@ const createResourceTabInjectable = getInjectable({
 
     return (tabParams: DockTabCreateSpecific = {}) =>
       dockStore.createTab({
-        title: "Create resource",
+        title: t("Create resource"),
         ...tabParams,
         kind: TabKind.CREATE_RESOURCE,
       });

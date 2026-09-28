@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../../renderer/components/layout/sub-title";
@@ -18,13 +19,14 @@ interface Dependencies {
 
 const NonInjectedHelmServerSide = observer(({ state }: Dependencies) => (
   <section>
-    <SubTitle title="Server-side apply" />
+    <SubTitle title={t("Server-side apply")} />
     <Switch checked={state.helmServerSide} onChange={() => (state.helmServerSide = !state.helmServerSide)}>
-      Use server-side apply for Helm chart operations
+      {t("Use server-side apply for Helm chart operations")}
     </Switch>
     <div className="hint">
-      When enabled, Helm will use server-side apply (--server-side=true) for install and upgrade operations. This is
-      always enabled when &quot;Force conflicts&quot; is checked.
+      {t(
+        'When enabled, Helm will use server-side apply (--server-side=true) for install and upgrade operations. This is always enabled when "Force conflicts" is checked.',
+      )}
     </div>
   </section>
 ));

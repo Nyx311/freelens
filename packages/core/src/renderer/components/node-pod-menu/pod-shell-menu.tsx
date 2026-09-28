@@ -4,6 +4,7 @@
  */
 
 import os from "node:os";
+import { t } from "@freelensapp/i18n";
 import { Pod } from "@freelensapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import React from "react";
@@ -84,8 +85,8 @@ const NonInjectablePodShellMenu: React.FC<PodShellMenuProps & Dependencies> = (p
   return (
     <PodMenuItem
       svg="ssh"
-      title="Shell"
-      tooltip="Pod Shell"
+      title={t("Shell")}
+      tooltip={t("Pod Shell")}
       toolbar={toolbar}
       annotations={annotations}
       containers={containers}

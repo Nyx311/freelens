@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./helm-chart-details.scss";
 
 import assert from "node:assert";
@@ -76,9 +77,9 @@ class NonInjectedHelmChartDetails extends Component<HelmChartDetailsProps & Depe
         <div className="intro-contents grow shrink-0 basis-0">
           <div className="description flex items-center justify-between" data-testid="selected-chart-description">
             {selectedChart.getDescription()}
-            <Button primary label="Install" onClick={this.install} data-testid={`install-chart-for-${testId}`} />
+            <Button primary label={t("Install")} onClick={this.install} data-testid={`install-chart-for-${testId}`} />
           </div>
-          <DrawerItem name="Version" className="version" onClick={stopPropagation}>
+          <DrawerItem name={t("Version")} className="version" onClick={stopPropagation}>
             <Select
               id={`helm-chart-version-selector-${testId}`}
               themeName="outlined"
@@ -86,7 +87,7 @@ class NonInjectedHelmChartDetails extends Component<HelmChartDetailsProps & Depe
               options={this.props.versionSelection.options.get()}
               formatOptionLabel={({ value: chart }) =>
                 chart.deprecated ? (
-                  <LargeTooltip title="Deprecated" placement="left">
+                  <LargeTooltip title={t("Deprecated")} placement="left">
                     <span className="deprecated">{chart.version}</span>
                   </LargeTooltip>
                 ) : (
@@ -98,18 +99,18 @@ class NonInjectedHelmChartDetails extends Component<HelmChartDetailsProps & Depe
               onChange={this.props.versionSelection.onChange}
             />
           </DrawerItem>
-          <DrawerItem name="Home">
+          <DrawerItem name={t("Home")}>
             <a href={selectedChart.getHome()} target="_blank" rel="noreferrer">
               {selectedChart.getHome()}
             </a>
           </DrawerItem>
-          <DrawerItem name="Maintainers" className="maintainers">
+          <DrawerItem name={t("Maintainers")} className="maintainers">
             {selectedChart.getMaintainers().map(({ name, email }) => (
               <li key={name}>{`${name}<${email}>`}</li>
             ))}
           </DrawerItem>
           {selectedChart.getKeywords().length > 0 && (
-            <DrawerItem name="Keywords" labelsOnly>
+            <DrawerItem name={t("Keywords")} labelsOnly>
               {selectedChart.getKeywords().map((key) => (
                 <Badge key={key} label={key} />
               ))}
@@ -151,7 +152,7 @@ class NonInjectedHelmChartDetails extends Component<HelmChartDetailsProps & Depe
         className="HelmChartDetails"
         usePortal={true}
         open={!!this.chart}
-        title={this.chart ? `Chart: ${this.chart.getFullName()}` : ""}
+        title={this.chart ? t("Chart: {{name}}", { name: this.chart.getFullName() }) : ""}
         onClose={this.props.hideDetails}
       >
         {this.renderContent()}

@@ -6,6 +6,7 @@
 
 import "./drawer-param-toggler.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import React from "react";
@@ -31,7 +32,7 @@ export class DrawerParamToggler extends React.Component<DrawerParamTogglerProps,
     const { label, children } = this.props;
     const { open } = this.state;
     const icon = `arrow_drop_${open ? "up" : "down"}`;
-    const link = open ? `Hide` : `Show`;
+    const link = open ? t("Hide") : t("Show");
 
     return (
       <div className="DrawerParamToggler">

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { apiPrefix } from "../../../common/vars";
 import kubeconfigManagerInjectable from "../../kubeconfig-manager/kubeconfig-manager.injectable";
@@ -69,7 +70,10 @@ const startPortForwardRouteInjectable = getRouteInjectable({
 
             return {
               error: {
-                message: `Failed to forward port ${port} to ${thePort ? forwardPort : "random port"}`,
+                message: t("Failed to forward port {{port}} to {{forwardPort}}", {
+                  port,
+                  forwardPort: thePort ? forwardPort : t("random port"),
+                }),
               },
             };
           }
@@ -86,7 +90,7 @@ const startPortForwardRouteInjectable = getRouteInjectable({
 
         return {
           error: {
-            message: `Failed to forward port ${port}`,
+            message: t("Failed to forward port {{port}}", { port }),
           },
         };
       }

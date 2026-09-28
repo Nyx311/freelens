@@ -7,6 +7,7 @@
 import "./service-port-component.scss";
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { Spinner } from "@freelensapp/spinner";
@@ -135,7 +136,13 @@ class NonInjectedServicePortComponent extends React.Component<ServicePortCompone
         }
       } else {
         this.props.notifyErrorPortForwarding(
-          `Error occurred starting port-forward, the local port may not be available or the ${portForward.kind} ${portForward.name} may not be reachable`,
+          t(
+            "Error occurred starting port-forward; the local port may not be available or the {{kind}} {{name}} may not be reachable",
+            {
+              kind: portForward.kind,
+              name: portForward.name,
+            },
+          ),
         );
       }
     } catch (error) {
@@ -162,7 +169,9 @@ class NonInjectedServicePortComponent extends React.Component<ServicePortCompone
     try {
       await this.portForwardStore.remove(portForward);
     } catch (error) {
-      showErrorNotification(`Error occurred stopping the port-forward from port ${portForward.forwardPort}.`);
+      showErrorNotification(
+        t("Error occurred stopping the port-forward from port {{port}}.", { port: portForward.forwardPort }),
+      );
     } finally {
       this.checkExistingPortForwarding();
       this.forwardPort = 0;
@@ -204,12 +213,12 @@ class NonInjectedServicePortComponent extends React.Component<ServicePortCompone
       <div className={cssNames("ServicePortComponent", { waiting: this.waiting })}>
         {service.getSelector().length ? (
           <>
-            <span title="Open in a browser" onClick={() => this.portForward()}>
+            <span title={t("Open in a browser")} onClick={() => this.portForward()}>
               {text}
             </span>
             <Button primary onClick={portForwardAction}>
               {" "}
-              {this.isPortForwarded ? (this.isActive ? "Stop/Remove" : "Remove") : "Forward..."}{" "}
+              {this.isPortForwarded ? (this.isActive ? t("Stop/Remove") : t("Remove")) : t("Forward...")}{" "}
             </Button>
             {this.waiting && <Spinner />}
           </>

@@ -5,6 +5,7 @@
  */
 
 import path from "node:path";
+import { t } from "@freelensapp/i18n";
 import { listTarEntries, readFileFromTar } from "@freelensapp/utilities";
 import { manifestFilename, validateExtensionManifest } from "../../../../features/extensions/installer/common/manifest";
 
@@ -17,7 +18,7 @@ export async function validatePackage(filePath: string): Promise<LensExtensionMa
   const firstFile = tarFiles[0];
 
   if (!firstFile) {
-    throw new Error(`invalid extension bundle, ${manifestFilename} not found`);
+    throw new Error(t("invalid extension bundle, {{manifestFilename}} not found", { manifestFilename }));
   }
 
   const rootFolder = path.normalize(firstFile).split(path.sep)[0];
@@ -25,7 +26,7 @@ export async function validatePackage(filePath: string): Promise<LensExtensionMa
   const manifestLocation = packedInRootFolder ? path.join(rootFolder, manifestFilename) : manifestFilename;
 
   if (!tarFiles.includes(manifestLocation)) {
-    throw new Error(`invalid extension bundle, ${manifestFilename} not found`);
+    throw new Error(t("invalid extension bundle, {{manifestFilename}} not found", { manifestFilename }));
   }
 
   const manifest = await readFileFromTar({

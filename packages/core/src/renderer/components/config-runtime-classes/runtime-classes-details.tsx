@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./runtime-classes.scss";
 
 import { observer } from "mobx-react";
@@ -26,13 +27,13 @@ export class RuntimeClassesDetails extends React.Component<RuntimeClassesDetails
 
     return (
       <div className="RuntimeClassesDetails">
-        <DrawerItem name="Handler">{rc.getHandler()}</DrawerItem>
+        <DrawerItem name={t("Handler")}>{rc.getHandler()}</DrawerItem>
 
-        <DrawerItem name="Pod Fixed" hidden={rc.getPodFixed() === ""}>
+        <DrawerItem name={t("Pod Fixed")} hidden={rc.getPodFixed() === ""}>
           {rc.getPodFixed()}
         </DrawerItem>
 
-        <DrawerItem name="Node Selector" hidden={nodeSelector.length === 0}>
+        <DrawerItem name={t("Node Selector")} hidden={nodeSelector.length === 0}>
           {nodeSelector.map((label) => (
             <Badge key={label} label={label} />
           ))}

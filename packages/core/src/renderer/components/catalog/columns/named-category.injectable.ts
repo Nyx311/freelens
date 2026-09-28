@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import styles from "../catalog.module.scss";
 import renderNamedCategoryColumnCellInjectable from "./render-named-category-column-cell.injectable";
@@ -22,7 +23,7 @@ const namedCategoryColumnInjectable = getInjectable({
     priority: 0,
     renderCell: di.inject(renderNamedCategoryColumnCellInjectable),
     titleProps: {
-      title: "Name",
+      title: t("Name"),
       className: styles.entityName,
       id: "name",
       sortBy: "name",

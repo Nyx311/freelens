@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { dump } from "js-yaml";
 import { DrawerItem, DrawerItemLabels } from "../../../../drawer";
 
@@ -17,9 +18,9 @@ export const Ephemeral: VolumeVariantComponent<"ephemeral"> = ({
   },
 }) => (
   <>
-    <DrawerItem name="PVC Template Name">{`${pod.getName()}-${volumeName}`}</DrawerItem>
-    <DrawerItemLabels name="Template Labels" labels={metadata.labels ?? {}} />
-    <DrawerItemLabels name="Template Annotations" labels={metadata.annotations ?? {}} />
-    <DrawerItem name="Template PVC Spec">{dump(spec)}</DrawerItem>
+    <DrawerItem name={t("PVC Template Name")}>{`${pod.getName()}-${volumeName}`}</DrawerItem>
+    <DrawerItemLabels name={t("Template Labels")} labels={metadata.labels ?? {}} />
+    <DrawerItemLabels name={t("Template Annotations")} labels={metadata.annotations ?? {}} />
+    <DrawerItem name={t("Template PVC Spec")}>{dump(spec)}</DrawerItem>
   </>
 );

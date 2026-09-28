@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Tooltip } from "@freelensapp/tooltip";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -59,7 +60,9 @@ const NonInjectedSidebarCluster = observer(
     }
 
     const onMenuOpen = () => {
-      const title = entityInActiveHotbar.hasEntity(clusterEntity.getId()) ? "Remove from Hotbar" : "Add to Hotbar";
+      const title = entityInActiveHotbar.hasEntity(clusterEntity.getId())
+        ? t("Remove from Hotbar")
+        : t("Add to Hotbar");
       const onClick = () => entityInActiveHotbar.toggleEntity(clusterEntity);
 
       menuItems.replace([{ title, onClick }]);

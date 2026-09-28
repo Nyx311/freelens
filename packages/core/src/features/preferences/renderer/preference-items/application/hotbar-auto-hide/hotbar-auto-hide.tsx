@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
@@ -18,14 +19,14 @@ interface Dependencies {
 
 const NonInjectedHotbarAutoHide = observer(({ state }: Dependencies) => (
   <section id="hotbar">
-    <SubTitle title="Auto-Hide Hotbar" />
+    <SubTitle title={t("Auto-Hide Hotbar")} />
     <Switch
       checked={state.hotbarAutoHide}
       onChange={() => {
         state.hotbarAutoHide = !state.hotbarAutoHide;
       }}
     >
-      Automatically hide Hotbar
+      {t("Automatically hide Hotbar")}
     </Switch>
   </section>
 ));

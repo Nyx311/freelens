@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { TooltipPosition } from "@freelensapp/tooltip";
@@ -167,7 +168,9 @@ class NonInjectedClusterRoleBindingDialog extends React.Component<ClusterRoleBin
     } catch (err) {
       this.props.showCheckedErrorNotification(
         err,
-        `Unknown error occurred while ${this.isEditing ? "editing the" : "creating a"} ClusterRoleBinding`,
+        this.isEditing
+          ? t("Unknown error occurred while editing the ClusterRoleBinding")
+          : t("Unknown error occurred while creating a ClusterRoleBinding"),
       );
     }
   };
@@ -175,11 +178,11 @@ class NonInjectedClusterRoleBindingDialog extends React.Component<ClusterRoleBin
   renderContents() {
     return (
       <>
-        <SubTitle title="Cluster Role Reference" />
+        <SubTitle title={t("Cluster Role Reference")} />
         <Select
           id="cluster-role-input"
           themeName="lens"
-          placeholder="Select cluster role ..."
+          placeholder={t("Select cluster role ...")}
           isDisabled={this.isEditing}
           options={this.clusterRoleOptions}
           value={this.selectedRoleRef}
@@ -207,40 +210,40 @@ class NonInjectedClusterRoleBindingDialog extends React.Component<ClusterRoleBin
           }}
         />
 
-        <SubTitle title="Binding Name" />
+        <SubTitle title={t("Binding Name")} />
         <Input
-          placeholder="Name of ClusterRoleBinding ..."
+          placeholder={t("Name of ClusterRoleBinding ...")}
           disabled={this.isEditing}
           value={this.props.editBindingNameState.get()}
           onChange={(val) => this.props.editBindingNameState.set(val)}
         />
 
-        <SubTitle title="Binding targets" />
+        <SubTitle title={t("Binding targets")} />
 
-        <b>Users</b>
+        <b>{t("Users")}</b>
         <EditableList
-          placeholder="Bind to User Accounts (comma-separated) ..."
+          placeholder={t("Bind to User Accounts (comma-separated) ...")}
           separator=","
           add={(newUser) => this.selectedUsers.add(newUser)}
           items={Array.from(this.selectedUsers)}
           remove={({ oldItem }) => this.selectedUsers.delete(oldItem)}
         />
 
-        <b>Groups</b>
+        <b>{t("Groups")}</b>
         <EditableList
-          placeholder="Bind to User Groups (comma-separated) ..."
+          placeholder={t("Bind to User Groups (comma-separated) ...")}
           separator=","
           add={(newGroup) => this.selectedGroups.add(newGroup)}
           items={Array.from(this.selectedGroups)}
           remove={({ oldItem }) => this.selectedGroups.delete(oldItem)}
         />
 
-        <b>Service Accounts</b>
+        <b>{t("Service Accounts")}</b>
         <Select
           id="service-account-input"
           isMulti
           themeName="lens"
-          placeholder="Select service accounts ..."
+          placeholder={t("Select service accounts ...")}
           options={this.serviceAccountOptions}
           value={Array.from(this.selectedAccounts)}
           formatOptionLabel={(option) => (
@@ -265,7 +268,7 @@ class NonInjectedClusterRoleBindingDialog extends React.Component<ClusterRoleBin
       state,
       ...dialogProps
     } = this.props;
-    const [action, nextLabel] = this.isEditing ? ["Edit", "Update"] : ["Add", "Create"];
+    const [action, nextLabel] = this.isEditing ? [t("Edit"), t("Update")] : [t("Add"), t("Create")];
     const disableNext = !this.selectedRoleRef || !this.selectedBindings.length || !editBindingNameState.get();
 
     void openClusterRoleBindingDialog;
@@ -281,7 +284,7 @@ class NonInjectedClusterRoleBindingDialog extends React.Component<ClusterRoleBin
         onClose={this.reset}
         onOpen={this.onOpen}
       >
-        <Wizard header={<h5>{`${action} ClusterRoleBinding`}</h5>} done={closeClusterRoleBindingDialog}>
+        <Wizard header={<h5>{t("{{action}} ClusterRoleBinding", { action })}</h5>} done={closeClusterRoleBindingDialog}>
           <WizardStep nextLabel={nextLabel} next={this.createBindings} disabledNext={disableNext}>
             {this.renderContents()}
           </WizardStep>

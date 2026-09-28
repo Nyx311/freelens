@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { defaultColorThemePreference } from "../../../../../../common/vars";
@@ -24,17 +25,17 @@ const NonInjectedTheme = observer(({ state, themes }: Dependencies) => {
   const themeOptions = [
     {
       value: defaultColorThemePreference,
-      label: "Sync with computer",
+      label: t("Sync with computer"),
     },
     ...themes.map((theme) => ({
       value: theme.name,
-      label: theme.name,
+      label: theme.name === "Light" || theme.name === "Dark" ? t(theme.name) : theme.name,
     })),
   ];
 
   return (
     <section id="appearance">
-      <SubTitle title="Theme" />
+      <SubTitle title={t("Theme")} />
       <Select
         id="theme-input"
         options={themeOptions}

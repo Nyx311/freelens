@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import findHotbarByNameInjectable from "../../../../features/hotbar/storage/common/find-by-name.injectable";
 import { inputValidator } from "../input_validators";
@@ -16,7 +17,7 @@ const uniqueHotbarNameInjectable = getInjectable({
 
     return inputValidator({
       condition: ({ required }) => required,
-      message: () => "Hotbar with this name already exists",
+      message: () => t("Hotbar with this name already exists"),
       validate: (value) => !findHotbarByName(value),
     });
   },

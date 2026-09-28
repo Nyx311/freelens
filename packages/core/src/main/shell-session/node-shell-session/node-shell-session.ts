@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { NodeApi } from "@freelensapp/kube-api";
 import { CoreV1Api, Watch } from "@kubernetes/client-node";
 import { once } from "es-toolkit";
@@ -68,10 +69,10 @@ export class NodeShellSession extends ShellSession {
     this.websocket.once("close", cleanup);
 
     try {
-      this.status.info("Creating node shell pod ...");
+      this.status.info(t("Creating node shell pod ..."));
       await this.createNodeShellPod(coreApi);
 
-      this.status.info("Waiting for the node shell pod ...");
+      this.status.info(t("Waiting for the node shell pod ..."));
       await this.waitForRunningPod(proxyKubeconfig);
     } catch (error) {
       cleanup();
@@ -79,7 +80,9 @@ export class NodeShellSession extends ShellSession {
       // Not STDOUT: that marks the session as ready and clears the buffer, so
       // the message used to erase itself.
       this.status.error(
-        `Error occurred: ${get(error, "response.body.message", error ? String(error) : "unknown error")}`,
+        t("Error occurred: {{error}}", {
+          error: get(error, "response.body.message", error ? String(error) : t("Unknown error")),
+        }),
       );
 
       throw new ShellOpenError("failed to create node pod", error instanceof Error ? { cause: error } : undefined);
@@ -115,7 +118,7 @@ export class NodeShellSession extends ShellSession {
     const node = await nodeApi.get({ name: this.nodeName });
 
     if (!node) {
-      throw new Error(`No node with name=${this.nodeName} found`);
+      throw new Error(t("No node with name={{nodeName}} found", { nodeName: this.nodeName }));
     }
 
     const nodeOs = node.getOperatingSystem();
@@ -220,7 +223,9 @@ export class NodeShellSession extends ShellSession {
                   return resolve();
                 case "Failed":
                   return reject(
-                    `Failed to be created: ${(status as unknown as Record<string, string>).message || "unknown error"}`,
+                    t("Failed to be created: {{error}}", {
+                      error: (status as unknown as Record<string, string>).message || t("Unknown error"),
+                    }),
                   );
               }
             }
@@ -236,7 +241,7 @@ export class NodeShellSession extends ShellSession {
             () => {
               this.dependencies.logger.error(`[NODE-SHELL]: aborting wait for ${this.podName}, timing out`);
               req.abort();
-              reject("Pod creation timed out");
+              reject(t("Pod creation timed out"));
             },
             2 * 60 * 1000,
           ); // 2 * 60 * 1000

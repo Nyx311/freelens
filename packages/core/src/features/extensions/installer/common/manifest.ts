@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { isObject, isString } from "@freelensapp/utilities";
 
 import type { LensExtensionManifest } from "../../../../extensions/installed-extension";
@@ -18,23 +19,23 @@ export const manifestFilename = "package.json";
  */
 export function validateExtensionManifest(manifest: unknown): LensExtensionManifest {
   if (!isObject(manifest)) {
-    throw new Error(`${manifestFilename} is not an object`);
+    throw new Error(t("{{manifest}} is not an object", { manifest: manifestFilename }));
   }
 
   if (!isString(manifest.name) || !manifest.name) {
-    throw new Error(`${manifestFilename} must specify "name"`);
+    throw new Error(t('{{manifest}} must specify "name"', { manifest: manifestFilename }));
   }
 
   if (!isString(manifest.version) || !manifest.version) {
-    throw new Error(`${manifestFilename} must specify "version"`);
+    throw new Error(t('{{manifest}} must specify "version"', { manifest: manifestFilename }));
   }
 
   if (!isString(manifest.main) && !isString(manifest.renderer)) {
-    throw new Error(`${manifestFilename} must specify "main" and/or "renderer" field`);
+    throw new Error(t('{{manifest}} must specify "main" and/or "renderer" field', { manifest: manifestFilename }));
   }
 
   if (!isObject(manifest.engines) || !isString(manifest.engines.freelens)) {
-    throw new Error(`${manifestFilename} must specify "freelens" in "engines" field`);
+    throw new Error(t('{{manifest}} must specify "freelens" in "engines" field', { manifest: manifestFilename }));
   }
 
   return manifest as unknown as LensExtensionManifest;

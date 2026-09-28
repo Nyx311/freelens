@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import openLinkInBrowserInjectable from "../../../../../../common/utils/open-link-in-browser.injectable";
@@ -22,7 +23,7 @@ const openSupportItemInjectable = getInjectable({
       parentId: "help",
       id: "open-support",
       orderNumber: 30,
-      label: "Support",
+      label: t("Support"),
 
       // TODO: Convert to async/await
       onClick: () => {

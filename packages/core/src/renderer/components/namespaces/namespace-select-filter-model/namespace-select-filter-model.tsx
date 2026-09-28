@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { observableCrate } from "@freelensapp/utilities";
 import { action, comparer, computed, observable } from "mobx";
@@ -84,7 +85,7 @@ export function namespaceSelectFilterModelFor(dependencies: Dependencies): Names
   const options = computed((): readonly NamespaceSelectFilterOption[] => [
     {
       value: selectAllNamespaces,
-      label: "All Namespaces",
+      label: t("All Namespaces"),
       id: "all-namespaces",
     },
     ...context.allNamespaces.sort(sortNamespacesByIfTheyHaveBeenSelected).map((namespace) => ({
@@ -162,7 +163,7 @@ export function namespaceSelectFilterModelFor(dependencies: Dependencies): Names
     isOptionSelected,
     formatOptionLabel: (option) => {
       if (option.value === selectAllNamespaces) {
-        return <>All Namespaces</>;
+        return <>{t("All Namespaces")}</>;
       }
 
       return (

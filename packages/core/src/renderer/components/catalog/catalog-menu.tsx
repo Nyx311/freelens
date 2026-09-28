@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -41,17 +42,17 @@ interface Dependencies {
 const NonInjectedCatalogMenu = observer(
   ({ activeTab, filteredCategories, onItemClick }: CatalogMenuProps & Dependencies) => (
     <div className="flex flex-col w-full">
-      <div className={styles.catalog}>Catalog</div>
+      <div className={styles.catalog}>{t("Catalog")}</div>
       <TreeView>
         <TreeItem
           classes={treeStyles}
-          label="Browse"
+          label={t("Browse")}
           data-testid="*-tab"
           onClick={() => onItemClick("*")}
           selected={activeTab === browseCatalogTab}
         />
         <HorizontalLine size="xxs" />
-        <TreeGroup classes={treeStyles} label={<div className={styles.parent}>Categories</div>}>
+        <TreeGroup classes={treeStyles} label={<div className={styles.parent}>{t("Categories")}</div>}>
           {filteredCategories.get().map((category) => (
             <TreeItem
               classes={treeStyles}

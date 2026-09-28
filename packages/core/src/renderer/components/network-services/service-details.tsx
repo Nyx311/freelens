@@ -6,6 +6,7 @@
 
 import "./service-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { type PortStatus, Service } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
@@ -96,34 +97,34 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
     return (
       <div className="ServicesDetails">
         {selector && (
-          <DrawerItem name="Selector" labelsOnly>
+          <DrawerItem name={t("Selector")} labelsOnly>
             {selector.map((selector) => (
               <Badge key={selector} label={selector} />
             ))}
           </DrawerItem>
         )}
 
-        <DrawerItem name="Type">{spec.type}</DrawerItem>
-        <DrawerItem name="Session Affinity">{spec.sessionAffinity}</DrawerItem>
-        <DrawerItem name="Internal Traffic Policy" hidden={!spec.internalTrafficPolicy}>
+        <DrawerItem name={t("Type")}>{spec.type}</DrawerItem>
+        <DrawerItem name={t("Session Affinity")}>{spec.sessionAffinity}</DrawerItem>
+        <DrawerItem name={t("Internal Traffic Policy")} hidden={!spec.internalTrafficPolicy}>
           {spec.internalTrafficPolicy}
         </DrawerItem>
-        <DrawerItem name="Traffic Distribution" hidden={!spec.trafficDistribution}>
+        <DrawerItem name={t("Traffic Distribution")} hidden={!spec.trafficDistribution}>
           {spec.trafficDistribution}
         </DrawerItem>
-        <DrawerItem name="Topology Keys" hidden={!spec.topologyKeys}>
+        <DrawerItem name={t("Topology Keys")} hidden={!spec.topologyKeys}>
           {spec.topologyKeys?.map((key) => (
             <Badge key={key} label={key} />
           ))}
         </DrawerItem>
-        <DrawerItem name="Publish Not Ready Address" hidden={spec.publishNotReadyAddresses === undefined}>
+        <DrawerItem name={t("Publish Not Ready Address")} hidden={spec.publishNotReadyAddresses === undefined}>
           <BadgeBoolean value={spec.publishNotReadyAddresses} />
         </DrawerItem>
 
         {spec.sessionAffinityConfig && (
           <>
-            <DrawerTitle>Session Affinity Config</DrawerTitle>
-            <DrawerItem name="Client IP Timeout" hidden={!spec.sessionAffinityConfig.clientIP}>
+            <DrawerTitle>{t("Session Affinity Config")}</DrawerTitle>
+            <DrawerItem name={t("Client IP Timeout")} hidden={!spec.sessionAffinityConfig.clientIP}>
               {formatDuration((spec.sessionAffinityConfig.clientIP?.timeoutSeconds ?? 0) * 1000, false)}
             </DrawerItem>
           </>
@@ -131,23 +132,23 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
 
         {spec.type === "LoadBalancer" && (
           <>
-            <DrawerTitle>Load Balancer</DrawerTitle>
+            <DrawerTitle>{t("Load Balancer")}</DrawerTitle>
             <DrawerItem
-              name="Allocate Load Balancer Node Ports"
+              name={t("Allocate Load Balancer Node Ports")}
               hidden={spec.allocateLoadBalancerNodePorts === undefined}
             >
               <BadgeBoolean value={spec.allocateLoadBalancerNodePorts} />
             </DrawerItem>
-            <DrawerItem name="Load Balancer IP" hidden={!spec.loadBalancerIP}>
+            <DrawerItem name={t("Load Balancer IP")} hidden={!spec.loadBalancerIP}>
               {spec.loadBalancerIP}
             </DrawerItem>
-            <DrawerItem name="Load Balancer Class" hidden={!spec.loadBalancerClass}>
+            <DrawerItem name={t("Load Balancer Class")} hidden={!spec.loadBalancerClass}>
               {spec.loadBalancerClass}
             </DrawerItem>
-            <DrawerItem name="External Traffic Policy" hidden={!spec.externalTrafficPolicy}>
+            <DrawerItem name={t("External Traffic Policy")} hidden={!spec.externalTrafficPolicy}>
               {spec.externalTrafficPolicy}
             </DrawerItem>
-            <DrawerItem name="Health Check Node Port" hidden={!spec.healthCheckNodePort}>
+            <DrawerItem name={t("Health Check Node Port")} hidden={!spec.healthCheckNodePort}>
               {spec.healthCheckNodePort}
             </DrawerItem>
 
@@ -158,16 +159,16 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
                     <div className="title flex gap-2">
                       <Icon small material="list" />
                     </div>
-                    <DrawerItem name="Hostname" hidden={!lb.hostname}>
+                    <DrawerItem name={t("Hostname")} hidden={!lb.hostname}>
                       {lb.hostname}
                     </DrawerItem>
                     <DrawerItem name="IP" hidden={!lb.ip}>
                       {lb.ip}
                     </DrawerItem>
-                    <DrawerItem name="IP Mode" hidden={!lb.ipMode}>
+                    <DrawerItem name={t("IP Mode")} hidden={!lb.ipMode}>
                       {lb.ipMode}
                     </DrawerItem>
-                    <DrawerItem name="Ports" hidden={!lb.ports}>
+                    <DrawerItem name={t("Ports")} hidden={!lb.ports}>
                       <Table
                         selectable
                         tableId="loadBalancerStatusPorts"
@@ -182,12 +183,12 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
                       >
                         <TableHead flat sticky={false}>
                           <TableCell className="port" sortBy="port">
-                            Port
+                            {t("Port")}
                           </TableCell>
                           <TableCell className="protocol" sortBy="protocol">
-                            Protocol
+                            {t("Protocol")}
                           </TableCell>
-                          <TableCell className="errorStatus">Error</TableCell>
+                          <TableCell className="errorStatus">{t("Error")}</TableCell>
                         </TableHead>
                         {lb.ports?.map((portStatus) => (
                           <TableRow key={`${portStatus.port}-${portStatus.protocol}`} sortItem={portStatus} nowrap>
@@ -206,28 +207,28 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
           </>
         )}
 
-        <DrawerTitle>Connection</DrawerTitle>
+        <DrawerTitle>{t("Connection")}</DrawerTitle>
 
-        <DrawerItem name="Cluster IP" hidden={!spec.clusterIP}>
+        <DrawerItem name={t("Cluster IP")} hidden={!spec.clusterIP}>
           {spec.clusterIP}
         </DrawerItem>
 
-        <DrawerItem name="Cluster IPs" hidden={!service.getClusterIps().length} labelsOnly>
+        <DrawerItem name={t("Cluster IPs")} hidden={!service.getClusterIps().length} labelsOnly>
           {service.getClusterIps().map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
 
-        <DrawerItem name="IP family policy" hidden={!service.getIpFamilyPolicy()}>
+        <DrawerItem name={t("IP family policy")} hidden={!service.getIpFamilyPolicy()}>
           {service.getIpFamilyPolicy()}
         </DrawerItem>
 
-        <DrawerItem name="IP families" hidden={!service.getIpFamilies().length}>
+        <DrawerItem name={t("IP families")} hidden={!service.getIpFamilies().length}>
           {service.getIpFamilies().join(", ")}
         </DrawerItem>
 
         {externalIps.length > 0 && (
-          <DrawerItem name="External IPs">
+          <DrawerItem name={t("External IPs")}>
             {externalIps.map((ip) => (
               <div key={ip}>
                 {externalProtocol ? (
@@ -243,7 +244,7 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
         )}
 
         {ports && ports.length > 0 && (
-          <DrawerItem name="Ports">
+          <DrawerItem name={t("Ports")}>
             <div>
               {service.getPorts().map((port) => (
                 <ServicePortComponent service={service} port={port} key={port.toString()} />
@@ -254,26 +255,26 @@ class NonInjectedServiceDetails extends React.Component<ServiceDetailsProps & De
 
         {endpointSlices.length > 0 && (
           <>
-            <DrawerTitle>Endpoint Slices</DrawerTitle>
+            <DrawerTitle>{t("Endpoint Slices")}</DrawerTitle>
             <ServiceDetailsEndpointSlices endpointSlices={endpointSlices} />
           </>
         )}
 
         {loadBalancerStatus?.conditions && (
           <div className="ServiceConditions">
-            <DrawerTitle>Conditions</DrawerTitle>
+            <DrawerTitle>{t("Conditions")}</DrawerTitle>
             {loadBalancerStatus?.conditions?.map((condition, idx) => (
               <div className="condition" key={idx}>
                 <div className="title flex gap-2">
                   <Icon small material="list" />
                 </div>
-                <DrawerItem name="Last Transition Time">{condition.lastTransitionTime}</DrawerItem>
-                <DrawerItem name="Reason">{condition.reason}</DrawerItem>
-                <DrawerItem name="Status">{condition.status}</DrawerItem>
-                <DrawerItem name="Type" hidden={!condition.type}>
+                <DrawerItem name={t("Last Transition Time")}>{condition.lastTransitionTime}</DrawerItem>
+                <DrawerItem name={t("Reason")}>{condition.reason}</DrawerItem>
+                <DrawerItem name={t("Status")}>{t(condition.status)}</DrawerItem>
+                <DrawerItem name={t("Type")} hidden={!condition.type}>
                   {condition.type}
                 </DrawerItem>
-                <DrawerItem name="Message">{condition.message}</DrawerItem>
+                <DrawerItem name={t("Message")}>{condition.message}</DrawerItem>
               </div>
             ))}
           </div>

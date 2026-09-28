@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToPersistentVolumeClaimsInjectable from "../../../common/front-end-routing/routes/cluster/storage/persistent-volume-claims/navigate-to-persistent-volume-claims.injectable";
 import persistentVolumeClaimsRouteInjectable from "../../../common/front-end-routing/routes/cluster/storage/persistent-volume-claims/persistent-volume-claims-route.injectable";
@@ -19,7 +20,7 @@ const persistentVolumeClaimsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: storageSidebarItemInjectable.id,
-      title: "Persistent Volume Claims",
+      title: t("Persistent Volume Claims"),
       onClick: di.inject(navigateToPersistentVolumeClaimsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

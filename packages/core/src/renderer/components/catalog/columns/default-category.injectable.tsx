@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { KubeObject } from "@freelensapp/kube-object";
 import { getInjectable } from "@ogre-tools/injectable";
 import styles from "../catalog.module.scss";
@@ -27,7 +28,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
         priority: 10,
         renderCell: (entity) => entity.getSource(),
         titleProps: {
-          title: "Source",
+          title: t("Source"),
           className: styles.sourceCell,
           id: "source",
           sortBy: "source",
@@ -42,7 +43,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
         renderCell: getLabelBadges,
         titleProps: {
           id: "labels",
-          title: "Labels",
+          title: t("Labels"),
           className: `${styles.labelsCell} scrollable`,
           "data-testid": "catalog-labels-column",
         },
@@ -57,7 +58,7 @@ const defaultCategoryColumnsInjectable = getInjectable({
           </span>
         ),
         titleProps: {
-          title: "Status",
+          title: t("Status"),
           className: styles.statusCell,
           id: "status",
           sortBy: "status",

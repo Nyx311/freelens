@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { capitalize } from "es-toolkit";
 import { observer } from "mobx-react";
@@ -20,12 +21,12 @@ interface Dependencies {
 
 const lineNumberOptions = (["on", "off", "relative", "interval"] as const).map((lineNumbers) => ({
   value: lineNumbers,
-  label: capitalize(lineNumbers),
+  label: t(capitalize(lineNumbers)),
 }));
 
 const NonInjectedLineNumbers = observer(({ state: { editorConfiguration } }: Dependencies) => (
   <section>
-    <SubTitle title="Line numbers" />
+    <SubTitle title={t("Line numbers")} />
     <Select
       id="editor-line-numbers-input"
       options={lineNumberOptions}

@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showInfoNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -35,16 +36,16 @@ const newVersionNotificationInjectable = getInjectable({
         showInfoNotification(
           <div className="flex flex-col gap-2">
             <div>
-              {productName} v{newVersion} is available! Open the{" "}
+              {t("{{product}} v{{version}} is available! Open the", { product: productName, version: newVersion })}{" "}
               <a
                 href={`https://github.com/freelensapp/freelens/releases`}
                 target="_blank"
                 rel="noreferrer"
                 className="NotificationLink"
               >
-                release notes
+                {t("release notes")}
               </a>{" "}
-              to learn more.
+              {t("to learn more.")}
             </div>
           </div>,
         );

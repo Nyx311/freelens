@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -52,7 +53,7 @@ const NonInjectedMetricsTimeRangeSelector = observer(
         })),
         {
           value: "custom" as const,
-          label: "Custom",
+          label: t("Custom"),
         },
       ],
       [],
@@ -95,7 +96,7 @@ const NonInjectedMetricsTimeRangeSelector = observer(
           menuPlacement="auto"
           themeName="lens"
           isSearchable={false}
-          placeholder="Select time range..."
+          placeholder={t("Select time range...")}
         />
         {isCustom && displayLabel && (
           <span
@@ -168,29 +169,29 @@ const CustomTimeRangePicker: React.FC<CustomTimeRangePickerProps> = observer(
 
     return (
       <div className={styles.pickerContent}>
-        <h5 className={styles.header}>Custom Time Range</h5>
+        <h5 className={styles.header}>{t("Custom Time Range")}</h5>
         <div className={styles.inputGroup}>
-          <label>Start:</label>
+          <label>{t("Start:")}</label>
           <input type="datetime-local" value={startValue} onChange={(e) => setStartValue(e.target.value)} autoFocus />
         </div>
         <div className={styles.inputGroup}>
-          <label>End:</label>
+          <label>{t("End:")}</label>
           <input type="datetime-local" value={endValue} onChange={(e) => setEndValue(e.target.value)} />
         </div>
         <div className={styles.actions}>
           <button
             onClick={onCancel}
             className={`${styles.button} ${styles.cancelButton}`}
-            aria-label="Cancel custom time range selection"
+            aria-label={t("Cancel custom time range selection")}
           >
-            Cancel
+            {t("Cancel")}
           </button>
           <button
             onClick={handleApply}
             className={`${styles.button} ${styles.applyButton}`}
-            aria-label="Apply custom time range"
+            aria-label={t("Apply custom time range")}
           >
-            Apply
+            {t("Apply")}
           </button>
         </div>
       </div>

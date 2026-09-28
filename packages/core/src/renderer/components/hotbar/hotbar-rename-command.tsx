@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { action } from "mobx";
 import { observer } from "mobx-react";
@@ -52,7 +53,7 @@ const NonInjectedHotbarRenameCommand = observer(
             trim={true}
             value={hotbarName}
             onChange={setHotbarName}
-            placeholder="New hotbar name"
+            placeholder={t("New hotbar name")}
             autoFocus={true}
             theme="round-black"
             validators={uniqueHotbarName}
@@ -60,7 +61,7 @@ const NonInjectedHotbarRenameCommand = observer(
             showValidationLine={true}
           />
           <small className="hint">
-            Please provide a new hotbar name (Press &quot;Enter&quot; to confirm or &quot;Escape&quot; to cancel)
+            {t('Please provide a new hotbar name (Press "Enter" to confirm or "Escape" to cancel)')}
           </small>
         </>
       );
@@ -84,7 +85,7 @@ const NonInjectedHotbarRenameCommand = observer(
         }))}
         autoFocus={true}
         escapeClearsValue={false}
-        placeholder="Rename hotbar"
+        placeholder={t("Rename hotbar")}
       />
     );
   },

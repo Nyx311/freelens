@@ -6,6 +6,7 @@
 
 import "./secret.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { prevDefault } from "@freelensapp/utilities";
 import React from "react";
@@ -42,7 +43,7 @@ export class ServiceAccountsSecret extends React.Component<ServiceAccountsSecret
             <Icon
               small
               material="lock_open"
-              tooltip="Show value"
+              tooltip={t("Show value")}
               onClick={prevDefault(() => this.setState({ showToken: true }))}
             />
           </>
@@ -67,15 +68,15 @@ export class ServiceAccountsSecret extends React.Component<ServiceAccountsSecret
     return (
       <div className="ServiceAccountsSecret grow shrink-0 basis-0">
         {this.renderRow({
-          name: "Name: ",
+          name: t("Name: "),
           value: typeof secret === "string" ? secret : secret.getName(),
         })}
         {this.renderRow({
-          name: "Value: ",
+          name: t("Value: "),
           value: typeof secret === "string" ? "<unknown>" : this.renderSecretValue(secret),
         })}
         {this.renderRow({
-          name: "Created at: ",
+          name: t("Created at: "),
           value:
             typeof secret === "string" || !secret.metadata.creationTimestamp
               ? "<unknown>"
@@ -84,7 +85,7 @@ export class ServiceAccountsSecret extends React.Component<ServiceAccountsSecret
                 ),
         })}
         {this.renderRow({
-          name: "Type: ",
+          name: t("Type: "),
           value: typeof secret === "string" ? "<unknown>" : secret.type,
         })}
       </div>

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import createLogsTabInjectable from "./create-logs-tab.injectable";
 
@@ -23,7 +24,7 @@ const createPodLogsTabInjectable = getInjectable({
     const createLogsTab = di.inject(createLogsTabInjectable);
 
     return ({ selectedPod, selectedContainer }: PodLogsTabData): TabId =>
-      createLogsTab(`Pod ${selectedPod.getName()}`, {
+      createLogsTab(t("Pod {{name}}", { name: selectedPod.getName() }), {
         owner: selectedPod.getOwnerRefs()[0],
         namespace: selectedPod.getNs(),
         selectedContainer: selectedContainer.name,

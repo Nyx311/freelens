@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import { DrawerTitle } from "../../../drawer";
 import { PodDetailsContainer } from "../../pod-details-container";
@@ -19,7 +20,7 @@ const PodDetailsContainers = observer(({ pod }: PodDetailsContainersProps) => {
 
   return (
     <>
-      <DrawerTitle>Containers</DrawerTitle>
+      <DrawerTitle>{t("Containers")}</DrawerTitle>
       {containers.map((container) => (
         <PodDetailsContainer key={container.name} pod={pod} container={container} />
       ))}

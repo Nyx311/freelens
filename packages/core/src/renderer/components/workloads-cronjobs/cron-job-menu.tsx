@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cronJobApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -39,8 +40,8 @@ const NonInjectedCronJobMenu = ({
 }: Dependencies & CronJobMenuProps) => (
   <>
     <MenuItem onClick={() => openCronJobTriggerDialog(object)}>
-      <Icon material="play_circle_filled" tooltip="Trigger" interactive={toolbar} />
-      <span className="title">Trigger</span>
+      <Icon material="play_circle_filled" tooltip={t("Trigger")} interactive={toolbar} />
+      <span className="title">{t("Trigger")}</span>
     </MenuItem>
 
     {object.isSuspend() ? (
@@ -51,21 +52,16 @@ const NonInjectedCronJobMenu = ({
               try {
                 await cronJobApi.resume({ namespace: object.getNs(), name: object.getName() });
               } catch (err) {
-                showCheckedErrorNotification(err, "Unknown error occurred while resuming CronJob");
+                showCheckedErrorNotification(err, t("Unknown error occurred while resuming CronJob"));
               }
             },
-            labelOk: `Resume`,
-            message: (
-              <p>
-                {"Resume CronJob "}
-                <b>{object.getName()}</b>?
-              </p>
-            ),
+            labelOk: t("Resume"),
+            message: <p>{t("Resume CronJob {{name}}?", { name: object.getName() })}</p>,
           })
         }
       >
-        <Icon material="play_circle_outline" tooltip="Resume" interactive={toolbar} />
-        <span className="title">Resume</span>
+        <Icon material="play_circle_outline" tooltip={t("Resume")} interactive={toolbar} />
+        <span className="title">{t("Resume")}</span>
       </MenuItem>
     ) : (
       <MenuItem
@@ -75,21 +71,16 @@ const NonInjectedCronJobMenu = ({
               try {
                 await cronJobApi.suspend({ namespace: object.getNs(), name: object.getName() });
               } catch (err) {
-                showCheckedErrorNotification(err, "Unknown error occurred while suspending CronJob");
+                showCheckedErrorNotification(err, t("Unknown error occurred while suspending CronJob"));
               }
             },
-            labelOk: `Suspend`,
-            message: (
-              <p>
-                {"Suspend CronJob "}
-                <b>{object.getName()}</b>?
-              </p>
-            ),
+            labelOk: t("Suspend"),
+            message: <p>{t("Suspend CronJob {{name}}?", { name: object.getName() })}</p>,
           })
         }
       >
-        <Icon material="pause_circle_filled" tooltip="Suspend" interactive={toolbar} />
-        <span className="title">Suspend</span>
+        <Icon material="pause_circle_filled" tooltip={t("Suspend")} interactive={toolbar} />
+        <span className="title">{t("Suspend")}</span>
       </MenuItem>
     )}
   </>

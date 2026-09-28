@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -46,7 +47,7 @@ const NonInjectableLogsButton: React.FC<LogsButtonProps & Dependencies> = ({ pod
   };
 
   return (
-    <Icon material="subject" tooltip="View Logs" interactive onClick={handleClick} style={{ cursor: "pointer" }} />
+    <Icon material="subject" tooltip={t("View Logs")} interactive onClick={handleClick} style={{ cursor: "pointer" }} />
   );
 };
 

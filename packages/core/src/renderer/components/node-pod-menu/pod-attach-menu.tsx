@@ -4,6 +4,7 @@
  */
 
 import os from "node:os";
+import { t } from "@freelensapp/i18n";
 import { Pod } from "@freelensapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import React from "react";
@@ -76,8 +77,8 @@ const NonInjectedPodAttachMenu: React.FC<PodAttachMenuProps & Dependencies> = (p
   return (
     <PodMenuItem
       material="pageview"
-      title="Attach to Pod"
-      tooltip="Attach to Pod"
+      title={t("Attach to Pod")}
+      tooltip={t("Attach to Pod")}
       toolbar={toolbar}
       containers={containers}
       annotations={annotations}

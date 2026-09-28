@@ -6,6 +6,7 @@
 
 import "./endpoint-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Endpoints } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -41,7 +42,7 @@ class NonInjectedEndpointsDetails extends React.Component<EndpointsDetailsProps 
 
     return (
       <div className="EndpointDetails">
-        <DrawerTitle>Subsets</DrawerTitle>
+        <DrawerTitle>{t("Subsets")}</DrawerTitle>
         {endpoint.getEndpointSubsets().map((subset) => (
           <EndpointSubsetList key={subset.toString()} subset={subset} endpoint={endpoint} />
         ))}

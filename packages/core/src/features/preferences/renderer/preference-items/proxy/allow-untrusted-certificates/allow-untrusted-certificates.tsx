@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
@@ -18,13 +19,14 @@ interface Dependencies {
 
 const NonInjectedAllowUntrustedCertificates = observer(({ state }: Dependencies) => (
   <section className="small">
-    <SubTitle title="Certificate Trust" />
+    <SubTitle title={t("Certificate Trust")} />
     <Switch checked={state.allowUntrustedCAs} onChange={() => (state.allowUntrustedCAs = !state.allowUntrustedCAs)}>
-      Allow untrusted Certificate Authorities
+      {t("Allow untrusted Certificate Authorities")}
     </Switch>
     <small className="hint">
-      This will make Freelens to trust ANY certificate authority without any validations. Needed with some corporate
-      proxies that do certificate re-writing. Does not affect cluster communications!
+      {t(
+        "This will make Freelens to trust ANY certificate authority without any validations. Needed with some corporate proxies that do certificate re-writing. Does not affect cluster communications!",
+      )}
     </small>
   </section>
 ));

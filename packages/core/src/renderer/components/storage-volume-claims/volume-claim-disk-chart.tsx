@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { useContext } from "react";
@@ -47,15 +48,15 @@ const NonInjectedVolumeClaimDiskChart = observer(
     const datasets: ChartDataSets[] = [
       {
         id: `${id}-diskUsage`,
-        label: `Usage`,
-        tooltip: `Volume disk usage`,
+        label: t("Usage"),
+        tooltip: t("Volume disk usage"),
         borderColor: "#ffc63d",
         data: convertVolumeClaimMetricValuesToChartData(usage),
       },
       {
         id: `${id}-diskCapacity`,
-        label: `Capacity`,
-        tooltip: `Volume disk capacity`,
+        label: t("Capacity"),
+        tooltip: t("Volume disk capacity"),
         borderColor: chartCapacityColor,
         data: convertVolumeClaimMetricValuesToChartData(capacity),
       },

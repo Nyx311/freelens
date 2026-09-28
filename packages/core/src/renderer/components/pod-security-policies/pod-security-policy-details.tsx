@@ -6,6 +6,7 @@
 
 import "./pod-security-policy-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { PodSecurityPolicy } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -43,9 +44,9 @@ class NonInjectedPodSecurityPolicyDetails extends React.Component<PodSecurityPol
     return (
       <>
         <DrawerTitle>{title}</DrawerTitle>
-        <DrawerItem name="Rule">{rule}</DrawerItem>
+        <DrawerItem name={t("Rule")}>{rule}</DrawerItem>
         {ranges && (
-          <DrawerItem name="Ranges (Min-Max)" labelsOnly>
+          <DrawerItem name={t("Ranges (Min-Max)")} labelsOnly>
             {ranges.map(({ min, max }, index) => (
               <Badge key={index} label={`${min} - ${max}`} />
             ))}
@@ -99,52 +100,56 @@ class NonInjectedPodSecurityPolicyDetails extends React.Component<PodSecurityPol
 
     return (
       <div className="PodSecurityPolicyDetails">
-        {allowedCapabilities && <DrawerItem name="Allowed Capabilities">{allowedCapabilities.join(", ")}</DrawerItem>}
+        {allowedCapabilities && (
+          <DrawerItem name={t("Allowed Capabilities")}>{allowedCapabilities.join(", ")}</DrawerItem>
+        )}
 
-        {volumes && <DrawerItem name="Volumes">{volumes.join(", ")}</DrawerItem>}
+        {volumes && <DrawerItem name={t("Volumes")}>{volumes.join(", ")}</DrawerItem>}
 
         {allowedCSIDrivers && (
-          <DrawerItem name="Allowed CSI Drivers">{allowedCSIDrivers.map(({ name }) => name).join(", ")}</DrawerItem>
+          <DrawerItem name={t("Allowed CSI Drivers")}>
+            {allowedCSIDrivers.map(({ name }) => name).join(", ")}
+          </DrawerItem>
         )}
 
         {allowedFlexVolumes && (
-          <DrawerItem name="Allowed Flex Volumes">
+          <DrawerItem name={t("Allowed Flex Volumes")}>
             {allowedFlexVolumes.map(({ driver }) => driver).join(", ")}
           </DrawerItem>
         )}
 
         {allowedProcMountTypes && (
-          <DrawerItem name="Allowed Proc Mount Types">{allowedProcMountTypes.join(", ")}</DrawerItem>
+          <DrawerItem name={t("Allowed Proc Mount Types")}>{allowedProcMountTypes.join(", ")}</DrawerItem>
         )}
 
         {allowedUnsafeSysctls && (
-          <DrawerItem name="Allowed Unsafe Sysctls">{allowedUnsafeSysctls.join(", ")}</DrawerItem>
+          <DrawerItem name={t("Allowed Unsafe Sysctls")}>{allowedUnsafeSysctls.join(", ")}</DrawerItem>
         )}
 
-        {forbiddenSysctls && <DrawerItem name="Forbidden Sysctls">{forbiddenSysctls.join(", ")}</DrawerItem>}
+        {forbiddenSysctls && <DrawerItem name={t("Forbidden Sysctls")}>{forbiddenSysctls.join(", ")}</DrawerItem>}
 
-        <DrawerItem name="Allow Privilege Escalation">{allowPrivilegeEscalation ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Allow Privilege Escalation")}>{allowPrivilegeEscalation ? t("Yes") : t("No")}</DrawerItem>
 
-        <DrawerItem name="Privileged">{privileged ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Privileged")}>{privileged ? t("Yes") : t("No")}</DrawerItem>
 
-        <DrawerItem name="Read-only Root Filesystem">{readOnlyRootFilesystem ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Read-only Root Filesystem")}>{readOnlyRootFilesystem ? t("Yes") : t("No")}</DrawerItem>
 
         {defaultAddCapabilities && (
-          <DrawerItem name="Default Add Capabilities">{defaultAddCapabilities.join(", ")}</DrawerItem>
+          <DrawerItem name={t("Default Add Capabilities")}>{defaultAddCapabilities.join(", ")}</DrawerItem>
         )}
 
         {requiredDropCapabilities && (
-          <DrawerItem name="Required Drop Capabilities">{requiredDropCapabilities.join(", ")}</DrawerItem>
+          <DrawerItem name={t("Required Drop Capabilities")}>{requiredDropCapabilities.join(", ")}</DrawerItem>
         )}
 
-        <DrawerItem name="Host IPC">{hostIPC ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Host IPC")}>{hostIPC ? t("Yes") : t("No")}</DrawerItem>
 
-        <DrawerItem name="Host Network">{hostNetwork ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Host Network")}>{hostNetwork ? t("Yes") : t("No")}</DrawerItem>
 
-        <DrawerItem name="Host PID">{hostPID ? "Yes" : "No"}</DrawerItem>
+        <DrawerItem name={t("Host PID")}>{hostPID ? t("Yes") : t("No")}</DrawerItem>
 
         {hostPorts && (
-          <DrawerItem name="Host Ports (Min-Max)" labelsOnly>
+          <DrawerItem name={t("Host Ports (Min-Max)")} labelsOnly>
             {hostPorts.map(({ min, max }, index) => {
               return <Badge key={index} label={`${min} - ${max}`} />;
             })}
@@ -153,47 +158,49 @@ class NonInjectedPodSecurityPolicyDetails extends React.Component<PodSecurityPol
 
         {allowedHostPaths && (
           <>
-            <DrawerTitle>Allowed Host Paths</DrawerTitle>
+            <DrawerTitle>{t("Allowed Host Paths")}</DrawerTitle>
             <Table>
               <TableHead>
-                <TableCell>Path Prefix</TableCell>
-                <TableCell>Read-only</TableCell>
+                <TableCell>{t("Path Prefix")}</TableCell>
+                <TableCell>{t("Read-only")}</TableCell>
               </TableHead>
               {allowedHostPaths.map(({ pathPrefix, readOnly }, index) => (
                 <TableRow key={index}>
                   <TableCell>{pathPrefix}</TableCell>
-                  <TableCell>{readOnly ? "Yes" : "No"}</TableCell>
+                  <TableCell>{readOnly ? t("Yes") : t("No")}</TableCell>
                 </TableRow>
               ))}
             </Table>
           </>
         )}
 
-        {fsGroup && this.renderRuleGroup("Fs Group", fsGroup)}
-        {runAsGroup && this.renderRuleGroup("Run As Group", runAsGroup)}
-        {runAsUser && this.renderRuleGroup("Run As User", runAsUser)}
-        {supplementalGroups && this.renderRuleGroup("Supplemental Groups", supplementalGroups)}
+        {fsGroup && this.renderRuleGroup(t("Fs Group"), fsGroup)}
+        {runAsGroup && this.renderRuleGroup(t("Run As Group"), runAsGroup)}
+        {runAsUser && this.renderRuleGroup(t("Run As User"), runAsUser)}
+        {supplementalGroups && this.renderRuleGroup(t("Supplemental Groups"), supplementalGroups)}
 
         {runtimeClass && (
           <>
-            <DrawerTitle>Runtime Class</DrawerTitle>
-            <DrawerItem name="Allowed Runtime Class Names">
+            <DrawerTitle>{t("Runtime Class")}</DrawerTitle>
+            <DrawerItem name={t("Allowed Runtime Class Names")}>
               {runtimeClass.allowedRuntimeClassNames?.join(", ") || "-"}
             </DrawerItem>
-            <DrawerItem name="Default Runtime Class Name">{runtimeClass.defaultRuntimeClassName || "-"}</DrawerItem>
+            <DrawerItem name={t("Default Runtime Class Name")}>
+              {runtimeClass.defaultRuntimeClassName || "-"}
+            </DrawerItem>
           </>
         )}
 
         {seLinux && (
           <>
-            <DrawerTitle>Se Linux</DrawerTitle>
-            <DrawerItem name="Rule">{seLinux.rule}</DrawerItem>
+            <DrawerTitle>{t("Se Linux")}</DrawerTitle>
+            <DrawerItem name={t("Rule")}>{seLinux.rule}</DrawerItem>
             {seLinux.seLinuxOptions && (
               <>
-                <DrawerItem name="Level">{seLinux.seLinuxOptions.level}</DrawerItem>
-                <DrawerItem name="Role">{seLinux.seLinuxOptions.role}</DrawerItem>
-                <DrawerItem name="Type">{seLinux.seLinuxOptions.type}</DrawerItem>
-                <DrawerItem name="User">{seLinux.seLinuxOptions.user}</DrawerItem>
+                <DrawerItem name={t("Level")}>{seLinux.seLinuxOptions.level}</DrawerItem>
+                <DrawerItem name={t("Role")}>{seLinux.seLinuxOptions.role}</DrawerItem>
+                <DrawerItem name={t("Type")}>{seLinux.seLinuxOptions.type}</DrawerItem>
+                <DrawerItem name={t("User")}>{seLinux.seLinuxOptions.user}</DrawerItem>
               </>
             )}
           </>

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { computed, makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
@@ -58,7 +59,7 @@ class NonInjectedWeblinkAddCommand extends React.Component<Dependencies> {
     return (
       <>
         <Input
-          placeholder="Link URL"
+          placeholder={t("Link URL")}
           autoFocus={this.nameHidden}
           theme="round-black"
           data-test-id="command-palette-weblink-add-url"
@@ -71,13 +72,13 @@ class NonInjectedWeblinkAddCommand extends React.Component<Dependencies> {
         />
         {this.nameHidden && (
           <small className="hint">
-            Please provide a web link URL (Press &quot;Enter&quot; to continue or &quot;Escape&quot; to cancel)
+            {t('Please provide a web link URL (Press "Enter" to continue or "Escape" to cancel)')}
           </small>
         )}
         {!this.nameHidden && (
           <>
             <Input
-              placeholder="Name (optional)"
+              placeholder={t("Name (optional)")}
               autoFocus={true}
               theme="round-black"
               data-test-id="command-palette-weblink-add-name"
@@ -85,8 +86,7 @@ class NonInjectedWeblinkAddCommand extends React.Component<Dependencies> {
               dirty={true}
             />
             <small className="hint">
-              Please provide a name for the web link (Press &quot;Enter&quot; to confirm or &quot;Escape&quot; to
-              cancel)
+              {t('Please provide a name for the web link (Press "Enter" to confirm or "Escape" to cancel)')}
             </small>
           </>
         )}

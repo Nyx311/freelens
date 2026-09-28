@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
 import withErrorLoggingInjectable from "../../../../common/utils/with-error-logging/with-error-logging.injectable";
@@ -26,7 +27,7 @@ const aboutAppTrayItemInjectable = getInjectable({
       id: "about-app",
       parentId: null,
       orderNumber: 140,
-      label: computed(() => `About ${productName}`),
+      label: computed(() => t("About {{productName}}", { productName })),
       enabled: computed(() => true),
       visible: computed(() => true),
 

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./secret-details.scss";
 
 import { Button } from "@freelensapp/button";
@@ -74,9 +75,9 @@ class NonInjectedSecretDetails extends React.Component<SecretDetailsProps & Depe
 
       try {
         await this.props.secretStore.update(secret, { ...secret, data: this.data });
-        this.props.showSuccessNotification("Secret successfully updated.");
+        this.props.showSuccessNotification(t("Secret successfully updated."));
       } catch (err) {
-        this.props.showCheckedErrorNotification(err, "Unknown error occurred while updating the secret");
+        this.props.showCheckedErrorNotification(err, t("Unknown error occurred while updating the secret"));
       }
       this.isSaving = false;
     })();
@@ -119,7 +120,7 @@ class NonInjectedSecretDetails extends React.Component<SecretDetailsProps & Depe
           {typeof decodedVal === "string" && (
             <Icon
               material={revealSecret ? "visibility" : "visibility_off"}
-              tooltip={revealSecret ? "Hide" : "Show"}
+              tooltip={revealSecret ? t("Hide") : t("Show")}
               onClick={() => toggle(this.revealSecret, name)}
             />
           )}
@@ -137,9 +138,9 @@ class NonInjectedSecretDetails extends React.Component<SecretDetailsProps & Depe
 
     return (
       <>
-        <DrawerTitle>Data</DrawerTitle>
+        <DrawerTitle>{t("Data")}</DrawerTitle>
         {secrets.map(this.renderSecret)}
-        <Button primary label="Save" waiting={this.isSaving} className="save-btn" onClick={this.saveSecret} />
+        <Button primary label={t("Save")} waiting={this.isSaving} className="save-btn" onClick={this.saveSecret} />
       </>
     );
   }
@@ -159,7 +160,7 @@ class NonInjectedSecretDetails extends React.Component<SecretDetailsProps & Depe
 
     return (
       <div className="SecretDetails">
-        <DrawerItem name="Type">{secret.type}</DrawerItem>
+        <DrawerItem name={t("Type")}>{secret.type}</DrawerItem>
         {this.renderData()}
       </div>
     );

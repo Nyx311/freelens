@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -52,14 +53,14 @@ const NonInjectedFavoritesOverview = observer(({ favoritesStore, favoritesSideba
         <div className={styles.content}>
           <div className={styles.title}>{item.title}</div>
         </div>
-        {!isAvailable && <div className={styles.unavailableText}>Not available in this cluster</div>}
+        {!isAvailable && <div className={styles.unavailableText}>{t("Not available in this cluster")}</div>}
         <button
           className={styles.removeButton}
           onClick={(e) => {
             e.stopPropagation();
             handleRemove(item.id);
           }}
-          title="Remove from favorites"
+          title={t("Remove from favorites")}
         >
           <Icon material="close" />
         </button>
@@ -72,13 +73,13 @@ const NonInjectedFavoritesOverview = observer(({ favoritesStore, favoritesSideba
       <div className={styles.FavoritesOverview} data-testid="page-for-favorites-overview">
         <div className={styles.favoritesContainer}>
           <div className={styles.header}>
-            <h5>Favorites</h5>
+            <h5>{t("Favorites")}</h5>
           </div>
 
           {!hasFavorites ? (
             <div className={styles.emptyState}>
-              <h6>No favorites yet</h6>
-              <p>Hover over any sidebar item and click the pin icon to add it here.</p>
+              <h6>{t("No favorites yet")}</h6>
+              <p>{t("Hover over any sidebar item and click the pin icon to add it here.")}</p>
             </div>
           ) : (
             <>
@@ -87,7 +88,7 @@ const NonInjectedFavoritesOverview = observer(({ favoritesStore, favoritesSideba
                   {favorites.length} {favorites.length === 1 ? "item" : "items"}
                 </div>
                 <Checkbox
-                  label="Use short names"
+                  label={t("Use short names")}
                   value={favoritesStore.useShortNames}
                   onChange={(value) => favoritesStore.setUseShortNames(value)}
                 />

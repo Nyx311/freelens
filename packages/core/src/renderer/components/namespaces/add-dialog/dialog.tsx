@@ -6,6 +6,7 @@
 
 import "./dialog.scss";
 
+import { t } from "@freelensapp/i18n";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import autoBindReact from "auto-bind/react";
@@ -68,7 +69,7 @@ class NonInjectedAddNamespaceDialog extends React.Component<AddNamespaceDialogPr
       onSuccess?.(created);
       this.close();
     } catch (err) {
-      this.props.showCheckedErrorNotification(err, "Unknown error occurred while creating the namespace");
+      this.props.showCheckedErrorNotification(err, t("Unknown error occurred while creating the namespace"));
       onError?.(err);
     }
   }
@@ -80,13 +81,13 @@ class NonInjectedAddNamespaceDialog extends React.Component<AddNamespaceDialogPr
 
     return (
       <Dialog {...dialogProps} className="AddNamespaceDialog" isOpen={isOpen} onClose={this.reset} close={this.close}>
-        <Wizard header={<h5>Create Namespace</h5>} done={this.close}>
-          <WizardStep contentClass="flex gap-2 flex-col" nextLabel="Create" next={this.addNamespace}>
+        <Wizard header={<h5>{t("Create Namespace")}</h5>} done={this.close}>
+          <WizardStep contentClass="flex gap-2 flex-col" nextLabel={t("Create")} next={this.addNamespace}>
             <Input
               required
               autoFocus
               iconLeft="layers"
-              placeholder="Namespace"
+              placeholder={t("Namespace")}
               trim
               validators={systemName}
               value={namespace}

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Tooltip } from "@freelensapp/tooltip";
 import { cssNames } from "@freelensapp/utilities";
 import React from "react";
@@ -19,7 +20,7 @@ export function SubnamespaceBadge({ id, className, ...other }: SubnamespaceBadge
       <span className={cssNames(styles.subnamespaceBadge, className)} data-testid={id} id={id} {...other}>
         S
       </span>
-      <Tooltip targetId={id}>Subnamespace</Tooltip>
+      <Tooltip targetId={id}>{t("Subnamespace")}</Tooltip>
     </>
   );
 }

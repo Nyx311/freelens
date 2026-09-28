@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { statefulSetApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -44,21 +45,16 @@ const NonInjectedStatefulSetMenu = ({
                 name: object.getName(),
               });
             } catch (err) {
-              showCheckedErrorNotification(err, "Unknown error occurred while restarting StatefulSet");
+              showCheckedErrorNotification(err, t("Unknown error occurred while restarting StatefulSet"));
             }
           },
-          labelOk: "Restart",
-          message: (
-            <p>
-              {"Are you sure you want to restart StatefulSet "}
-              <b>{object.getName()}</b>?
-            </p>
-          ),
+          labelOk: t("Restart"),
+          message: <p>{t("Are you sure you want to restart StatefulSet {{name}}?", { name: object.getName() })}</p>,
         })
       }
     >
-      <Icon material="autorenew" tooltip="Restart" interactive={toolbar} />
-      <span className="title">Restart</span>
+      <Icon material="autorenew" tooltip={t("Restart")} interactive={toolbar} />
+      <span className="title">{t("Restart")}</span>
     </MenuItem>
   </>
 );

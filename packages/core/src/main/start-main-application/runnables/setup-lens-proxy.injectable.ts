@@ -5,12 +5,14 @@
  */
 
 import { beforeApplicationIsLoadingInjectionToken } from "@freelensapp/application";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import fetchInjectable from "../../../common/fetch/fetch.injectable";
 import { lensProxyDispatcherInjectionToken } from "../../../common/fetch/lens-proxy-dispatcher-injection-token";
 import isProductionInjectable from "../../../common/vars/is-production.injectable";
 import isWindowsInjectable from "../../../common/vars/is-windows.injectable";
+import initializeLanguageInjectable from "../../../features/i18n/main/init.injectable";
 import { buildVersionInitializable } from "../../../features/vars/build-version/common/token";
 import { buildVersionInitializationInjectable } from "../../../features/vars/build-version/main/init.injectable";
 import forceAppExitInjectable from "../../electron-app/features/force-app-exit.injectable";
@@ -41,7 +43,10 @@ const setupLensProxyInjectable = getInjectable({
         logger.info("🔌 Starting Freelens Proxy");
         await lensProxy.listen(); // lensProxy.port available
       } catch (error: any) {
-        showErrorPopup("Freelens Error", `Could not start proxy: ${error?.message || "unknown error"}`);
+        showErrorPopup(
+          t("Freelens Error"),
+          t("Could not start proxy: {{error}}", { error: error?.message || t("unknown error") }),
+        );
 
         return forceAppExit();
       }
@@ -67,13 +72,18 @@ const setupLensProxyInjectable = getInjectable({
 
         const hostsPath = isWindows ? "C:\\windows\\system32\\drivers\\etc\\hosts" : "/etc/hosts";
         const message = [
-          `Failed connection test: ${error}`,
-          "Check to make sure that no other versions of Freelens are running",
-          `Check ${hostsPath} to make sure that it is clean and that the localhost loopback is at the top and set to 127.0.0.1`,
-          "If you have HTTP_PROXY or http_proxy set in your environment, make sure that the localhost and the ipv4 loopback address 127.0.0.1 are added to the NO_PROXY environment variable.",
+          t("Failed connection test: {{error}}", { error }),
+          t("Check to make sure that no other versions of Freelens are running"),
+          t(
+            "Check {{hostsPath}} to make sure that it is clean and that the localhost loopback is at the top and set to 127.0.0.1",
+            { hostsPath },
+          ),
+          t(
+            "If you have HTTP_PROXY or http_proxy set in your environment, make sure that the localhost and the ipv4 loopback address 127.0.0.1 are added to the NO_PROXY environment variable.",
+          ),
         ];
 
-        showErrorPopup("Freelens Proxy Error", message.join("\n\n"));
+        showErrorPopup(t("Freelens Proxy Error"), message.join("\n\n"));
 
         return forceAppExit();
       }
@@ -114,7 +124,7 @@ const setupLensProxyInjectable = getInjectable({
         }
       }
     },
-    runAfter: [buildVersionInitializationInjectable, setupLensProxyCertificateInjectable],
+    runAfter: [initializeLanguageInjectable, buildVersionInitializationInjectable, setupLensProxyCertificateInjectable],
   }),
 
   causesSideEffects: true,

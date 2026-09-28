@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { KubeObject } from "@freelensapp/kube-object";
 import React from "react";
@@ -35,19 +36,19 @@ const SmartDeleteMenuItem: React.FC<SmartDeleteMenuItemProps> = (props) => {
     switch (mode) {
       case "normal":
         return {
-          title: "Delete",
+          title: t("Delete"),
           icon: "delete",
           onClick: () => onDelete(object, "normal"),
         };
       case "force":
         return {
-          title: "Force Delete",
+          title: t("Force Delete"),
           icon: "delete_forever",
           onClick: () => onDelete(object, "force"),
         };
       case "finalizers":
         return {
-          title: "Delete with Finalizers",
+          title: t("Delete with Finalizers"),
           icon: "delete_sweep",
           onClick: () => onDelete(object, "finalizers"),
         };

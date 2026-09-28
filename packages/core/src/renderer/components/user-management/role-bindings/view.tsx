@@ -5,7 +5,7 @@
  */
 
 import "./view.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -67,14 +67,14 @@ class NonInjectedRoleBindings extends React.Component<Dependencies> {
             [columnId.age]: (binding) => -binding.getCreationTimestamp(),
           }}
           searchFilters={[(binding) => binding.getSearchFields(), (binding) => binding.getSubjectNames()]}
-          renderHeaderTitle="Role Bindings"
+          renderHeaderTitle={t("Role Bindings")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Role", className: "role", sortBy: columnId.role, id: columnId.role },
-            { title: "Types", className: "types", sortBy: columnId.types, id: columnId.types },
-            { title: "Bindings", className: "bindings", sortBy: columnId.bindings, id: columnId.bindings },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Role"), className: "role", sortBy: columnId.role, id: columnId.role },
+            { title: t("Types"), className: "types", sortBy: columnId.types, id: columnId.types },
+            { title: t("Bindings"), className: "bindings", sortBy: columnId.bindings, id: columnId.bindings },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(binding) => [
             <WithTooltip>{binding.getName()}</WithTooltip>,
@@ -86,7 +86,7 @@ class NonInjectedRoleBindings extends React.Component<Dependencies> {
           ]}
           addRemoveButtons={{
             onAdd: () => openRoleBindingDialog(),
-            addTooltip: "Create new RoleBinding",
+            addTooltip: t("Create new RoleBinding"),
           }}
         />
         <RoleBindingDialog />

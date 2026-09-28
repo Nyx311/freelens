@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import readYamlFileInjectable from "../../../../common/fs/read-yaml-file.injectable";
@@ -48,7 +49,7 @@ const getActiveHelmRepositoriesInjectable = getInjectable({
       if (!envResult.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Error getting Helm configuration: ${envResult.error}`,
+          error: t("Error getting Helm configuration: {{error}}", { error: envResult.error }),
         };
       }
 
@@ -56,26 +57,28 @@ const getActiveHelmRepositoriesInjectable = getInjectable({
         envResult.response;
 
       if (!repositoryConfigFilePath) {
-        const errorMessage =
-          "Tried to get Helm repositories, but HELM_REPOSITORY_CONFIG was not present in `$ helm env`.";
+        const errorMessage = t(
+          "Tried to get Helm repositories, but HELM_REPOSITORY_CONFIG was not present in `$ helm env`.",
+        );
 
         logger.error(errorMessage);
 
         return {
           callWasSuccessful: false,
-          error: `Error getting Helm configuration: ${errorMessage}`,
+          error: t("Error getting Helm configuration: {{error}}", { error: errorMessage }),
         };
       }
 
       if (!helmRepositoryCacheDirPath) {
-        const errorMessage =
-          "Tried to get Helm repositories, but HELM_REPOSITORY_CACHE was not present in `$ helm env`.";
+        const errorMessage = t(
+          "Tried to get Helm repositories, but HELM_REPOSITORY_CACHE was not present in `$ helm env`.",
+        );
 
         logger.error(errorMessage);
 
         return {
           callWasSuccessful: false,
-          error: `Error getting Helm configuration: ${errorMessage}`,
+          error: t("Error getting Helm configuration: {{error}}", { error: errorMessage }),
         };
       }
 
@@ -90,7 +93,7 @@ const getActiveHelmRepositoriesInjectable = getInjectable({
         }
         return {
           callWasSuccessful: false,
-          error: `Error updating Helm repositories: ${updateResult.error.stderr}`,
+          error: t("Error updating Helm repositories: {{error}}", { error: updateResult.error.stderr }),
         };
       }
 

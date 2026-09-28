@@ -26,6 +26,7 @@
   "scripts": {},
   "dependencies": {
     "@freelensapp/button": "workspace:^",
+    "@freelensapp/i18n": "workspace:^",
     "@freelensapp/routing": "workspace:^",
     "@ogre-tools/injectable": "catalog:",
     "@ogre-tools/injectable-react": "catalog:",

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./preferences.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -41,7 +42,7 @@ const NonInjectedPreferences = observer(({ closePreferences, pageComposite }: De
         toPreferenceItemHierarchy(composite)
       ) : (
         <div className="flex items-center" data-preference-page-does-not-exist-test={true}>
-          No preferences found
+          {t("No preferences found")}
         </div>
       )}
     </SettingLayout>

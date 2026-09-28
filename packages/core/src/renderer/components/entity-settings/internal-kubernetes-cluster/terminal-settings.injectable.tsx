@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import getClusterByIdInjectable from "../../../../features/cluster/storage/common/get-by-id.injectable";
@@ -49,7 +50,7 @@ const terminalKubernetesClusterEntitySettingsInjectable = getInjectable({
   instantiate: () => ({
     apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
     kind: "KubernetesCluster",
-    title: "Terminal",
+    title: t("Terminal"),
     group: "Settings",
     id: "terminal",
     orderNumber: 20,

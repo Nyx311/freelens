@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import electronDialogInjectable from "./electron-dialog.injectable";
 
@@ -34,7 +35,7 @@ const showMessagePopupInjectable = getInjectable({
         message,
         detail,
         type: "info",
-        buttons: ["Close"],
+        buttons: [t("Close")],
         ...options,
       });
     };

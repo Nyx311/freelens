@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getRequestChannelListenerInjectable } from "@freelensapp/messaging";
 import readFileInjectable from "../../../common/fs/read-file.injectable";
 import joinPathsInjectable from "../../../common/path/join-paths.injectable";
@@ -28,7 +29,7 @@ const licenseContentRequestChannelListenerInjectable = getRequestChannelListener
 
         return await readFile(licenseFilePath);
       } catch (error) {
-        return `Error loading license file: ${error}`;
+        return t("Error loading license file: {{error}}", { error });
       }
     };
   },

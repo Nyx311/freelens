@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToStorageClassesInjectable from "../../../common/front-end-routing/routes/cluster/storage/storage-classes/navigate-to-storage-classes.injectable";
 import storageClassesRouteInjectable from "../../../common/front-end-routing/routes/cluster/storage/storage-classes/storage-classes-route.injectable";
@@ -19,7 +20,7 @@ const storageClassesSidebarItemInjectable = getInjectable({
 
     return {
       parentId: storageSidebarItemInjectable.id,
-      title: "Storage Classes",
+      title: t("Storage Classes"),
       onClick: di.inject(navigateToStorageClassesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

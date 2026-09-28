@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./limit-ranges.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -44,11 +45,26 @@ class NonInjectedLimitRanges extends React.Component<Dependencies> {
             [columnId.age]: (limitRange) => -limitRange.getCreationTimestamp(),
           }}
           searchFilters={[(item) => item.getName(), (item) => item.getNs()]}
-          renderHeaderTitle="Limit Ranges"
+          renderHeaderTitle={t("Limit Ranges")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(limitRange) => [
             <WithTooltip>{limitRange.getName()}</WithTooltip>,

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getConvertedParts } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -22,7 +23,7 @@ export const podsNameColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: COLUMN_PRIORITY.NAME,
     content: (pod: Pod) => <WithTooltip>{pod.getName()}</WithTooltip>,
-    header: { title: "Name", className: "name", sortBy: columnId, id: columnId },
+    header: { title: t("Name"), className: "name", sortBy: columnId, id: columnId },
     sortingCallBack: (pod) => getConvertedParts(pod.getName()),
     searchFilter: (pod) => pod.getSearchFields(),
   }),

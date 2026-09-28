@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { formatDuration } from "@freelensapp/utilities";
 import { observer } from "mobx-react";
 import { reactiveNow } from "../../../common/utils/reactive-now/reactive-now";
@@ -45,7 +46,7 @@ function computeUpdateInterval(creationTimestampEpoch: number, compact: boolean)
 
 export const ReactiveDuration = observer(({ timestamp, compact = true }: ReactiveDurationProps) => {
   if (!timestamp) {
-    return <>{"<unknown>"}</>;
+    return <>{t("<unknown>")}</>;
   }
 
   const timestampSeconds = new Date(timestamp).getTime();

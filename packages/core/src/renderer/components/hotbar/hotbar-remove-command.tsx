@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import computeHotbarDisplayLabelInjectable from "../../../features/hotbar/storage/common/compute-display-label.injectable";
@@ -40,7 +41,7 @@ const NonInjectedHotbarRemoveCommand = observer(
         closeCommandOverlay();
         openConfirmDialog({
           okButtonProps: {
-            label: "Remove Hotbar",
+            label: t("Remove Hotbar"),
             primary: false,
             accent: true,
           },
@@ -48,7 +49,7 @@ const NonInjectedHotbarRemoveCommand = observer(
           message: (
             <div className="confirm flex flex-col gap-2">
               <p>
-                Are you sure you want remove hotbar <b>{option.value.name.get()}</b>?
+                {t("Are you sure you want remove hotbar")} <b>{option.value.name.get()}</b>?
               </p>
             </div>
           ),
@@ -62,7 +63,7 @@ const NonInjectedHotbarRemoveCommand = observer(
       }))}
       autoFocus={true}
       escapeClearsValue={false}
-      placeholder="Remove hotbar"
+      placeholder={t("Remove hotbar")}
     />
   ),
 );

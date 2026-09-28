@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
@@ -18,12 +19,12 @@ interface Dependencies {
 
 const NonInjectedCopyPasteFromTerminal = observer(({ state }: Dependencies) => (
   <section id="terminalSelection">
-    <SubTitle title="Terminal copy & paste" />
+    <SubTitle title={t("Terminal copy & paste")} />
     <Switch
       checked={state.terminalCopyOnSelect}
       onChange={() => (state.terminalCopyOnSelect = !state.terminalCopyOnSelect)}
     >
-      Copy on select and paste on right-click
+      {t("Copy on select and paste on right-click")}
     </Switch>
   </section>
 ));

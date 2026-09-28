@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { ReactiveDuration } from "../duration/reactive-duration";
 import { LocaleDate } from "../locale-date";
 
@@ -13,13 +14,13 @@ export interface DurationAbsoluteTimestampProps {
 
 export const DurationAbsoluteTimestamp = ({ timestamp }: DurationAbsoluteTimestampProps) => {
   if (!timestamp) {
-    return <>{"<unknown>"}</>;
+    return <>{t("<unknown>")}</>;
   }
 
   return (
     <>
       <ReactiveDuration timestamp={timestamp} />
-      {" ago "}
+      {` ${t("ago")} `}
       (
       <LocaleDate date={timestamp} />)
     </>

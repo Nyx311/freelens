@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showCheckedErrorNotificationInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { Spinner } from "@freelensapp/spinner";
@@ -100,7 +101,7 @@ class NonInjectedCreateResource extends React.Component<CreateResourceProps & De
 
       if (!result.callWasSuccessful) {
         this.props.logger.warn("Failed to create resource", { resource }, result.error);
-        this.props.showCheckedErrorNotification(result.error, "Unknown error occurred while creating resources");
+        this.props.showCheckedErrorNotification(result.error, t("Unknown error occurred while creating resources"));
 
         throw result.error;
       }
@@ -123,8 +124,8 @@ class NonInjectedCreateResource extends React.Component<CreateResourceProps & De
             })}
           >
             {name}
-          </a>
-          {" successfully created."}
+          </a>{" "}
+          {t("successfully created.")}
         </p>,
       );
     });
@@ -135,7 +136,7 @@ class NonInjectedCreateResource extends React.Component<CreateResourceProps & De
       return;
     }
 
-    return "All resources have been successfully created";
+    return t("All resources have been successfully created");
   };
 
   renderControls() {
@@ -145,7 +146,7 @@ class NonInjectedCreateResource extends React.Component<CreateResourceProps & De
           id="create-resource-resource-templates-input"
           controlShouldRenderValue={false} // always keep initial placeholder
           className="TemplateSelect"
-          placeholder="Select Template ..."
+          placeholder={t("Select Template ...")}
           options={this.props.createResourceTemplates.get()}
           formatGroupLabel={(group) => group.label}
           menuPlacement="top"

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getRequestChannelListenerInjectable } from "@freelensapp/messaging";
 import emitAppEventInjectable from "../../common/app-event-bus/emit-event.injectable";
 import { kubectlApplyAllChannel } from "../../common/kube-helpers/channels";
@@ -26,7 +27,7 @@ const kubectlApplyAllChannelHandlerInjectable = getRequestChannelListenerInjecta
       if (!cluster) {
         return {
           callWasSuccessful: false,
-          error: `No cluster found for clusterId="${clusterId}"`,
+          error: t('No cluster found for clusterId="{{clusterId}}"', { clusterId }),
         };
       }
 

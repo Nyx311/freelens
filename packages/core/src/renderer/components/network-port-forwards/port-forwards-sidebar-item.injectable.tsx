@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToPortForwardsInjectable from "../../../common/front-end-routing/routes/cluster/network/port-forwards/navigate-to-port-forwards.injectable";
 import portForwardsRouteInjectable from "../../../common/front-end-routing/routes/cluster/network/port-forwards/port-forwards-route.injectable";
@@ -19,7 +20,7 @@ const portForwardsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: networkSidebarItemInjectable.id,
-      title: "Port Forwarding",
+      title: t("Port Forwarding"),
       onClick: di.inject(navigateToPortForwardsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

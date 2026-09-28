@@ -19,6 +19,7 @@
       "@freelensapp/extensions": ["./packages/extensions/src/extension-api.ts"],
       "@freelensapp/feature-core": ["./packages/technical-features/feature-core/index.ts"],
       "@freelensapp/icon": ["./packages/ui-components/icon/index.ts"],
+      "@freelensapp/i18n": ["./packages/i18n/src/common/i18n.ts"],
       "@freelensapp/json-api": ["./packages/utility-features/json-api/index.ts"],
       "@freelensapp/keyboard-shortcuts": ["./packages/business-features/keyboard-shortcuts/index.ts"],
       "@freelensapp/kube-api": ["./packages/utility-features/kube-api/index.ts"],

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./item-list-layout.scss";
 
 import { cssNames, isDefined } from "@freelensapp/utilities";
@@ -60,7 +61,7 @@ export class ItemListLayoutHeader<I extends ItemObject, PreLoadStores extends bo
       if (getFilters().length > 0) {
         return (
           <>
-            <a onClick={toggleFilters}>Filtered</a>
+            <a onClick={toggleFilters}>{t("Filtered")}</a>
             {`: ${itemsCount} / ${allItemsCount}`}
           </>
         );

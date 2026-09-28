@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToVerticalPodAutoscalersInjectable from "../../../common/front-end-routing/routes/cluster/config/vertical-pod-autoscalers/navigate-to-vertical-pod-autoscalers.injectable";
 import verticalPodAutoscalersRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/vertical-pod-autoscalers/vertical-pod-autoscalers-route.injectable";
@@ -19,7 +20,7 @@ const verticalPodAutoscalersSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Vertical Pod Autoscalers",
+      title: t("Vertical Pod Autoscalers"),
       onClick: di.inject(navigateToVerticalPodAutoscalersInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

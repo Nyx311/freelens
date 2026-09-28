@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Node } from "@freelensapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -71,7 +72,7 @@ const NonInjectedNodeMenu: React.FC<NodeMenuProps & Dependencies> = (props) => {
 
     openConfirmDialog({
       ok: () => sendToTerminal(command),
-      labelOk: `Drain Node`,
+      labelOk: t("Drain Node"),
       message: (
         <p>
           {"Are you sure you want to drain "}
@@ -85,22 +86,22 @@ const NonInjectedNodeMenu: React.FC<NodeMenuProps & Dependencies> = (props) => {
     <>
       <MenuItem onClick={shell}>
         <Icon svg="ssh" interactive={toolbar} tooltip={toolbar && "Node shell"} />
-        <span className="title">Shell</span>
+        <span className="title">{t("Shell")}</span>
       </MenuItem>
       {node.isUnschedulable() ? (
         <MenuItem onClick={unCordon}>
           <Icon material="play_circle_filled" tooltip={toolbar && "Uncordon"} interactive={toolbar} />
-          <span className="title">Uncordon</span>
+          <span className="title">{t("Uncordon")}</span>
         </MenuItem>
       ) : (
         <MenuItem onClick={cordon}>
           <Icon material="pause_circle_filled" tooltip={toolbar && "Cordon"} interactive={toolbar} />
-          <span className="title">Cordon</span>
+          <span className="title">{t("Cordon")}</span>
         </MenuItem>
       )}
       <MenuItem onClick={drain}>
         <Icon material="delete_sweep" tooltip={toolbar && "Drain"} interactive={toolbar} />
-        <span className="title">Drain</span>
+        <span className="title">{t("Drain")}</span>
       </MenuItem>
     </>
   );

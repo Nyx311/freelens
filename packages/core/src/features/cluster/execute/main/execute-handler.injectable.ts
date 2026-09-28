@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { createKubeApiURL, type KubeApiPatchType, patchTypeHeaders } from "@freelensapp/kube-api";
 import { logWarningInjectionToken } from "@freelensapp/logger";
 import { lowerAndPluralize } from "@freelensapp/utilities";
@@ -39,7 +40,7 @@ const executeOnClusterHandlerInjectable = getInjectable({
         return {
           success: false,
           error: {
-            message: "Cluster not available. Ensure cluster is connected.",
+            message: t("Cluster not available. Ensure cluster is connected."),
             code: 503,
             reason: "ClusterNotAccessible",
           },
@@ -51,7 +52,7 @@ const executeOnClusterHandlerInjectable = getInjectable({
         return {
           success: false,
           error: {
-            message: "Cluster not available. Ensure cluster is connected.",
+            message: t("Cluster not available. Ensure cluster is connected."),
             code: 503,
             reason: "ClusterNotAccessible",
           },
@@ -71,7 +72,7 @@ const executeOnClusterHandlerInjectable = getInjectable({
           return {
             success: false,
             error: {
-              message: "Failed to load cluster configuration.",
+              message: t("Failed to load cluster configuration."),
               code: 500,
               reason: "ConfigurationError",
             },
@@ -124,7 +125,7 @@ const executeOnClusterHandlerInjectable = getInjectable({
           return {
             success: false,
             error: {
-              message: `Unknown operation: ${operation}`,
+              message: t("Unknown operation: {{operation}}", { operation }),
               code: 400,
               reason: "BadRequest",
             },
@@ -140,7 +141,7 @@ const executeOnClusterHandlerInjectable = getInjectable({
         return {
           success: false,
           error: {
-            message: errorObj?.message?.toString() ?? (error instanceof Error ? error.message : "Unknown error"),
+            message: errorObj?.message?.toString() ?? (error instanceof Error ? error.message : t("Unknown error")),
             code: typeof errorObj?.code === "number" ? errorObj.code : undefined,
             reason: typeof errorObj?.reason === "string" ? errorObj.reason : undefined,
           },

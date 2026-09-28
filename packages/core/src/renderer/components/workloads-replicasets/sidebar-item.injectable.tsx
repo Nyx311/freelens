@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToReplicasetsInjectable from "../../../common/front-end-routing/routes/cluster/workloads/replicasets/navigate-to-replicasets.injectable";
 import replicasetsRouteInjectable from "../../../common/front-end-routing/routes/cluster/workloads/replicasets/replicasets-route.injectable";
@@ -19,7 +20,7 @@ const replicaSetsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: workloadsSidebarItemInjectable.id,
-      title: "Replica Sets",
+      title: t("Replica Sets"),
       onClick: di.inject(navigateToReplicasetsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

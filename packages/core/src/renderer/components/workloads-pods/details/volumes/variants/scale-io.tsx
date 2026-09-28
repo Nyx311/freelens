@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -37,22 +38,22 @@ const NonInjectedScaleIo = (props: PodVolumeVariantSpecificProps<"scaleIO"> & De
 
   return (
     <>
-      <DrawerItem name="Gateway">{gateway}</DrawerItem>
-      <DrawerItem name="System">{system}</DrawerItem>
-      <LocalRef pod={pod} title="Name" kubeRef={secretRef} api={secretApi} />
-      <DrawerItem name="SSL Enabled">{sslEnabled.toString()}</DrawerItem>
-      <DrawerItem name="Protection Domain Name" hidden={!protectionDomain}>
+      <DrawerItem name={t("Gateway")}>{gateway}</DrawerItem>
+      <DrawerItem name={t("System")}>{system}</DrawerItem>
+      <LocalRef pod={pod} title={t("Name")} kubeRef={secretRef} api={secretApi} />
+      <DrawerItem name={t("SSL Enabled")}>{t(sslEnabled.toString())}</DrawerItem>
+      <DrawerItem name={t("Protection Domain Name")} hidden={!protectionDomain}>
         {protectionDomain}
       </DrawerItem>
-      <DrawerItem name="Storage Pool" hidden={!storagePool}>
+      <DrawerItem name={t("Storage Pool")} hidden={!storagePool}>
         {storagePool}
       </DrawerItem>
-      <DrawerItem name="Storage Mode" hidden={!storageMode}>
+      <DrawerItem name={t("Storage Mode")} hidden={!storageMode}>
         {storageMode}
       </DrawerItem>
-      <DrawerItem name="Volume Name">{volumeName}</DrawerItem>
-      <DrawerItem name="Filesystem Type">{fsType}</DrawerItem>
-      <DrawerItem name="Readonly">{readOnly.toString()}</DrawerItem>
+      <DrawerItem name={t("Volume Name")}>{volumeName}</DrawerItem>
+      <DrawerItem name={t("Filesystem Type")}>{fsType}</DrawerItem>
+      <DrawerItem name={t("Readonly")}>{t(readOnly.toString())}</DrawerItem>
     </>
   );
 };

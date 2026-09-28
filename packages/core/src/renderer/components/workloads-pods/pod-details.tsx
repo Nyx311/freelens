@@ -6,6 +6,7 @@
 
 import "./pod-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Pod } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { cssNames, formatDuration } from "@freelensapp/utilities";
@@ -68,40 +69,40 @@ class NonInjectedPodDetails extends React.Component<PodDetailsProps & Dependenci
 
     return (
       <div className="PodDetails">
-        <DrawerItem name="Status">
-          <span className={cssNames("status", kebabCase(pod.getStatusMessage()))}>{pod.getStatusMessage()}</span>
+        <DrawerItem name={t("Status")}>
+          <span className={cssNames("status", kebabCase(pod.getStatusMessage()))}>{t(pod.getStatusMessage())}</span>
         </DrawerItem>
-        <DrawerItem name="Scheduler" hidden={!schedulerName || schedulerName === "default-scheduler"}>
+        <DrawerItem name={t("Scheduler")} hidden={!schedulerName || schedulerName === "default-scheduler"}>
           {schedulerName}
         </DrawerItem>
-        <DrawerItem name="Node" hidden={!nodeName}>
+        <DrawerItem name={t("Node")} hidden={!nodeName}>
           <LinkToNode name={nodeName} />
         </DrawerItem>
-        <DrawerItem name="Host IPs" hidden={!hostIPs.length && !hostIP} labelsOnly>
+        <DrawerItem name={t("Host IPs")} hidden={!hostIPs.length && !hostIP} labelsOnly>
           {(hostIPs.length ? hostIPs : hostIP ? [hostIP] : []).map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
-        <DrawerItem name="Pod IPs" hidden={!podIPs.length && !podIP} labelsOnly>
+        <DrawerItem name={t("Pod IPs")} hidden={!podIPs.length && !podIP} labelsOnly>
           {(podIPs.length ? podIPs : podIP ? [podIP] : []).map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
-        <DrawerItem name="Service Account">
+        <DrawerItem name={t("Service Account")}>
           <LinkToServiceAccount name={serviceAccountName} namespace={namespace} />
         </DrawerItem>
-        <DrawerItem name="Priority Class" hidden={priorityClassName === ""}>
+        <DrawerItem name={t("Priority Class")} hidden={priorityClassName === ""}>
           <LinkToPriorityClass name={priorityClassName} />
         </DrawerItem>
-        <DrawerItem name="QoS Class">{pod.getQosClass()}</DrawerItem>
-        <DrawerItem name="Runtime Class" hidden={runtimeClassName === ""}>
+        <DrawerItem name={t("QoS Class")}>{pod.getQosClass()}</DrawerItem>
+        <DrawerItem name={t("Runtime Class")} hidden={runtimeClassName === ""}>
           <LinkToRuntimeClass name={runtimeClassName} />
         </DrawerItem>
-        <DrawerItem name="Termination Grace Period">
+        <DrawerItem name={t("Termination Grace Period")}>
           {formatDuration((pod.spec.terminationGracePeriodSeconds ?? 30) * 1000, false)}
         </DrawerItem>
 
-        <DrawerItem name="Node Selector" hidden={nodeSelector.length === 0}>
+        <DrawerItem name={t("Node Selector")} hidden={nodeSelector.length === 0}>
           {nodeSelector.map((label) => (
             <Badge key={label} label={label} />
           ))}
@@ -111,7 +112,7 @@ class NonInjectedPodDetails extends React.Component<PodDetailsProps & Dependenci
         <PodDetailsAffinities workload={pod} />
 
         {requests.length > 0 && (
-          <DrawerItem name="Requests" labelsOnly>
+          <DrawerItem name={t("Requests")} labelsOnly>
             {requests.map(([key, value], index) => (
               <Badge key={index} label={`${key}=${value}`} />
             ))}
@@ -119,14 +120,14 @@ class NonInjectedPodDetails extends React.Component<PodDetailsProps & Dependenci
         )}
 
         {limits.length > 0 && (
-          <DrawerItem name="Limits" labelsOnly>
+          <DrawerItem name={t("Limits")} labelsOnly>
             {limits.map(([key, value], index) => (
               <Badge key={index} label={`${key}=${value}`} />
             ))}
           </DrawerItem>
         )}
 
-        <DrawerItem name="Secrets" hidden={pod.getSecrets().length === 0}>
+        <DrawerItem name={t("Secrets")} hidden={pod.getSecrets().length === 0}>
           <PodDetailsSecrets pod={pod} />
         </DrawerItem>
 

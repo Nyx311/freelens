@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { PodStatusPhase } from "@freelensapp/kube-object";
 import { cssNames } from "@freelensapp/utilities";
@@ -105,9 +106,9 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
 
     return (
       <p>
-        {`${title} ${object.kind} `}
+        {`${t("{{action}} {{kind}}", { action: title, kind: object.kind })} `}
         <b>{breadcrumb}</b>
-        {" from "}
+        {` ${t("from")} `}
         <b>{this.props.clusterName.get()}</b>?
       </p>
     );
@@ -224,21 +225,21 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
           switch (mode) {
             case "delete":
               return {
-                title: "Delete",
+                title: t("Delete"),
                 icon: "delete",
-                labelOk: "Delete",
+                labelOk: t("Delete"),
               };
             case "force_delete":
               return {
-                title: "Force Delete",
+                title: t("Force Delete"),
                 icon: "delete_forever",
-                labelOk: "Force Delete",
+                labelOk: t("Force Delete"),
               };
             case "force_finalize":
               return {
-                title: "Force Finalize",
+                title: t("Force Finalize"),
                 icon: "delete_sweep",
-                labelOk: "Force Finalize",
+                labelOk: t("Force Finalize"),
               };
           }
         };
@@ -268,7 +269,7 @@ class NonInjectedKubeObjectMenu<Kube extends KubeObject> extends React.Component
       if (isEditable) {
         this.menuItems.push({
           id: "edit-kube-object",
-          title: "Edit",
+          title: t("Edit"),
           icon: "edit",
           onClick: async () => {
             hideDetails();

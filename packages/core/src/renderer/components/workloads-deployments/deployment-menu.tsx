@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { deploymentApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -39,8 +40,8 @@ const NonInjectedDeploymentMenu = ({
 }: Dependencies & DeploymentMenuProps) => (
   <>
     <MenuItem onClick={() => openDeploymentScaleDialog(object)}>
-      <Icon material="open_with" tooltip="Scale" interactive={toolbar} />
-      <span className="title">Scale</span>
+      <Icon material="open_with" tooltip={t("Scale")} interactive={toolbar} />
+      <span className="title">{t("Scale")}</span>
     </MenuItem>
     <MenuItem
       onClick={() =>
@@ -52,21 +53,16 @@ const NonInjectedDeploymentMenu = ({
                 name: object.getName(),
               });
             } catch (err) {
-              showCheckedErrorNotification(err, "Unknown error occurred while restarting deployment");
+              showCheckedErrorNotification(err, t("Unknown error occurred while restarting deployment"));
             }
           },
-          labelOk: "Restart",
-          message: (
-            <p>
-              {"Are you sure you want to restart deployment "}
-              <b>{object.getName()}</b>?
-            </p>
-          ),
+          labelOk: t("Restart"),
+          message: <p>{t("Are you sure you want to restart deployment {{name}}?", { name: object.getName() })}</p>,
         })
       }
     >
-      <Icon material="autorenew" tooltip="Restart" interactive={toolbar} />
-      <span className="title">Restart</span>
+      <Icon material="autorenew" tooltip={t("Restart")} interactive={toolbar} />
+      <span className="title">{t("Restart")}</span>
     </MenuItem>
   </>
 );

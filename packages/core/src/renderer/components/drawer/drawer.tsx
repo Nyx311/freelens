@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./drawer.scss";
 
 import { Animate } from "@freelensapp/animate";
@@ -230,7 +231,7 @@ class NonInjectedDrawer extends React.Component<DrawerProps & Dependencies & typ
                 )}
               </div>
               {toolbar}
-              <Icon material="close" tooltip="Close" onClick={this.close} data-testid={testIdForClose} />
+              <Icon material="close" tooltip={t("Close")} onClick={this.close} data-testid={testIdForClose} />
             </div>
             <div
               className={cssNames("drawer-content flex flex-col grow shrink-0 basis-0", contentClass)}

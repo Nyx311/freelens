@@ -5,6 +5,7 @@
  */
 
 import { applicationInformationToken } from "@freelensapp/application";
+import i18n, { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import { BrowserWindow } from "electron";
@@ -154,7 +155,16 @@ const createElectronWindowInjectable = getInjectable({
             `[CREATE-ELECTRON-WINDOW]: Loading content for window "${configuration.id}" from file: ${filePath}...`,
           );
 
-          await browserWindow.loadFile(filePath);
+          if (configuration.id === "splash") {
+            await browserWindow.loadFile(filePath, {
+              query: {
+                language: i18n.resolvedLanguage ?? "en",
+                loadingText: t("Loading..."),
+              },
+            });
+          } else {
+            await browserWindow.loadFile(filePath);
+          }
         },
 
         loadUrl: async (url) => {

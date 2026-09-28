@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -35,23 +36,23 @@ const NonInjectedRadosBlockDevice = (props: PodVolumeVariantSpecificProps<"rbd">
 
   return (
     <>
-      <DrawerItem name="Ceph Monitors">
+      <DrawerItem name={t("Ceph Monitors")}>
         <ul>
           {monitors.map((monitor) => (
             <li key={monitor}>{monitor}</li>
           ))}
         </ul>
       </DrawerItem>
-      <DrawerItem name="Image">{image}</DrawerItem>
-      <DrawerItem name="Filesystem Type">{fsType}</DrawerItem>
-      <DrawerItem name="Pool">{pool}</DrawerItem>
-      <DrawerItem name="User">{user}</DrawerItem>
+      <DrawerItem name={t("Image")}>{image}</DrawerItem>
+      <DrawerItem name={t("Filesystem Type")}>{fsType}</DrawerItem>
+      <DrawerItem name={t("Pool")}>{pool}</DrawerItem>
+      <DrawerItem name={t("User")}>{user}</DrawerItem>
       {secretRef ? (
-        <LocalRef pod={pod} title="Authentication Secret" kubeRef={secretRef} api={secretApi} />
+        <LocalRef pod={pod} title={t("Authentication Secret")} kubeRef={secretRef} api={secretApi} />
       ) : (
-        <DrawerItem name="Keyright Path">{keyring}</DrawerItem>
+        <DrawerItem name={t("Keyright Path")}>{keyring}</DrawerItem>
       )}
-      <DrawerItem name="Readonly">{readOnly.toString()}</DrawerItem>
+      <DrawerItem name={t("Readonly")}>{t(readOnly.toString())}</DrawerItem>
     </>
   );
 };

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./release-details.scss";
 
 import { Button } from "@freelensapp/button";
@@ -46,13 +47,13 @@ const NonInjectedReleaseDetailsContent = observer(({ model }: Dependencies & Rel
 
   return (
     <div>
-      <DrawerItem name="Chart" className="chart">
+      <DrawerItem name={t("Chart")} className="chart">
         <div className="flex gap-2 items-center">
           <span>{model.release.chart}</span>
 
           <Button
             primary
-            label="Upgrade"
+            label={t("Upgrade")}
             className="ml-auto mr-0 upgrade"
             onClick={model.startUpgradeProcess}
             data-testid="helm-release-upgrade-button"
@@ -60,17 +61,19 @@ const NonInjectedReleaseDetailsContent = observer(({ model }: Dependencies & Rel
         </div>
       </DrawerItem>
 
-      <DrawerItem name="Updated">{`${model.release.getUpdated()} ago (${model.release.updated})`}</DrawerItem>
+      <DrawerItem name={t("Updated")}>
+        {t("{{age}} ago ({{updated}})", { age: model.release.getUpdated(), updated: model.release.updated })}
+      </DrawerItem>
 
-      <DrawerItem name="Namespace">{model.release.getNs()}</DrawerItem>
+      <DrawerItem name={t("Namespace")}>{model.release.getNs()}</DrawerItem>
 
-      <DrawerItem name="Version" onClick={stopPropagation}>
+      <DrawerItem name={t("Version")} onClick={stopPropagation}>
         <div className="version flex gap-2 items-center">
           <span>{model.release.getVersion()}</span>
         </div>
       </DrawerItem>
 
-      <DrawerItem name="Status" className="status" labelsOnly>
+      <DrawerItem name={t("Status")} className="status" labelsOnly>
         <Badge label={model.release.getStatus()} className={kebabCase(model.release.getStatus())} />
       </DrawerItem>
 
@@ -80,11 +83,11 @@ const NonInjectedReleaseDetailsContent = observer(({ model }: Dependencies & Rel
         onlyUserSuppliedValuesAreShown={model.onlyUserSuppliedValuesAreShown}
       />
 
-      <DrawerTitle>Notes</DrawerTitle>
+      <DrawerTitle>{t("Notes")}</DrawerTitle>
 
       {model.notes && <div className="notes">{model.notes}</div>}
 
-      <DrawerTitle>Resources</DrawerTitle>
+      <DrawerTitle>{t("Resources")}</DrawerTitle>
 
       {model.groupedResources.length > 0 && (
         <div className="resources">
@@ -115,9 +118,9 @@ const ResourceGroup = ({ group: { kind, isNamespaced, resources } }: { group: Mi
 
     <Table scrollable={false}>
       <TableHead sticky={false}>
-        <TableCell className="name">Name</TableCell>
+        <TableCell className="name">{t("Name")}</TableCell>
 
-        {isNamespaced && <TableCell className="namespace">Namespace</TableCell>}
+        {isNamespaced && <TableCell className="namespace">{t("Namespace")}</TableCell>}
       </TableHead>
 
       {resources.map(({ detailsUrl, name, namespace, uid }) => (
@@ -142,11 +145,11 @@ const ReleaseValues = observer(({ releaseId, configuration, onlyUserSuppliedValu
 
   return (
     <div className="values">
-      <DrawerTitle>Values</DrawerTitle>
+      <DrawerTitle>{t("Values")}</DrawerTitle>
 
       <div className="flex flex-col gap-2">
         <Checkbox
-          label="User-supplied values only"
+          label={t("User-supplied values only")}
           value={onlyUserSuppliedValuesAreShown.value.get()}
           onChange={onlyUserSuppliedValuesAreShown.toggle}
           disabled={configurationIsLoading}
@@ -162,7 +165,7 @@ const ReleaseValues = observer(({ releaseId, configuration, onlyUserSuppliedValu
 
         <Button
           primary
-          label="Save"
+          label={t("Save")}
           waiting={configuration.isSaving.get()}
           disabled={configurationIsLoading}
           onClick={configuration.save}

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { object } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -39,12 +40,17 @@ const renderState = (container: ContainerWithType | EphemeralContainerWithType, 
       <div className="title">
         {container.name}{" "}
         <span className="text-secondary">
-          {state}
-          {container.type === "initContainers" ? ", init" : ""}
-          {container.type === "ephemeralContainers" ? ", ephemeral" : ""}
-          {status?.restartCount ? ", restarted" : ""}
-          {status?.ready ? ", ready" : ""}
-          {terminated ? ` - ${terminated.reason} (exit code: ${terminated.exitCode})` : ""}
+          {t(state)}
+          {container.type === "initContainers" ? `, ${t("init")}` : ""}
+          {container.type === "ephemeralContainers" ? `, ${t("ephemeral")}` : ""}
+          {status?.restartCount ? `, ${t("restarted")}` : ""}
+          {status?.ready ? `, ${t("ready")}` : ""}
+          {terminated
+            ? t(" - {{reason}} (exit code: {{code}})", {
+                reason: terminated.reason,
+                code: terminated.exitCode,
+              })
+            : ""}
         </span>
       </div>
       {stateDetails && (
@@ -111,7 +117,7 @@ export const podsContainersColumnInjectable = getInjectable({
     priority: COLUMN_PRIORITY.CONTAINERS,
     content: renderContainersStatus,
     header: {
-      title: "Containers",
+      title: t("Containers"),
       className: "containers",
       sortBy: columnId,
       id: columnId,

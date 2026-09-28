@@ -5,6 +5,7 @@
 
 import "../../../renderer/components/dock/terminal/terminal-window.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -88,7 +89,7 @@ const NonInjectedTerminalPage = observer(({ tabsStore, sessionStore, activeTheme
                     small
                     material="close"
                     className={styles.closeTab}
-                    tooltip="Close terminal"
+                    tooltip={t("Close terminal")}
                     data-testid={`close-standalone-terminal-tab-${tab.id}`}
                     onClick={(event) => {
                       // the tab would otherwise be selected on its way out
@@ -103,7 +104,7 @@ const NonInjectedTerminalPage = observer(({ tabsStore, sessionStore, activeTheme
         </Tabs>
         <Icon
           material="add"
-          tooltip="New terminal"
+          tooltip={t("New terminal")}
           data-testid="add-standalone-terminal-tab"
           onClick={() => tabsStore.add()}
         />

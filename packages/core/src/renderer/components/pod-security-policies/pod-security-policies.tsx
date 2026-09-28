@@ -5,7 +5,7 @@
  */
 
 import "./pod-security-policies.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -48,16 +48,16 @@ class NonInjectedPodSecurityPolicies extends React.Component<Dependencies> {
             (podSecurityPolicy) => podSecurityPolicy.getVolumes(),
             (podSecurityPolicy) => Object.values(podSecurityPolicy.getRules()),
           ]}
-          renderHeaderTitle="Pod Security Policies"
+          renderHeaderTitle={t("Pod Security Policies")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Privileged", className: "privileged", sortBy: columnId.privileged, id: columnId.privileged },
-            { title: "Volumes", className: "volumes", sortBy: columnId.volumes, id: columnId.volumes },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Privileged"), className: "privileged", sortBy: columnId.privileged, id: columnId.privileged },
+            { title: t("Volumes"), className: "volumes", sortBy: columnId.volumes, id: columnId.volumes },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(podSecurityPolicy) => [
             podSecurityPolicy.getName(),
-            podSecurityPolicy.isPrivileged() ? "Yes" : "No",
+            podSecurityPolicy.isPrivileged() ? t("Yes") : t("No"),
             podSecurityPolicy.getVolumes().join(", "),
             <KubeObjectAge key="age" object={podSecurityPolicy} />,
           ]}

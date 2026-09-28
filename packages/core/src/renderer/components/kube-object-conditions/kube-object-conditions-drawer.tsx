@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { KubeObject } from "@freelensapp/kube-object";
 import { observer } from "mobx-react";
 import { Badge } from "../badge";
@@ -33,7 +34,7 @@ export const KubeObjectConditionsDrawer = observer((props: KubeObjectConditionsD
   if (!conditions?.length) return null;
 
   return (
-    <DrawerItem name="Conditions" className="conditions" hidden={!conditions?.length} labelsOnly>
+    <DrawerItem name={t("Conditions")} className="conditions" hidden={!conditions?.length} labelsOnly>
       {sortConditions(conditions, conditionTypePriorities)?.map((condition) => {
         return (
           <Badge

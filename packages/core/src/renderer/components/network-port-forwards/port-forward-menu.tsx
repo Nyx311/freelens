@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { cssNames } from "@freelensapp/utilities";
@@ -47,7 +48,9 @@ class NonInjectedPortForwardMenu<Props extends PortForwardMenuProps & Dependenci
       this.portForwardStore.remove(portForward);
     } catch (error) {
       showErrorNotification(
-        `Error occurred stopping the port-forward from port ${portForward.forwardPort}. The port-forward may still be active.`,
+        t("Error occurred stopping the port-forward from port {{port}}. The port-forward may still be active.", {
+          port: portForward.forwardPort,
+        }),
       );
     }
   }
@@ -65,7 +68,14 @@ class NonInjectedPortForwardMenu<Props extends PortForwardMenuProps & Dependenci
       const { name, kind, forwardPort } = portForward;
 
       showErrorNotification(
-        `Error occurred starting port-forward, the local port ${forwardPort} may not be available or the ${kind} ${name} may not be reachable`,
+        t(
+          "Error occurred starting port-forward; the local port {{port}} may not be available or the {{kind}} {{name}} may not be reachable",
+          {
+            port: forwardPort,
+            kind,
+            name,
+          },
+        ),
       );
     }
   };
@@ -76,16 +86,16 @@ class NonInjectedPortForwardMenu<Props extends PortForwardMenuProps & Dependenci
     if (portForward.status === "Active") {
       return (
         <MenuItem onClick={() => this.portForwardStore.stop(portForward)}>
-          <Icon material="stop" tooltip="Stop port-forward" interactive={toolbar} />
-          <span className="title">Stop</span>
+          <Icon material="stop" tooltip={t("Stop port-forward")} interactive={toolbar} />
+          <span className="title">{t("Stop")}</span>
         </MenuItem>
       );
     }
 
     return (
       <MenuItem onClick={this.startPortForwarding}>
-        <Icon material="play_arrow" tooltip="Start port-forward" interactive={toolbar} />
-        <span className="title">Start</span>
+        <Icon material="play_arrow" tooltip={t("Start port-forward")} interactive={toolbar} />
+        <span className="title">{t("Start")}</span>
       </MenuItem>
     );
   }
@@ -99,13 +109,13 @@ class NonInjectedPortForwardMenu<Props extends PortForwardMenuProps & Dependenci
       <>
         {portForward.status === "Active" && (
           <MenuItem onClick={() => this.props.openPortForward(portForward)}>
-            <Icon material="open_in_browser" interactive={toolbar} tooltip="Open in browser" />
-            <span className="title">Open</span>
+            <Icon material="open_in_browser" interactive={toolbar} tooltip={t("Open in browser")} />
+            <span className="title">{t("Open")}</span>
           </MenuItem>
         )}
         <MenuItem onClick={() => this.props.openPortForwardDialog(portForward)}>
-          <Icon material="edit" tooltip="Change port or protocol" interactive={toolbar} />
-          <span className="title">Edit</span>
+          <Icon material="edit" tooltip={t("Change port or protocol")} interactive={toolbar} />
+          <span className="title">{t("Edit")}</span>
         </MenuItem>
         {this.renderStartStopMenuItem()}
       </>

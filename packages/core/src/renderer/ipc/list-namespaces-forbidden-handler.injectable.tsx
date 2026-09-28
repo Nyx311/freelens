@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { notificationsStoreInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToEntitySettingsInjectable from "../../common/front-end-routing/routes/entity-settings/navigate-to-entity-settings.injectable";
@@ -47,7 +48,7 @@ const listNamespacesForbiddenHandlerInjectable = getInjectable({
 
       showSuccessNotification(
         <div className="flex flex-col gap-2">
-          <b>Add Accessible Namespaces</b>
+          <b>{t("Add Accessible Namespaces")}</b>
           <p>
             {"Cluster "}
             <b>{getClusterById(clusterId)?.name.get() ?? "<unknown cluster>"}</b>
@@ -57,7 +58,7 @@ const listNamespacesForbiddenHandlerInjectable = getInjectable({
             <Button
               active
               outlined
-              label="Go to Accessible Namespaces Settings"
+              label={t("Go to Accessible Namespaces Settings")}
               onClick={() => {
                 navigateToEntitySettings(clusterId, "namespaces");
                 notificationsStore.remove(notificationId);

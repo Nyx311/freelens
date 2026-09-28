@@ -6,6 +6,7 @@
 
 import "./deployment-replicasets.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { prevDefault, stopPropagation } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -72,7 +73,7 @@ class NonInjectedDeploymentReplicaSets extends React.Component<DeploymentReplica
 
     return (
       <div className="ReplicaSets flex flex-col">
-        <DrawerTitle>Deploy Revisions</DrawerTitle>
+        <DrawerTitle>{t("Deploy Revisions")}</DrawerTitle>
         <Table
           selectable
           tableId="deployment_replica_sets_view"
@@ -89,16 +90,16 @@ class NonInjectedDeploymentReplicaSets extends React.Component<DeploymentReplica
         >
           <TableHead flat sticky={false}>
             <TableCell className="name" sortBy={sortBy.name}>
-              Name
+              {t("Name")}
             </TableCell>
             <TableCell className="namespace" sortBy={sortBy.namespace}>
-              Namespace
+              {t("Namespace")}
             </TableCell>
             <TableCell className="pods" sortBy={sortBy.pods}>
-              Pods
+              {t("Pods")}
             </TableCell>
             <TableCell className="age" sortBy={sortBy.age}>
-              Age
+              {t("Age")}
             </TableCell>
             <TableCell className="actions" />
           </TableHead>

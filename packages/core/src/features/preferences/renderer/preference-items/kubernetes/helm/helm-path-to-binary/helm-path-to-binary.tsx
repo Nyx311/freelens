@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { useState } from "react";
@@ -29,7 +30,7 @@ const NonInjectedHelmPathToBinary = observer(({ state, defaultPathForHelmBinary 
 
   return (
     <section>
-      <SubTitle title="Path to helm binary" />
+      <SubTitle title={t("Path to helm binary")} />
       <Input
         theme="round-black"
         placeholder={defaultPathForHelmBinary}
@@ -38,7 +39,7 @@ const NonInjectedHelmPathToBinary = observer(({ state, defaultPathForHelmBinary 
         onChange={setBinariesPath}
         onBlur={save}
       />
-      <div className="hint">The path to the helm binary. Defaults to the bundled version.</div>
+      <div className="hint">{t("The path to the helm binary. Defaults to the bundled version.")}</div>
     </section>
   );
 });

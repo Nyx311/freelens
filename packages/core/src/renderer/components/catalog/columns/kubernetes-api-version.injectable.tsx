@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { customCatalogCategoryColumnInjectionToken } from "./custom-token";
 
@@ -23,7 +24,7 @@ const kubernetesApiVersionColumnInjectable = getInjectable({
         return <span key="version">{k8sVersion === "unknown" ? "" : k8sVersion}</span>;
       },
       titleProps: {
-        title: "Version",
+        title: t("Version"),
       },
     },
   }),

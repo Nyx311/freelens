@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import limitRangesRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/limit-ranges/limit-ranges-route.injectable";
 import navigateToLimitRangesInjectable from "../../../common/front-end-routing/routes/cluster/config/limit-ranges/navigate-to-limit-ranges.injectable";
@@ -19,7 +20,7 @@ const limitRangesSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Limit Ranges",
+      title: t("Limit Ranges"),
       onClick: di.inject(navigateToLimitRangesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

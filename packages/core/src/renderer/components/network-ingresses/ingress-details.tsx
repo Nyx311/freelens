@@ -6,6 +6,7 @@
 
 import "./ingress-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { computeRuleDeclarations, Ingress } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -34,9 +35,9 @@ class NonInjectedIngressDetails extends React.Component<IngressDetailsProps & De
         {rule.http && (
           <Table className="paths">
             <TableHead flat>
-              <TableCell className="path">Path</TableCell>
-              <TableCell className="link">Link</TableCell>
-              <TableCell className="backends">Backends</TableCell>
+              <TableCell className="path">{t("Path")}</TableCell>
+              <TableCell className="link">{t("Link")}</TableCell>
+              <TableCell className="backends">{t("Backends")}</TableCell>
             </TableHead>
             {computeRuleDeclarations(ingress, rule).map(({ displayAsLink, service, url, pathname }) => (
               <TableRow key={index}>
@@ -66,7 +67,7 @@ class NonInjectedIngressDetails extends React.Component<IngressDetailsProps & De
       <div>
         <Table className="ingress-points">
           <TableHead>
-            <TableCell className="name">Hostname</TableCell>
+            <TableCell className="name">{t("Hostname")}</TableCell>
             <TableCell className="ingresspoints">IP</TableCell>
           </TableHead>
           {ingressPoints.map(({ hostname, ip }, index) => (
@@ -97,7 +98,7 @@ class NonInjectedIngressDetails extends React.Component<IngressDetailsProps & De
 
     return (
       <div className="IngressDetails">
-        <DrawerItem name="Ports">{ingress.getPorts()}</DrawerItem>
+        <DrawerItem name={t("Ports")}>{ingress.getPorts()}</DrawerItem>
         {ingress.spec.tls && (
           <DrawerItem name="TLS">
             {ingress.spec.tls.map((tls, index) => (
@@ -105,11 +106,11 @@ class NonInjectedIngressDetails extends React.Component<IngressDetailsProps & De
             ))}
           </DrawerItem>
         )}
-        {port && <DrawerItem name="Service">{`${port.serviceName}:${port.servicePort}`}</DrawerItem>}
-        <DrawerTitle>Rules</DrawerTitle>
+        {port && <DrawerItem name={t("Service")}>{`${port.serviceName}:${port.servicePort}`}</DrawerItem>}
+        <DrawerTitle>{t("Rules")}</DrawerTitle>
         {this.renderPaths(ingress)}
 
-        <DrawerTitle>Load-Balancer Ingress Points</DrawerTitle>
+        <DrawerTitle>{t("Load-Balancer Ingress Points")}</DrawerTitle>
         {this.renderIngressPoints(ingress.status?.loadBalancer?.ingress ?? [])}
       </div>
     );

@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Spinner } from "@freelensapp/spinner";
 import { cssNames, hasTypedProperty, isObject, isString } from "@freelensapp/utilities";
@@ -138,7 +139,7 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
         <Spinner singleColor={false} className={styles.spinner} />
         <pre className="kube-auth-out">
           <p>
-            {this.isReconnecting ? "Reconnecting" : "Connecting"}
+            {this.isReconnecting ? t("Reconnecting") : t("Connecting")}
             &hellip;
           </p>
         </pre>
@@ -150,9 +151,15 @@ class NonInjectedClusterStatus extends React.Component<ClusterStatusProps & Depe
     if (this.hasErrorsOrWarnings && !this.isReconnecting) {
       return (
         <>
-          <Button primary label="Reconnect" className="m-auto" onClick={this.reconnect} waiting={this.isReconnecting} />
+          <Button
+            primary
+            label={t("Reconnect")}
+            className="m-auto"
+            onClick={this.reconnect}
+            waiting={this.isReconnecting}
+          />
           <a className="m-auto interactive" onClick={this.manageProxySettings}>
-            Manage Proxy Settings
+            {t("Manage Proxy Settings")}
           </a>
         </>
       );

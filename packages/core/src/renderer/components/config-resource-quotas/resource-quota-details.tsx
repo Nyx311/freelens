@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./resource-quota-details.scss";
 
 import { ResourceQuota } from "@freelensapp/kube-object";
@@ -71,7 +72,11 @@ function renderQuotas(quota: ResourceQuota): React.JSX.Element[] {
         <div key={name} className={cssNames("param", kebabCase(name))}>
           <span className="title">{name}</span>
           <span className="value">{`${rawCurrent} / ${rawMax}`}</span>
-          <LineProgress max={max} value={current} tooltip={<p>{`Set: ${rawMax}. Usage: ${+usage.toFixed(2)}%`}</p>} />
+          <LineProgress
+            max={max}
+            value={current}
+            tooltip={<p>{t("Set: {{set}}. Usage: {{usage}}%", { set: rawMax, usage: +usage.toFixed(2) })}</p>}
+          />
         </div>
       );
     });
@@ -98,18 +103,18 @@ class NonInjectedResourceQuotaDetails extends React.Component<ResourceQuotaDetai
 
     return (
       <div className="ResourceQuotaDetails">
-        <DrawerItem name="Quotas" className="quota-list">
+        <DrawerItem name={t("Quotas")} className="quota-list">
           {renderQuotas(quota)}
         </DrawerItem>
 
         {quota.getScopeSelector().length > 0 && (
           <>
-            <DrawerTitle>Scope Selector</DrawerTitle>
+            <DrawerTitle>{t("Scope Selector")}</DrawerTitle>
             <Table className="paths">
               <TableHead>
-                <TableCell>Operator</TableCell>
-                <TableCell>Scope name</TableCell>
-                <TableCell>Values</TableCell>
+                <TableCell>{t("Operator")}</TableCell>
+                <TableCell>{t("Scope name")}</TableCell>
+                <TableCell>{t("Values")}</TableCell>
               </TableHead>
               {quota.getScopeSelector().map((selector, index) => {
                 const { operator, scopeName, values } = selector;

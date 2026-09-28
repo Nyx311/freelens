@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./terminal-dock-tab.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -94,7 +95,7 @@ class NonInjectedTerminalTab<Props extends TerminalTabProps & Dependencies> exte
               small
               material="refresh"
               className="restart-icon"
-              tooltip="Restart session"
+              tooltip={t("Restart session")}
               onClick={this.reconnect}
             />
           )

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./list.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -45,9 +46,9 @@ const NonInjectedPageFiltersList = observer(
       return (
         <>
           <div className="header flex gap-2">
-            <span>Currently applied filters:</span>
+            <span>{t("Currently applied filters:")}</span>
             <a onClick={reset} className="reset">
-              Reset
+              {t("Reset")}
             </a>
           </div>
           <div className="labels">

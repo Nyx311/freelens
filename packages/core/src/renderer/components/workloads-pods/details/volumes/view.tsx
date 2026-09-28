@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { observer } from "mobx-react";
 import { DrawerTitle } from "../../../drawer";
@@ -24,7 +25,7 @@ export const PodVolumes = observer(({ pod }: PodVolumesProps) => {
 
   return (
     <>
-      <DrawerTitle>Volumes</DrawerTitle>
+      <DrawerTitle>{t("Volumes")}</DrawerTitle>
       {volumes.map((volume) => (
         <div key={volume.name} className="volume">
           <div className="title flex gap-2">

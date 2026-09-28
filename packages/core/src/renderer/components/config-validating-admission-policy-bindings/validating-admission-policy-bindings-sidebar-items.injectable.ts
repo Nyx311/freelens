@@ -4,6 +4,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToValidatingAdmissionPolicyBindingsInjectable from "../../../common/front-end-routing/routes/cluster/config/validating-admission-policy-bindings/navigate-to-validating-admission-policy-bindings.injectable";
 import validatingAdmissionPolicyBindingsRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/validating-admission-policy-bindings/validating-admission-policy-bindings-route.injectable";
@@ -18,7 +19,7 @@ const validatingAdmissionPolicyBindingsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Validating Admission Policy Bindings",
+      title: t("Validating Admission Policy Bindings"),
       onClick: di.inject(navigateToValidatingAdmissionPolicyBindingsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

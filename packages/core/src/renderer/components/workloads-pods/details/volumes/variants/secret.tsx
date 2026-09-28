@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -26,16 +27,16 @@ const NonInjectedSecret = (props: PodVolumeVariantSpecificProps<"secret"> & Depe
 
   return (
     <>
-      <LocalRef pod={pod} title="Name" kubeRef={{ name: secretName }} api={secretApi} />
-      <DrawerItem name="Items" hidden={items.length === 0}>
+      <LocalRef pod={pod} title={t("Name")} kubeRef={{ name: secretName }} api={secretApi} />
+      <DrawerItem name={t("Items")} hidden={items.length === 0}>
         <ul>
           {items.map(({ key }) => (
             <li key={key}>{key}</li>
           ))}
         </ul>
       </DrawerItem>
-      <DrawerItem name="Default File Mode">{`0o${defaultMode.toString(8)}`}</DrawerItem>
-      <DrawerItem name="Optional">{optional.toString()}</DrawerItem>
+      <DrawerItem name={t("Default File Mode")}>{`0o${defaultMode.toString(8)}`}</DrawerItem>
+      <DrawerItem name={t("Optional")}>{t(optional.toString())}</DrawerItem>
     </>
   );
 };

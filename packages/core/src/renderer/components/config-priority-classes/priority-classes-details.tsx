@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./priority-classes.scss";
 
 import { observer } from "mobx-react";
@@ -23,11 +24,11 @@ export class PriorityClassesDetails extends React.Component<PriorityClassesDetai
 
     return (
       <div className="PriorityClassesDetails">
-        <DrawerItem name="Description">{pc.getDescription()}</DrawerItem>
+        <DrawerItem name={t("Description")}>{pc.getDescription()}</DrawerItem>
 
-        <DrawerItem name="Value">{pc.getValue()}</DrawerItem>
+        <DrawerItem name={t("Value")}>{pc.getValue()}</DrawerItem>
 
-        <DrawerItem name="Global Default">{pc.getGlobalDefault()}</DrawerItem>
+        <DrawerItem name={t("Global Default")}>{pc.getGlobalDefault()}</DrawerItem>
       </div>
     );
   }

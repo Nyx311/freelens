@@ -5,7 +5,7 @@
  */
 
 import "./replicasets.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import eventStoreInjectable from "../events/store.injectable";
@@ -53,29 +53,29 @@ const NonInjectedReplicaSets = observer((props: Dependencies) => {
           [columnId.age]: (replicaSet) => -replicaSet.getCreationTimestamp(),
         }}
         searchFilters={[(replicaSet) => replicaSet.getSearchFields()]}
-        renderHeaderTitle="Replica Sets"
+        renderHeaderTitle={t("Replica Sets")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Namespace",
+            title: t("Namespace"),
             className: "namespace",
             sortBy: columnId.namespace,
             id: columnId.namespace,
           },
           {
-            title: "Desired",
+            title: t("Desired"),
             className: "desired",
             sortBy: columnId.desired,
             id: columnId.desired,
           },
           {
-            title: "Current",
+            title: t("Current"),
             className: "current",
             sortBy: columnId.current,
             id: columnId.current,
           },
-          { title: "Ready", className: "ready", sortBy: columnId.ready, id: columnId.ready },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Ready"), className: "ready", sortBy: columnId.ready, id: columnId.ready },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(replicaSet) => [
           <WithTooltip>{replicaSet.getName()}</WithTooltip>,

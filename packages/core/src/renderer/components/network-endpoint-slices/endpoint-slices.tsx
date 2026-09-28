@@ -4,7 +4,7 @@
  */
 
 import "./endpoint-slices.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -49,14 +49,19 @@ class NonInjectedEndpointSlices extends React.Component<Dependencies> {
             [columnId.age]: (endpointSlice) => -endpointSlice.getCreationTimestamp(),
           }}
           searchFilters={[(endpointSlice) => endpointSlice.getSearchFields()]}
-          renderHeaderTitle="Endpoint Slices"
+          renderHeaderTitle={t("Endpoint Slices")}
           renderTableHeader={[
-            { title: "Name", className: columnId.name, sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Address Type", className: "addressType", sortBy: columnId.addressType, id: columnId.addressType },
-            { title: "Ports", className: "ports", sortBy: columnId.ports, id: columnId.ports },
-            { title: "Endpoints", className: "endpoints", sortBy: columnId.endpoints, id: columnId.endpoints },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: columnId.name, sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            {
+              title: t("Address Type"),
+              className: "addressType",
+              sortBy: columnId.addressType,
+              id: columnId.addressType,
+            },
+            { title: t("Ports"), className: "ports", sortBy: columnId.ports, id: columnId.ports },
+            { title: t("Endpoints"), className: "endpoints", sortBy: columnId.endpoints, id: columnId.endpoints },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(endpointSlice) => [
             <WithTooltip>{endpointSlice.getName()}</WithTooltip>,

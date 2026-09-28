@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./error-boundary.scss";
 
 import { Button } from "@freelensapp/button";
@@ -52,27 +53,26 @@ class NonInjectedErrorBoundary extends React.Component<ErrorBoundaryProps & Depe
       return (
         <div className="ErrorBoundary">
           <h5>
-            {"App crash at "}
-            <span className="contrast">{window.location.pathname}</span>
+            {t("App crash at")} <span className="contrast">{window.location.pathname}</span>
           </h5>
           <p>
-            {"To help us improve the product please report bugs on "}
+            {t("To help us improve the product please report bugs on")}{" "}
             <a href={issuesTrackerUrl} rel="noreferrer" target="_blank">
-              Github
-            </a>
-            {" issues tracker."}
+              {t("Github")}
+            </a>{" "}
+            {t("issues tracker.")}
           </p>
           <div className="wrapper">
             <code className="block">
-              <p className="contrast">Component stack:</p>
+              <p className="contrast">{t("Component stack:")}</p>
               {errorInfo?.componentStack}
             </code>
             <code className="block">
-              <p className="contrast">Error stack:</p>
+              <p className="contrast">{t("Error stack:")}</p>
               {error.stack}
             </code>
           </div>
-          <Button className="back-button" primary label="Back" onClick={this.back} />
+          <Button className="back-button" primary label={t("Back")} onClick={this.back} />
         </div>
       );
     }

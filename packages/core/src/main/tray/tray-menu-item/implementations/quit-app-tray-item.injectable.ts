@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
 import requestQuitOfAppInjectable from "../../../electron-app/features/require-quit.injectable";
@@ -16,7 +17,7 @@ const quitAppTrayItemInjectable = getInjectable({
     id: "quit-app",
     parentId: null,
     orderNumber: 150,
-    label: computed(() => "Quit App"),
+    label: computed(() => t("Quit App")),
     enabled: computed(() => true),
     visible: computed(() => true),
     click: di.inject(requestQuitOfAppInjectable),

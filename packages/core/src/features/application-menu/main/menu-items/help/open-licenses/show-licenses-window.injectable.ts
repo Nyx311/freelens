@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import { ipcMain } from "electron";
@@ -37,7 +38,7 @@ const showLicensesWindowInjectable = getInjectable({
 
         window = createElectronWindow({
           id: "licenses",
-          title: "Licenses",
+          title: t("Licenses"),
           defaultWidth: 800,
           defaultHeight: 600,
           resizable: true,

@@ -6,6 +6,7 @@
 
 import "./namespace-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Namespace } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { Link } from "@freelensapp/routing";
@@ -86,11 +87,11 @@ class NonInjectedNamespaceDetails extends React.Component<NamespaceDetailsProps 
 
     return (
       <div className="NamespaceDetails">
-        <DrawerItem name="Status">
+        <DrawerItem name={t("Status")}>
           <span className={cssNames("status", status.toLowerCase())}>{status}</span>
         </DrawerItem>
 
-        <DrawerItem name="Resource Quotas" className="quotas flex items-center">
+        <DrawerItem name={t("Resource Quotas")} className="quotas flex items-center">
           {!this.quotas && resourceQuotaStore.isLoading && <Spinner />}
           {this.quotas.map(
             (quota) =>
@@ -101,7 +102,7 @@ class NonInjectedNamespaceDetails extends React.Component<NamespaceDetailsProps 
               ),
           )}
         </DrawerItem>
-        <DrawerItem name="Limit Ranges">
+        <DrawerItem name={t("Limit Ranges")}>
           {!this.limitranges && limitRangeStore.isLoading && <Spinner />}
           {this.limitranges.map(
             (limitrange) =>

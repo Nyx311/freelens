@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { makeObservable, observable, reaction } from "mobx";
 import { observer } from "mobx-react";
@@ -78,7 +79,7 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
         <Select
           id="cluster-metric-resource-type-input"
           className="grow shrink-0 basis-0"
-          placeholder="Select metrics to hide..."
+          placeholder={t("Select metrics to hide...")}
           isMulti
           isSearchable
           onMenuClose={this.save}
@@ -94,8 +95,8 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
           )}
           themeName="lens"
         />
-        <Button primary label="Hide all metrics" onClick={this.onChangeButton} />
-        <Button primary label="Reset" onClick={this.reset} />
+        <Button primary label={t("Hide all metrics")} onClick={this.onChangeButton} />
+        <Button primary label={t("Reset")} onClick={this.reset} />
       </>
     );
   }
@@ -103,7 +104,7 @@ export class ClusterMetricsSetting extends React.Component<ClusterMetricsSetting
   render() {
     return (
       <div className="MetricsSelec0 mb-5">
-        <SubTitle title={"Hide metrics from the UI"} />
+        <SubTitle title={t("Hide metrics from the UI")} />
         <div className="flex gap-2">{this.renderMetricsSelect()}</div>
       </div>
     );

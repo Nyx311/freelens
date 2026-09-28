@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import i18n from "@freelensapp/i18n";
 import { onceDefined } from "@freelensapp/utilities";
 import { action, makeObservable, observable, when } from "mobx";
 import { getClusterFrameUrl } from "../../../common/utils";
@@ -60,7 +61,10 @@ export class ClusterFrameHandler {
 
     iframe.id = `cluster-frame-${cluster.id}`;
     iframe.name = cluster.contextName.get();
-    iframe.setAttribute("src", getClusterFrameUrl(clusterId));
+    const frameUrl = new URL(getClusterFrameUrl(clusterId));
+
+    frameUrl.searchParams.set("freelensLocale", i18n.language);
+    iframe.setAttribute("src", frameUrl.href);
     iframe.setAttribute("allow", "clipboard-read; clipboard-write");
     iframe.addEventListener(
       "load",

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Spinner } from "@freelensapp/spinner";
 import { cssNames } from "@freelensapp/utilities";
@@ -44,10 +45,10 @@ interface Dependencies {
 
 function getStatus(extension: InstalledExtension) {
   if (!extension.isCompatible) {
-    return "Incompatible";
+    return t("Incompatible");
   }
 
-  return extension.isEnabled ? "Enabled" : "Disabled";
+  return extension.isEnabled ? t("Enabled") : t("Disabled");
 }
 
 const NonInjectedInstalledExtensions = observer(
@@ -75,8 +76,8 @@ const NonInjectedInstalledExtensions = observer(
       return (
         <div className="flex flex-col h-full items-center justify-center">
           <Icon material="extension" className={styles.noItemsIcon} />
-          <h3 className="font-medium text-3xl mt-5 mb-2">There are no extensions installed.</h3>
-          <p>Please use the form above to install or drag a tarball file here.</p>
+          <h3 className="font-medium text-3xl mt-5 mb-2">{t("There are no extensions installed.")}</h3>
+          <p>{t("Please use the form above to install or drag a tarball file here.")}</p>
         </div>
       );
     }
@@ -93,7 +94,7 @@ const NonInjectedInstalledExtensions = observer(
     const columns: SortableTableColumn<InstalledExtension>[] = [
       {
         id: "extension",
-        title: "Name",
+        title: t("Name"),
         // Percentages, to keep the proportions `react-table`'s flex weights
         // used to give these columns (200 / 100 / 100 / 20)
         width: "48%",
@@ -107,20 +108,26 @@ const NonInjectedInstalledExtensions = observer(
       },
       {
         id: "version",
-        title: "Version",
+        title: t("Version"),
         width: "22%",
         sortBy: (extension) => extension.manifest.version,
         renderCell: (extension) => (
           <div>
             <div>{extension.manifest.version}</div>
             {!extension.isManaged ? (
-              <div className={styles.extensionProvenance} title={`Loaded in place from ${extension.absolutePath}`}>
-                in place, unverified
+              <div
+                className={styles.extensionProvenance}
+                title={t("Loaded in place from {{path}}", { path: extension.absolutePath })}
+              >
+                {t("in place, unverified")}
               </div>
             ) : (
               !extension.isVerified && (
-                <div className={styles.extensionProvenance} title="No checksum was available when this was installed">
-                  unverified
+                <div
+                  className={styles.extensionProvenance}
+                  title={t("No checksum was available when this was installed")}
+                >
+                  {t("unverified")}
                 </div>
               )
             )}
@@ -129,7 +136,7 @@ const NonInjectedInstalledExtensions = observer(
       },
       {
         id: "status",
-        title: "Status",
+        title: t("Status"),
         width: "22%",
         sortBy: getStatus,
         renderCell: (extension) => (
@@ -159,7 +166,7 @@ const NonInjectedInstalledExtensions = observer(
                   <MenuItem disabled={isUninstalling} onClick={() => toggleExtension(id)}>
                     <Icon material={isEnabled ? "unpublished" : "check_circle"} />
                     <span className="title" aria-disabled={isUninstalling}>
-                      {isEnabled ? "Disable" : "Enabled"}
+                      {isEnabled ? t("Disable") : t("Enabled")}
                     </span>
                   </MenuItem>
                 )}
@@ -167,7 +174,7 @@ const NonInjectedInstalledExtensions = observer(
                 <MenuItem disabled={isUninstalling} onClick={() => confirmUninstallExtension(extension)}>
                   <Icon material="delete" />
                   <span className="title" aria-disabled={isUninstalling}>
-                    Uninstall
+                    {t("Uninstall")}
                   </span>
                 </MenuItem>
               </MenuActions>
@@ -181,14 +188,14 @@ const NonInjectedInstalledExtensions = observer(
       <section data-testid="extensions-table">
         <div className="flex items-center justify-between mb-6">
           <div className="mr-6">
-            <h2 className={styles.title}>Installed extensions</h2>
+            <h2 className={styles.title}>{t("Installed extensions")}</h2>
           </div>
           <div>
             <SearchInput value={search} theme="round-black" onChange={setSearch} className={styles.searchInput} />
           </div>
         </div>
         <SortableTable columns={columns} items={matchedExtensions} getItemKey={(extension) => extension.id} />
-        {matchedExtensions.length === 0 && <div className={styles.notFound}>No data found</div>}
+        {matchedExtensions.length === 0 && <div className={styles.notFound}>{t("No data found")}</div>}
       </section>
     );
   },

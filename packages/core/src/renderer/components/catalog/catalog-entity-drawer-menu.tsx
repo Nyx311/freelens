@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames, hasDefiniteField } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -70,8 +71,8 @@ class NonInjectedCatalogEntityDrawerMenu<T extends CatalogEntity> extends React.
       <HotbarToggleMenuItem
         key="hotbar-toggle"
         entity={entity}
-        addContent={<Icon material="push_pin" interactive small tooltip="Add to Hotbar" />}
-        removeContent={<Icon svg="push_off" interactive small tooltip="Remove from Hotbar" />}
+        addContent={<Icon material="push_pin" interactive small tooltip={t("Add to Hotbar")} />}
+        removeContent={<Icon svg="push_off" interactive small tooltip={t("Remove from Hotbar")} />}
       />,
     );
 

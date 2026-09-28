@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./confirm-dialog.scss";
 
 import { Button } from "@freelensapp/button";
@@ -49,8 +50,8 @@ interface Dependencies {
 const defaultParams = {
   ok: noop,
   cancel: noop,
-  labelOk: "Ok",
-  labelCancel: "Cancel",
+  labelOk: t("Ok"),
+  labelCancel: t("Cancel"),
   icon: <Icon big material="warning" />,
 };
 
@@ -77,7 +78,7 @@ class NonInjectedConfirmDialog extends React.Component<ConfirmDialogProps & Depe
     } catch (error) {
       this.props.showErrorNotification(
         <>
-          <p>Confirmation action failed:</p>
+          <p>{t("Confirmation action failed:")}</p>
           <p>
             {error instanceof Error
               ? error.message
@@ -103,7 +104,7 @@ class NonInjectedConfirmDialog extends React.Component<ConfirmDialogProps & Depe
     } catch (error) {
       this.props.showErrorNotification(
         <>
-          <p>Cancelling action failed:</p>
+          <p>{t("Cancelling action failed:")}</p>
           <p>
             {error instanceof Error
               ? error.message

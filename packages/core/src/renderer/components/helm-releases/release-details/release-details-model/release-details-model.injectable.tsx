@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { showCheckedErrorNotificationInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { waitUntilDefined } from "@freelensapp/utilities";
 import { getInjectable, lifecycleEnum } from "@ogre-tools/injectable";
@@ -142,15 +143,17 @@ export class ReleaseDetailsModel {
       });
 
       if (!result.callWasSuccessful) {
-        this.dependencies.showCheckedErrorNotification(result.error, "Unknown error occurred while updating release");
+        this.dependencies.showCheckedErrorNotification(
+          result.error,
+          t("Unknown error occurred while updating release"),
+        );
 
         return;
       }
 
       this.dependencies.showSuccessNotification(
         <p>
-          Release <b>{name}</b>
-          {" successfully updated!"}
+          {t("Release")} <b>{name}</b> {t("successfully updated!")}
         </p>,
       );
 

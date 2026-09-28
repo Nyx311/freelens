@@ -6,6 +6,7 @@
 
 import "./cronjob-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { CronJob } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
@@ -74,52 +75,55 @@ class NonInjectedCronJobDetails extends React.Component<CronJobDetailsProps & De
 
     return (
       <div className="CronJobDetails">
-        <DrawerItem name="Schedule">{getScheduleFullDescription(cronJob)}</DrawerItem>
-        <DrawerItem name="Timezone">{cronJob.spec.timeZone}</DrawerItem>
-        <DrawerItem name="Starting Deadline Seconds" hidden={!cronJob.spec.startingDeadlineSeconds}>
+        <DrawerItem name={t("Schedule")}>{getScheduleFullDescription(cronJob)}</DrawerItem>
+        <DrawerItem name={t("Timezone")}>{cronJob.spec.timeZone}</DrawerItem>
+        <DrawerItem name={t("Starting Deadline Seconds")} hidden={!cronJob.spec.startingDeadlineSeconds}>
           {formatDuration(cronJob.spec.startingDeadlineSeconds || 0)}
         </DrawerItem>
-        <DrawerItem name="Concurrency Policy" hidden={!cronJob.spec.concurrencyPolicy}>
+        <DrawerItem name={t("Concurrency Policy")} hidden={!cronJob.spec.concurrencyPolicy}>
           {cronJob.spec.concurrencyPolicy}
         </DrawerItem>
-        <DrawerItem name="Resumed">
+        <DrawerItem name={t("Resumed")}>
           <BadgeBoolean value={!cronJob.spec.suspend} />
         </DrawerItem>
-        <DrawerItem name="Successful Jobs History Limit" hidden={!cronJob.spec.successfulJobsHistoryLimit}>
+        <DrawerItem name={t("Successful Jobs History Limit")} hidden={!cronJob.spec.successfulJobsHistoryLimit}>
           {cronJob.spec.successfulJobsHistoryLimit}
         </DrawerItem>
-        <DrawerItem name="Failed Jobs History Limit" hidden={!cronJob.spec.failedJobsHistoryLimit}>
+        <DrawerItem name={t("Failed Jobs History Limit")} hidden={!cronJob.spec.failedJobsHistoryLimit}>
           {cronJob.spec.failedJobsHistoryLimit}
         </DrawerItem>
-        <DrawerItem name="Last Schedule" hidden={!cronJob.status?.lastScheduleTime}>
+        <DrawerItem name={t("Last Schedule")} hidden={!cronJob.status?.lastScheduleTime}>
           <DurationAbsoluteTimestamp timestamp={cronJob.status?.lastScheduleTime} />
         </DrawerItem>
-        <DrawerItem name="Last Successful Run" hidden={!cronJob.status?.lastSuccessfulTime}>
+        <DrawerItem name={t("Last Successful Run")} hidden={!cronJob.status?.lastSuccessfulTime}>
           <DurationAbsoluteTimestamp timestamp={cronJob.status?.lastSuccessfulTime} />
         </DrawerItem>
-        <DrawerItem name="Active">{cronJobStore.getActiveJobsNum(cronJob)}</DrawerItem>
+        <DrawerItem name={t("Active")}>{cronJobStore.getActiveJobsNum(cronJob)}</DrawerItem>
 
         {cronJob.spec.jobTemplate && (
           <>
-            <DrawerTitle>Template</DrawerTitle>
-            <DrawerItem name="Parallelism">{cronJob.getJobParallelism()}</DrawerItem>
-            <DrawerItem name="Completions">{cronJob.getJobDesiredCompletions()}</DrawerItem>
-            <DrawerItem name="Completion Mode" hidden={!cronJob.spec.jobTemplate.spec?.completionMode}>
+            <DrawerTitle>{t("Template")}</DrawerTitle>
+            <DrawerItem name={t("Parallelism")}>{cronJob.getJobParallelism()}</DrawerItem>
+            <DrawerItem name={t("Completions")}>{cronJob.getJobDesiredCompletions()}</DrawerItem>
+            <DrawerItem name={t("Completion Mode")} hidden={!cronJob.spec.jobTemplate.spec?.completionMode}>
               {cronJob.spec.jobTemplate.spec?.completionMode}
             </DrawerItem>
-            <DrawerItem name="Resumed">
+            <DrawerItem name={t("Resumed")}>
               <BadgeBoolean value={!cronJob.spec.jobTemplate.spec?.suspend} />
             </DrawerItem>
-            <DrawerItem name="Backoff Limit" hidden={cronJob.spec.jobTemplate.spec?.backoffLimit !== undefined}>
+            <DrawerItem name={t("Backoff Limit")} hidden={cronJob.spec.jobTemplate.spec?.backoffLimit !== undefined}>
               {cronJob.spec.jobTemplate.spec?.backoffLimit}
             </DrawerItem>
             <DrawerItem
-              name="TTL Seconds After Finished"
+              name={t("TTL Seconds After Finished")}
               hidden={cronJob.spec.jobTemplate.spec?.ttlSecondsAfterFinished !== undefined}
             >
               {formatDuration(cronJob.spec.jobTemplate.spec?.ttlSecondsAfterFinished || 0)}
             </DrawerItem>
-            <DrawerItem name="Active Deadline Seconds" hidden={!cronJob.spec.jobTemplate.spec?.activeDeadlineSeconds}>
+            <DrawerItem
+              name={t("Active Deadline Seconds")}
+              hidden={!cronJob.spec.jobTemplate.spec?.activeDeadlineSeconds}
+            >
               {formatDuration(cronJob.spec.jobTemplate.spec?.activeDeadlineSeconds || 0)}
             </DrawerItem>
           </>
@@ -127,7 +131,7 @@ class NonInjectedCronJobDetails extends React.Component<CronJobDetailsProps & De
 
         {childJobs.length > 0 && (
           <>
-            <DrawerTitle>Jobs</DrawerTitle>
+            <DrawerTitle>{t("Jobs")}</DrawerTitle>
             {childJobs.map((job: Job) => {
               const selectors = job.getSelectors();
               const condition = job.getCondition();
@@ -140,18 +144,18 @@ class NonInjectedCronJobDetails extends React.Component<CronJobDetailsProps & De
                       <LinkToJob name={job.getName()} namespace={job.getNs()} />
                     </span>
                   </div>
-                  <DrawerItem name="Condition" className="conditions" labelsOnly>
+                  <DrawerItem name={t("Condition")} className="conditions" labelsOnly>
                     {condition && <Badge label={condition.type} className={kebabCase(condition.type)} />}
                   </DrawerItem>
-                  <DrawerItem name="Selector" labelsOnly>
+                  <DrawerItem name={t("Selector")} labelsOnly>
                     {selectors.map((label) => (
                       <Badge key={label} label={label} />
                     ))}
                   </DrawerItem>
-                  <DrawerItem name="Start Time" labelsOnly>
+                  <DrawerItem name={t("Start Time")} labelsOnly>
                     {job.status?.startTime && <DurationAbsoluteTimestamp timestamp={job.status?.startTime} />}
                   </DrawerItem>
-                  <DrawerItem name="Duration" labelsOnly>
+                  <DrawerItem name={t("Duration")} labelsOnly>
                     {formatDuration(job.getJobDuration() || 0)}
                   </DrawerItem>
                 </div>

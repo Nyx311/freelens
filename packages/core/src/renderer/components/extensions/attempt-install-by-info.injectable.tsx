@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { isObject } from "@freelensapp/utilities";
@@ -67,13 +68,15 @@ const attemptInstallByInfoInjectable = getInjectable({
         const result = await downloadJson(registryUrl.href, { timeout: 15_000 });
 
         if (!result.callWasSuccessful) {
-          showErrorNotification(`Failed to get registry information for extension: ${result.error}`);
+          showErrorNotification(
+            t("Failed to get registry information for extension: {{error}}", { error: result.error }),
+          );
 
           return disposer();
         }
 
         if (!isObject(result.response) || Array.isArray(result.response)) {
-          showErrorNotification("Failed to get registry information for extension");
+          showErrorNotification(t("Failed to get registry information for extension"));
 
           return disposer();
         }
@@ -81,7 +84,7 @@ const attemptInstallByInfoInjectable = getInjectable({
         if (result.response.error || !isObject(result.response.versions)) {
           const message = result.response.error || "Incorrect response from registry";
 
-          showErrorNotification(`Failed to get registry information for extension: ${message}`);
+          showErrorNotification(t("Failed to get registry information for extension: {{error}}", { error: message }));
 
           return disposer();
         }
@@ -92,11 +95,13 @@ const attemptInstallByInfoInjectable = getInjectable({
           // assume invalid JSON
           logger.warn("Set registry has invalid json", { url: baseUrl }, error);
           showErrorNotification(
-            "Failed to get valid registry information for extension. Registry did not return valid JSON",
+            t("Failed to get valid registry information for extension. Registry did not return valid JSON"),
           );
         } else {
           logger.error("Failed to download registry information", error);
-          showErrorNotification(`Failed to get valid registry information for extension. ${error}`);
+          showErrorNotification(
+            t("Failed to get valid registry information for extension. {{error}}", { error: String(error) }),
+          );
         }
 
         return disposer();
@@ -113,8 +118,8 @@ const attemptInstallByInfoInjectable = getInjectable({
               if (!json.versions[potentialVersion]) {
                 showErrorNotification(
                   <p>
-                    Configured registry claims to have tag <code>{versionOrTagName}</code>. But does not have version
-                    infomation for the reference.
+                    {t("Configured registry claims to have tag")} <code>{versionOrTagName}</code>.{" "}
+                    {t("But does not have version infomation for the reference.")}
                   </p>,
                 );
 
@@ -128,10 +133,8 @@ const attemptInstallByInfoInjectable = getInjectable({
 
           showErrorNotification(
             <p>
-              {"The "}
-              <em>{name}</em>
-              {" extension does not have a version or tag "}
-              <code>{versionOrTagName}</code>.
+              {t("The")} <em>{name}</em> {t("extension does not have a version or tag")} <code>{versionOrTagName}</code>
+              .
             </p>,
           );
 
@@ -150,7 +153,7 @@ const attemptInstallByInfoInjectable = getInjectable({
 
       if (!version) {
         logger.error("No versions supplied for extension", { name });
-        showErrorNotification(`No versions found for ${name}`);
+        showErrorNotification(t("No versions found for {{name}}", { name }));
 
         return disposer();
       }
@@ -159,7 +162,7 @@ const attemptInstallByInfoInjectable = getInjectable({
       const tarballUrl = versionInfo?.dist.tarball;
 
       if (!tarballUrl) {
-        showErrorNotification("Configured registry has invalid data model. Please verify that it is like NPM's.");
+        showErrorNotification(t("Configured registry has invalid data model. Please verify that it is like NPM's."));
         logger.warn(
           `[ATTEMPT-INSTALL-BY-INFO]: registry returned unexpected data, final version is ${version} but the versions object is missing .dist.tarball as a string`,
           versionInfo,
@@ -172,12 +175,11 @@ const attemptInstallByInfoInjectable = getInjectable({
         const proceed = await confirm({
           message: (
             <p>
-              {"Are you sure you want to install "}
-              <b>{`${name}@${version}`}</b>?
+              {t("Are you sure you want to install")} <b>{`${name}@${version}`}</b>?
             </p>
           ),
-          labelCancel: "Cancel",
-          labelOk: "Install",
+          labelCancel: t("Cancel"),
+          labelOk: t("Install"),
         });
 
         if (!proceed) {
@@ -189,7 +191,7 @@ const attemptInstallByInfoInjectable = getInjectable({
       const request = await downloadBinary(tarballUrl, { timeout: 30_000 });
 
       if (!request.callWasSuccessful) {
-        showErrorNotification(`Failed to download extension: ${request.error}`);
+        showErrorNotification(t("Failed to download extension: {{error}}", { error: request.error }));
 
         return disposer();
       }

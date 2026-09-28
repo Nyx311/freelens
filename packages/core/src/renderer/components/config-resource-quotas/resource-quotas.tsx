@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./resource-quotas.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -50,11 +51,26 @@ class NonInjectedResourceQuotas extends React.Component<Dependencies> {
             (resourceQuota) => resourceQuota.getSearchFields(),
             (resourceQuota) => resourceQuota.getName(),
           ]}
-          renderHeaderTitle="Resource Quotas"
+          renderHeaderTitle={t("Resource Quotas")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(resourceQuota) => [
             <WithTooltip>{resourceQuota.getName()}</WithTooltip>,

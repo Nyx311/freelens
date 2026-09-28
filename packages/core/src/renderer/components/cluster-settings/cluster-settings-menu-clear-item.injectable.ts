@@ -5,6 +5,7 @@
  */
 
 import { clusterIconSettingsMenuInjectionToken } from "@freelensapp/cluster-settings";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 
 const clusterIconSettingsMenuClearItem = getInjectable({
@@ -12,7 +13,7 @@ const clusterIconSettingsMenuClearItem = getInjectable({
 
   instantiate: () => ({
     id: "clear-icon-menu-item",
-    title: "Clear",
+    title: t("Clear"),
     disabled: (preferences) => !preferences.icon,
     onClick: (preferences) => {
       /**

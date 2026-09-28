@@ -152,7 +152,9 @@ describe("opening application window using tray", () => {
           });
 
           it("starts loading of content for the application window", () => {
-            expect(callForApplicationWindowHtmlMock).toHaveBeenCalledWith("https://renderer.freelens.app:42");
+            expect(callForApplicationWindowHtmlMock).toHaveBeenCalledWith(
+              "https://renderer.freelens.app:42?freelensLocale=en-US",
+            );
           });
 
           describe("given static HTML of application window has not resolved yet, when opening from tray again", () => {

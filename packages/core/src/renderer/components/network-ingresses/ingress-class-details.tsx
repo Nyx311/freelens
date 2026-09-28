@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Link } from "@freelensapp/routing";
 import { stopPropagation } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -46,8 +47,8 @@ class NonInjectedIngressDetails extends React.Component<IngressClassDetailsProps
 
     return (
       <>
-        <DrawerTitle>Parameters</DrawerTitle>
-        <DrawerItem name="Name">
+        <DrawerTitle>{t("Parameters")}</DrawerTitle>
+        <DrawerItem name={t("Name")}>
           {url ? (
             <Link key="link" to={url} onClick={stopPropagation}>
               {ingressClass.getCtrlName()}
@@ -56,12 +57,12 @@ class NonInjectedIngressDetails extends React.Component<IngressClassDetailsProps
             ingressClass.getCtrlName()
           )}
         </DrawerItem>
-        <DrawerItem name="Namespace" hidden={!ingressClass.getCtrlNs()}>
+        <DrawerItem name={t("Namespace")} hidden={!ingressClass.getCtrlNs()}>
           {ingressClass.getCtrlNs()}
         </DrawerItem>
-        <DrawerItem name="Scope">{ingressClass.getCtrlScope()}</DrawerItem>
-        <DrawerItem name="Kind">{ingressClass.getCtrlKind()}</DrawerItem>
-        <DrawerItem name="API Group">{ingressClass.getCtrlApiGroup()}</DrawerItem>
+        <DrawerItem name={t("Scope")}>{ingressClass.getCtrlScope()}</DrawerItem>
+        <DrawerItem name={t("Kind")}>{ingressClass.getCtrlKind()}</DrawerItem>
+        <DrawerItem name={t("API Group")}>{ingressClass.getCtrlApiGroup()}</DrawerItem>
       </>
     );
   }
@@ -71,7 +72,7 @@ class NonInjectedIngressDetails extends React.Component<IngressClassDetailsProps
 
     return (
       <div className={styles.IngressClassDetails}>
-        <DrawerItem name="Controller">
+        <DrawerItem name={t("Controller")}>
           <Badge label={ingressClass.getController()} />
         </DrawerItem>
         {this.renderParameters()}

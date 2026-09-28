@@ -5,7 +5,7 @@
  */
 
 import "./network-policies.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -45,12 +45,12 @@ class NonInjectedNetworkPolicies extends React.Component<Dependencies> {
             [columnId.age]: (networkPolicy) => -networkPolicy.getCreationTimestamp(),
           }}
           searchFilters={[(networkPolicy) => networkPolicy.getSearchFields()]}
-          renderHeaderTitle="Network Policies"
+          renderHeaderTitle={t("Network Policies")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Policy Types", className: "type", id: columnId.types },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Policy Types"), className: "type", id: columnId.types },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(networkPolicy) => [
             <WithTooltip>{networkPolicy.getName()}</WithTooltip>,

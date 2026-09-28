@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { bytesToUnits } from "@freelensapp/utilities";
 import { throttle } from "es-toolkit/compat";
 import { TerminalChannels } from "../../common/terminal/channels";
@@ -87,7 +88,10 @@ const formatDownloadProgress = (version: string, { transferred, total }: Downloa
   const percentage = total ? `${String(Math.floor((transferred / total) * 100)).padStart(3)}%  ` : "";
   const outOf = total ? ` / ${formatBytes(total)}` : "";
 
-  return `Downloading kubectl v${version}  ${percentage}${formatBytes(transferred)}${outOf}`;
+  return t("Downloading kubectl v{{version}}  {{progress}}", {
+    version,
+    progress: `${percentage}${formatBytes(transferred)}${outOf}`,
+  });
 };
 
 export interface KubectlStatusOptions extends KubectlProgressOptions {

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./menu-actions.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -62,7 +63,7 @@ interface Dependencies {
 @observer
 class NonInjectedMenuActions extends React.Component<MenuActionsProps & Dependencies> {
   static defaultProps = {
-    removeConfirmationMessage: "Remove item?",
+    removeConfirmationMessage: () => t("Remove item?"),
   };
 
   private readonly disposers: (() => void)[] = [];
@@ -132,7 +133,7 @@ class NonInjectedMenuActions extends React.Component<MenuActionsProps & Dependen
     }
     openConfirmDialog({
       ok: removeAction,
-      labelOk: "Remove",
+      labelOk: t("Remove"),
       message: <div>{removeConfirmationMessage}</div>,
     });
   }
@@ -210,14 +211,14 @@ class NonInjectedMenuActions extends React.Component<MenuActionsProps & Dependen
           {children}
           {updateAction && (
             <MenuItem onClick={updateAction}>
-              <Icon material="edit" interactive={toolbar} tooltip="Edit" />
-              <span className="title">Edit</span>
+              <Icon material="edit" interactive={toolbar} tooltip={t("Edit")} />
+              <span className="title">{t("Edit")}</span>
             </MenuItem>
           )}
           {removeAction && (
             <MenuItem onClick={this.remove} data-testid="menu-action-remove">
-              <Icon material="delete" interactive={toolbar} tooltip="Delete" />
-              <span className="title">Delete</span>
+              <Icon material="delete" interactive={toolbar} tooltip={t("Delete")} />
+              <span className="title">{t("Delete")}</span>
             </MenuItem>
           )}
         </Menu>

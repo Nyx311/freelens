@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./secrets.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -52,13 +53,38 @@ class NonInjectedSecrets extends React.Component<Dependencies> {
             [columnId.age]: (secret) => -secret.getCreationTimestamp(),
           }}
           searchFilters={[(secret) => secret.getSearchFields(), (secret) => secret.getKeys()]}
-          renderHeaderTitle="Secrets"
+          renderHeaderTitle={t("Secrets")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Keys", className: "keys", sortBy: columnId.keys, id: columnId.keys },
-            { title: "Type", className: "type", sortBy: columnId.type, id: columnId.type },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Keys"),
+              className: "keys",
+              sortBy: columnId.keys,
+              id: columnId.keys,
+            },
+            {
+              title: t("Type"),
+              className: "type",
+              sortBy: columnId.type,
+              id: columnId.type,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(secret) => [
             <WithTooltip>{secret.getName()}</WithTooltip>,

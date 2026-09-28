@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { Spinner } from "@freelensapp/spinner";
@@ -72,10 +73,9 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
 
     showErrorNotification(
       <>
-        <b>Terminal Working Directory</b>
+        <b>{t("Terminal Working Directory")}</b>
         <p>
-          {"Your changes were not saved because "}
-          {result.error}
+          {t("Your changes were not saved because")} {result.error}
         </p>
       </>,
     );
@@ -92,8 +92,8 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
 
   const openFilePicker = () => {
     openPathPickingDialog({
-      message: "Choose Working Directory",
-      buttonLabel: "Pick",
+      message: t("Choose Working Directory"),
+      buttonLabel: t("Pick"),
       properties: ["openDirectory", "showHiddenFiles"],
       onPick: ([directory]) => setAndCommitDirectory(directory),
     });
@@ -102,7 +102,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
   return (
     <>
       <section className="working-directory">
-        <SubTitle title="Working Directory" />
+        <SubTitle title={t("Working Directory")} />
         <Input
           theme="round-black"
           value={presenter.directory.get()}
@@ -115,24 +115,25 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
               {presenter.directory.get() && (
                 <Icon
                   material="close"
-                  title="Clear"
+                  title={t("Clear")}
                   onClick={() => setAndCommitDirectory("")}
                   smallest
                   style={{ marginRight: "var(--margin)" }}
                 />
               )}
-              <Icon material="folder" title="Pick from filesystem" onClick={openFilePicker} smallest />
+              <Icon material="folder" title={t("Pick from filesystem")} onClick={openFilePicker} smallest />
             </>
           }
         />
         <small className="hint">
-          An explicit start path where the terminal will be launched, this is used as the current working directory
-          (cwd) for the shell process.
+          {t(
+            "An explicit start path where the terminal will be launched, this is used as the current working directory (cwd) for the shell process.",
+          )}
         </small>
       </section>
       <Gutter />
       <section className="default-namespace">
-        <SubTitle title="Default Namespace" />
+        <SubTitle title={t("Default Namespace")} />
         <Input
           theme="round-black"
           data-testid="default-namespace"
@@ -141,7 +142,7 @@ const NonInjectedClusterLocalTerminalSetting = observer((props: Dependencies & C
           onBlur={commitDefaultNamespace}
           placeholder={presenter.placeholderDefaultNamespace}
         />
-        <small className="hint">Default namespace used for kubectl.</small>
+        <small className="hint">{t("Default namespace used for kubectl.")}</small>
       </section>
     </>
   );

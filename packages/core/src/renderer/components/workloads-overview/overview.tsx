@@ -6,6 +6,7 @@
 
 import "./overview.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { TooltipPosition } from "@freelensapp/tooltip";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -126,7 +127,7 @@ class NonInjectedWorkloadsOverview extends React.Component<Dependencies> {
       <SiblingsInTabLayout scrollable>
         <div className="WorkloadsOverview flex flex-col gap-4" data-testid="page-for-workloads-overview">
           <div className="header flex gap-4 items-center">
-            <h5 className="grow shrink-0 basis-0">Overview</h5>
+            <h5 className="grow shrink-0 basis-0">{t("Overview")}</h5>
             {this.renderLoadErrors()}
             <NamespaceSelectFilter id="overview-namespace-select-filter-input" />
           </div>

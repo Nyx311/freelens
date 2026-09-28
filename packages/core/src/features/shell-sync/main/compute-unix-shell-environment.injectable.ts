@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { object } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -141,12 +142,15 @@ const computeUnixShellEnvironmentInjectable = getInjectable({
           if (opts.signal.aborted) {
             resolve({
               callWasSuccessful: false,
-              error: `timeout: ${getErrorContext()}`,
+              error: t("timeout: {{context}}", { context: getErrorContext() }),
             });
           } else {
             resolve({
               callWasSuccessful: false,
-              error: `Failed to spawn ${shellPath}: ${getErrorContext({ error: String(error) })}`,
+              error: t("Failed to spawn {{shellPath}}: {{context}}", {
+                shellPath,
+                context: getErrorContext({ error: String(error) }),
+              }),
             });
           }
         });
@@ -154,7 +158,9 @@ const computeUnixShellEnvironmentInjectable = getInjectable({
           if (code || signal) {
             return resolve({
               callWasSuccessful: false,
-              error: `Shell did not exit successfully: ${getErrorContext({ code, signal })}`,
+              error: t("Shell did not exit successfully: {{context}}", {
+                context: getErrorContext({ code, signal }),
+              }),
             });
           }
 
@@ -168,7 +174,7 @@ const computeUnixShellEnvironmentInjectable = getInjectable({
             if (!matchedOutput) {
               return resolve({
                 callWasSuccessful: false,
-                error: "Something has blocked the shell from producing the environment variables",
+                error: t("Something has blocked the shell from producing the environment variables"),
               });
             }
 

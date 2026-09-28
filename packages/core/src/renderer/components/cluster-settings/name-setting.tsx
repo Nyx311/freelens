@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { autorun, makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
@@ -57,7 +58,7 @@ export class ClusterNameSetting extends React.Component<ClusterNameSettingProps>
   render() {
     return (
       <>
-        <SubTitle title="Cluster Name" />
+        <SubTitle title={t("Cluster Name")} />
         <Input
           theme="round-black"
           validators={isRequired}

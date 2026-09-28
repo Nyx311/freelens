@@ -5,7 +5,7 @@
  */
 
 import "./endpoints.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -45,12 +45,12 @@ class NonInjectedEndpoints extends React.Component<Dependencies> {
             [columnId.age]: (endpoint) => -endpoint.getCreationTimestamp(),
           }}
           searchFilters={[(endpoint) => endpoint.getSearchFields()]}
-          renderHeaderTitle="Endpoints"
+          renderHeaderTitle={t("Endpoints")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Endpoints", className: "endpoints", id: columnId.endpoints },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Endpoints"), className: "endpoints", id: columnId.endpoints },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(endpoint) => [
             <WithTooltip>{endpoint.getName()}</WithTooltip>,

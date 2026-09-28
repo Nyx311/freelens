@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { preferenceItemInjectionToken } from "../preference-item-injection-token";
 
@@ -15,7 +16,7 @@ const proxyPreferenceTabInjectable = getInjectable({
     id: "proxy-tab",
     parentId: "general-tab-group" as const,
     pathId: "proxy",
-    label: "Proxy",
+    label: t("Proxy"),
     orderNumber: 20,
   }),
 

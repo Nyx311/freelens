@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import getClusterByIdInjectable from "../../../../features/cluster/storage/common/get-by-id.injectable";
@@ -65,7 +66,7 @@ const generalKubernetesClusterEntitySettingsInjectable = getInjectable({
     apiVersions: new Set(["entity.k8slens.dev/v1alpha1"]),
     kind: "KubernetesCluster",
     source: "local",
-    title: "General",
+    title: t("General"),
     group: "Settings",
     id: "general",
     orderNumber: 0,

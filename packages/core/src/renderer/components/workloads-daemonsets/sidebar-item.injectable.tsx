@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import daemonsetsRouteInjectable from "../../../common/front-end-routing/routes/cluster/workloads/daemonsets/daemonsets-route.injectable";
 import navigateToDaemonsetsInjectable from "../../../common/front-end-routing/routes/cluster/workloads/daemonsets/navigate-to-daemonsets.injectable";
@@ -19,7 +20,7 @@ const daemonSetsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: workloadsSidebarItemInjectable.id,
-      title: "Daemon Sets",
+      title: t("Daemon Sets"),
       onClick: di.inject(navigateToDaemonsetsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

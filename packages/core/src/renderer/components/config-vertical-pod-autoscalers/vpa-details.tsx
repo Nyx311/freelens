@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./vpa-details.scss";
 
 import {
@@ -48,8 +49,8 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
 
     return (
       <div>
-        <DrawerTitle>Status</DrawerTitle>
-        <DrawerItem name="Status" className="status" labelsOnly>
+        <DrawerTitle>{t("Status")}</DrawerTitle>
+        <DrawerItem name={t("Status")} className="status" labelsOnly>
           {vpa.getReadyConditions().map(({ type, tooltip, isReady }) => (
             <Badge key={type} label={type} tooltip={tooltip} className={cssNames({ [type]: isReady })} />
           ))}
@@ -59,8 +60,10 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
           recommendation.containerRecommendations.map(
             ({ containerName, target, lowerBound, upperBound, uncappedTarget }) => (
               <div key={containerName}>
-                <DrawerTitle>{`Container Recommendation for ${containerName ?? "<unknown>"}`}</DrawerTitle>
-                <DrawerItem name="target">
+                <DrawerTitle>
+                  {t("Container Recommendation for {{name}}", { name: containerName ?? t("Unknown") })}
+                </DrawerTitle>
+                <DrawerItem name={t("target")}>
                   {Object.entries(target).map(([name, value]) => (
                     <DrawerItem key={name} name={startCase(name)}>
                       {value}
@@ -68,7 +71,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
                   ))}
                 </DrawerItem>
                 {lowerBound && (
-                  <DrawerItem name="lowerBound">
+                  <DrawerItem name={t("lowerBound")}>
                     {Object.entries(lowerBound).map(([name, value]) => (
                       <DrawerItem key={name} name={startCase(name)}>
                         {value}
@@ -77,7 +80,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
                   </DrawerItem>
                 )}
                 {upperBound && (
-                  <DrawerItem name="upperBound">
+                  <DrawerItem name={t("upperBound")}>
                     {Object.entries(upperBound).map(([name, value]) => (
                       <DrawerItem key={name} name={startCase(name)}>
                         {value}
@@ -86,7 +89,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
                   </DrawerItem>
                 )}
                 {uncappedTarget && (
-                  <DrawerItem name="uncappedTarget">
+                  <DrawerItem name={t("uncappedTarget")}>
                     {Object.entries(uncappedTarget).map(([name, value]) => (
                       <DrawerItem key={name} name={startCase(name)}>
                         {value}
@@ -104,9 +107,9 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
   renderUpdatePolicy(updatePolicy: PodUpdatePolicy) {
     return (
       <div>
-        <DrawerTitle>Update Policy</DrawerTitle>
-        <DrawerItem name="updateMode">{updatePolicy?.updateMode ?? UpdateMode.UpdateModeAuto}</DrawerItem>
-        <DrawerItem name="minReplicas">{updatePolicy?.minReplicas}</DrawerItem>
+        <DrawerTitle>{t("Update Policy")}</DrawerTitle>
+        <DrawerItem name={t("updateMode")}>{updatePolicy?.updateMode ?? UpdateMode.UpdateModeAuto}</DrawerItem>
+        <DrawerItem name={t("minReplicas")}>{updatePolicy?.minReplicas}</DrawerItem>
       </div>
     );
   }
@@ -120,10 +123,12 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
               ({ containerName, mode, minAllowed, maxAllowed, controlledResources, controlledValues }) => {
                 return (
                   <div key={containerName}>
-                    <DrawerTitle>{`Container Policy for ${containerName ?? "<unknown>"}`}</DrawerTitle>
-                    <DrawerItem name="mode">{mode ?? ContainerScalingMode.ContainerScalingModeAuto}</DrawerItem>
+                    <DrawerTitle>
+                      {t("Container Policy for {{name}}", { name: containerName ?? t("Unknown") })}
+                    </DrawerTitle>
+                    <DrawerItem name={t("Mode")}>{mode ?? ContainerScalingMode.ContainerScalingModeAuto}</DrawerItem>
                     {minAllowed && (
-                      <DrawerItem name="minAllowed">
+                      <DrawerItem name={t("minAllowed")}>
                         {Object.entries(minAllowed).map(([name, value]) => (
                           <DrawerItem key={name} name={startCase(name)}>
                             {value}
@@ -132,7 +137,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
                       </DrawerItem>
                     )}
                     {maxAllowed && (
-                      <DrawerItem name="maxAllowed">
+                      <DrawerItem name={t("maxAllowed")}>
                         {Object.entries(maxAllowed).map(([name, value]) => (
                           <DrawerItem key={name} name={startCase(name)}>
                             {value}
@@ -140,12 +145,12 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
                         ))}
                       </DrawerItem>
                     )}
-                    <DrawerItem name="controlledResources">
+                    <DrawerItem name={t("controlledResources")}>
                       {controlledResources?.length
                         ? controlledResources.join(", ")
                         : `${ResourceName.ResourceCPU}, ${ResourceName.ResourceMemory}`}
                     </DrawerItem>
-                    <DrawerItem name="controlledValues">
+                    <DrawerItem name={t("controlledValues")}>
                       {controlledValues ?? ControlledValues.ControlledValueRequestsAndLimits}
                     </DrawerItem>
                   </div>
@@ -175,7 +180,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
 
     return (
       <div className="VpaDetails">
-        <DrawerItem name="Reference">
+        <DrawerItem name={t("Reference")}>
           {targetRef && (
             <Link to={getDetailsUrl(apiManager.lookupApiLink(targetRef, vpa))}>
               {targetRef.kind}/{targetRef.name}
@@ -183,7 +188,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
           )}
         </DrawerItem>
 
-        <DrawerItem name="Recommender">
+        <DrawerItem name={t("Recommender")}>
           {
             /* according to the spec there can be 0 or 1 recommenders, only */
             recommenders?.length ? recommenders[0].name : "default"
@@ -194,7 +199,7 @@ class NonInjectedVpaDetails extends React.Component<VpaDetailsProps & Dependenci
         {updatePolicy && this.renderUpdatePolicy(updatePolicy)}
         {resourcePolicy && this.renderResourcePolicy(resourcePolicy)}
 
-        <DrawerTitle>CRD details</DrawerTitle>
+        <DrawerTitle>{t("CRD details")}</DrawerTitle>
       </div>
     );
   }

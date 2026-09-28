@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./vpa.scss";
 
 import { prevDefault } from "@freelensapp/utilities";
@@ -49,13 +50,36 @@ class NonInjectedVerticalPodAutoscalers extends React.Component<Dependencies> {
             [columnId.age]: (vpa) => -vpa.getCreationTimestamp(),
           }}
           searchFilters={[(vpa) => vpa.getSearchFields()]}
-          renderHeaderTitle="Vertical Pod Autoscalers"
+          renderHeaderTitle={t("Vertical Pod Autoscalers")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Mode", className: "mode", sortBy: columnId.mode, id: columnId.mode },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Conditions", className: "conditions scrollable", id: columnId.conditions },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Mode"),
+              className: "mode",
+              sortBy: columnId.mode,
+              id: columnId.mode,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
+            {
+              title: t("Conditions"),
+              className: "conditions scrollable",
+              id: columnId.conditions,
+            },
           ]}
           renderTableContents={(vpa) => [
             vpa.getName(),

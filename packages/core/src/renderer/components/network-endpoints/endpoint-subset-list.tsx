@@ -6,6 +6,7 @@
 
 import "./endpoint-subset-list.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Link } from "@freelensapp/routing";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import autoBindReact from "auto-bind/react";
@@ -66,7 +67,7 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
   renderAddressTable(addresses: EndpointAddress[], virtual: boolean) {
     return (
       <div>
-        <div className="title flex gap-2">Addresses</div>
+        <div className="title flex gap-2">{t("Addresses")}</div>
         <Table
           items={addresses}
           selectable={false}
@@ -77,8 +78,8 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
         >
           <TableHead>
             <TableCell className="ip">IP</TableCell>
-            <TableCell className="name">Hostname</TableCell>
-            <TableCell className="target">Target</TableCell>
+            <TableCell className="name">{t("Hostname")}</TableCell>
+            <TableCell className="target">{t("Target")}</TableCell>
           </TableHead>
           {!virtual && addresses.map((address) => this.getAddressTableRow(address.ip))}
         </Table>
@@ -119,7 +120,7 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
       <div className="EndpointSubsetList flex flex-col">
         {addresses.length > 0 && (
           <div>
-            <div className="title flex gap-2">Addresses</div>
+            <div className="title flex gap-2">{t("Addresses")}</div>
             <Table
               items={addresses}
               selectable={false}
@@ -130,8 +131,8 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
             >
               <TableHead>
                 <TableCell className="ip">IP</TableCell>
-                <TableCell className="host">Hostname</TableCell>
-                <TableCell className="target">Target</TableCell>
+                <TableCell className="host">{t("Hostname")}</TableCell>
+                <TableCell className="target">{t("Target")}</TableCell>
               </TableHead>
               {!addressesVirtual && addresses.map((address) => this.getAddressTableRow(address.ip))}
             </Table>
@@ -140,7 +141,7 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
 
         {notReadyAddresses.length > 0 && (
           <div>
-            <div className="title flex gap-2">Not Ready Addresses</div>
+            <div className="title flex gap-2">{t("Not Ready Addresses")}</div>
             <Table
               items={notReadyAddresses}
               selectable
@@ -151,8 +152,8 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
             >
               <TableHead>
                 <TableCell className="ip">IP</TableCell>
-                <TableCell className="host">Hostname</TableCell>
-                <TableCell className="target">Target</TableCell>
+                <TableCell className="host">{t("Hostname")}</TableCell>
+                <TableCell className="target">{t("Target")}</TableCell>
               </TableHead>
               {!notReadyAddressesVirtual &&
                 notReadyAddresses.map((address) => this.getNotReadyAddressTableRow(address.ip))}
@@ -160,12 +161,12 @@ class NonInjectedEndpointSubsetList extends React.Component<EndpointSubsetListPr
           </div>
         )}
 
-        <div className="title flex gap-2">Ports</div>
+        <div className="title flex gap-2">{t("Ports")}</div>
         <Table selectable={false} virtual={false} scrollable={false} className="grow shrink-0 basis-0">
           <TableHead>
-            <TableCell className="port">Port</TableCell>
-            <TableCell className="name">Name</TableCell>
-            <TableCell className="protocol">Protocol</TableCell>
+            <TableCell className="port">{t("Port")}</TableCell>
+            <TableCell className="name">{t("Name")}</TableCell>
+            <TableCell className="protocol">{t("Protocol")}</TableCell>
           </TableHead>
           {ports.map((port) => (
             // The same port number may be exposed under several protocols, so the number

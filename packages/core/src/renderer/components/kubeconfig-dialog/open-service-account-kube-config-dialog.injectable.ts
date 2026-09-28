@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { urlBuilderFor } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import apiBaseInjectable from "../../../common/k8s-api/api-base.injectable";
@@ -23,7 +24,7 @@ const openServiceAccountKubeConfigDialogInjectable = getInjectable({
 
     return (account) =>
       openKubeconfigDialog({
-        title: `${account.getName()} kubeconfig`,
+        title: t("{{name}} kubeconfig", { name: account.getName() }),
         loader: () =>
           apiBase.get(
             serviceAccountConfigEndpoint.compile({

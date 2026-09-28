@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import createDockTabInjectable from "../dock/create-dock-tab.injectable";
 import { TabKind } from "../dock/store";
@@ -29,7 +30,7 @@ const createInstallChartTabInjectable = getInjectable({
       const tab = createDockTab(
         {
           id: getRandomId(),
-          title: `Helm Install: ${repo}/${name}`,
+          title: t("Helm Install: {{chart}}", { chart: `${repo}/${name}` }),
           ...tabParams,
           kind: TabKind.INSTALL_CHART,
         },

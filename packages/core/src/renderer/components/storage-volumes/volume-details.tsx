@@ -7,6 +7,7 @@
 import { startCase } from "es-toolkit";
 import "./volume-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { persistentVolumeClaimApiInjectable, storageClassApiInjectable } from "@freelensapp/kube-api-specifics";
 import { PersistentVolume } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
@@ -68,24 +69,24 @@ class NonInjectedPersistentVolumeDetails extends React.Component<PersistentVolum
 
     return (
       <div className="PersistentVolumeDetails">
-        <DrawerItem name="Capacity">{capacity?.storage}</DrawerItem>
+        <DrawerItem name={t("Capacity")}>{capacity?.storage}</DrawerItem>
 
-        {mountOptions && <DrawerItem name="Mount Options">{mountOptions.join(", ")}</DrawerItem>}
+        {mountOptions && <DrawerItem name={t("Mount Options")}>{mountOptions.join(", ")}</DrawerItem>}
 
-        <DrawerItem name="Access Modes">{accessModes?.join(", ")}</DrawerItem>
-        <DrawerItem name="Reclaim Policy">{persistentVolumeReclaimPolicy}</DrawerItem>
-        <DrawerItem name="Storage Class Name">
+        <DrawerItem name={t("Access Modes")}>{accessModes?.join(", ")}</DrawerItem>
+        <DrawerItem name={t("Reclaim Policy")}>{persistentVolumeReclaimPolicy}</DrawerItem>
+        <DrawerItem name={t("Storage Class Name")}>
           <Link key="link" to={storageClassDetailsUrl} onClick={stopPropagation}>
             {storageClassName}
           </Link>
         </DrawerItem>
-        <DrawerItem name="Status" labelsOnly>
-          <Badge label={volume.getStatus()} />
+        <DrawerItem name={t("Status")} labelsOnly>
+          <Badge label={t(volume.getStatus())} />
         </DrawerItem>
 
         {nfs && (
           <>
-            <DrawerTitle>Network File System</DrawerTitle>
+            <DrawerTitle>{t("Network File System")}</DrawerTitle>
             {Object.entries(nfs).map(([name, value]) => (
               <DrawerItem key={name} name={startCase(name)}>
                 {value}
@@ -96,8 +97,8 @@ class NonInjectedPersistentVolumeDetails extends React.Component<PersistentVolum
 
         {flexVolume && (
           <>
-            <DrawerTitle>FlexVolume</DrawerTitle>
-            <DrawerItem name="Driver">{flexVolume.driver}</DrawerItem>
+            <DrawerTitle>{t("FlexVolume")}</DrawerTitle>
+            <DrawerItem name={t("Driver")}>{flexVolume.driver}</DrawerItem>
             {Object.entries(flexVolume.options ?? {}).map(([name, value]) => (
               <DrawerItem key={name} name={startCase(name)}>
                 {value}
@@ -108,12 +109,12 @@ class NonInjectedPersistentVolumeDetails extends React.Component<PersistentVolum
 
         {claimRef && (
           <>
-            <DrawerTitle>Claim</DrawerTitle>
-            <DrawerItem name="Type">{claimRef.kind}</DrawerItem>
-            <DrawerItem name="Name">
+            <DrawerTitle>{t("Claim")}</DrawerTitle>
+            <DrawerItem name={t("Type")}>{claimRef.kind}</DrawerItem>
+            <DrawerItem name={t("Name")}>
               <Link to={getDetailsUrl(persistentVolumeClaimApi.formatUrlForNotListing(claimRef))}>{claimRef.name}</Link>
             </DrawerItem>
-            <DrawerItem name="Namespace">{claimRef.namespace}</DrawerItem>
+            <DrawerItem name={t("Namespace")}>{claimRef.namespace}</DrawerItem>
           </>
         )}
       </div>

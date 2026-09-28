@@ -6,6 +6,7 @@
 
 import "./job-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Job } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { formatDuration } from "@freelensapp/utilities";
@@ -73,59 +74,68 @@ class NonInjectedJobDetails extends React.Component<JobDetailsProps & Dependenci
     return (
       <div className="JobDetails">
         {selectors.length > 0 && (
-          <DrawerItem name="Selector" labelsOnly>
+          <DrawerItem name={t("Selector")} labelsOnly>
             {selectors.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {nodeSelector.length > 0 && (
-          <DrawerItem name="Node Selector">
+          <DrawerItem name={t("Node Selector")}>
             {nodeSelector.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
-        <DrawerItem name="Status">
-          <Badge className={getStatusClass(job)} label={getStatusText(job)} tooltip={getStatusText(job)} />
+        <DrawerItem name={t("Status")}>
+          <Badge className={getStatusClass(job)} label={t(getStatusText(job))} tooltip={t(getStatusText(job))} />
         </DrawerItem>
-        <DrawerItem name="Parallelism">{job.getParallelism()}</DrawerItem>
-        <DrawerItem name="Completions">{job.getDesiredCompletions()}</DrawerItem>
-        <DrawerItem name="Completion Mode" hidden={!job.spec.completionMode}>
+        <DrawerItem name={t("Parallelism")}>{job.getParallelism()}</DrawerItem>
+        <DrawerItem name={t("Completions")}>{job.getDesiredCompletions()}</DrawerItem>
+        <DrawerItem name={t("Completion Mode")} hidden={!job.spec.completionMode}>
           {job.spec.completionMode}
         </DrawerItem>
-        <DrawerItem name="Resumed">
+        <DrawerItem name={t("Resumed")}>
           <BadgeBoolean value={!job.spec.suspend} />
         </DrawerItem>
-        <DrawerItem name="Backoff Limit" hidden={job.spec.backoffLimit !== undefined}>
+        <DrawerItem name={t("Backoff Limit")} hidden={job.spec.backoffLimit !== undefined}>
           {job.spec.backoffLimit}
         </DrawerItem>
-        <DrawerItem name="TTL Seconds After Finished" hidden={job.spec.ttlSecondsAfterFinished !== undefined}>
+        <DrawerItem name={t("TTL Seconds After Finished")} hidden={job.spec.ttlSecondsAfterFinished !== undefined}>
           {formatDuration(job.spec.ttlSecondsAfterFinished || 0)}
         </DrawerItem>
-        <DrawerItem name="Start Time" hidden={!job.status?.startTime}>
+        <DrawerItem name={t("Start Time")} hidden={!job.status?.startTime}>
           <DurationAbsoluteTimestamp timestamp={job.status?.startTime} />
         </DrawerItem>
-        <DrawerItem name="Completed At" hidden={!job.status?.completionTime}>
+        <DrawerItem name={t("Completed At")} hidden={!job.status?.completionTime}>
           <DurationAbsoluteTimestamp timestamp={job.status?.completionTime} />
         </DrawerItem>
-        <DrawerItem name="Duration" hidden={!job.status?.startTime || !job.status?.completionTime}>
+        <DrawerItem name={t("Duration")} hidden={!job.status?.startTime || !job.status?.completionTime}>
           {formatDuration(job.getJobDuration())}
         </DrawerItem>
-        <DrawerItem name="Active Deadline Seconds" hidden={!job.spec.activeDeadlineSeconds}>
+        <DrawerItem name={t("Active Deadline Seconds")} hidden={!job.spec.activeDeadlineSeconds}>
           {formatDuration(job.spec.activeDeadlineSeconds || 0)}
         </DrawerItem>
-        <DrawerItem name="Pods Statuses">
+        <DrawerItem name={t("Pods Statuses")}>
           {job.status?.ready === undefined
-            ? `${job.status?.active || 0} Active / ${job.status?.succeeded || 0} Succeeded / ${job.status?.failed || 0} Failed`
-            : `${job.status?.active || 0} Active (${job.status?.ready || 0} Ready) / ${job.status?.succeeded || 0} Succeeded / ${job.status?.failed || 0} Failed`}
+            ? t("{{active}} Active / {{succeeded}} Succeeded / {{failed}} Failed", {
+                active: job.status?.active || 0,
+                succeeded: job.status?.succeeded || 0,
+                failed: job.status?.failed || 0,
+              })
+            : t("{{active}} Active ({{ready}} Ready) / {{succeeded}} Succeeded / {{failed}} Failed", {
+                active: job.status?.active || 0,
+                ready: job.status?.ready || 0,
+                succeeded: job.status?.succeeded || 0,
+                failed: job.status?.failed || 0,
+              })}
         </DrawerItem>
-        <DrawerItem name="Completed Indexes" hidden={!job.status?.completedIndexes}>
+        <DrawerItem name={t("Completed Indexes")} hidden={!job.status?.completedIndexes}>
           {job.status?.completedIndexes}
         </DrawerItem>
         <PodDetailsTolerations workload={job} />
         <PodDetailsAffinities workload={job} />
-        <DrawerItem name="Pod Status" className="pod-status">
+        <DrawerItem name={t("Pod Status")} className="pod-status">
           <PodDetailsStatuses pods={childPods} />
         </DrawerItem>
         <KubeObjectConditionsDrawer object={job} />

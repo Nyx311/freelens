@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Pod } from "@freelensapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import React from "react";
@@ -53,8 +54,8 @@ const NonInjectablePodLogsMenu: React.FC<NonInjectablePodLogsMenuProps & Depende
   return (
     <PodMenuItem
       material="subject"
-      title="Logs"
-      tooltip="Pod Logs"
+      title={t("Logs")}
+      tooltip={t("Pod Logs")}
       toolbar={toolbar}
       annotations={annotations}
       containers={containers}

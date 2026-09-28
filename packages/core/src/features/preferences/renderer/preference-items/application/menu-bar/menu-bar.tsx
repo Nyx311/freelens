@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { ipcRenderer } from "electron";
 import { observer } from "mobx-react";
@@ -19,7 +20,7 @@ interface Dependencies {
 
 const NonInjectedMenuBarSettings = observer(({ state }: Dependencies) => (
   <section id="menu">
-    <SubTitle title="Menu-bar Settings" />
+    <SubTitle title={t("Menu-bar Settings")} />
     <Switch
       checked={state.showTrayIcon}
       onChange={() => {
@@ -27,7 +28,7 @@ const NonInjectedMenuBarSettings = observer(({ state }: Dependencies) => (
         ipcRenderer.send("tray:set-visible", state.showTrayIcon);
       }}
     >
-      Show tray icon in the menu bar
+      {t("Show tray icon in the menu bar")}
     </Switch>
   </section>
 ));

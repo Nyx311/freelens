@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import styles from "./close-button.module.scss";
 
@@ -14,7 +15,7 @@ export interface CloseButtonProps extends HTMLAttributes<HTMLDivElement> {}
 export function CloseButton(props: CloseButtonProps) {
   return (
     <div {...props}>
-      <div className={styles.closeButton} role="button" aria-label="Close">
+      <div className={styles.closeButton} role="button" aria-label={t("Close")}>
         <Icon material="close" className={styles.icon} />
       </div>
       <div className={styles.esc} aria-hidden="true">

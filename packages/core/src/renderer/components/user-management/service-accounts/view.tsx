@@ -5,7 +5,7 @@
  */
 
 import "./view.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -50,11 +50,11 @@ class NonInjectedServiceAccounts extends React.Component<Dependencies> {
             [columnId.age]: (account) => -account.getCreationTimestamp(),
           }}
           searchFilters={[(account) => account.getSearchFields()]}
-          renderHeaderTitle="Service Accounts"
+          renderHeaderTitle={t("Service Accounts")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(account) => [
             <WithTooltip>{account.getName()}</WithTooltip>,
@@ -63,7 +63,7 @@ class NonInjectedServiceAccounts extends React.Component<Dependencies> {
           ]}
           addRemoveButtons={{
             onAdd: () => openCreateServiceAccountDialog(),
-            addTooltip: "Create new Service Account",
+            addTooltip: t("Create new Service Account"),
           }}
         />
         <CreateServiceAccountDialog />

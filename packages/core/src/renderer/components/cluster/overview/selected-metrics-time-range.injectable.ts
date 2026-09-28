@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { action, computed } from "mobx";
 import { now } from "mobx-utils";
@@ -17,12 +18,30 @@ export type SelectedMetricsTimeRange = ReturnType<(typeof selectedMetricsTimeRan
  * Predefined time range options
  */
 export const timeRangeOptions = [
-  { label: "5 minutes", duration: 300 },
-  { label: "30 minutes", duration: 1800 },
-  { label: "1 hour", duration: 3600 },
-  { label: "2 hours", duration: 7200 },
-  { label: "4 hours", duration: 14400 },
-  { label: "24 hours", duration: 86400 },
+  {
+    label: t("5 minutes"),
+    duration: 300,
+  },
+  {
+    label: t("30 minutes"),
+    duration: 1800,
+  },
+  {
+    label: t("1 hour"),
+    duration: 3600,
+  },
+  {
+    label: t("2 hours"),
+    duration: 7200,
+  },
+  {
+    label: t("4 hours"),
+    duration: 14400,
+  },
+  {
+    label: t("24 hours"),
+    duration: 86400,
+  },
 ] as const;
 
 const everyMinute = 60 * 1000;
@@ -106,7 +125,7 @@ const selectedMetricsTimeRangeInjectable = getInjectable({
         return option?.label ?? "Custom";
       }
 
-      return "Custom";
+      return t("Custom");
     });
 
     /**

@@ -5,7 +5,7 @@
  */
 
 import "./view.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -62,18 +62,18 @@ class NonInjectedClusterRoleBindings extends React.Component<Dependencies> {
             [columnId.age]: (binding) => -binding.getCreationTimestamp(),
           }}
           searchFilters={[(binding) => binding.getSearchFields(), (binding) => binding.getSubjectNames()]}
-          renderHeaderTitle="Cluster Role Bindings"
+          renderHeaderTitle={t("Cluster Role Bindings")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
             {
-              title: "Cluster Role",
+              title: t("Cluster Role"),
               className: "cluster-role",
               sortBy: columnId.clusterRole,
               id: columnId.clusterRole,
             },
-            { title: "Types", className: "types", sortBy: columnId.types, id: columnId.types },
-            { title: "Bindings", className: "bindings", sortBy: columnId.bindings, id: columnId.bindings },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Types"), className: "types", sortBy: columnId.types, id: columnId.types },
+            { title: t("Bindings"), className: "bindings", sortBy: columnId.bindings, id: columnId.bindings },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(binding) => [
             <WithTooltip>{binding.getName()}</WithTooltip>,
@@ -84,7 +84,7 @@ class NonInjectedClusterRoleBindings extends React.Component<Dependencies> {
           ]}
           addRemoveButtons={{
             onAdd: () => openClusterRoleBindingDialog(),
-            addTooltip: "Create new ClusterRoleBinding",
+            addTooltip: t("Create new ClusterRoleBinding"),
           }}
         />
         <ClusterRoleBindingDialog />

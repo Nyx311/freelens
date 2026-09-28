@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { jobApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -42,21 +43,16 @@ const NonInjectedJobMenu = ({
               try {
                 await jobApi.resume({ namespace: object.getNs(), name: object.getName() });
               } catch (err) {
-                showCheckedErrorNotification(err, "Unknown error occurred while resuming Job");
+                showCheckedErrorNotification(err, t("Unknown error occurred while resuming Job"));
               }
             },
-            labelOk: `Resume`,
-            message: (
-              <p>
-                {"Resume Job "}
-                <b>{object.getName()}</b>?
-              </p>
-            ),
+            labelOk: t("Resume"),
+            message: <p>{t("Resume Job {{name}}?", { name: object.getName() })}</p>,
           })
         }
       >
-        <Icon material="play_circle_outline" tooltip="Resume" interactive={toolbar} />
-        <span className="title">Resume</span>
+        <Icon material="play_circle_outline" tooltip={t("Resume")} interactive={toolbar} />
+        <span className="title">{t("Resume")}</span>
       </MenuItem>
     ) : (
       <MenuItem
@@ -66,21 +62,16 @@ const NonInjectedJobMenu = ({
               try {
                 await jobApi.suspend({ namespace: object.getNs(), name: object.getName() });
               } catch (err) {
-                showCheckedErrorNotification(err, "Unknown error occurred while suspending Job");
+                showCheckedErrorNotification(err, t("Unknown error occurred while suspending Job"));
               }
             },
-            labelOk: `Suspend`,
-            message: (
-              <p>
-                {"Suspend Job "}
-                <b>{object.getName()}</b>?
-              </p>
-            ),
+            labelOk: t("Suspend"),
+            message: <p>{t("Suspend Job {{name}}?", { name: object.getName() })}</p>,
           })
         }
       >
-        <Icon material="pause_circle_filled" tooltip="Suspend" interactive={toolbar} />
-        <span className="title">Suspend</span>
+        <Icon material="pause_circle_filled" tooltip={t("Suspend")} interactive={toolbar} />
+        <span className="title">{t("Suspend")}</span>
       </MenuItem>
     )}
   </>

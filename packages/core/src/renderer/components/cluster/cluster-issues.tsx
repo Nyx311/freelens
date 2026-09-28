@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Spinner } from "@freelensapp/spinner";
 import { cssNames, prevDefault } from "@freelensapp/utilities";
@@ -164,8 +165,8 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
           className={cssNames(styles.noIssues, "flex flex-col grow shrink-0 basis-0 gap-2 items-center justify-center")}
         >
           <Icon className={styles.Icon} material="check" big sticker />
-          <p className={styles.title}>No issues found</p>
-          <p>Everything is fine in the Cluster</p>
+          <p className={styles.title}>{t("No issues found")}</p>
+          <p>{t("Everything is fine in the Cluster")}</p>
         </div>
       );
     }
@@ -173,8 +174,7 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
     return (
       <>
         <SubHeader className={styles.SubHeader}>
-          <Icon material="error_outline" />
-          {` Warnings: ${warnings.length}`}
+          <Icon material="error_outline" /> {t("Warnings: {{count}}", { count: warnings.length })}
         </SubHeader>
         <Table
           tableId="cluster_issues"
@@ -192,15 +192,15 @@ class NonInjectedClusterIssues extends React.Component<ClusterIssuesProps & Depe
           className={cssNames("grow shrink-0 basis-0", this.props.activeTheme.get().type)}
         >
           <TableHead nowrap>
-            <TableCell className={cssNames(styles.TableCell, styles.message)}>Message</TableCell>
+            <TableCell className={cssNames(styles.TableCell, styles.message)}>{t("Message")}</TableCell>
             <TableCell className={cssNames(styles.TableCell, styles.object)} sortBy={sortBy.object}>
-              Object
+              {t("Object")}
             </TableCell>
             <TableCell className={cssNames(styles.TableCell, styles.kind)} sortBy={sortBy.type}>
-              Type
+              {t("Type")}
             </TableCell>
             <TableCell className={cssNames(styles.TableCell, styles.age)} sortBy={sortBy.age}>
-              Age
+              {t("Age")}
             </TableCell>
           </TableHead>
         </Table>

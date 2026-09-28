@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { isObject } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import execHelmInjectable from "./exec-helm/exec-helm.injectable";
@@ -51,7 +52,7 @@ const listHelmReleasesInjectable = getInjectable({
       if (!result.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Failed to list helm releases: ${result.error}`,
+          error: t("Failed to list helm releases: {{error}}", { error: result.error }),
         };
       }
 

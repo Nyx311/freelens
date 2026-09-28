@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./upgrade-chart.scss";
 
 import { Spinner } from "@freelensapp/spinner";
@@ -41,9 +42,7 @@ export class NonInjectedUpgradeChart extends React.Component<UpgradeChartProps &
     if (result.callWasSuccessful) {
       return (
         <p>
-          {"Release "}
-          <b>{model.release.getName()}</b>
-          {" successfully upgraded to version "}
+          {t("Release")} <b>{model.release.getName()}</b> {t("successfully upgraded to version")}{" "}
           <b>{model.version.value.get()?.version}</b>
         </p>
       );
@@ -66,14 +65,14 @@ export class NonInjectedUpgradeChart extends React.Component<UpgradeChartProps &
           tabId={tabId}
           error={model.configuration.error.get()}
           submit={this.upgrade}
-          submitLabel="Upgrade"
+          submitLabel={t("Upgrade")}
           submittingMessage="Updating.."
           controls={
             <div className="upgrade flex gap-2 items-center">
-              <span>Release</span> <Badge label={release.getName()} />
-              <span>Namespace</span> <Badge label={release.getNs()} />
-              <span>Version</span> <Badge label={release.getVersion()} />
-              <span>Upgrade version</span>
+              <span>{t("Release")}</span> <Badge label={release.getName()} />
+              <span>{t("Namespace")}</span> <Badge label={release.getNs()} />
+              <span>{t("Version")}</span> <Badge label={release.getVersion()} />
+              <span>{t("Upgrade version")}</span>
               <Select<HelmChartVersion, SelectOption<HelmChartVersion>, false>
                 id="char-version-input"
                 className="chart-version"
@@ -83,7 +82,7 @@ export class NonInjectedUpgradeChart extends React.Component<UpgradeChartProps &
                 onChange={model.version.set}
               />
               <Checkbox
-                label="Force conflicts"
+                label={t("Force conflicts")}
                 value={model.forceConflicts.value.get()}
                 onChange={model.forceConflicts.set}
               />

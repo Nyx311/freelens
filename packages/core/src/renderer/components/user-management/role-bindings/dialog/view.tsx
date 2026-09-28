@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { roleApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -186,7 +187,9 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
     } catch (err) {
       showCheckedErrorNotification(
         err,
-        `Unknown error occurred while ${this.isEditing ? "editing" : "creating"} role bindings.`,
+        this.isEditing
+          ? t("Unknown error occurred while editing role bindings.")
+          : t("Unknown error occurred while creating role bindings."),
       );
     }
   };
@@ -194,7 +197,7 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
   renderContents() {
     return (
       <>
-        <SubTitle title="Namespace" />
+        <SubTitle title={t("Namespace")} />
         <NamespaceSelect
           id="dialog-namespace-input"
           themeName="lens"
@@ -204,11 +207,11 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
           onChange={(opt) => (this.bindingNamespace = opt?.value ?? null)}
         />
 
-        <SubTitle title="Role Reference" />
+        <SubTitle title={t("Role Reference")} />
         <Select
           id="role-reference-input"
           themeName="lens"
-          placeholder="Select role or cluster role ..."
+          placeholder={t("Select role or cluster role ...")}
           isDisabled={this.isEditing}
           options={this.roleRefOptions}
           value={this.selectedRoleRef}
@@ -221,35 +224,35 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
           }}
         />
 
-        <SubTitle title="Binding Name" />
+        <SubTitle title={t("Binding Name")} />
         <Input disabled={this.isEditing} value={this.bindingName} onChange={(value) => (this.bindingName = value)} />
 
-        <SubTitle title="Binding targets" />
+        <SubTitle title={t("Binding targets")} />
 
-        <b>Users</b>
+        <b>{t("Users")}</b>
         <EditableList
-          placeholder="Bind to User Accounts (comma-separated) ..."
+          placeholder={t("Bind to User Accounts (comma-separated) ...")}
           separator=","
           add={(newUser) => this.selectedUsers.add(newUser)}
           items={Array.from(this.selectedUsers)}
           remove={({ oldItem }) => this.selectedUsers.delete(oldItem)}
         />
 
-        <b>Groups</b>
+        <b>{t("Groups")}</b>
         <EditableList
-          placeholder="Bind to User Groups (comma-separated) ..."
+          placeholder={t("Bind to User Groups (comma-separated) ...")}
           separator=","
           add={(newGroup) => this.selectedGroups.add(newGroup)}
           items={Array.from(this.selectedGroups)}
           remove={({ oldItem }) => this.selectedGroups.delete(oldItem)}
         />
 
-        <b>Service Accounts</b>
+        <b>{t("Service Accounts")}</b>
         <Select
           id="service-account-input"
           isMulti
           themeName="lens"
-          placeholder="Select service accounts ..."
+          placeholder={t("Select service accounts ...")}
           options={this.serviceAccountOptions}
           value={Array.from(this.selectedAccounts)}
           formatOptionLabel={(option) => (
@@ -266,7 +269,7 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
 
   render() {
     const { closeRoleBindingDialog, roleBindingStore, state, ...dialogProps } = this.props;
-    const [action, nextLabel] = this.isEditing ? ["Edit", "Update"] : ["Add", "Create"];
+    const [action, nextLabel] = this.isEditing ? [t("Edit"), t("Update")] : [t("Add"), t("Create")];
     const disableNext =
       !this.selectedRoleRef || !this.selectedBindings.length || !this.bindingNamespace || !this.bindingName;
 
@@ -281,7 +284,7 @@ class NonInjectedRoleBindingDialog extends React.Component<RoleBindingDialogProp
         onClose={this.reset}
         onOpen={this.onOpen}
       >
-        <Wizard header={<h5>{`${action} RoleBinding`}</h5>} done={closeRoleBindingDialog}>
+        <Wizard header={<h5>{t("{{action}} RoleBinding", { action })}</h5>} done={closeRoleBindingDialog}>
           <WizardStep nextLabel={nextLabel} next={this.createBindings} disabledNext={disableNext}>
             {this.renderContents()}
           </WizardStep>

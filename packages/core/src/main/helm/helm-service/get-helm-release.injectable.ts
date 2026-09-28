@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import kubeconfigManagerInjectable from "../../kubeconfig-manager/kubeconfig-manager.injectable";
 import getHelmReleaseDataInjectable from "./get-helm-release-data.injectable";
@@ -38,7 +39,7 @@ const getHelmReleaseInjectable = getInjectable({
       if (!releaseResult.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Failed to get helm release data: ${releaseResult.error}`,
+          error: t("Failed to get helm release data: {{error}}", { error: releaseResult.error }),
         };
       }
 
@@ -47,7 +48,7 @@ const getHelmReleaseInjectable = getInjectable({
       if (!resourcesResult.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Failed to get helm release resources: ${resourcesResult.error}`,
+          error: t("Failed to get helm release resources: {{error}}", { error: resourcesResult.error }),
         };
       }
 

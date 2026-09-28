@@ -6,6 +6,7 @@
 
 import "./details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { formatNodeTaint, Node } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -71,7 +72,7 @@ class NonInjectedNodeDetails extends React.Component<NodeDetailsProps & Dependen
     return (
       <div className="NodeDetails">
         {addresses && (
-          <DrawerItem name="Addresses">
+          <DrawerItem name={t("Addresses")}>
             {/* A node may expose several addresses of the same type (e.g. an IPv4 and an
                 IPv6 InternalIP), so the type alone is not a unique key. */}
             {addresses.map(({ type, address }) => (
@@ -79,27 +80,27 @@ class NonInjectedNodeDetails extends React.Component<NodeDetailsProps & Dependen
             ))}
           </DrawerItem>
         )}
-        {providerID && <DrawerItem name="Provider ID">{providerID}</DrawerItem>}
+        {providerID && <DrawerItem name={t("Provider ID")}>{providerID}</DrawerItem>}
         {nodeInfo && (
           <>
             <DrawerItem name="OS">{`${nodeInfo.operatingSystem} (${nodeInfo.architecture})`}</DrawerItem>
-            <DrawerItem name="OS Image">{nodeInfo.osImage}</DrawerItem>
-            <DrawerItem name="Kernel version">{nodeInfo.kernelVersion}</DrawerItem>
-            <DrawerItem name="Container runtime">{nodeInfo.containerRuntimeVersion}</DrawerItem>
-            <DrawerItem name="Kubelet version">{nodeInfo.kubeletVersion}</DrawerItem>
+            <DrawerItem name={t("OS Image")}>{nodeInfo.osImage}</DrawerItem>
+            <DrawerItem name={t("Kernel version")}>{nodeInfo.kernelVersion}</DrawerItem>
+            <DrawerItem name={t("Container runtime")}>{nodeInfo.containerRuntimeVersion}</DrawerItem>
+            <DrawerItem name={t("Kubelet version")}>{nodeInfo.kubeletVersion}</DrawerItem>
           </>
         )}
         {taints.length > 0 && (
-          <DrawerItem name="Taints" labelsOnly>
+          <DrawerItem name={t("Taints")} labelsOnly>
             {taints.map((taint) => (
               <Badge key={taint.key} label={formatNodeTaint(taint)} />
             ))}
           </DrawerItem>
         )}
         <KubeObjectConditionsDrawer object={node} />
-        <DrawerTitle>Capacity</DrawerTitle>
+        <DrawerTitle>{t("Capacity")}</DrawerTitle>
         <NodeDetailsResources node={node} type="capacity" />
-        <DrawerTitle>Allocatable</DrawerTitle>
+        <DrawerTitle>{t("Allocatable")}</DrawerTitle>
         <NodeDetailsResources node={node} type="allocatable" />
         <PodDetailsList
           pods={childPods}

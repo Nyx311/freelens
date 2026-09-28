@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./validating-admission-policy-bindings.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -36,7 +37,7 @@ const NonInjectedValidatingAdmissionPolicyBindings = observer((props: Dependenci
           ...rest,
           searchProps: {
             ...searchProps,
-            placeholder: "Search...",
+            placeholder: t("Search..."),
           },
         })}
         tableId="config_validating_admission_policy_bindings"
@@ -49,12 +50,30 @@ const NonInjectedValidatingAdmissionPolicyBindings = observer((props: Dependenci
           [columnId.age]: (item) => -item.getCreationTimestamp(),
         }}
         searchFilters={[(item) => item.getSearchFields(), (item) => item.getLabels()]}
-        renderHeaderTitle="Validating Admission Policy Bindings"
+        renderHeaderTitle={t("Validating Admission Policy Bindings")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-          { title: "Policy", sortBy: columnId.policy, id: columnId.policy },
-          { title: "Actions", sortBy: columnId.actions, id: columnId.actions },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          {
+            title: t("Name"),
+            className: "name",
+            sortBy: columnId.name,
+            id: columnId.name,
+          },
+          {
+            title: t("Policy"),
+            sortBy: columnId.policy,
+            id: columnId.policy,
+          },
+          {
+            title: t("Actions"),
+            sortBy: columnId.actions,
+            id: columnId.actions,
+          },
+          {
+            title: t("Age"),
+            className: "age",
+            sortBy: columnId.age,
+            id: columnId.age,
+          },
         ]}
         renderTableContents={(item) => [
           <WithTooltip>{item.getName()}</WithTooltip>,

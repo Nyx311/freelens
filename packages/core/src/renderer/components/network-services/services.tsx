@@ -6,6 +6,7 @@
 
 import "./services.scss";
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -73,16 +74,16 @@ class NonInjectedServices extends React.Component<Dependencies> {
             (service) => service.getSelector().join(" "),
             (service) => service.getPorts().join(" "),
           ]}
-          renderHeaderTitle="Services"
+          renderHeaderTitle={t("Services")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Type", className: "type", sortBy: columnId.type, id: columnId.type },
-            { title: "Cluster IP", className: "clusterIp", sortBy: columnId.clusterIp, id: columnId.clusterIp },
-            { title: "External IP", className: "externalIp", id: columnId.externalIp },
-            { title: "Ports", className: "ports", sortBy: columnId.ports, id: columnId.ports },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Type"), className: "type", sortBy: columnId.type, id: columnId.type },
+            { title: t("Cluster IP"), className: "clusterIp", sortBy: columnId.clusterIp, id: columnId.clusterIp },
+            { title: t("External IP"), className: "externalIp", id: columnId.externalIp },
+            { title: t("Ports"), className: "ports", sortBy: columnId.ports, id: columnId.ports },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
           ]}
           renderTableContents={(service) => [
             <WithTooltip>{service.getName()}</WithTooltip>,
@@ -92,7 +93,7 @@ class NonInjectedServices extends React.Component<Dependencies> {
             <WithTooltip>{formatExternalIps(service)}</WithTooltip>,
             <WithTooltip>{service.getPorts().join(", ")}</WithTooltip>,
             <KubeObjectAge key="age" object={service} />,
-            { title: service.getStatus(), className: service.getStatus().toLowerCase() },
+            { title: t(service.getStatus()), className: service.getStatus().toLowerCase() },
           ]}
         />
       </SiblingsInTabLayout>

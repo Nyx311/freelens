@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./search-input.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -28,7 +29,7 @@ const defaultProps: Partial<SearchInputProps> = {
   autoFocus: true,
   bindGlobalFocusHotkey: true,
   showClearIcon: true,
-  placeholder: "Search...",
+  placeholder: t("Search..."),
 };
 
 interface Dependencies {

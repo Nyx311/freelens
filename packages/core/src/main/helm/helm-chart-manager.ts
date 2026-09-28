@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { iter, put, sortBySemverVersion } from "@freelensapp/utilities";
 import * as yaml from "js-yaml";
 
@@ -75,7 +76,7 @@ export class HelmChartManager {
     const data = yaml.load(cacheFile) as string | number | HelmCacheFile;
 
     if (!data || typeof data !== "object" || typeof data.entries !== "object") {
-      throw Object.assign(new TypeError("Helm Cache file does not parse correctly"), {
+      throw Object.assign(new TypeError(t("Helm Cache file does not parse correctly")), {
         file: this.repo.cacheFilePath,
         data,
       });

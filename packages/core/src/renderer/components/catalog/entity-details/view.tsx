@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -67,15 +68,15 @@ class NonInjectedCatalogEntityDetails<Entity extends CatalogEntity> extends Comp
             >
               {entity.spec.icon?.material && <Icon material={entity.spec.icon?.material} />}
             </Avatar>
-            {entity.isEnabled() && <div className={styles.hint}>Click to open</div>}
+            {entity.isEnabled() && <div className={styles.hint}>{t("Click to open")}</div>}
           </div>
           <div className={cssNames("grow shrink-0 basis-0", styles.metadata)}>
-            <DrawerItem name="Name">{entity.getName()}</DrawerItem>
-            <DrawerItem name="Kind">{entity.kind}</DrawerItem>
-            <DrawerItem name="Source">{entity.getSource()}</DrawerItem>
-            <DrawerItem name="Status">{entity.status.phase}</DrawerItem>
-            <DrawerItem name="Labels">{getLabelBadges(entity, hideDetails)}</DrawerItem>
-            {isDevelopment && <DrawerItem name="Id">{entity.getId()}</DrawerItem>}
+            <DrawerItem name={t("Name")}>{entity.getName()}</DrawerItem>
+            <DrawerItem name={t("Kind")}>{entity.kind}</DrawerItem>
+            <DrawerItem name={t("Source")}>{entity.getSource()}</DrawerItem>
+            <DrawerItem name={t("Status")}>{entity.status.phase}</DrawerItem>
+            <DrawerItem name={t("Labels")}>{getLabelBadges(entity, hideDetails)}</DrawerItem>
+            {isDevelopment && <DrawerItem name={t("Id")}>{entity.getId()}</DrawerItem>}
           </div>
         </div>
         <div className="grow shrink-0 basis-0">{details}</div>

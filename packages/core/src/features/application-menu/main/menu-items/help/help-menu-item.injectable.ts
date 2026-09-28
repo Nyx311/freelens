@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import applicationMenuItemInjectionToken from "../application-menu-item-injection-token";
 
@@ -15,7 +16,7 @@ const helpMenuItemInjectable = getInjectable({
     id: "help",
     parentId: "root" as const,
     orderNumber: 50,
-    label: "Help",
+    label: t("Help"),
     role: "help" as const,
   }),
 

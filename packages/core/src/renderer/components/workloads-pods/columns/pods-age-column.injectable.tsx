@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getInjectable } from "@ogre-tools/injectable";
 import { KubeObjectAge } from "../../kube-object/age";
@@ -19,7 +20,7 @@ export const podsAgeColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: COLUMN_PRIORITY.AGE,
     content: (pod) => <KubeObjectAge key="age" object={pod} />,
-    header: { title: "Age", className: "age", sortBy: columnId, id: columnId },
+    header: { title: t("Age"), className: "age", sortBy: columnId, id: columnId },
     sortingCallBack: (pod) => -pod.getCreationTimestamp(),
   }),
   injectionToken: podListLayoutColumnInjectionToken,

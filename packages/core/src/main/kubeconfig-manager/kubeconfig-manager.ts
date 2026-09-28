@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { isErrnoException } from "@freelensapp/utilities";
 import { dumpConfigYaml } from "../../common/kube-helpers";
 
@@ -89,7 +90,7 @@ export class KubeconfigManager {
 
       return (this.tempFilePath = await this.createProxyKubeconfig());
     } catch (error) {
-      throw new Error(`Failed to create temp config for auth-proxy: ${error}`);
+      throw new Error(t("Failed to create temp config for auth-proxy: {{error}}", { error }));
     }
   }
 

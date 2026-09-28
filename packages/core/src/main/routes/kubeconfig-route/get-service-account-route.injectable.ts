@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { CoreV1Api } from "@kubernetes/client-node";
 import * as yaml from "js-yaml";
 import { defaultYamlDumpOptions } from "../../../common/kube-helpers";
@@ -35,7 +36,7 @@ const getServiceAccountRouteInjectable = getRouteInjectable({
 
       if (!secret || !secret.data || !secret.metadata) {
         return {
-          error: "No secret found",
+          error: t("No secret found"),
           statusCode: 404,
         };
       }

@@ -6,6 +6,7 @@
 
 import "./dialog.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { statefulSetApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -89,7 +90,7 @@ class NonInjectedStatefulSetScaleDialog extends Component<StatefulSetScaleDialog
       }
       close();
     } catch (error) {
-      this.props.showCheckedErrorNotification(error, "Unknown error occurred while scaling StatefulSet");
+      this.props.showCheckedErrorNotification(error, t("Unknown error occurred while scaling StatefulSet"));
     }
   };
 
@@ -108,27 +109,19 @@ class NonInjectedStatefulSetScaleDialog extends Component<StatefulSetScaleDialog
     const warning = currentReplicas < 10 && desiredReplicas > 90;
 
     return (
-      <Wizard
-        header={
-          <h5>
-            {"Scale Stateful Set "}
-            <span>{statefulSet.getName()}</span>
-          </h5>
-        }
-        done={this.close}
-      >
+      <Wizard header={<h5>{t("Scale Stateful Set {{name}}", { name: statefulSet.getName() })}</h5>} done={this.close}>
         <WizardStep
           contentClass="flex gap-2 flex-col"
           next={() => this.scale(statefulSet)}
-          nextLabel="Scale"
+          nextLabel={t("Scale")}
           disabledNext={!this.ready}
         >
           <div className="current-scale" data-testid="current-scale">
-            {`Current replica scale: ${currentReplicas}`}
+            {t("Current replica scale: {{count}}", { count: currentReplicas })}
           </div>
           <div className="flex gap-2 items-center">
             <div className="desired-scale" data-testid="desired-scale">
-              {`Desired number of replicas: ${desiredReplicas}`}
+              {t("Desired number of replicas: {{count}}", { count: desiredReplicas })}
             </div>
             <div className="slider-container flex items-center" data-testid="slider">
               <Slider value={desiredReplicas} max={scaleMax} onChange={onChange} />
@@ -145,7 +138,8 @@ class NonInjectedStatefulSetScaleDialog extends Component<StatefulSetScaleDialog
           {warning && (
             <div className="warning" data-testid="warning">
               <Icon material="warning" />
-              High number of replicas may cause cluster performance issues
+
+              {t("High number of replicas may cause cluster performance issues")}
             </div>
           )}
         </WizardStep>

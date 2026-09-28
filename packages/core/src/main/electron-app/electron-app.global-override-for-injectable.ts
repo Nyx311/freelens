@@ -76,12 +76,8 @@ export default getGlobalOverride(electronAppInjectable, () => {
     getName(): string {
       throw new Error("Method not implemented.");
     }
-    getPreferredSystemLanguages(): (
-      | "app.getLocale()"
-      | "app.getSystemLocale()"
-      | "app.getPreferredSystemLanguages()"
-    )[] {
-      throw new Error("Method not implemented.");
+    getPreferredSystemLanguages(): string[] {
+      return ["en-US"];
     }
     getSystemLocale(): string {
       throw new Error("Method not implemented.");

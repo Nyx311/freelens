@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -31,7 +32,7 @@ const openPortForwardInjectable = getInjectable({
           namespace: portForward.namespace,
           name: portForward.name,
         });
-        showErrorNotification(`Failed to open ${browseTo} in browser`);
+        showErrorNotification(t("Failed to open {{address}} in browser", { address: browseTo }));
       });
     };
   },

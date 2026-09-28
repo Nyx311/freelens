@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -90,7 +91,7 @@ class NonInjectedHotbarEntityIcon extends React.Component<HotbarEntityIconProps 
   onMenuOpen() {
     this.menuItems.replace([
       {
-        title: "Remove from Hotbar",
+        title: t("Remove from Hotbar"),
         onClick: () => this.props.remove(this.props.entity.getId()),
       },
     ]);

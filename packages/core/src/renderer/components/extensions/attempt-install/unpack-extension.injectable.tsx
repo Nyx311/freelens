@@ -5,6 +5,7 @@
  */
 
 import path from "node:path";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable, showInfoNotificationInjectable } from "@freelensapp/notifications";
 import { noop } from "@freelensapp/utilities";
@@ -52,10 +53,7 @@ const unpackExtensionInjectable = getInjectable({
     const displayErrorMessage = (message: string, displayName: string) => {
       showErrorNotification(
         <p>
-          {"Installing extension "}
-          <b>{displayName}</b>
-          {" has failed: "}
-          <em>{message}</em>
+          {t("Installing extension")} <b>{displayName}</b> {t("has failed:")} <em>{message}</em>
         </p>,
       );
     };
@@ -90,9 +88,8 @@ const unpackExtensionInjectable = getInjectable({
         if (!checksum) {
           showInfoNotification(
             <p>
-              {"Nothing vouches for the integrity of "}
-              <b>{displayName}</b>
-              {": no checksum was available for this download. Installing it anyway."}
+              {t("Nothing vouches for the integrity of")} <b>{displayName}</b>
+              {t(": no checksum was available for this download. Installing it anyway.")}
             </p>,
           );
         }
@@ -135,9 +132,7 @@ const unpackExtensionInjectable = getInjectable({
 
             showInfoNotification(
               <p>
-                {"Extension "}
-                <b>{displayName}</b>
-                {" successfully installed!"}
+                {t("Extension")} <b>{displayName}</b> {t("successfully installed!")}
               </p>,
             );
           })

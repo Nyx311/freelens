@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { customCatalogCategoryColumnInjectionToken } from "./custom-token";
 
@@ -23,7 +24,7 @@ const kubernetesDistributionColumnInjectable = getInjectable({
         return <span key="distro">{k8sDistro === "unknown" ? "" : k8sDistro}</span>;
       },
       titleProps: {
-        title: "Distro",
+        title: t("Distro"),
       },
     },
   }),

@@ -8,6 +8,7 @@
 // API docs: https://react-select.com/
 import "./select.scss";
 
+import { t } from "@freelensapp/i18n";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import autoBindReact from "auto-bind/react";
@@ -235,6 +236,82 @@ class NonInjectedSelect<
 
     return (
       <ReactSelect
+        placeholder={t("Select...")}
+        loadingMessage={() => t("Loading...")}
+        noOptionsMessage={() => t("No options")}
+        screenReaderStatus={({ count }) =>
+          count === 1 ? t("{{count}} result available", { count }) : t("{{count}} results available", { count })
+        }
+        ariaLiveMessages={{
+          guidance: ({ isSearchable, isMulti, tabSelectsValue, context, isInitialFocus, "aria-label": ariaLabel }) => {
+            switch (context) {
+              case "menu":
+                return t(
+                  "Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu{{tabGuidance}}.",
+                  { tabGuidance: tabSelectsValue ? t(", press Tab to select the option and exit the menu") : "" },
+                );
+              case "input":
+                return isInitialFocus
+                  ? t("{{label}} is focused {{searchGuidance}}, press Down to open the menu, {{multiGuidance}}", {
+                      label: ariaLabel || t("Select"),
+                      searchGuidance: isSearchable ? t(",type to refine list") : "",
+                      multiGuidance: isMulti ? t(" press left to focus selected values") : "",
+                    })
+                  : "";
+              case "value":
+                return t(
+                  "Use left and right to toggle between focused values, press Backspace to remove the currently focused value",
+                );
+              default:
+                return "";
+            }
+          },
+          onChange: ({ action, label = "", labels, isDisabled }) => {
+            switch (action) {
+              case "deselect-option":
+              case "pop-value":
+              case "remove-value":
+                return t("option {{label}}, deselected.", { label });
+              case "clear":
+                return t("All selected options have been cleared.");
+              case "initial-input-focus":
+                return labels.length > 1
+                  ? t("options {{labels}}, selected.", { labels: labels.join(",") })
+                  : t("option {{labels}}, selected.", { labels: labels.join(",") });
+              case "select-option":
+                return isDisabled
+                  ? t("option {{label}} is disabled. Select another option.", { label })
+                  : t("option {{label}}, selected.", { label });
+              default:
+                return "";
+            }
+          },
+          onFocus: ({ context, focused, options, label = "", selectValue, isDisabled, isSelected, isAppleDevice }) => {
+            const getArrayIndex = (items: readonly unknown[] | undefined, item: unknown) =>
+              items?.length ? `${items.indexOf(item) + 1} of ${items.length}` : "";
+
+            if (context === "value" && selectValue) {
+              return t("value {{label}} focused, {{position}}.", {
+                label,
+                position: getArrayIndex(selectValue, focused),
+              });
+            }
+            if (context === "menu" && isAppleDevice) {
+              return t("{{label}}{{selected}}{{disabled}}, {{position}}.", {
+                label,
+                selected: isSelected ? t(" selected") : "",
+                disabled: isDisabled ? t(" disabled") : "",
+                position: getArrayIndex(options, focused),
+              });
+            }
+            return "";
+          },
+          onFilter: ({ inputValue, resultsMessage }) =>
+            t("{{resultsMessage}}{{searchTerm}}.", {
+              resultsMessage,
+              searchTerm: inputValue ? t(" for search term {{term}}", { term: inputValue }) : "",
+            }),
+        }}
         {...props}
         styles={{
           menuPortal: (styles) => ({

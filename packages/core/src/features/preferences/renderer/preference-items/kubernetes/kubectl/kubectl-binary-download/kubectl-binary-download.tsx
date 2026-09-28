@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../../renderer/components/layout/sub-title";
@@ -18,12 +19,12 @@ interface Dependencies {
 
 const NonInjectedKubectlBinaryDownload = observer(({ state }: Dependencies) => (
   <section>
-    <SubTitle title="Kubectl binary download" />
+    <SubTitle title={t("Kubectl binary download")} />
     <Switch
       checked={state.downloadKubectlBinaries}
       onChange={() => (state.downloadKubectlBinaries = !state.downloadKubectlBinaries)}
     >
-      Download kubectl binaries matching the Kubernetes cluster version
+      {t("Download kubectl binaries matching the Kubernetes cluster version")}
     </Switch>
   </section>
 ));

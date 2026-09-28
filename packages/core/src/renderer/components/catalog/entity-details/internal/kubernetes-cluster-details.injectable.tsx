@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { KubernetesCluster } from "../../../../../common/catalog-entities";
 import { DrawerItem, DrawerTitle } from "../../../drawer";
@@ -18,12 +19,12 @@ const kubernetesClusterDetailsItemInjectable = getInjectable({
     components: {
       Details: ({ entity }) => (
         <>
-          <DrawerTitle>Kubernetes Information</DrawerTitle>
+          <DrawerTitle>{t("Kubernetes Information")}</DrawerTitle>
           <div className="grow shrink-0 basis-0 EntityMetadata">
-            <DrawerItem name="Distribution" data-testid={`kubernetes-distro-for-${entity.getId()}`}>
+            <DrawerItem name={t("Distribution")} data-testid={`kubernetes-distro-for-${entity.getId()}`}>
               {String(entity.metadata.distro || "unknown")}
             </DrawerItem>
-            <DrawerItem name="Kubelet Version">{String(entity.metadata.kubeVersion || "unknown")}</DrawerItem>
+            <DrawerItem name={t("Kubelet Version")}>{String(entity.metadata.kubeVersion || "unknown")}</DrawerItem>
           </div>
         </>
       ),

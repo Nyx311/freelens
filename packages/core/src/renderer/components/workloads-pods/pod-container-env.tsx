@@ -6,6 +6,7 @@
 
 import "./pod-container-env.scss";
 
+import { t } from "@freelensapp/i18n";
 import { cpuUnitsToNumber, metricUnitsToNumber, object, unitsToBytes } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { ceil, get, last, round, sortBy, toPath } from "es-toolkit/compat";
@@ -225,7 +226,7 @@ const NonInjectedContainerEnvironment = observer((props: Dependencies & Containe
   };
 
   return (
-    <DrawerItem name="Environment" className="ContainerEnvironment">
+    <DrawerItem name={t("Environment")} className="ContainerEnvironment">
       {env && renderEnv()}
       {envFrom && renderEnvFrom()}
     </DrawerItem>

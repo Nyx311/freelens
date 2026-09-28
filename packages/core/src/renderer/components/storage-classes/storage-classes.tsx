@@ -5,7 +5,7 @@
  */
 
 import "./storage-classes.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -46,18 +46,23 @@ class NonInjectedStorageClasses extends React.Component<Dependencies> {
             [columnId.reclaimPolicy]: (storageClass) => storageClass.reclaimPolicy,
           }}
           searchFilters={[(storageClass) => storageClass.getSearchFields(), (storageClass) => storageClass.provisioner]}
-          renderHeaderTitle="Storage Classes"
+          renderHeaderTitle={t("Storage Classes")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Provisioner", className: "provisioner", sortBy: columnId.provisioner, id: columnId.provisioner },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
             {
-              title: "Reclaim Policy",
+              title: t("Provisioner"),
+              className: "provisioner",
+              sortBy: columnId.provisioner,
+              id: columnId.provisioner,
+            },
+            {
+              title: t("Reclaim Policy"),
               className: "reclaim-policy",
               sortBy: columnId.reclaimPolicy,
               id: columnId.reclaimPolicy,
             },
-            { title: "Default", className: "is-default", id: columnId.default },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Default"), className: "is-default", id: columnId.default },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
           ]}
           renderTableContents={(storageClass) => [
             <WithTooltip>{storageClass.getName()}</WithTooltip>,

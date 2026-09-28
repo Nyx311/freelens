@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
 import { TabKind } from "../dock/store";
@@ -40,7 +41,7 @@ const createUpgradeChartTab =
       const tab = dockStore.createTab(
         {
           id: getRandomId(),
-          title: `Helm Upgrade: ${release.getName()}`,
+          title: t("Helm Upgrade: {{release}}", { release: release.getName() }),
           ...tabParams,
           kind: TabKind.UPGRADE_CHART,
         },

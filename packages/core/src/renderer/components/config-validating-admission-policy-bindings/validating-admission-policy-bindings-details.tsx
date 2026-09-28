@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import React from "react";
 import { DrawerItem, DrawerTitle } from "../drawer";
@@ -25,26 +26,28 @@ export class ValidatingAdmissionPolicyBindingDetails extends React.Component<Val
 
     return (
       <div className="ValidatingAdmissionPolicyBindingDetails">
-        <DrawerItem name="API version">{binding.apiVersion}</DrawerItem>
-        <DrawerItem name="Policy Name">{binding.getPolicyName()}</DrawerItem>
-        <DrawerItem name="Validation Actions">{validationActions.join(", ")}</DrawerItem>
+        <DrawerItem name={t("API version")}>{binding.apiVersion}</DrawerItem>
+        <DrawerItem name={t("Policy Name")}>{binding.getPolicyName()}</DrawerItem>
+        <DrawerItem name={t("Validation Actions")}>{validationActions.join(", ")}</DrawerItem>
 
         {paramRef && (
           <>
-            <DrawerTitle>Param Ref</DrawerTitle>
-            {paramRef.name && <DrawerItem name="Name">{paramRef.name}</DrawerItem>}
-            {paramRef.namespace && <DrawerItem name="Namespace">{paramRef.namespace}</DrawerItem>}
+            <DrawerTitle>{t("Param Ref")}</DrawerTitle>
+            {paramRef.name && <DrawerItem name={t("Name")}>{paramRef.name}</DrawerItem>}
+            {paramRef.namespace && <DrawerItem name={t("Namespace")}>{paramRef.namespace}</DrawerItem>}
             {paramRef.parameterNotFoundAction && (
-              <DrawerItem name="Parameter Not Found Action">{paramRef.parameterNotFoundAction}</DrawerItem>
+              <DrawerItem name={t("Parameter Not Found Action")}>{paramRef.parameterNotFoundAction}</DrawerItem>
             )}
           </>
         )}
 
         {matchResources && (
           <>
-            <DrawerTitle>Match Resources</DrawerTitle>
-            {matchResources.matchPolicy && <DrawerItem name="Match Policy">{matchResources.matchPolicy}</DrawerItem>}
-            <DrawerItem name="Resource Rules">
+            <DrawerTitle>{t("Match Resources")}</DrawerTitle>
+            {matchResources.matchPolicy && (
+              <DrawerItem name={t("Match Policy")}>{matchResources.matchPolicy}</DrawerItem>
+            )}
+            <DrawerItem name={t("Resource Rules")}>
               {matchResources.resourceRules?.map((rule, index) => (
                 <div key={index}>
                   <div>API Groups: {rule.apiGroups.join(", ")}</div>

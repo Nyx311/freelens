@@ -4,6 +4,7 @@
  */
 
 import { createHash } from "node:crypto";
+import { t } from "@freelensapp/i18n";
 
 /**
  * How much of the tarball digest goes into the install path. Eight hex
@@ -50,14 +51,14 @@ export function verifySubresourceIntegrity(data: Buffer, integrity: string): Che
   const separatorIndex = integrity.indexOf("-");
 
   if (separatorIndex < 0) {
-    throw new Error(`malformed integrity string "${integrity}"`);
+    throw new Error(t('malformed integrity string "{{integrity}}"', { integrity }));
   }
 
   const algorithm = integrity.slice(0, separatorIndex);
   const expected = integrity.slice(separatorIndex + 1);
 
   if (!isSupportedAlgorithm(algorithm)) {
-    throw new Error(`unsupported integrity algorithm "${algorithm}"`);
+    throw new Error(t('unsupported integrity algorithm "{{algorithm}}"', { algorithm }));
   }
 
   const actual = createHash(algorithm).update(data).digest("base64");

@@ -7,6 +7,7 @@
 import "./wizard.scss";
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { cssNames, prevDefault } from "@freelensapp/utilities";
 import { debounce } from "es-toolkit/compat";
@@ -265,7 +266,7 @@ export class WizardStep<D> extends React.Component<WizardStepProps<D>, WizardSte
             <Button
               className="back-btn"
               plain
-              label={prevLabel || (isFirst?.() ? "Cancel" : "Back")}
+              label={prevLabel || (isFirst?.() ? t("Cancel") : t("Back"))}
               hidden={hideBackBtn}
               onClick={this.prev}
               data-testid={testIdForPrev}
@@ -273,7 +274,7 @@ export class WizardStep<D> extends React.Component<WizardStepProps<D>, WizardSte
             <Button
               primary
               type="submit"
-              label={nextLabel || (isLast?.() ? "Submit" : "Next")}
+              label={nextLabel || (isLast?.() ? t("Submit") : t("Next"))}
               hidden={hideNextBtn}
               waiting={waiting ?? this.state.waiting}
               disabled={disabledNext}

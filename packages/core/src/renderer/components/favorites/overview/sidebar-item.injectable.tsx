@@ -4,6 +4,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import favoritesOverviewRouteInjectable from "../../../../common/front-end-routing/routes/cluster/favorites/overview/favorites-overview-route.injectable";
 import navigateToFavoritesOverviewInjectable from "../../../../common/front-end-routing/routes/cluster/favorites/overview/navigate-to-favorites-overview.injectable";
@@ -18,7 +19,7 @@ const favoritesOverviewSidebarItemInjectable = getInjectable({
 
     return {
       parentId: favoritesSidebarItemInjectable.id,
-      title: "Overview",
+      title: t("Overview"),
       onClick: di.inject(navigateToFavoritesOverviewInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

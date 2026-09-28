@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getInjectable } from "@ogre-tools/injectable";
 import { LinkToNode } from "../../kube-object-link";
@@ -25,7 +26,7 @@ export const podsNodeColumnInjectable = getInjectable({
           <LinkToNode name={pod.getNodeName()} />
         </WithTooltip>
       ),
-      header: { title: "Node", className: "node", sortBy: columnId, id: columnId },
+      header: { title: t("Node"), className: "node", sortBy: columnId, id: columnId },
       sortingCallBack: (pod) => pod.getNodeName(),
     };
   },

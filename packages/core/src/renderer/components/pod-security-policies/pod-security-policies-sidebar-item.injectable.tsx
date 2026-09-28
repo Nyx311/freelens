@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToPodSecurityPoliciesInjectable from "../../../common/front-end-routing/routes/cluster/user-management/pod-security-policies/navigate-to-pod-security-policies.injectable";
 import podSecurityPoliciesRouteInjectable from "../../../common/front-end-routing/routes/cluster/user-management/pod-security-policies/pod-security-policies-route.injectable";
@@ -19,7 +20,7 @@ const podSecurityPoliciesSidebarItemInjectable = getInjectable({
 
     return {
       parentId: userManagementSidebarItemInjectable.id,
-      title: "Pod Security Policies",
+      title: t("Pod Security Policies"),
       onClick: di.inject(navigateToPodSecurityPoliciesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

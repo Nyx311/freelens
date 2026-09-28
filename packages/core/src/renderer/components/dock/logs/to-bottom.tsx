@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 
 export function ToBottom({ onClick }: { onClick: () => void }) {
@@ -17,7 +18,7 @@ export function ToBottom({ onClick }: { onClick: () => void }) {
         onClick();
       }}
     >
-      To bottom
+      {t("To bottom")}
       <Icon small material="expand_more" />
     </Button>
   );

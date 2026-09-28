@@ -6,6 +6,7 @@
 
 import "./details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Link } from "@freelensapp/routing";
 import { Spinner } from "@freelensapp/spinner";
@@ -108,7 +109,7 @@ class NonInjectedServiceAccountsDetails extends React.Component<ServiceAccountsD
         return (
           <div key={secret}>
             {secret}
-            <Icon small material="warning" tooltip="Secret is not found" />
+            <Icon small material="warning" tooltip={t("Secret is not found")} />
           </div>
         );
       }
@@ -139,17 +140,17 @@ class NonInjectedServiceAccountsDetails extends React.Component<ServiceAccountsD
     return (
       <div className="ServiceAccountsDetails">
         {tokens.length > 0 && (
-          <DrawerItem name="Tokens" className="links">
+          <DrawerItem name={t("Tokens")} className="links">
             {this.renderSecretLinks(tokens)}
           </DrawerItem>
         )}
         {imagePullSecrets.length > 0 && (
-          <DrawerItem name="ImagePullSecrets" className="links">
+          <DrawerItem name={t("ImagePullSecrets")} className="links">
             {this.renderImagePullSecrets()}
           </DrawerItem>
         )}
 
-        <DrawerTitle>Mountable secrets</DrawerTitle>
+        <DrawerTitle>{t("Mountable secrets")}</DrawerTitle>
         <div className="secrets">{this.renderSecrets()}</div>
       </div>
     );

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getOrInsert } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import { action } from "mobx";
@@ -29,7 +30,7 @@ const addWeblinkInjectable = getInjectable({
       const { id = uuid.v4(), name, url } = data;
 
       if (state.has(id)) {
-        throw new Error(`There already exists a weblink with id=${id}`);
+        throw new Error(t("There already exists a weblink with id={{id}}", { id }));
       }
 
       return getOrInsert(state, id, { id, name, url });

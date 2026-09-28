@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -153,8 +154,7 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
             logger.warn("Failed to find route tab", error);
             showErrorNotification(
               <p>
-                {"Unknown category: "}
-                {routeTab}
+                {t("Unknown category:")} {routeTab}
               </p>,
             );
           }
@@ -246,7 +246,7 @@ class NonInjectedCatalog extends React.Component<Dependencies> {
           data-testid={`open-details-menu-item-for-${entity.getId()}`}
           onClick={() => showEntityDetails(entity.getId())}
         >
-          View Details
+          {t("View Details")}
         </MenuItem>
         {this.menuItems.map(normalizeMenuItem).map((menuItem, index) => (
           <MenuItem key={index} onClick={menuItem.onClick}>

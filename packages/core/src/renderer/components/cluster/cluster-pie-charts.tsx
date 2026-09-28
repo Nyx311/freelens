@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Spinner } from "@freelensapp/spinner";
 import { bytesToUnits, cssNames } from "@freelensapp/utilities";
@@ -47,7 +48,7 @@ interface Dependencies {
 const renderLimitWarning = () => (
   <div className="node-warning flex gap-4 items-center">
     <Icon material="info" />
-    <p>Specified limits are higher than node capacity!</p>
+    <p>{t("Specified limits are higher than node capacity!")}</p>
   </div>
 );
 
@@ -87,19 +88,19 @@ const renderCharts = (defaultColor: string, lastPoints: Partial<Record<keyof Clu
         data: [cpuUsage, cpuUsage ? cpuAllocatableCapacity - cpuUsage : 1],
         backgroundColor: ["#c93dce", defaultColor],
         id: "cpuUsage",
-        label: "Usage",
+        label: t("Usage"),
       },
       {
         data: [cpuRequests, cpuRequests ? cpuAllocatableCapacity - cpuRequests : 1],
         backgroundColor: ["#4caf50", defaultColor],
         id: "cpuRequests",
-        label: "Requests",
+        label: t("Requests"),
       },
       {
         data: [cpuLimits, Math.max(0, cpuAllocatableCapacity - (cpuLimits ?? cpuAllocatableCapacity))],
         backgroundColor: ["#00a7a0", defaultColor],
         id: "cpuLimits",
-        label: "Limits",
+        label: t("Limits"),
       },
     ],
     labels: createLabels([
@@ -116,27 +117,27 @@ const renderCharts = (defaultColor: string, lastPoints: Partial<Record<keyof Clu
         data: [memoryUsage, memoryUsage ? memoryAllocatableCapacity - memoryUsage : 1],
         backgroundColor: ["#c93dce", defaultColor],
         id: "memoryUsage",
-        label: "Usage",
+        label: t("Usage"),
       },
       {
         data: [memoryRequests, memoryRequests ? memoryAllocatableCapacity - memoryRequests : 1],
         backgroundColor: ["#4caf50", defaultColor],
         id: "memoryRequests",
-        label: "Requests",
+        label: t("Requests"),
       },
       {
         data: [memoryLimits, Math.max(0, memoryAllocatableCapacity - (memoryLimits ?? memoryAllocatableCapacity))],
         backgroundColor: ["#00a7a0", defaultColor],
         id: "memoryLimits",
-        label: "Limits",
+        label: t("Limits"),
       },
     ],
     labels: [
-      `Usage: ${bytesToUnits(memoryUsage)}`,
-      `Requests: ${bytesToUnits(memoryRequests)}`,
-      `Limits: ${checkedBytesToUnits(memoryLimits)}`,
-      `Allocatable Capacity: ${bytesToUnits(memoryAllocatableCapacity)}`,
-      `Capacity: ${bytesToUnits(memoryCapacity)}`,
+      t("Usage: {{usage}}", { usage: bytesToUnits(memoryUsage) }),
+      t("Requests: {{requests}}", { requests: bytesToUnits(memoryRequests) }),
+      t("Limits: {{limits}}", { limits: checkedBytesToUnits(memoryLimits) }),
+      t("Allocatable Capacity: {{capacity}}", { capacity: bytesToUnits(memoryAllocatableCapacity) }),
+      t("Capacity: {{capacity}}", { capacity: bytesToUnits(memoryCapacity) }),
     ],
   };
   const podsData: PieChartData = {
@@ -145,11 +146,17 @@ const renderCharts = (defaultColor: string, lastPoints: Partial<Record<keyof Clu
         data: [podUsage, podUsage ? podAllocatableCapacity - podUsage : 1],
         backgroundColor: ["#4caf50", defaultColor],
         id: "podUsage",
-        label: "Usage",
-        tooltipLabels: [(percent) => `Usage: ${percent}`, (percent) => `Available: ${percent}`],
+        label: t("Usage"),
+        tooltipLabels: [
+          (percent) => t("Usage: {{usage}}", { usage: percent }),
+          (percent) => t("Available: {{percent}}", { percent }),
+        ],
       },
     ],
-    labels: [`Usage: ${podUsage || 0}`, `Capacity: ${podAllocatableCapacity}`],
+    labels: [
+      t("Usage: {{usage}}", { usage: podUsage || 0 }),
+      t("Capacity: {{capacity}}", { capacity: podAllocatableCapacity }),
+    ],
   };
 
   return (
@@ -157,7 +164,7 @@ const renderCharts = (defaultColor: string, lastPoints: Partial<Record<keyof Clu
       <div className={cssNames(styles.chart, "flex flex-col items-center grow shrink-0 basis-0")}>
         <PieChart
           data={cpuData}
-          title="CPU"
+          title={t("CPU")}
           legendColors={["#c93dce", "#4caf50", "#00a7a0", "#032b4d", defaultColor]}
         />
         {(cpuLimits ?? cpuAllocatableCapacity) > cpuAllocatableCapacity && renderLimitWarning()}
@@ -165,13 +172,13 @@ const renderCharts = (defaultColor: string, lastPoints: Partial<Record<keyof Clu
       <div className={cssNames(styles.chart, "flex flex-col items-center grow shrink-0 basis-0")}>
         <PieChart
           data={memoryData}
-          title="Memory"
+          title={t("Memory")}
           legendColors={["#c93dce", "#4caf50", "#00a7a0", "#032b4d", defaultColor]}
         />
         {(memoryLimits ?? memoryAllocatableCapacity) > memoryAllocatableCapacity && renderLimitWarning()}
       </div>
       <div className={cssNames(styles.chart, "flex flex-col items-center grow shrink-0 basis-0")}>
-        <PieChart data={podsData} title="Pods" legendColors={["#4caf50", defaultColor]} />
+        <PieChart data={podsData} title={t("Pods")} legendColors={["#4caf50", defaultColor]} />
       </div>
     </div>
   );
@@ -182,7 +189,7 @@ const renderContent = (defaultColor: string, nodes: Node[], metrics: Partial<Clu
     return (
       <div className={cssNames(styles.empty, "flex flex-col grow shrink-0 basis-0 items-center justify-center")}>
         <Icon material="info" />
-        No Nodes Available.
+        {t("No Nodes Available.")}
       </div>
     );
   }

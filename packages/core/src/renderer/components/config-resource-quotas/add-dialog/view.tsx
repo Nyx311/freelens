@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./view.scss";
 
 import { Button } from "@freelensapp/button";
@@ -135,7 +136,7 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
       );
       this.close();
     } catch (err) {
-      this.props.showCheckedErrorNotification(err, "Unknown error occurred while creating ResourceQuota");
+      this.props.showCheckedErrorNotification(err, t("Unknown error occurred while creating ResourceQuota"));
     }
   };
 
@@ -150,7 +151,7 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
 
   render() {
     const { closeAddQuotaDialog, isAddQuotaDialogOpen, resourceQuotaApi, ...dialogProps } = this.props;
-    const header = <h5>Create ResourceQuota</h5>;
+    const header = <h5>{t("Create ResourceQuota")}</h5>;
 
     void closeAddQuotaDialog;
     void resourceQuotaApi;
@@ -168,7 +169,7 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
               <Input
                 required
                 autoFocus
-                placeholder="ResourceQuota name"
+                placeholder={t("ResourceQuota name")}
                 trim
                 validators={systemName}
                 value={this.quotaName}
@@ -177,23 +178,23 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
               />
             </div>
 
-            <SubTitle title="Namespace" />
+            <SubTitle title={t("Namespace")} />
             <NamespaceSelect
               id="namespace-input"
               value={this.namespace}
-              placeholder="Namespace"
+              placeholder={t("Namespace")}
               themeName="lens"
               className="grow shrink-0 basis-0"
               onChange={(option) => (this.namespace = option?.value ?? null)}
             />
 
-            <SubTitle title="Values" />
+            <SubTitle title={t("Values")} />
             <div className="flex gap-2 items-center">
               <Select
                 id="quota-input"
                 className="quota-select"
                 themeName="lens"
-                placeholder="Select a quota.."
+                placeholder={t("Select a quota..")}
                 options={Object.keys(this.quotas).map((quota) => ({
                   value: quota,
                   label: quota,
@@ -214,7 +215,7 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
               />
               <Input
                 maxLength={10}
-                placeholder="Value"
+                placeholder={t("Value")}
                 value={this.quotaInputValue}
                 onChange={(v) => (this.quotaInputValue = v)}
                 onKeyDown={this.onInputQuota}
@@ -223,7 +224,7 @@ class NonInjectedAddQuotaDialog extends React.Component<AddQuotaDialogProps & De
               <Button round primary onClick={this.setQuota}>
                 <Icon
                   material={this.quotaSelectValue && this.quotas.get()[this.quotaSelectValue] ? "edit" : "add"}
-                  tooltip="Set quota"
+                  tooltip={t("Set quota")}
                 />
               </Button>
             </div>

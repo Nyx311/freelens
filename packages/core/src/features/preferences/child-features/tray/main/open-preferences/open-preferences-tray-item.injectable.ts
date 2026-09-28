@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { computed } from "mobx";
 import withErrorLoggingInjectable from "../../../../../../common/utils/with-error-logging/with-error-logging.injectable";
@@ -21,7 +22,7 @@ const openPreferencesTrayItemInjectable = getInjectable({
     return {
       id: "open-preferences",
       parentId: null,
-      label: computed(() => "Preferences"),
+      label: computed(() => t("Preferences")),
       orderNumber: 20,
       enabled: computed(() => true),
       visible: computed(() => true),

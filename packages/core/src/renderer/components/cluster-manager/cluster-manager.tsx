@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./cluster-manager.scss";
 
 import { Redirect } from "@freelensapp/routing";
@@ -61,9 +62,10 @@ class NonInjectedClusterManager extends React.Component<Dependencies> {
 
     return (
       <div className="error">
-        <h2>ERROR!!</h2>
+        <h2>{t("ERROR!!")}</h2>
         <p>
-          No matching route for the current path: <code>{currentPath}</code> which is the welcomeUrl. This is a bug.
+          {t("No matching route for the current path:")} <code>{currentPath}</code>{" "}
+          {t("which is the welcomeUrl. This is a bug.")}
         </p>
       </div>
     );

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getInjectable } from "@ogre-tools/injectable";
 import { NamespaceSelectBadge } from "../../namespaces/namespace-select-badge";
@@ -19,7 +20,7 @@ export const podsNamespaceColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: COLUMN_PRIORITY.NAMESPACE,
     content: (pod) => <NamespaceSelectBadge key="namespace" namespace={pod.getNs()} />,
-    header: { title: "Namespace", className: "namespace", sortBy: columnId, id: columnId },
+    header: { title: t("Namespace"), className: "namespace", sortBy: columnId, id: columnId },
     sortingCallBack: (pod) => pod.getNs(),
   }),
   injectionToken: podListLayoutColumnInjectionToken,

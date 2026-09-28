@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import type http from "node:http";
 import type { URLSearchParams } from "node:url";
 
@@ -100,7 +101,7 @@ export function clusterRoute<Path extends string>(parts: BaseRoutePaths<Path>): 
     handler: ({ cluster, ...rest }) => {
       if (!cluster) {
         return {
-          error: "Cluster missing",
+          error: t("Cluster missing"),
           statusCode: 400,
         };
       }

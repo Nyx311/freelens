@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
@@ -23,17 +24,17 @@ const NonInjectedTerminalTheme = observer(({ state, themes }: Dependencies) => {
   const themeOptions = [
     {
       value: "", // TODO: replace with a sentinel value that isn't string (and serialize it differently)
-      label: "Match Freelens Theme",
+      label: t("Match Freelens Theme"),
     },
     ...themes.map((theme) => ({
       value: theme.name,
-      label: theme.name,
+      label: theme.name === "Light" || theme.name === "Dark" ? t(theme.name) : theme.name,
     })),
   ];
 
   return (
     <section id="terminalTheme">
-      <SubTitle title="Terminal theme" />
+      <SubTitle title={t("Terminal theme")} />
       <Select
         id="terminal-theme-input"
         themeName="lens"

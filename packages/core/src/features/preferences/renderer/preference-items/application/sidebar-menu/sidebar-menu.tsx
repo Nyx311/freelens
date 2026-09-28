@@ -1,4 +1,5 @@
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { ShowNotification, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { useState } from "react";
@@ -19,16 +20,16 @@ const NonInjectedSidebarMenu = ({
 
   return (
     <section id="other">
-      <SubTitle title="Sidebar menu order" />
+      <SubTitle title={t("Sidebar menu order")} />
       <div className={styles.row}>
-        <span>Reset sidebar menu order to the original settings</span>
+        <span>{t("Reset sidebar menu order to the original settings")}</span>
         <Button
           disabled={disabled}
           primary
-          label="Reset"
+          label={t("Reset")}
           onClick={() => {
             resetClusterPageMenuOrder();
-            showSuccessNotification("Sidebar menu order has been restored to the original state");
+            showSuccessNotification(t("Sidebar menu order has been restored to the original state"));
             setDisabled(true);
           }}
         />

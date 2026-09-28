@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { iter } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -96,7 +97,7 @@ const NonInjectedCommandDialog = observer(({ commands, activeEntity, closeComman
       autoFocus={true}
       escapeClearsValue={false}
       data-test-id="command-palette-search"
-      placeholder="Type a command or search&hellip;"
+      placeholder={t("Type a command or search…")}
       onInputChange={(newValue, { action }) => {
         if (action === "input-change") {
           setSearchValue(newValue);

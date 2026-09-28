@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getMessageChannelListenerInjectable } from "@freelensapp/messaging";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { shellSyncFailedChannel } from "../common/failure-channel";
@@ -14,7 +15,8 @@ const shellSyncFailureListenerInjectable = getMessageChannelListenerInjectable({
   getHandler: (di) => {
     const showErrorNotification = di.inject(showErrorNotificationInjectable);
 
-    return (errorMessage) => showErrorNotification(`Failed to sync shell environment: ${errorMessage}`);
+    return (errorMessage) =>
+      showErrorNotification(t("Failed to sync shell environment: {{error}}", { error: errorMessage }));
   },
 });
 

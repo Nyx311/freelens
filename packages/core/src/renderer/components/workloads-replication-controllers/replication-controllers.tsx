@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Badge } from "../badge";
@@ -46,20 +47,20 @@ const NonInjectedReplicationControllers = observer((props: Dependencies) => (
         [columnId.ready]: (item) => item.status?.readyReplicas,
       }}
       searchFilters={[(item) => item.getSearchFields(), (item) => item.getSelectorLabels()]}
-      renderHeaderTitle="Replication Controllers"
+      renderHeaderTitle={t("Replication Controllers")}
       renderTableHeader={[
-        { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+        { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
         {
-          title: "Namespace",
+          title: t("Namespace"),
           className: "namespace",
           sortBy: columnId.namespace,
           id: columnId.namespace,
         },
-        { title: "Desired", className: "desired", sortBy: columnId.desired, id: columnId.desired },
-        { title: "Current", className: "current", sortBy: columnId.current, id: columnId.current },
-        { title: "Ready", className: "ready", sortBy: columnId.ready, id: columnId.ready },
+        { title: t("Desired"), className: "desired", sortBy: columnId.desired, id: columnId.desired },
+        { title: t("Current"), className: "current", sortBy: columnId.current, id: columnId.current },
+        { title: t("Ready"), className: "ready", sortBy: columnId.ready, id: columnId.ready },
         {
-          title: "Selector",
+          title: t("Selector"),
           className: "selector",
           sortBy: columnId.selector,
           id: columnId.selector,

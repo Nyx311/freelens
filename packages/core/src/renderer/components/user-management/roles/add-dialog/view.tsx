@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -51,28 +52,28 @@ class NonInjectedAddRoleDialog extends React.Component<AddRoleDialogProps & Depe
       showDetails(role.selfLink);
       closeAddRoleDialog();
     } catch (err) {
-      showCheckedErrorNotification(err, "Unknown error occurred while creating role");
+      showCheckedErrorNotification(err, t("Unknown error occurred while creating role"));
     }
   };
 
   render() {
     const { closeAddRoleDialog, roleStore, state, ...dialogProps } = this.props;
-    const header = <h5>Create Role</h5>;
+    const header = <h5>{t("Create Role")}</h5>;
 
     return (
       <Dialog {...dialogProps} className="AddRoleDialog" isOpen={state.isOpen.get()} close={closeAddRoleDialog}>
         <Wizard header={header} done={closeAddRoleDialog}>
-          <WizardStep contentClass="flex gap-2 flex-col" nextLabel="Create" next={this.createRole}>
-            <SubTitle title="Role Name" />
+          <WizardStep contentClass="flex gap-2 flex-col" nextLabel={t("Create")} next={this.createRole}>
+            <SubTitle title={t("Role Name")} />
             <Input
               required
               autoFocus
-              placeholder="Name"
+              placeholder={t("Name")}
               iconLeft="supervisor_account"
               value={state.roleName.get()}
               onChange={(v) => state.roleName.set(v)}
             />
-            <SubTitle title="Namespace" />
+            <SubTitle title={t("Namespace")} />
             <NamespaceSelect
               id="add-dialog-namespace-select-input"
               themeName="lens"

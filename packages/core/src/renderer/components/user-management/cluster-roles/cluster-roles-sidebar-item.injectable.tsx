@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import clusterRolesRouteInjectable from "../../../../common/front-end-routing/routes/cluster/user-management/cluster-roles/cluster-roles-route.injectable";
 import navigateToClusterRolesInjectable from "../../../../common/front-end-routing/routes/cluster/user-management/cluster-roles/navigate-to-cluster-roles.injectable";
@@ -19,7 +20,7 @@ const clusterRolesSidebarItemInjectable = getInjectable({
 
     return {
       parentId: userManagementSidebarItemInjectable.id,
-      title: "Cluster Roles",
+      title: t("Cluster Roles"),
       onClick: di.inject(navigateToClusterRolesInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

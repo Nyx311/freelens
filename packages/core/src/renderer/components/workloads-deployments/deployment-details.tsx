@@ -6,6 +6,7 @@
 
 import "./deployment-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Deployment } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -71,26 +72,26 @@ class NonInjectedDeploymentDetails extends React.Component<DeploymentDetailsProp
 
     return (
       <div className="DeploymentDetails">
-        <DrawerItem name="Replicas">
+        <DrawerItem name={t("Replicas")}>
           {`${spec.replicas} desired, ${status?.updatedReplicas ?? 0} updated, `}
           {`${status?.replicas ?? 0} total, ${status?.availableReplicas ?? 0} available, `}
           {`${status?.unavailableReplicas ?? 0} unavailable`}
         </DrawerItem>
         {selectors.length > 0 && (
-          <DrawerItem name="Selector" labelsOnly>
+          <DrawerItem name={t("Selector")} labelsOnly>
             {selectors.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {nodeSelector.length > 0 && (
-          <DrawerItem name="Node Selector">
+          <DrawerItem name={t("Node Selector")}>
             {nodeSelector.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
-        <DrawerItem name="Strategy Type">{spec.strategy.type}</DrawerItem>
+        <DrawerItem name={t("Strategy Type")}>{spec.strategy.type}</DrawerItem>
         <KubeObjectConditionsDrawer object={deployment} />
         <PodDetailsTolerations workload={deployment} />
         <PodDetailsAffinities workload={deployment} />

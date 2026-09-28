@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToLicensesInjectable from "../../../../../licenses/common/navigate-to-licenses.injectable";
@@ -21,7 +22,7 @@ const openLicensesMenuItemInjectable = getInjectable({
       parentId: "help",
       id: "open-licenses",
       orderNumber: 30,
-      label: "Licenses",
+      label: t("Licenses"),
 
       onClick: () => {
         try {

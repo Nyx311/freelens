@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { Gutter } from "../gutter";
 import { DropFileInput } from "../input";
@@ -23,7 +24,7 @@ import type { InstallOnDrop } from "./install-on-drop.injectable";
 
 const ExtensionsNotice = () => (
   <Notice className={styles.notice}>
-    <p>{"Add new features via Freelens Extensions."}</p>
+    <p>{t("Add new features via Freelens Extensions.")}</p>
   </Notice>
 );
 
@@ -35,7 +36,7 @@ const NonInjectedExtensions = ({ installOnDrop }: Dependencies) => (
   <DropFileInput onDropFiles={installOnDrop}>
     <SettingLayout className="Extensions" contentGaps={false} data-testid="extensions-page">
       <section>
-        <h1>Extensions</h1>
+        <h1>{t("Extensions")}</h1>
         <ExtensionsNotice />
         <ExtensionInstall />
         <Gutter size="md" />

@@ -6,6 +6,7 @@
 
 import "./pod-details-tolerations.scss";
 
+import { t } from "@freelensapp/i18n";
 import { DrawerItem, DrawerParamToggler } from "../drawer";
 import { PodTolerations } from "./pod-tolerations";
 
@@ -25,7 +26,7 @@ export function PodDetailsTolerations({ workload }: PodDetailsTolerationsProps) 
   if (!tolerations.length) return null;
 
   return (
-    <DrawerItem name="Tolerations" className="PodDetailsTolerations">
+    <DrawerItem name={t("Tolerations")} className="PodDetailsTolerations">
       <DrawerParamToggler label={tolerations.length}>
         <PodTolerations tolerations={tolerations} />
       </DrawerParamToggler>

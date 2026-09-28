@@ -9,6 +9,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { cssNames, prevDefault } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { Badge } from "../badge";
@@ -40,7 +41,7 @@ export function NamespaceSelectBadgeNonInjected({
       label={namespace ?? label}
       tooltip={
         <>
-          Set global namespace filter to:
+          {t("Set global namespace filter to:")}
           <b>{namespace}</b>
         </>
       }

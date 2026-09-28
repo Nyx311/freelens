@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./config-map-details.scss";
 
 import { Button } from "@freelensapp/button";
@@ -75,12 +76,11 @@ class NonInjectedConfigMapDetails extends React.Component<ConfigMapDetailsProps 
         this.props.showSuccessNotification(
           <p>
             {"ConfigMap "}
-            <b>{configMap.getName()}</b>
-            {" successfully updated."}
+            <b>{configMap.getName()}</b> {t("successfully updated.")}
           </p>,
         );
       } catch (error) {
-        this.props.showErrorNotification(`Failed to save config map: ${String(error)}`);
+        this.props.showErrorNotification(t("Failed to save config map: {{error}}", { error: String(error) }));
       } finally {
         this.isSaving = false;
       }
@@ -106,7 +106,7 @@ class NonInjectedConfigMapDetails extends React.Component<ConfigMapDetailsProps 
       <div className="ConfigMapDetails">
         {data.length > 0 && (
           <>
-            <DrawerTitle>Data</DrawerTitle>
+            <DrawerTitle>{t("Data")}</DrawerTitle>
             {data.map(([name, value = ""]) => (
               <div key={name} className="data">
                 <div className="name">{name}</div>
@@ -129,7 +129,7 @@ class NonInjectedConfigMapDetails extends React.Component<ConfigMapDetailsProps 
                 />
               </div>
             ))}
-            <Button primary label="Save" waiting={this.isSaving} className="save-btn" onClick={this.save} />
+            <Button primary label={t("Save")} waiting={this.isSaving} className="save-btn" onClick={this.save} />
           </>
         )}
       </div>

@@ -6,6 +6,7 @@
 
 import "./volume-claim-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { storageClassApiInjectable } from "@freelensapp/kube-api-specifics";
 import { PersistentVolumeClaim } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
@@ -66,36 +67,36 @@ class NonInjectedPersistentVolumeClaimDetails extends React.Component<
 
     return (
       <div className="PersistentVolumeClaimDetails">
-        <DrawerItem name="Access Modes">{accessModes?.join(", ")}</DrawerItem>
-        <DrawerItem name="Storage Class Name">
+        <DrawerItem name={t("Access Modes")}>{accessModes?.join(", ")}</DrawerItem>
+        <DrawerItem name={t("Storage Class Name")}>
           <Link key="link" to={storageClassDetailsUrl} onClick={stopPropagation}>
             {storageClassName}
           </Link>
         </DrawerItem>
-        <DrawerItem name="Storage">{volumeClaim.getStorage()}</DrawerItem>
-        <DrawerItem name="Pods" className="pods">
+        <DrawerItem name={t("Storage")}>{volumeClaim.getStorage()}</DrawerItem>
+        <DrawerItem name={t("Pods")} className="pods">
           {pods.map((pod) => (
             <Link key={pod.getId()} to={getDetailsUrl(pod.selfLink)}>
               {pod.getName()}
             </Link>
           ))}
         </DrawerItem>
-        <DrawerItem name="Status">{volumeClaim.getStatus()}</DrawerItem>
+        <DrawerItem name={t("Status")}>{t(volumeClaim.getStatus())}</DrawerItem>
 
-        <DrawerTitle>Selector</DrawerTitle>
+        <DrawerTitle>{t("Selector")}</DrawerTitle>
 
-        <DrawerItem name="Match Labels" labelsOnly>
+        <DrawerItem name={t("Match Labels")} labelsOnly>
           {volumeClaim.getMatchLabels().map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
 
-        <DrawerItem name="Match Expressions">
+        <DrawerItem name={t("Match Expressions")}>
           {volumeClaim.getMatchExpressions().map(({ key, operator, values }, i) => (
             <Fragment key={i}>
-              <DrawerItem name="Key">{key}</DrawerItem>
-              <DrawerItem name="Operator">{operator}</DrawerItem>
-              <DrawerItem name="Values">{values?.join(", ")}</DrawerItem>
+              <DrawerItem name={t("Key")}>{key}</DrawerItem>
+              <DrawerItem name={t("Operator")}>{operator}</DrawerItem>
+              <DrawerItem name={t("Values")}>{values?.join(", ")}</DrawerItem>
             </Fragment>
           ))}
         </DrawerItem>

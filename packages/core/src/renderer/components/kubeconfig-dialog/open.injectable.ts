@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -32,7 +33,7 @@ const openKubeconfigDialogInjectable = getInjectable({
 
           state.set({ title, config });
         } catch (error) {
-          showCheckedErrorNotification(error, "Failed to retrieve config for dialog");
+          showCheckedErrorNotification(error, t("Failed to retrieve config for dialog"));
           logger.warn("[KUBECONFIG-DIALOG]: failed to retrieve config for dialog", error);
         }
       })();

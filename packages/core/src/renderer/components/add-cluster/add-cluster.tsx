@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { isDefined, iter } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -88,7 +89,7 @@ class NonInjectedAddCluster extends React.Component<Dependencies> {
       }
 
       if (config.contexts.length === 0) {
-        this.errors.push('No contexts defined, either missing the "contexts" field, or it is empty.');
+        this.errors.push(t('No contexts defined, either missing the "contexts" field, or it is empty.'));
       }
     }),
     500,
@@ -104,30 +105,32 @@ class NonInjectedAddCluster extends React.Component<Dependencies> {
       await fse.ensureDir(this.props.getDirnameOfPath(absPath));
       await fse.writeFile(absPath, this.customConfig.trim(), { encoding: "utf-8", mode: 0o600 });
 
-      this.props.showSuccessNotification(`Successfully added ${this.kubeContexts.size} new cluster(s)`);
+      this.props.showSuccessNotification(
+        t("Successfully added {{count}} new cluster(s)", { count: this.kubeContexts.size }),
+      );
 
       return this.props.navigateToCatalog();
     } catch (error) {
-      this.props.showErrorNotification(`Failed to add clusters: ${error}`);
+      this.props.showErrorNotification(t("Failed to add clusters: {{error}}", { error: String(error) }));
     }
   });
 
   render() {
     return (
       <SettingLayout className={styles.AddClusters} data-testid="add-cluster-page">
-        <h2>Add Clusters from Kubeconfig</h2>
+        <h2>{t("Add Clusters from Kubeconfig")}</h2>
         <p>
-          {"Clusters added here are  "}
-          <b>not</b>
-          {" merged into the "}
+          {`${t("Clusters added here are")}  `}
+          <b>{t("not")}</b>
+          {` ${t("merged into the")} `}
           <code>~/.kube/config</code>
-          {" file. "}
+          {` ${t("file.")} `}
           <a
             href="https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/"
             rel="noreferrer"
             target="_blank"
           >
-            Read more about adding clusters.
+            {t("Read more about adding clusters.")}
           </a>
         </p>
         <div className="flex flex-col">
@@ -144,7 +147,7 @@ class NonInjectedAddCluster extends React.Component<Dependencies> {
         </div>
         {this.allErrors.length > 0 && (
           <>
-            <h3>KubeConfig Yaml Validation Errors:</h3>
+            <h3>{t("KubeConfig Yaml Validation Errors:")}</h3>
             {this.allErrors.map((error) => (
               <div key={error} className="error">
                 {error}
@@ -156,10 +159,10 @@ class NonInjectedAddCluster extends React.Component<Dependencies> {
           <Button
             primary
             disabled={this.kubeContexts.size === 0}
-            label={this.kubeContexts.size === 1 ? "Add cluster" : "Add clusters"}
+            label={this.kubeContexts.size === 1 ? t("Add cluster") : t("Add clusters")}
             onClick={this.addClusters}
             waiting={this.isWaiting}
-            tooltip={this.kubeContexts.size === 0 || "Paste in at least one cluster to add."}
+            tooltip={this.kubeContexts.size === 0 || t("Paste in at least one cluster to add.")}
             tooltipOverrideDisabled
           />
         </div>

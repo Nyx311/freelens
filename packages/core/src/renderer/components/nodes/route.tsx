@@ -6,6 +6,7 @@
 
 import "./nodes.scss";
 
+import { t } from "@freelensapp/i18n";
 import { formatNodeTaint } from "@freelensapp/kube-object";
 import { Tooltip, TooltipPosition } from "@freelensapp/tooltip";
 import { bytesToUnits, cpuUnitsToNumber, interval, unitsToBytes } from "@freelensapp/utilities";
@@ -322,16 +323,23 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
     const tooltipLines: string[] = [];
 
     if (Number.isFinite(usage) && capacity) {
-      tooltipLines.push(`CPU: ${((usage * 100) / capacity).toFixed(2)}%, cores: ${formatCores(capacity)}`);
+      tooltipLines.push(
+        t("CPU: {{percent}}%, cores: {{cores}}", {
+          percent: ((usage * 100) / capacity).toFixed(2),
+          cores: formatCores(capacity),
+        }),
+      );
     }
-    tooltipLines.push(`Usage: ${formatCores(textUsage)} cores`);
+    tooltipLines.push(t("Usage: {{cores}} cores", { cores: formatCores(textUsage) }));
     if (podsLoaded) {
       tooltipLines.push(
-        `Requests: ${formatCores(requests)} cores${
-          allocatable
-            ? ` (${((requests * 100) / allocatable).toFixed(0)}% of allocatable ${formatCores(allocatable)})`
-            : ""
-        }`,
+        allocatable
+          ? t("Requests: {{cores}} cores ({{percent}}% of allocatable {{allocatable}})", {
+              cores: formatCores(requests),
+              percent: ((requests * 100) / allocatable).toFixed(0),
+              allocatable: formatCores(allocatable),
+            })
+          : t("Requests: {{cores}} cores", { cores: formatCores(requests) }),
       );
     }
 
@@ -365,22 +373,29 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
     const tooltipLines: string[] = [];
 
     if (Number.isFinite(usage) && capacity) {
-      tooltipLines.push(`Memory: ${((usage * 100) / capacity).toFixed(2)}%, ${bytesToUnits(usage, { precision: 3 })}`);
+      tooltipLines.push(
+        t("Memory: {{percent}}%, {{usage}}", {
+          percent: ((usage * 100) / capacity).toFixed(2),
+          usage: bytesToUnits(usage, { precision: 3 }),
+        }),
+      );
     }
-    tooltipLines.push(`Usage: ${bytesToUnits(textUsage, { precision: 3 })}`);
+    tooltipLines.push(t("Usage: {{usage}}", { usage: bytesToUnits(textUsage, { precision: 3 }) }));
     if (podsLoaded) {
       tooltipLines.push(
-        `Requests: ${bytesToUnits(requests, { precision: 3 })}${
-          allocatable
-            ? ` (${((requests * 100) / allocatable).toFixed(0)}% of allocatable ${bytesToUnits(allocatable, { precision: 3 })})`
-            : ""
-        }`,
+        allocatable
+          ? t("Requests: {{requests}} ({{percent}}% of allocatable {{allocatable}})", {
+              requests: bytesToUnits(requests, { precision: 3 }),
+              percent: ((requests * 100) / allocatable).toFixed(0),
+              allocatable: bytesToUnits(allocatable, { precision: 3 }),
+            })
+          : t("Requests: {{requests}}", { requests: bytesToUnits(requests, { precision: 3 }) }),
       );
     }
 
     return this.renderUsage({
       node,
-      title: "Memory",
+      title: t("Memory"),
       usage,
       capacity,
       requests: podsLoaded ? requests : undefined,
@@ -410,7 +425,11 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
         <LineProgress max={capacity} value={podCount} />
         <span className="usageText">{`${podCount} / ${capacity}`}</span>
         <Tooltip targetId={tooltipId} preferredPositions={TooltipPosition.BOTTOM}>
-          {`Pods: ${podCount} of ${capacity} allocatable (${((podCount * 100) / capacity).toFixed(0)}%)`}
+          {t("Pods: {{count}} of {{capacity}} allocatable ({{percent}}%)", {
+            count: podCount,
+            capacity,
+            percent: ((podCount * 100) / capacity).toFixed(0),
+          })}
         </Tooltip>
       </div>
     );
@@ -420,12 +439,17 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
     const [usage, capacity] = this.getLastMetricValues(node, ["fsUsage", "fsSize"]);
     const tooltipLines =
       usage !== undefined && capacity
-        ? [`Disk: ${((usage * 100) / capacity).toFixed(2)}%, ${bytesToUnits(usage, { precision: 3 })}`]
+        ? [
+            t("Disk: {{percent}}%, {{usage}}", {
+              percent: ((usage * 100) / capacity).toFixed(2),
+              usage: bytesToUnits(usage, { precision: 3 }),
+            }),
+          ]
         : [];
 
     return this.renderUsage({
       node,
-      title: "Disk",
+      title: t("Disk"),
       usage,
       capacity,
       tooltipLines,
@@ -474,39 +498,44 @@ class NonInjectedNodesRoute extends React.Component<Dependencies> {
             (node) => getNodeGroup(node),
             (node) => getCapacityType(node),
           ]}
-          renderHeaderTitle="Nodes"
+          renderHeaderTitle={t("Nodes")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
             { title: "CPU", className: "cpu", sortBy: columnId.cpu, id: columnId.cpu },
-            { title: "Memory", className: "memory", sortBy: columnId.memory, id: columnId.memory },
-            { title: "Disk", className: "disk", sortBy: columnId.disk, id: columnId.disk },
-            { title: "Pods", className: "pods", sortBy: columnId.pods, id: columnId.pods },
+            { title: t("Memory"), className: "memory", sortBy: columnId.memory, id: columnId.memory },
+            { title: t("Disk"), className: "disk", sortBy: columnId.disk, id: columnId.disk },
+            { title: t("Pods"), className: "pods", sortBy: columnId.pods, id: columnId.pods },
             {
-              title: "Instance Type",
+              title: t("Instance Type"),
               className: "instanceType",
               sortBy: columnId.instanceType,
               id: columnId.instanceType,
             },
             {
-              title: "Node Group",
+              title: t("Node Group"),
               className: "nodeGroup",
               sortBy: columnId.nodeGroup,
               id: columnId.nodeGroup,
             },
             {
-              title: "Capacity",
+              title: t("Capacity"),
               className: "capacityType",
               sortBy: columnId.capacityType,
               id: columnId.capacityType,
             },
-            { title: "Roles", className: "roles", sortBy: columnId.roles, id: columnId.roles },
-            { title: "Taints", className: "taints", sortBy: columnId.taints, id: columnId.taints },
-            { title: "Version", className: "version", sortBy: columnId.version, id: columnId.version },
-            { title: "Internal IP", className: "internalIp", sortBy: columnId.internalIp, id: columnId.internalIp },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Schedulable", className: "schedulable", sortBy: columnId.schedulable, id: columnId.schedulable },
+            { title: t("Roles"), className: "roles", sortBy: columnId.roles, id: columnId.roles },
+            { title: t("Taints"), className: "taints", sortBy: columnId.taints, id: columnId.taints },
+            { title: t("Version"), className: "version", sortBy: columnId.version, id: columnId.version },
+            { title: t("Internal IP"), className: "internalIp", sortBy: columnId.internalIp, id: columnId.internalIp },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
             {
-              title: "Conditions",
+              title: t("Schedulable"),
+              className: "schedulable",
+              sortBy: columnId.schedulable,
+              id: columnId.schedulable,
+            },
+            {
+              title: t("Conditions"),
               className: "conditions scrollable",
               sortBy: columnId.conditions,
               id: columnId.conditions,

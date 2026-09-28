@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import openServiceAccountKubeConfigDialogInjectable from "../../kubeconfig-dialog/open-service-account-kube-config-dialog.injectable";
@@ -23,8 +24,8 @@ function NonInjectedServiceAccountMenu(props: KubeObjectMenuProps<ServiceAccount
 
   return (
     <MenuItem onClick={() => openServiceAccountKubeConfigDialog(object)}>
-      <Icon material="insert_drive_file" tooltip="Kubeconfig File" interactive={toolbar} />
-      <span className="title">Kubeconfig</span>
+      <Icon material="insert_drive_file" tooltip={t("Kubeconfig File")} interactive={toolbar} />
+      <span className="title">{t("Kubeconfig")}</span>
     </MenuItem>
   );
 }

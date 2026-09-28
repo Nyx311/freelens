@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable, lifecycleEnum } from "@ogre-tools/injectable";
 import { observable, when } from "mobx";
@@ -96,12 +97,12 @@ const createKubeAuthProxyInjectable = getInjectable({
           if (code) {
             broadcastConnectionUpdate({
               level: "error",
-              message: `proxy exited with code: ${code}`,
+              message: t("proxy exited with code: {{code}}", { code }),
             });
           } else {
             broadcastConnectionUpdate({
               level: "info",
-              message: "proxy exited successfully",
+              message: t("proxy exited successfully"),
             });
           }
           exit();
@@ -110,7 +111,7 @@ const createKubeAuthProxyInjectable = getInjectable({
         proxyProcess.on("disconnect", () => {
           broadcastConnectionUpdate({
             level: "error",
-            message: "Proxy disconnected communications",
+            message: t("Proxy disconnected communications"),
           });
           exit();
         });
@@ -144,14 +145,14 @@ const createKubeAuthProxyInjectable = getInjectable({
             onFind: () =>
               broadcastConnectionUpdate({
                 level: "info",
-                message: "Authentication proxy started",
+                message: t("Authentication proxy started"),
               }),
           });
         } catch (error) {
           logger.warn("[KUBE-AUTH-PROXY]: getPortFromStream failed", error);
           broadcastConnectionUpdate({
             level: "error",
-            message: "Proxy port can't be found, restarting...",
+            message: t("Proxy port can't be found, restarting..."),
           });
           exit();
 
@@ -167,7 +168,7 @@ const createKubeAuthProxyInjectable = getInjectable({
           logger.warn("[KUBE-AUTH-PROXY]: waitUntilUsed failed", error);
           broadcastConnectionUpdate({
             level: "error",
-            message: "Proxy port failed to be used within time limit, restarting...",
+            message: t("Proxy port failed to be used within time limit, restarting..."),
           });
           exit();
 

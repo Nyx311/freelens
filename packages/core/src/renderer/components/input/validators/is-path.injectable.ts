@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import pathExistsInjectable from "../../../../common/fs/path-exists.injectable";
 import { asyncInputValidator } from "../input_validators";
@@ -19,7 +20,7 @@ const isPathInjectable = getInjectable({
       condition: ({ type }) => type === "text",
       validate: async (value) => {
         if (!(await pathExists(value))) {
-          throw new Error(`"${value}" is not a valid file path`);
+          throw new Error(t('"{{value}}" is not a valid file path', { value }));
         }
       },
     });

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import computeHotbarDisplayLabelInjectable from "../../../features/hotbar/storage/common/compute-display-label.injectable";
@@ -70,23 +71,23 @@ const NonInjectedHotbarSwitchCommand = observer(
         })),
         {
           value: hotbarAddAction,
-          label: "Add hotbar ...",
+          label: t("Add hotbar ..."),
         },
         ...ignoreIf(hotbars.get().length <= 1, [
           {
             value: hotbarRemoveAction,
-            label: "Remove hotbar ...",
+            label: t("Remove hotbar ..."),
           },
         ]),
         {
           value: hotbarRenameAction,
-          label: "Rename hotbar ...",
+          label: t("Rename hotbar ..."),
         },
       ]}
       autoFocus={true}
       escapeClearsValue={false}
       isClearable={false}
-      placeholder="Switch to hotbar"
+      placeholder={t("Switch to hotbar")}
     />
   ),
 );

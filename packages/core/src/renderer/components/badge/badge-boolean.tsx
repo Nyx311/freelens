@@ -1,3 +1,4 @@
+import { t } from "@freelensapp/i18n";
 import { Badge } from "./badge";
 import styles from "./badge-boolean.module.scss";
 
@@ -6,8 +7,8 @@ export interface BadgeBooleanProps {
 }
 
 export function getBooleanText(value?: boolean) {
-  if (value === true) return "True";
-  if (value === false) return "False";
+  if (value === true) return t("True");
+  if (value === false) return t("False");
   return "-";
 }
 

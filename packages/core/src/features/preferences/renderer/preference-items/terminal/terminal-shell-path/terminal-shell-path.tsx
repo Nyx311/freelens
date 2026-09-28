@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import defaultShellInjectable from "../../../../../../common/vars/default-shell.injectable";
@@ -20,7 +21,7 @@ interface Dependencies {
 
 const NonInjectedTerminalShellPath = observer(({ state, defaultShell }: Dependencies) => (
   <section id="shell">
-    <SubTitle title="Terminal Shell Path" />
+    <SubTitle title={t("Terminal Shell Path")} />
     <Input
       theme="round-black"
       placeholder={defaultShell}

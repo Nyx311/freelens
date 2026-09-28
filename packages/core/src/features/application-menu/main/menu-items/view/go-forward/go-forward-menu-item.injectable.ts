@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { webContents } from "electron";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -16,7 +17,7 @@ const goForwardMenuItemInjectable = getInjectable({
     parentId: "view",
     id: "go-forward",
     orderNumber: 50,
-    label: "Forward",
+    label: t("Forward"),
     keyboardShortcut: "CmdOrCtrl+]",
 
     onClick: () => {

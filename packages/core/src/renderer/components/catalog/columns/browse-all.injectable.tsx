@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import defaultCategoryColumnsInjectable from "./default-category.injectable";
 import namedCategoryColumnInjectable from "./named-category.injectable";
@@ -18,7 +19,7 @@ const defaultBrowseAllColumns: RegisteredAdditionalCategoryColumn[] = [
     titleProps: {
       id: "kind",
       sortBy: "kind",
-      title: "Kind",
+      title: t("Kind"),
       "data-testid": "catalog-kind-column",
     },
     sortCallback: (entity) => entity.kind,

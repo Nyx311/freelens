@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import React from "react";
 import navigateToCatalogInjectable from "../../../../common/front-end-routing/routes/catalog/navigate-to-catalog.injectable";
@@ -42,17 +43,17 @@ function getInternalCommands(dependencies: Dependencies): CommandRegistration[] 
   return [
     {
       id: "app.showCatalog",
-      title: "Catalog: Open",
+      title: t("Catalog: Open"),
       action: () => dependencies.navigateToCatalog(),
     },
     {
       id: "app.showPreferences",
-      title: "Preferences: Open",
+      title: t("Preferences: Open"),
       action: () => dependencies.navigateToPreferences(),
     },
     {
       id: "clusters.search",
-      title: "Clusters: Search ...",
+      title: t("Clusters: Search ..."),
       action: () => dependencies.openCommandDialog(<ClustersSearchCommand />),
     },
     {
@@ -63,34 +64,34 @@ function getInternalCommands(dependencies: Dependencies): CommandRegistration[] 
     },
     {
       id: "cluster.openTerminal",
-      title: "Cluster: Open terminal",
+      title: t("Cluster: Open terminal"),
       action: () => dependencies.createTerminalTab(),
       isActive: isKubernetesClusterActive,
     },
     {
       // no isActive gate: this shell belongs to no cluster
       id: "app.openTerminal",
-      title: "Terminal: Open",
+      title: t("Terminal: Open"),
       action: () => dependencies.navigateToTerminal(),
     },
     {
       id: "hotbar.switchHotbar",
-      title: "Hotbar: Switch ...",
+      title: t("Hotbar: Switch ..."),
       action: () => dependencies.openCommandDialog(<HotbarSwitchCommand />),
     },
     {
       id: "hotbar.addHotbar",
-      title: "Hotbar: Add Hotbar ...",
+      title: t("Hotbar: Add Hotbar ..."),
       action: () => dependencies.openCommandDialog(<HotbarAddCommand />),
     },
     {
       id: "hotbar.removeHotbar",
-      title: "Hotbar: Remove Hotbar ...",
+      title: t("Hotbar: Remove Hotbar ..."),
       action: () => dependencies.openCommandDialog(<HotbarRemoveCommand />),
     },
     {
       id: "hotbar.renameHotbar",
-      title: "Hotbar: Rename Hotbar ...",
+      title: t("Hotbar: Rename Hotbar ..."),
       action: () => dependencies.openCommandDialog(<HotbarRenameCommand />),
     },
   ];

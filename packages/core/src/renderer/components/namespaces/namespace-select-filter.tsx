@@ -6,6 +6,7 @@
 
 import "./namespace-select-filter.scss";
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { components } from "react-select";
@@ -80,12 +81,12 @@ const NonInjectedPlaceholder = observer(
       const namespaces = namespaceStore.contextNamespaces;
 
       if (namespaceStore.areAllSelectedImplicitly || namespaces.length === 0) {
-        return "All namespaces";
+        return t("All namespaces");
       }
 
-      const prefix = namespaces.length === 1 ? "Namespace" : "Namespaces";
-
-      return `${prefix}: ${namespaces.join(", ")}`;
+      return namespaces.length === 1
+        ? t("Namespace: {{namespaces}}", { namespaces: namespaces.join(", ") })
+        : t("Namespaces: {{namespaces}}", { namespaces: namespaces.join(", ") });
     };
 
     return <components.Placeholder {...props}>{getPlaceholder()}</components.Placeholder>;

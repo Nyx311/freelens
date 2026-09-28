@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { isRequestError, object } from "@freelensapp/utilities";
 import { isObject } from "es-toolkit/compat";
@@ -85,7 +86,7 @@ const loadMetricsFor =
                 error.statusCode < 500)
             ) {
               const description = await describeError(query, error);
-              throw new Error("Metrics not available", { cause: description });
+              throw new Error(t("Metrics not available"), { cause: description });
             }
 
             await new Promise((resolve) => setTimeout(resolve, (attempt + 1) * 1000)); // add delay before repeating request

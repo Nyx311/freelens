@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { CoreV1Api } from "@kubernetes/client-node";
 
 import type { Logger } from "@freelensapp/logger";
@@ -112,7 +113,7 @@ export const createClusterPrometheusHandler = (...args: [Dependencies, Cluster])
       }
     }
 
-    throw new Error("No Prometheus service found", { cause: errors });
+    throw new Error(t("No Prometheus service found"), { cause: errors });
   };
 
   const getPrometheusDetails: ClusterPrometheusHandler["getPrometheusDetails"] = async () => {

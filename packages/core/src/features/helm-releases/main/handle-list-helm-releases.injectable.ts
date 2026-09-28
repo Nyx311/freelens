@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getRequestChannelListenerInjectable } from "@freelensapp/messaging";
 import listClusterHelmReleasesInjectable from "../../../main/helm/helm-service/list-helm-releases.injectable";
 import getClusterByIdInjectable from "../../cluster/storage/common/get-by-id.injectable";
@@ -22,7 +23,7 @@ const handleListHelmReleasesInjectable = getRequestChannelListenerInjectable({
       if (!cluster) {
         return {
           callWasSuccessful: false,
-          error: `Cluster with id "${clusterId}" not found`,
+          error: t('Cluster with id "{{clusterId}}" not found', { clusterId }),
         };
       }
 

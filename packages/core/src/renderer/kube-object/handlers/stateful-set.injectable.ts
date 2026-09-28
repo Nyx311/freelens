@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import openStatefulSetScaleDialogInjectable from "../../components/workloads-statefulsets/scale/open-dialog.injectable";
 import { staticKubeObjectHandlerInjectionToken } from "../handler";
@@ -21,7 +22,7 @@ const statefulSetKubeObjectHandlerInjectable = getInjectable({
       onContextMenuOpen: (ctx) => {
         ctx.menuItems.push({
           icon: "open_with",
-          title: "Scale",
+          title: t("Scale"),
           onClick: (obj) => openStatefulSetScaleDialog(obj as StatefulSet),
         });
       },

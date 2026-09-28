@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import createStorageInjectable from "../../../utils/create-storage/create-storage.injectable";
 import { TabKind } from "./store";
@@ -22,7 +23,7 @@ const dockStorageInjectable = getInjectable({
         {
           id: "terminal",
           kind: TabKind.TERMINAL,
-          title: "Terminal",
+          title: t("Terminal"),
           pinned: false,
         },
       ],

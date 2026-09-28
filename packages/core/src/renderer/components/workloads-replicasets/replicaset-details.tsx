@@ -6,6 +6,7 @@
 
 import "./replicaset-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { ReplicaSet } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -71,30 +72,30 @@ class NonInjectedReplicaSetDetails extends React.Component<ReplicaSetDetailsProp
     return (
       <div className="ReplicaSetDetails">
         {selectors.length > 0 && (
-          <DrawerItem name="Selector" labelsOnly>
+          <DrawerItem name={t("Selector")} labelsOnly>
             {selectors.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {nodeSelector.length > 0 && (
-          <DrawerItem name="Node Selector" labelsOnly>
+          <DrawerItem name={t("Node Selector")} labelsOnly>
             {nodeSelector.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {images.length > 0 && (
-          <DrawerItem name="Images">
+          <DrawerItem name={t("Images")}>
             {images.map((image) => (
               <p key={image}>{image}</p>
             ))}
           </DrawerItem>
         )}
-        <DrawerItem name="Replicas">{`${availableReplicas || 0} current / ${replicas || 0} desired`}</DrawerItem>
+        <DrawerItem name={t("Replicas")}>{`${availableReplicas || 0} current / ${replicas || 0} desired`}</DrawerItem>
         <PodDetailsTolerations workload={replicaSet} />
         <PodDetailsAffinities workload={replicaSet} />
-        <DrawerItem name="Pod Status" className="pod-status">
+        <DrawerItem name={t("Pod Status")} className="pod-status">
           <PodDetailsStatuses pods={childPods} />
         </DrawerItem>
         <PodDetailsList pods={childPods} owner={replicaSet} />

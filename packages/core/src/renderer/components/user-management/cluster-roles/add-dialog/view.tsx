@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -48,7 +49,7 @@ class NonInjectedAddClusterRoleDialog extends React.Component<AddClusterRoleDial
       showDetails(role.selfLink);
       closeAddClusterRoleDialog();
     } catch (error) {
-      showCheckedErrorNotification(error, "Unknown error occurred while creating the role");
+      showCheckedErrorNotification(error, t("Unknown error occurred while creating the role"));
     }
   };
 
@@ -62,13 +63,13 @@ class NonInjectedAddClusterRoleDialog extends React.Component<AddClusterRoleDial
         isOpen={state.isOpen.get()}
         close={closeAddClusterRoleDialog}
       >
-        <Wizard header={<h5>Create ClusterRole</h5>} done={closeAddClusterRoleDialog}>
-          <WizardStep contentClass="flex gap-2 flex-col" nextLabel="Create" next={this.createRole}>
-            <SubTitle title="ClusterRole Name" />
+        <Wizard header={<h5>{t("Create ClusterRole")}</h5>} done={closeAddClusterRoleDialog}>
+          <WizardStep contentClass="flex gap-2 flex-col" nextLabel={t("Create")} next={this.createRole}>
+            <SubTitle title={t("ClusterRole Name")} />
             <Input
               required
               autoFocus
-              placeholder="Name"
+              placeholder={t("Name")}
               iconLeft="supervisor_account"
               value={state.clusterRoleName.get()}
               onChange={(v) => state.clusterRoleName.set(v)}

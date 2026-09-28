@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { Link } from "@freelensapp/routing";
 import { stopPropagation } from "@freelensapp/utilities";
@@ -38,7 +39,7 @@ export const podsOwnersColumnInjectable = getInjectable({
             </Badge>
           );
         }),
-      header: { title: "Controlled By", className: "owners", sortBy: columnId, id: columnId },
+      header: { title: t("Controlled By"), className: "owners", sortBy: columnId, id: columnId },
       sortingCallBack: (pod) => pod.getOwnerRefs().map((ref) => ref.kind),
     };
   },

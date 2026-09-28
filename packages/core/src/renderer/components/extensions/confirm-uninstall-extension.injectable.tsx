@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { extensionDisplayName } from "../../../extensions/lens-extension";
 import confirmInjectable from "../confirm-dialog/confirm.injectable";
@@ -26,12 +27,11 @@ const confirmUninstallExtension =
     const confirmed = await confirm({
       message: (
         <p>
-          {"Are you sure you want to uninstall extension "}
-          <b>{displayName}</b>?
+          {t("Are you sure you want to uninstall extension")} <b>{displayName}</b>?
         </p>
       ),
-      labelOk: "Yes",
-      labelCancel: "No",
+      labelOk: t("Yes"),
+      labelCancel: t("No"),
     });
 
     if (confirmed) {

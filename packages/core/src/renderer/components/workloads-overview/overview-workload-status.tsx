@@ -6,6 +6,7 @@
 
 import "./overview-workload-status.scss";
 
+import { t } from "@freelensapp/i18n";
 import { object } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { capitalize } from "es-toolkit";
@@ -60,10 +61,10 @@ const NonInjectedOverviewWorkloadStatus = observer((props: OverviewWorkloadStatu
   const emptyDataSet = {
     data: [1],
     backgroundColor: [theme.colors.pieChartDefaultColor],
-    label: "Empty",
+    label: t("Empty"),
   };
   const statusDataSet = {
-    label: "Status",
+    label: t("Status"),
     data: statusesToBeShown.map(([, value]) => value),
     backgroundColor: statusesToBeShown.map(
       ([status]) => theme.colors[statusBackgroundColorMapping[toLowercase(status)]],

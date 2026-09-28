@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { useState } from "react";
 import { Dropdown } from "../../dropdown/dropdown";
@@ -34,16 +35,16 @@ export function DownloadLogsDropdown({ downloadAllLogs, downloadVisibleLogs, dis
       id="download-logs-dropdown"
       contentForToggle={
         <button data-testid="download-logs-dropdown" className={styles.dropdown} disabled={waiting || disabled}>
-          Download
+          {t("Download")}
           <Icon material="arrow_drop_down" smallest />
         </button>
       }
     >
       <MenuItem onClick={downloadVisibleLogs} data-testid="download-visible-logs">
-        Visible logs
+        {t("Visible logs")}
       </MenuItem>
       <MenuItem onClick={downloadAll} data-testid="download-all-logs">
-        All logs
+        {t("All logs")}
       </MenuItem>
     </Dropdown>
   );

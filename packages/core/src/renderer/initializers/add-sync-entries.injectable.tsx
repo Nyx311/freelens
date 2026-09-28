@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
 import { runInAction } from "mobx";
@@ -27,12 +28,12 @@ const addSyncEntriesInjectable = getInjectable({
 
       showSuccessNotification(
         <div>
-          <p>Selected items has been added to Kubeconfig Sync.</p>
+          <p>{t("Selected items has been added to Kubeconfig Sync.")}</p>
           <br />
           <p>
             {"Check the "}
             <a style={{ textDecoration: "underline" }} onClick={navigateToKubernetesPreferences}>
-              Preferences
+              {t("Preferences")}
             </a>
             {" to see full list."}
           </p>

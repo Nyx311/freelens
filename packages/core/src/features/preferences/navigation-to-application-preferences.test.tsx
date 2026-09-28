@@ -4,8 +4,11 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import i18n from "@freelensapp/i18n";
 import { discoverFor } from "@freelensapp/react-testing-library-discovery";
+import { waitFor } from "@testing-library/react";
 import { getApplicationBuilder } from "../../renderer/components/test-utils/get-application-builder";
+import userPreferencesStateInjectable from "../user-preferences/common/state.injectable";
 import navigateToProxyPreferencesInjectable from "./common/navigate-to-proxy-preferences.injectable";
 
 import type { Discover } from "@freelensapp/react-testing-library-discovery";
@@ -121,6 +124,29 @@ describe("preferences - navigation to application preferences", () => {
 
         expect(discovered).not.toBeNull();
       });
+    });
+  });
+  describe("language selection", () => {
+    let rendered: RenderResult;
+
+    beforeEach(async () => {
+      builder.beforeWindowStart(() => builder.preferences.navigate());
+      rendered = await builder.render();
+    });
+
+    it("defaults the language selection to the system language", () => {
+      expect(builder.select.getValue("language-input")).toBe("Follow system");
+    });
+
+    it("saves the language selection across processes without changing the active language", async () => {
+      await builder.select.openMenu("language-input").selectOption("简体中文");
+
+      expect(builder.applicationWindow.only.di.inject(userPreferencesStateInjectable).language).toBe("zh-CN");
+      await waitFor(() => {
+        expect(builder.mainDi.inject(userPreferencesStateInjectable).language).toBe("zh-CN");
+      });
+      expect(i18n.resolvedLanguage).toBe("en");
+      expect(rendered.getByText("Restart Freelens to apply the language change.")).toBeInTheDocument();
     });
   });
 });

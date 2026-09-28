@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { mapValues } from "es-toolkit";
 import { toJS } from "mobx";
@@ -50,22 +51,22 @@ const NonInjectedContainerCharts = observer(
       CPU: [
         {
           id: "cpuUsage",
-          label: `Usage`,
-          tooltip: `CPU cores usage`,
+          label: t("Usage"),
+          tooltip: t("CPU cores usage"),
           borderColor: "#00a7a0",
           data: cpuUsage.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "cpuRequests",
-          label: `Requests`,
-          tooltip: `CPU requests`,
+          label: t("Requests"),
+          tooltip: t("CPU requests"),
           borderColor: "#30b24d",
           data: cpuRequests.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "cpuLimits",
-          label: `Limits`,
-          tooltip: `CPU limits`,
+          label: t("Limits"),
+          tooltip: t("CPU limits"),
           borderColor: chartCapacityColor,
           data: cpuLimits.map(([x, y]) => ({ x: x * 1000, y })),
         },
@@ -73,22 +74,22 @@ const NonInjectedContainerCharts = observer(
       Memory: [
         {
           id: "memoryUsage",
-          label: `Usage`,
-          tooltip: `Memory usage`,
+          label: t("Usage"),
+          tooltip: t("Memory usage"),
           borderColor: "#c93dce",
           data: memoryUsage.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "memoryRequests",
-          label: `Requests`,
-          tooltip: `Memory requests`,
+          label: t("Requests"),
+          tooltip: t("Memory requests"),
           borderColor: "#30b24d",
           data: memoryRequests.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "memoryLimits",
-          label: `Limits`,
-          tooltip: `Memory limits`,
+          label: t("Limits"),
+          tooltip: t("Memory limits"),
           borderColor: chartCapacityColor,
           data: memoryLimits.map(([x, y]) => ({ x: x * 1000, y })),
         },
@@ -96,22 +97,22 @@ const NonInjectedContainerCharts = observer(
       Filesystem: [
         {
           id: "fsUsage",
-          label: `Usage`,
-          tooltip: `Bytes consumed on this filesystem`,
+          label: t("Usage"),
+          tooltip: t("Bytes consumed on this filesystem"),
           borderColor: "#ffc63d",
           data: fsUsage.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "fsWrites",
-          label: `Writes`,
-          tooltip: `Bytes written on this filesystem`,
+          label: t("Writes"),
+          tooltip: t("Bytes written on this filesystem"),
           borderColor: "#ff963d",
           data: fsWrites.map(([x, y]) => ({ x: x * 1000, y })),
         },
         {
           id: "fsReads",
-          label: `Reads`,
-          tooltip: `Bytes read on this filesystem`,
+          label: t("Reads"),
+          tooltip: t("Bytes read on this filesystem"),
           borderColor: "#fff73d",
           data: fsReads.map(([x, y]) => ({ x: x * 1000, y })),
         },

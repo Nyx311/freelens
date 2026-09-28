@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { disposer } from "@freelensapp/utilities";
 import autoBind from "auto-bind";
 import { action, makeObservable, observable, reaction } from "mobx";
@@ -53,7 +54,7 @@ export class PortForwardStore extends ItemStore<PortForwardItem> {
 
       for (const result of results) {
         if (result.status === "rejected" || result.value.status === "Disabled") {
-          this.dependencies.notifyErrorPortForwarding("One or more port-forwards could not be started");
+          this.dependencies.notifyErrorPortForwarding(t("One or more port-forwards could not be started"));
 
           return;
         }

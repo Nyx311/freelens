@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import * as yaml from "js-yaml";
 import React from "react";
 import { defaultYamlDumpOptions } from "../../../common/kube-helpers";
@@ -25,7 +26,7 @@ export class PodDetailsAffinities extends React.Component<PodDetailsAffinitiesPr
     if (!affinitiesNum) return null;
 
     return (
-      <DrawerItem name="Affinities" className="PodDetailsAffinities">
+      <DrawerItem name={t("Affinities")} className="PodDetailsAffinities">
         <DrawerParamToggler label={affinitiesNum}>
           <MonacoEditor readOnly style={{ height: 200 }} value={yaml.dump(affinities, defaultYamlDumpOptions)} />
         </DrawerParamToggler>

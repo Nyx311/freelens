@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./pod-disruption-budgets-details.scss";
 
 import { observer } from "mobx-react";
@@ -29,17 +30,17 @@ export const PodDisruptionBudgetDetails = observer((props: PodDisruptionBudgetDe
   return (
     <div className="PdbDetails">
       {selectors.length > 0 && (
-        <DrawerItem name="Selector" labelsOnly>
+        <DrawerItem name={t("Selector")} labelsOnly>
           {selectors.map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
       )}
 
-      <DrawerItem name="Min Available">{pdb.getMinAvailable()}</DrawerItem>
-      <DrawerItem name="Max Unavailable">{pdb.getMaxUnavailable()}</DrawerItem>
-      <DrawerItem name="Current Healthy">{pdb.getCurrentHealthy()}</DrawerItem>
-      <DrawerItem name="Desired Healthy">{pdb.getDesiredHealthy()}</DrawerItem>
+      <DrawerItem name={t("Min Available")}>{pdb.getMinAvailable()}</DrawerItem>
+      <DrawerItem name={t("Max Unavailable")}>{pdb.getMaxUnavailable()}</DrawerItem>
+      <DrawerItem name={t("Current Healthy")}>{pdb.getCurrentHealthy()}</DrawerItem>
+      <DrawerItem name={t("Desired Healthy")}>{pdb.getDesiredHealthy()}</DrawerItem>
       <KubeObjectConditionsDrawer object={pdb} />
     </div>
   );

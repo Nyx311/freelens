@@ -6,6 +6,7 @@
 
 import "./pod-details-list.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { bytesToUnits, cssNames, interval, prevDefault } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -158,7 +159,7 @@ class NonInjectedPodDetailsList extends React.Component<PodDetailsListProps & De
         <TableCell className="cpu">{this.renderCpuUsage(`cpu-${pod.getId()}`, metrics.cpu)}</TableCell>
         <TableCell className="memory">{this.renderMemoryUsage(`memory-${pod.getId()}`, metrics.memory)}</TableCell>
         <TableCell className={cssNames("status", kebabCase(pod.getStatusMessage()))}>
-          {pod.getStatusMessage()}
+          {t(pod.getStatusMessage())}
         </TableCell>
       </TableRow>
     );
@@ -185,7 +186,7 @@ class NonInjectedPodDetailsList extends React.Component<PodDetailsListProps & De
 
     return (
       <div className="PodDetailsList flex flex-col">
-        <DrawerTitle>Pods</DrawerTitle>
+        <DrawerTitle>{t("Pods")}</DrawerTitle>
         <Table
           tableId="workloads_pod_details_list"
           items={pods}
@@ -209,24 +210,24 @@ class NonInjectedPodDetailsList extends React.Component<PodDetailsListProps & De
         >
           <TableHead flat sticky={virtual}>
             <TableCell className="name" sortBy={sortBy.name}>
-              Name
+              {t("Name")}
             </TableCell>
             {hideNode || (
               <TableCell className="node" sortBy={sortBy.node}>
-                Node
+                {t("Node")}
               </TableCell>
             )}
             <TableCell className="namespace" sortBy={sortBy.namespace}>
-              Namespace
+              {t("Namespace")}
             </TableCell>
-            <TableCell className="ready">Ready</TableCell>
+            <TableCell className="ready">{t("Ready")}</TableCell>
             <TableCell className="cpu" sortBy={sortBy.cpu}>
               CPU
             </TableCell>
             <TableCell className="memory" sortBy={sortBy.memory}>
-              Memory
+              {t("Memory")}
             </TableCell>
-            <TableCell className="status">Status</TableCell>
+            <TableCell className="status">{t("Status")}</TableCell>
           </TableHead>
         </Table>
       </div>

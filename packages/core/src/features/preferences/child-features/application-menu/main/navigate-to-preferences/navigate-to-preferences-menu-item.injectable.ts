@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import isMacInjectable from "../../../../../../common/vars/is-mac.injectable";
 import applicationMenuItemInjectionToken from "../../../../../application-menu/main/menu-items/application-menu-item-injection-token";
@@ -21,7 +22,7 @@ const navigateToPreferencesMenuItemInjectable = getInjectable({
       parentId: isMac ? "mac" : "file",
       id: "navigate-to-preferences",
       orderNumber: isMac ? 40 : 30,
-      label: "Preferences",
+      label: t("Preferences"),
       keyboardShortcut: isMac ? "CmdOrCtrl+," : "Ctrl+,",
 
       onClick: () => {

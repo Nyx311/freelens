@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { createKubeApiURL, parseKubeApi } from "@freelensapp/kube-api";
 import { showErrorNotificationInjectable, showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { waitUntilDefined } from "@freelensapp/utilities";
@@ -366,14 +367,18 @@ export class EditResourceModel {
     let result = await this.dependencies.requestKubeResource(this.selfLink);
 
     if (!result.callWasSuccessful) {
-      return void this.dependencies.showErrorNotification(`Loading resource failed: ${result.error}`);
+      return void this.dependencies.showErrorNotification(
+        t("Loading resource failed: {{error}}", { error: result.error }),
+      );
     }
 
     if (result?.response?.metadata.annotations?.[EditResourceAnnotationName]) {
       const parsed = parseKubeApi(this.selfLink);
 
       if (!parsed) {
-        return void this.dependencies.showErrorNotification(`Object's selfLink is invalid: "${this.selfLink}"`);
+        return void this.dependencies.showErrorNotification(
+          t('Object\'s selfLink is invalid: "{{selfLink}}"', { selfLink: this.selfLink }),
+        );
       }
 
       parsed.apiVersion = result.response.metadata.annotations[EditResourceAnnotationName];
@@ -382,7 +387,9 @@ export class EditResourceModel {
     }
 
     if (!result.callWasSuccessful) {
-      return void this.dependencies.showErrorNotification(`Loading resource failed: ${result.error}`);
+      return void this.dependencies.showErrorNotification(
+        t("Loading resource failed: {{error}}", { error: result.error }),
+      );
     }
 
     const resource = result.response;
@@ -417,7 +424,12 @@ export class EditResourceModel {
     let patchRequest = getPatchRequestFor(currentVersion, firstVersion);
 
     if ("error" in patchRequest) {
-      this.dependencies.showErrorNotification(<p>Failed to save resource: {patchRequest.error}</p>);
+      this.dependencies.showErrorNotification(
+        <p>
+          {t("Failed to save resource: ")}
+          {patchRequest.error}
+        </p>,
+      );
 
       return null;
     }
@@ -428,7 +440,12 @@ export class EditResourceModel {
     }
 
     if ("error" in patchRequest) {
-      this.dependencies.showErrorNotification(<p>Failed to save resource: {patchRequest.error}</p>);
+      this.dependencies.showErrorNotification(
+        <p>
+          {t("Failed to save resource: ")}
+          {patchRequest.error}
+        </p>,
+      );
 
       return null;
     }
@@ -437,7 +454,9 @@ export class EditResourceModel {
 
     if (!selfLink) {
       this.dependencies.showErrorNotification(
-        <p>{`Cannot save resource, unknown selfLink: "${currentVersion.metadata.selfLink}"`}</p>,
+        <p>
+          {t('Cannot save resource, unknown selfLink: "{{selfLink}}"', { selfLink: currentVersion.metadata.selfLink })}
+        </p>,
       );
 
       return null;
@@ -446,7 +465,12 @@ export class EditResourceModel {
     const result = await this.dependencies.requestPatchKubeResource(selfLink, patchRequest.patch, patchRequest.options);
 
     if (!result.callWasSuccessful) {
-      this.dependencies.showErrorNotification(<p>Failed to save resource: {result.error}</p>);
+      this.dependencies.showErrorNotification(
+        <p>
+          {t("Failed to save resource: ")}
+          {result.error}
+        </p>,
+      );
 
       return null;
     }
@@ -456,7 +480,7 @@ export class EditResourceModel {
     this.dependencies.showSuccessNotification(
       <p>
         {kind} <b>{name}</b>
-        {" updated."}
+        {t(" updated.")}
       </p>,
     );
 

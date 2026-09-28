@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { jobApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showCheckedErrorNotificationInjectable, showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { cssNames } from "@freelensapp/utilities";
@@ -56,7 +57,7 @@ class NonInjectedCronJobTriggerDialog extends Component<CronJobTriggerDialogProp
 
   async trigger(cronJob: CronJob): Promise<void> {
     if (!cronJob.spec.jobTemplate) {
-      this.props.showErrorNotification(`CronJob ${cronJob.getName()} has no jobTemplate`);
+      this.props.showErrorNotification(t("CronJob {{name}} has no jobTemplate", { name: cronJob.getName() }));
 
       return;
     }
@@ -87,7 +88,7 @@ class NonInjectedCronJobTriggerDialog extends Component<CronJobTriggerDialogProp
 
       this.props.closeCronJobTriggerDialog();
     } catch (err) {
-      this.props.showCheckedErrorNotification(err, "Unknown error occurred while creating job");
+      this.props.showCheckedErrorNotification(err, t("Unknown error occurred while creating job"));
     }
   }
 
@@ -96,14 +97,14 @@ class NonInjectedCronJobTriggerDialog extends Component<CronJobTriggerDialogProp
       <Wizard
         header={
           <h5>
-            Trigger CronJob
+            {t("Trigger CronJob")}
             <span>{cronJob.getName()}</span>
           </h5>
         }
         done={this.props.closeCronJobTriggerDialog}
       >
-        <WizardStep contentClass="flex gap-2 flex-col" next={() => this.trigger(cronJob)} nextLabel="Trigger">
-          <div className="flex gap-2">Job name:</div>
+        <WizardStep contentClass="flex gap-2 flex-col" next={() => this.trigger(cronJob)} nextLabel={t("Trigger")}>
+          <div className="flex gap-2">{t("Job name:")}</div>
           <div className="flex gap-2">
             <Input
               required

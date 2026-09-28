@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { HorizontalLine } from "../../../../../renderer/components/horizontal-line/horizontal-line";
 import { PreferencePageComponent } from "../../preference-page-component";
@@ -12,7 +13,7 @@ import { preferenceItemInjectionToken } from "../preference-item-injection-token
 import type { PreferenceItemComponent, PreferencePage } from "../preference-item-injection-token";
 
 const ApplicationPage: PreferenceItemComponent<PreferencePage> = ({ children, item }) => (
-  <PreferencePageComponent title="Application" id={item.id}>
+  <PreferencePageComponent title={t("Application")} id={item.id}>
     {children}
   </PreferencePageComponent>
 );

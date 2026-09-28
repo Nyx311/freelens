@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { EXTENSION_NAME_MATCH, EXTENSION_PUBLISHER_MATCH, LensProtocolRouter } from "../../../common/protocol-handler";
 
 import type { ShowNotification } from "@freelensapp/notifications";
@@ -55,14 +56,7 @@ export const bindProtocolAddRouteHandlers =
       .addInternalHandler("/", ({ tail }) => {
         if (tail) {
           showShortInfoNotification(
-            <p>
-              {"Unknown Action for "}
-              <code>
-                freelens://app/
-                {tail}
-              </code>
-              . Are you on the latest version?
-            </p>,
+            <p>{t("Unknown action for freelens://app/{{path}}. Are you on the latest version?", { path: tail })}</p>,
           );
         }
 
@@ -84,12 +78,7 @@ export const bindProtocolAddRouteHandlers =
         if (entity) {
           navigateToEntitySettings(entityId);
         } else {
-          showShortInfoNotification(
-            <p>
-              {"Unknown catalog entity "}
-              <code>{entityId}</code>.
-            </p>,
-          );
+          showShortInfoNotification(<p>{t("Unknown catalog entity {{id}}.", { id: entityId })}</p>);
         }
       })
       // Handlers below are deprecated and only kept for backward compact purposes
@@ -100,12 +89,7 @@ export const bindProtocolAddRouteHandlers =
         if (cluster) {
           navigateToClusterView(clusterId);
         } else {
-          showShortInfoNotification(
-            <p>
-              {"Unknown catalog entity "}
-              <code>{clusterId}</code>.
-            </p>,
-          );
+          showShortInfoNotification(<p>{t("Unknown catalog entity {{id}}.", { id: clusterId })}</p>);
         }
       })
       .addInternalHandler("/cluster/:clusterId/settings", ({ pathname: { clusterId } }) => {
@@ -115,12 +99,7 @@ export const bindProtocolAddRouteHandlers =
         if (cluster) {
           navigateToEntitySettings(clusterId);
         } else {
-          showShortInfoNotification(
-            <p>
-              {"Unknown catalog entity "}
-              <code>{clusterId}</code>.
-            </p>,
-          );
+          showShortInfoNotification(<p>{t("Unknown catalog entity {{id}}.", { id: clusterId })}</p>);
         }
       })
       .addInternalHandler("/extensions", () => {

@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import React from "react";
 import { DrawerItem, DrawerTitle } from "../drawer";
@@ -27,15 +28,17 @@ export class ValidatingAdmissionPolicyDetails extends React.Component<Validating
 
     return (
       <div className="ValidatingAdmissionPolicyDetails">
-        <DrawerItem name="API version">{policy.apiVersion}</DrawerItem>
-        <DrawerItem name="Failure Policy">{policy.getFailurePolicy()}</DrawerItem>
+        <DrawerItem name={t("API version")}>{policy.apiVersion}</DrawerItem>
+        <DrawerItem name={t("Failure Policy")}>{policy.getFailurePolicy()}</DrawerItem>
         {paramKind && (
-          <DrawerItem name="Param Kind">{[paramKind.apiVersion, paramKind.kind].filter(Boolean).join("/")}</DrawerItem>
+          <DrawerItem name={t("Param Kind")}>
+            {[paramKind.apiVersion, paramKind.kind].filter(Boolean).join("/")}
+          </DrawerItem>
         )}
 
         {matchConditions.length > 0 && (
           <>
-            <DrawerTitle>Match Conditions</DrawerTitle>
+            <DrawerTitle>{t("Match Conditions")}</DrawerTitle>
             {matchConditions.map((matchCondition) => (
               <DrawerItem name={matchCondition.name} key={matchCondition.name}>
                 {matchCondition.expression}
@@ -46,7 +49,7 @@ export class ValidatingAdmissionPolicyDetails extends React.Component<Validating
 
         {variables.length > 0 && (
           <>
-            <DrawerTitle>Variables</DrawerTitle>
+            <DrawerTitle>{t("Variables")}</DrawerTitle>
             {variables.map((variable) => (
               <DrawerItem name={variable.name} key={variable.name}>
                 {variable.expression}
@@ -55,22 +58,22 @@ export class ValidatingAdmissionPolicyDetails extends React.Component<Validating
           </>
         )}
 
-        <DrawerTitle>Validations</DrawerTitle>
-        {validations.length === 0 && <div style={{ opacity: 0.6 }}>No validations set</div>}
+        <DrawerTitle>{t("Validations")}</DrawerTitle>
+        {validations.length === 0 && <div style={{ opacity: 0.6 }}>{t("No validations set")}</div>}
         {validations.map((validation, index) => (
           <div key={index}>
-            <DrawerItem name="Expression">{validation.expression}</DrawerItem>
-            {validation.message && <DrawerItem name="Message">{validation.message}</DrawerItem>}
+            <DrawerItem name={t("Expression")}>{validation.expression}</DrawerItem>
+            {validation.message && <DrawerItem name={t("Message")}>{validation.message}</DrawerItem>}
             {validation.messageExpression && (
-              <DrawerItem name="Message Expression">{validation.messageExpression}</DrawerItem>
+              <DrawerItem name={t("Message Expression")}>{validation.messageExpression}</DrawerItem>
             )}
-            {validation.reason && <DrawerItem name="Reason">{validation.reason}</DrawerItem>}
+            {validation.reason && <DrawerItem name={t("Reason")}>{validation.reason}</DrawerItem>}
           </div>
         ))}
 
         {auditAnnotations.length > 0 && (
           <>
-            <DrawerTitle>Audit Annotations</DrawerTitle>
+            <DrawerTitle>{t("Audit Annotations")}</DrawerTitle>
             {auditAnnotations.map((auditAnnotation) => (
               <DrawerItem name={auditAnnotation.key} key={auditAnnotation.key}>
                 {auditAnnotation.valueExpression}
@@ -81,11 +84,11 @@ export class ValidatingAdmissionPolicyDetails extends React.Component<Validating
 
         {matchConstraints && (
           <>
-            <DrawerTitle>Match Constraints</DrawerTitle>
+            <DrawerTitle>{t("Match Constraints")}</DrawerTitle>
             {matchConstraints.matchPolicy && (
-              <DrawerItem name="Match Policy">{matchConstraints.matchPolicy}</DrawerItem>
+              <DrawerItem name={t("Match Policy")}>{matchConstraints.matchPolicy}</DrawerItem>
             )}
-            <DrawerItem name="Resource Rules">
+            <DrawerItem name={t("Resource Rules")}>
               {matchConstraints.resourceRules?.map((rule, index) => (
                 <div key={index}>
                   <div>API Groups: {rule.apiGroups.join(", ")}</div>

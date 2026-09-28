@@ -6,6 +6,7 @@
 
 import "./jobs.scss";
 
+import { t } from "@freelensapp/i18n";
 import { formatDuration } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -93,9 +94,9 @@ const durationTooltip = (job: Job) => {
   }
   return (
     <>
-      Start time: <DurationAbsoluteTimestamp timestamp={startTime} />
+      {t("Start time:")} <DurationAbsoluteTimestamp timestamp={startTime} />
       <br />
-      Completion time: <DurationAbsoluteTimestamp timestamp={completionTime} />
+      {t("Completion time:")} <DurationAbsoluteTimestamp timestamp={completionTime} />
     </>
   );
 };
@@ -123,24 +124,24 @@ const NonInjectedJobs = observer((props: Dependencies) => {
           [columnId.age]: (job) => -job.getCreationTimestamp(),
         }}
         searchFilters={[(job) => job.getSearchFields()]}
-        renderHeaderTitle="Jobs"
+        renderHeaderTitle={t("Jobs")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-          { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-          { title: "Resumed", className: "resumed", sortBy: columnId.resumed, id: columnId.resumed },
-          { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
-          { title: "Succeeded", className: "succeeded", sortBy: columnId.succeeded, id: columnId.succeeded },
-          { title: "Completions", className: "completions", sortBy: columnId.completions, id: columnId.completions },
-          { title: "Parallelism", className: "parallelism", sortBy: columnId.parallelism, id: columnId.parallelism },
-          { title: "Duration", className: "duration", sortBy: columnId.duration, id: columnId.duration },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+          { title: t("Resumed"), className: "resumed", sortBy: columnId.resumed, id: columnId.resumed },
+          { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
+          { title: t("Succeeded"), className: "succeeded", sortBy: columnId.succeeded, id: columnId.succeeded },
+          { title: t("Completions"), className: "completions", sortBy: columnId.completions, id: columnId.completions },
+          { title: t("Parallelism"), className: "parallelism", sortBy: columnId.parallelism, id: columnId.parallelism },
+          { title: t("Duration"), className: "duration", sortBy: columnId.duration, id: columnId.duration },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(job) => {
           return [
             <WithTooltip>{job.getName()}</WithTooltip>,
             <NamespaceSelectBadge key="namespace" namespace={job.getNs()} />,
             <BadgeBoolean value={!job.spec.suspend} />,
-            <Badge className={getStatusClass(job)} label={getStatusText(job)} tooltip={getStatusText(job)} />,
+            <Badge className={getStatusClass(job)} label={t(getStatusText(job))} tooltip={t(getStatusText(job))} />,
             job.getCompletions(),
             job.getDesiredCompletions(),
             job.getParallelism(),

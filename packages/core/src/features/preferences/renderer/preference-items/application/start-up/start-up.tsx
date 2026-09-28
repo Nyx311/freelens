@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { SubTitle } from "../../../../../../renderer/components/layout/sub-title";
@@ -18,9 +19,9 @@ interface Dependencies {
 
 const NonInjectedStartUp = observer(({ state }: Dependencies) => (
   <section id="other">
-    <SubTitle title="Start-up" />
+    <SubTitle title={t("Start-up")} />
     <Switch checked={state.openAtLogin} onChange={() => (state.openAtLogin = !state.openAtLogin)}>
-      Automatically start Freelens on login
+      {t("Automatically start Freelens on login")}
     </Switch>
   </section>
 ));

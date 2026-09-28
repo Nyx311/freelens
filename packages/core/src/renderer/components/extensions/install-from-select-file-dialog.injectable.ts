@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import directoryForDownloadsInjectable from "../../../common/app-paths/directory-for-downloads/directory-for-downloads.injectable";
 import openPathPickingDialogInjectable from "../../../features/path-picking-dialog/renderer/pick-paths.injectable";
@@ -24,9 +25,11 @@ const installFromSelectFileDialogInjectable = getInjectable({
       openPathPickingDialog({
         defaultPath: directoryForDownloads,
         properties: ["openFile", "multiSelections"],
-        message: `Select extensions to install (formats: ${supportedExtensionFormats.join(", ")}), `,
-        buttonLabel: "Use configuration",
-        filters: [{ name: "tarball", extensions: supportedExtensionFormats }],
+        message: t("Select extensions to install (formats: {{formats}})", {
+          formats: supportedExtensionFormats.join(", "),
+        }),
+        buttonLabel: t("Use configuration"),
+        filters: [{ name: t("tarball"), extensions: supportedExtensionFormats }],
         onPick: attemptInstalls,
       });
   },

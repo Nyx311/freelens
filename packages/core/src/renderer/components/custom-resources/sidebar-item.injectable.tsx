@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { noop } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -17,7 +18,7 @@ const customResourcesSidebarItemInjectable = getInjectable({
   id: id,
 
   instantiate: (di) => {
-    const title = "Custom Resources";
+    const title = t("Custom Resources");
     const getClusterPageMenuOrder = di.inject(getClusterPageMenuOrderInjectable);
 
     return {

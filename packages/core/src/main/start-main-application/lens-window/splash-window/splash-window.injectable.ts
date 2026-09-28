@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import joinPathsInjectable from "../../../../common/path/join-paths.injectable";
 import staticFilesDirectoryInjectable from "../../../../common/vars/static-files-directory.injectable";
@@ -20,7 +21,7 @@ const splashWindowInjectable = getInjectable({
 
     return createLensWindow({
       id: "splash",
-      title: "Loading",
+      title: t("Loading"),
       getContentSource: () => ({
         file: splashWindowFile,
       }),

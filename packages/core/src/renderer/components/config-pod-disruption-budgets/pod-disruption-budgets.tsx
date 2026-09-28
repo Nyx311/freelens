@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./pod-disruption-budgets.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -57,35 +58,50 @@ class NonInjectedPodDisruptionBudgets extends React.Component<PodDisruptionBudge
             [columnId.age]: (pdb) => -pdb.getCreationTimestamp(),
           }}
           searchFilters={[(pdb) => pdb.getSearchFields()]}
-          renderHeaderTitle="Pod Disruption Budgets"
+          renderHeaderTitle={t("Pod Disruption Budgets")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
             {
-              title: "Min Available",
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Min Available"),
               className: "min-available",
               sortBy: columnId.minAvailable,
               id: columnId.minAvailable,
             },
             {
-              title: "Max Unavailable",
+              title: t("Max Unavailable"),
               className: "max-unavailable",
               sortBy: columnId.maxUnavailable,
               id: columnId.maxUnavailable,
             },
             {
-              title: "Current Healthy",
+              title: t("Current Healthy"),
               className: "current-healthy",
               sortBy: columnId.currentHealthy,
               id: columnId.currentHealthy,
             },
             {
-              title: "Desired Healthy",
+              title: t("Desired Healthy"),
               className: "desired-healthy",
               sortBy: columnId.desiredHealthy,
               id: columnId.desiredHealthy,
             },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(pdb) => [
             <WithTooltip>{pdb.getName()}</WithTooltip>,

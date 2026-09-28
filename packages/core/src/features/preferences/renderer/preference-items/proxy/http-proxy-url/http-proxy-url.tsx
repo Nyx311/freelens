@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -22,15 +23,15 @@ const NonInjectedHttpProxyUrl = observer(({ state }: Dependencies) => {
 
   return (
     <section>
-      <SubTitle title="HTTP Proxy" />
+      <SubTitle title={t("HTTP Proxy")} />
       <Input
         theme="round-black"
-        placeholder="Type HTTP proxy url (example: http://proxy.acme.org:8080)"
+        placeholder={t("Type HTTP proxy url (example: http://proxy.acme.org:8080)")}
         value={proxy}
         onChange={(v) => setProxy(v)}
         onBlur={() => (state.httpsProxy = proxy)}
       />
-      <small className="hint">Proxy is used only for non-cluster communication.</small>
+      <small className="hint">{t("Proxy is used only for non-cluster communication.")}</small>
     </section>
   );
 });

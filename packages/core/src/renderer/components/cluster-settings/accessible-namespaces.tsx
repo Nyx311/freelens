@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
@@ -29,9 +30,9 @@ export class ClusterAccessibleNamespaces extends React.Component<ClusterAccessib
   render() {
     return (
       <>
-        <SubTitle title="Accessible Namespaces" id="accessible-namespaces" />
+        <SubTitle title={t("Accessible Namespaces")} id="accessible-namespaces" />
         <EditableList
-          placeholder="Add new namespaces (comma-separated)..."
+          placeholder={t("Add new namespaces (comma-separated)...")}
           separator=","
           add={(newNamespace) => {
             this.namespaces.add(newNamespace);
@@ -46,8 +47,9 @@ export class ClusterAccessibleNamespaces extends React.Component<ClusterAccessib
           inputTheme="round-black"
         />
         <small className="hint">
-          This setting is useful for manually specifying which namespaces you have access to. This is useful when you do
-          not have permissions to list namespaces.
+          {t(
+            "This setting is useful for manually specifying which namespaces you have access to. This is useful when you do not have permissions to list namespaces.",
+          )}
         </small>
       </>
     );

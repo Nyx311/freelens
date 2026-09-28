@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getOrInsertWith, interval } from "@freelensapp/utilities";
 import { observable, when } from "mobx";
 
@@ -36,7 +37,10 @@ export class LogStore {
       error = error.error;
     }
 
-    const message = [`Failed to load logs: ${error.message}`, `Reason: ${error.reason} (${error.code})`];
+    const message = [
+      t("Failed to load logs: {{error}}", { error: error.message }),
+      t("Reason: {{reason}} ({{code}})", { reason: error.reason, code: error.code }),
+    ];
 
     this.stopLoadingLogs(tabId);
     this.podLogs.set(tabId, message);

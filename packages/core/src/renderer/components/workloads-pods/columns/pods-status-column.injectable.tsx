@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { getInjectable } from "@ogre-tools/injectable";
 import { kebabCase } from "es-toolkit";
@@ -19,10 +20,10 @@ export const podsStatusColumnInjectable = getInjectable({
     apiVersion: "v1",
     priority: COLUMN_PRIORITY.STATUS,
     content: (pod) => ({
-      title: pod.getStatusMessage(),
+      title: t(pod.getStatusMessage()),
       className: kebabCase(pod.getStatusMessage()),
     }),
-    header: { title: "Status", className: "status", sortBy: columnId, id: columnId },
+    header: { title: t("Status"), className: "status", sortBy: columnId, id: columnId },
     sortingCallBack: (pod) => pod.getStatusMessage(),
     searchFilter: (pod) => pod.getStatusMessage(),
   }),

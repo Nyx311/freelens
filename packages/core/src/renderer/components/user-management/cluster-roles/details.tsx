@@ -6,6 +6,7 @@
 
 import "./details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import React from "react";
 import { DrawerTitle } from "../../drawer";
@@ -26,25 +27,25 @@ export class ClusterRoleDetails extends React.Component<ClusterRoleDetailsProps>
 
     return (
       <div className="ClusterRoleDetails">
-        <DrawerTitle>Rules</DrawerTitle>
+        <DrawerTitle>{t("Rules")}</DrawerTitle>
         {rules.map(({ resourceNames, apiGroups, resources, verbs }, index) => {
           return (
             <div className="rule" key={index}>
               {resources && (
                 <>
-                  <div className="name">Resources</div>
+                  <div className="name">{t("Resources")}</div>
                   <div className="value">{resources.join(", ")}</div>
                 </>
               )}
               {verbs && (
                 <>
-                  <div className="name">Verbs</div>
+                  <div className="name">{t("Verbs")}</div>
                   <div className="value">{verbs.join(", ")}</div>
                 </>
               )}
               {apiGroups && (
                 <>
-                  <div className="name">Api Groups</div>
+                  <div className="name">{t("Api Groups")}</div>
                   <div className="value">
                     {apiGroups.map((apiGroup) => (apiGroup === "" ? `'${apiGroup}'` : apiGroup)).join(", ")}
                   </div>
@@ -52,7 +53,7 @@ export class ClusterRoleDetails extends React.Component<ClusterRoleDetailsProps>
               )}
               {resourceNames && (
                 <>
-                  <div className="name">Resource Names</div>
+                  <div className="name">{t("Resource Names")}</div>
                   <div className="value">{resourceNames.join(", ")}</div>
                 </>
               )}

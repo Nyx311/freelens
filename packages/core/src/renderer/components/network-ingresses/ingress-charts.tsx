@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { useContext } from "react";
@@ -41,15 +42,15 @@ const NonInjectedIngressCharts = observer(({ selectedMetricsTimeRange }: Depende
     Network: [
       {
         id: `${id}-bytesSentSuccess`,
-        label: `Bytes sent, status 2xx`,
-        tooltip: `Bytes sent by Ingress controller with successful status`,
+        label: t("Bytes sent, status 2xx"),
+        tooltip: t("Bytes sent by Ingress controller with successful status"),
         borderColor: "#46cd9e",
         data: convertIngressMetricValuesToChartData(bytesSentSuccess),
       },
       {
         id: `${id}-bytesSentFailure`,
-        label: `Bytes sent, status 5xx`,
-        tooltip: `Bytes sent by Ingress controller with error status`,
+        label: t("Bytes sent, status 5xx"),
+        tooltip: t("Bytes sent by Ingress controller with error status"),
         borderColor: "#cd465a",
         data: convertIngressMetricValuesToChartData(bytesSentFailure),
       },
@@ -57,15 +58,15 @@ const NonInjectedIngressCharts = observer(({ selectedMetricsTimeRange }: Depende
     Duration: [
       {
         id: `${id}-requestDurationSeconds`,
-        label: `Request`,
-        tooltip: `Request duration in seconds`,
+        label: t("Request"),
+        tooltip: t("Request duration in seconds"),
         borderColor: "#48b18d",
         data: convertIngressMetricValuesToChartData(requestDurationSeconds),
       },
       {
         id: `${id}-responseDurationSeconds`,
-        label: `Response`,
-        tooltip: `Response duration in seconds`,
+        label: t("Response"),
+        tooltip: t("Response duration in seconds"),
         borderColor: "#73ba3c",
         data: convertIngressMetricValuesToChartData(responseDurationSeconds),
       },

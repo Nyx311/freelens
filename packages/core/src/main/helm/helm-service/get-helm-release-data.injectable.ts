@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { isObject, json } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import execHelmInjectable from "../exec-helm/exec-helm.injectable";
@@ -38,7 +39,7 @@ const getHelmReleaseDataInjectable = getInjectable({
       if (!result.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Failed to execute helm: ${result.error}`,
+          error: t("Failed to execute helm: {{error}}", { error: result.error }),
         };
       }
 
@@ -47,7 +48,7 @@ const getHelmReleaseDataInjectable = getInjectable({
       if (!parseResult.callWasSuccessful) {
         return {
           callWasSuccessful: false,
-          error: `Failed to parse helm response: ${parseResult.error}`,
+          error: t("Failed to parse helm response: {{error}}", { error: parseResult.error }),
         };
       }
 
@@ -56,7 +57,7 @@ const getHelmReleaseDataInjectable = getInjectable({
       if (!isObject(release) || Array.isArray(release)) {
         return {
           callWasSuccessful: false,
-          error: `Helm response is not an object: ${JSON.stringify(release)}`,
+          error: t("Helm response is not an object: {{response}}", { response: JSON.stringify(release) }),
         };
       }
 

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./runtime-classes-details-tolerations.scss";
 
 import { DrawerItem, DrawerParamToggler } from "../drawer";
@@ -25,7 +26,7 @@ export function RuntimeClassDetailsTolerations({ runtimeClass: runtimeClass }: R
   if (!tolerations.length) return null;
 
   return (
-    <DrawerItem name="Tolerations" className="RuntimeClassDetailsTolerations">
+    <DrawerItem name={t("Tolerations")} className="RuntimeClassDetailsTolerations">
       <DrawerParamToggler label={tolerations.length}>
         <RuntimeClassTolerations tolerations={tolerations} />
       </DrawerParamToggler>

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { autorun, makeObservable, observable } from "mobx";
 import { observer } from "mobx-react";
 import React from "react";
@@ -54,7 +55,7 @@ export class ClusterProxySetting extends React.Component<ClusterProxySettingProp
   render() {
     return (
       <>
-        <SubTitle title="HTTP Proxy" id="http-proxy" />
+        <SubTitle title={t("HTTP Proxy")} id="http-proxy" />
         <Input
           theme="round-black"
           value={this.proxy}
@@ -63,7 +64,7 @@ export class ClusterProxySetting extends React.Component<ClusterProxySettingProp
           placeholder="http://<address>:<port>"
           validators={this.proxy ? InputValidators.isUrl : undefined}
         />
-        <small className="hint">HTTP Proxy server. Used for communicating with Kubernetes API.</small>
+        <small className="hint">{t("HTTP Proxy server. Used for communicating with Kubernetes API.")}</small>
       </>
     );
   }

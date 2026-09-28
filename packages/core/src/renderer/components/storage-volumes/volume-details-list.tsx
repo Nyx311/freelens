@@ -6,6 +6,7 @@
 
 import "./volume-details-list.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { cssNames, prevDefault } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -82,7 +83,7 @@ class NonInjectedVolumeDetailsList extends React.Component<VolumeDetailsListProp
       >
         <TableCell className="name">{volume.getName()}</TableCell>
         <TableCell className="capacity">{volume.getCapacity()}</TableCell>
-        <TableCell className={cssNames("status", kebabCase(volume.getStatus()))}>{volume.getStatus()}</TableCell>
+        <TableCell className={cssNames("status", kebabCase(volume.getStatus()))}>{t(volume.getStatus())}</TableCell>
       </TableRow>
     );
   };
@@ -97,7 +98,7 @@ class NonInjectedVolumeDetailsList extends React.Component<VolumeDetailsListProp
 
     return (
       <div className="VolumeDetailsList flex flex-col">
-        <DrawerTitle>Persistent Volumes</DrawerTitle>
+        <DrawerTitle>{t("Persistent Volumes")}</DrawerTitle>
         <Table
           tableId="storage_volume_details_list"
           items={persistentVolumes}
@@ -111,13 +112,13 @@ class NonInjectedVolumeDetailsList extends React.Component<VolumeDetailsListProp
         >
           <TableHead>
             <TableCell className="name" sortBy={sortBy.name}>
-              Name
+              {t("Name")}
             </TableCell>
             <TableCell className="capacity" sortBy={sortBy.capacity}>
-              Capacity
+              {t("Capacity")}
             </TableCell>
             <TableCell className="status" sortBy={sortBy.status}>
-              Status
+              {t("Status")}
             </TableCell>
           </TableHead>
           {!virtual && persistentVolumes.map((volume) => this.getTableRow(volume.getId()))}

@@ -10,6 +10,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { showSuccessNotificationInjectable } from "@freelensapp/notifications";
 import { cssNames } from "@freelensapp/utilities";
@@ -55,7 +56,7 @@ class NonInjectedKubeConfigDialog extends React.Component<KubeConfigDialogProps 
 
   copyToClipboard = (config: string) => {
     clipboard.writeText(config);
-    this.props.showSuccessNotification("Config copied to clipboard");
+    this.props.showSuccessNotification(t("Config copied to clipboard"));
   };
 
   download = (config: string) => {
@@ -63,20 +64,20 @@ class NonInjectedKubeConfigDialog extends React.Component<KubeConfigDialogProps 
   };
 
   renderContents = (data: KubeconfigDialogData) => (
-    <Wizard header={<h5>{data.title || "Kubeconfig File"}</h5>}>
+    <Wizard header={<h5>{data.title || t("Kubeconfig File")}</h5>}>
       <WizardStep
         customButtons={
           <div className="actions flex gap-2">
             <Button plain onClick={() => this.copyToClipboard(data.config)}>
               <Icon material="assignment" />
-              {" Copy to clipboard"}
+              {` ${t("Copy to clipboard")}`}
             </Button>
             <Button plain onClick={() => this.download(data.config)}>
               <Icon material="cloud_download" />
-              {" Download file"}
+              {` ${t("Download file")}`}
             </Button>
             <Button plain className="ml-auto mr-0" onClick={this.close}>
-              Close
+              {t("Close")}
             </Button>
           </div>
         }

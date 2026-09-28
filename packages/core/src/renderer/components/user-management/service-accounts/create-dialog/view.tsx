@@ -6,6 +6,7 @@
 
 import "./view.scss";
 
+import { t } from "@freelensapp/i18n";
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -53,7 +54,7 @@ class NonInjectedCreateServiceAccountDialog extends React.Component<CreateServic
       showDetails(serviceAccount.selfLink);
       closeCreateServiceAccountDialog();
     } catch (err) {
-      showCheckedErrorNotification(err, "Unknown error occurred while creating service account");
+      showCheckedErrorNotification(err, t("Unknown error occurred while creating service account"));
     }
   };
 
@@ -67,19 +68,19 @@ class NonInjectedCreateServiceAccountDialog extends React.Component<CreateServic
         isOpen={state.isOpen.get()}
         close={closeCreateServiceAccountDialog}
       >
-        <Wizard header={<h5>Create Service Account</h5>} done={closeCreateServiceAccountDialog}>
-          <WizardStep nextLabel="Create" next={this.createAccount}>
-            <SubTitle title="Account Name" />
+        <Wizard header={<h5>{t("Create Service Account")}</h5>} done={closeCreateServiceAccountDialog}>
+          <WizardStep nextLabel={t("Create")} next={this.createAccount}>
+            <SubTitle title={t("Account Name")} />
             <Input
               autoFocus
               required
-              placeholder="Enter a name"
+              placeholder={t("Enter a name")}
               trim
               validators={systemName}
               value={state.name.get()}
               onChange={(v) => state.name.set(v.toLowerCase())}
             />
-            <SubTitle title="Namespace" />
+            <SubTitle title={t("Namespace")} />
             <NamespaceSelect
               id="create-dialog-namespace-select-input"
               themeName="lens"

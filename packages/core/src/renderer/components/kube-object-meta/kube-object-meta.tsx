@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { KubeObject } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { Link } from "@freelensapp/routing";
@@ -96,9 +97,9 @@ const NonInjectedKubeObjectMeta = observer((props: Dependencies & KubeObjectMeta
 
   return (
     <>
-      <DrawerItem name="Created" hidden={isHidden("creationTimestamp") || !creationTimestamp}>
+      <DrawerItem name={t("Created")} hidden={isHidden("creationTimestamp") || !creationTimestamp}>
         <KubeObjectAge object={object} compact={false} withTooltip={false} />
-        {" ago "}
+        {` ${t("ago")} `}
         {creationTimestamp && (
           <>
             {"("}
@@ -107,29 +108,29 @@ const NonInjectedKubeObjectMeta = observer((props: Dependencies & KubeObjectMeta
           </>
         )}
       </DrawerItem>
-      <DrawerItem name="Deleted" hidden={isHidden("deletionTimestamp") || !deletionTimestamp}>
+      <DrawerItem name={t("Deleted")} hidden={isHidden("deletionTimestamp") || !deletionTimestamp}>
         <DurationAbsoluteTimestamp timestamp={deletionTimestamp} />
       </DrawerItem>
-      <DrawerItem name="Name" hidden={isHidden("name")}>
+      <DrawerItem name={t("Name")} hidden={isHidden("name")}>
         {object.getName()}
       </DrawerItem>
-      <DrawerItem name="Namespace" hidden={isHidden("namespace") || !namespace}>
+      <DrawerItem name={t("Namespace")} hidden={isHidden("namespace") || !namespace}>
         <LinkToNamespace namespace={namespace} />
       </DrawerItem>
-      <DrawerItem name="UID" hidden={isHidden("uid")}>
+      <DrawerItem name={t("UID")} hidden={isHidden("uid")}>
         {object.getId()}
       </DrawerItem>
-      <DrawerItem name="Link" hidden={isHidden("selfLink")}>
+      <DrawerItem name={t("Link")} hidden={isHidden("selfLink")}>
         {selfLink}
       </DrawerItem>
-      <DrawerItem name="Resource Version" hidden={isHidden("resourceVersion")}>
+      <DrawerItem name={t("Resource Version")} hidden={isHidden("resourceVersion")}>
         {object.getResourceVersion()}
       </DrawerItem>
-      <DrawerItemLabels name="Labels" labels={object.getLabels()} hidden={isHidden("labels")} />
-      <DrawerItemLabels name="Annotations" labels={object.getAnnotations()} hidden={isHidden("annotations")} />
-      <DrawerItemLabels name="Finalizers" labels={object.getFinalizers()} hidden={isHidden("finalizers")} />
+      <DrawerItemLabels name={t("Labels")} labels={object.getLabels()} hidden={isHidden("labels")} />
+      <DrawerItemLabels name={t("Annotations")} labels={object.getAnnotations()} hidden={isHidden("annotations")} />
+      <DrawerItemLabels name={t("Finalizers")} labels={object.getFinalizers()} hidden={isHidden("finalizers")} />
       {ownerRefs?.length > 0 && (
-        <DrawerItem name="Controlled By" hidden={isHidden("ownerReferences")}>
+        <DrawerItem name={t("Controlled By")} hidden={isHidden("ownerReferences")}>
           {ownerRefs.map((ref) => (
             <p key={ref.name}>
               {`${ref.kind} `}
@@ -139,7 +140,7 @@ const NonInjectedKubeObjectMeta = observer((props: Dependencies & KubeObjectMeta
         </DrawerItem>
       )}
       {managedFields && managedFields.length > 0 && (
-        <DrawerItem name="Managed Fields" hidden={isHidden("managedFields")}>
+        <DrawerItem name={t("Managed Fields")} hidden={isHidden("managedFields")}>
           {managedFields.filter(isManagedFieldsEntry).map((entry) => (
             // The apiserver identifies a managed-fields entry by manager, operation,
             // apiVersion and subresource, so that tuple is the entry's key. Manager and

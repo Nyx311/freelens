@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { computed } from "mobx";
 
 import type { IComputedValue } from "mobx";
@@ -19,7 +20,7 @@ interface Dependencies {
 
 export const getWelcomeMenuItems = ({ extensions, navigateToCatalog, navigateToTerminal }: Dependencies) => {
   const browseClusters = {
-    title: "Browse Clusters in Catalog",
+    title: t("Browse Clusters in Catalog"),
     icon: "view_list",
 
     click: () =>
@@ -31,7 +32,7 @@ export const getWelcomeMenuItems = ({ extensions, navigateToCatalog, navigateToT
 
   // A shell that belongs to no cluster, so it can be opened from here
   const openTerminal = {
-    title: "Open a Terminal",
+    title: t("Open a Terminal"),
     icon: "terminal",
 
     click: () => navigateToTerminal(),

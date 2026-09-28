@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./helm-charts.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -113,17 +114,39 @@ class NonInjectedHelmCharts extends Component<Dependencies> {
           customizeHeader={({ searchProps }) => ({
             searchProps: {
               ...searchProps,
-              placeholder: "Search Helm Charts...",
+              placeholder: t("Search Helm Charts..."),
             },
           })}
           customizeTableRowProps={(item) => ({ testId: `helm-chart-row-for-${item.getFullName("-")}` })}
           renderTableHeader={[
             { className: "icon", showWithColumn: columnId.name },
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Description", className: "description", id: columnId.description },
-            { title: "Version", className: "version", id: columnId.version },
-            { title: "App Version", className: "app-version", id: columnId.appVersion },
-            { title: "Repository", className: "repository", sortBy: columnId.repo, id: columnId.repo },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Description"),
+              className: "description",
+              id: columnId.description,
+            },
+            {
+              title: t("Version"),
+              className: "version",
+              id: columnId.version,
+            },
+            {
+              title: t("App Version"),
+              className: "app-version",
+              id: columnId.appVersion,
+            },
+            {
+              title: t("Repository"),
+              className: "repository",
+              sortBy: columnId.repo,
+              id: columnId.repo,
+            },
           ]}
           renderTableContents={(chart) => [
             <figure key="image">

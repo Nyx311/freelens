@@ -6,6 +6,7 @@
 
 import "./ingresses.scss";
 
+import { t } from "@freelensapp/i18n";
 import { type ComputedIngressRoute, computeRouteDeclarations } from "@freelensapp/kube-object";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -68,7 +69,7 @@ function showRoutes(routes: ComputedIngressRoute[], max: number) {
       )}
       {routes.length > max && (
         <div key="ellipsis" className="ingressRule">
-          {routes.length - max} more...
+          {routes.length - max} {t("more...")}
         </div>
       )}
     </>
@@ -91,13 +92,13 @@ const NonInjectedIngresses = observer((props: Dependencies) => {
           [columnId.age]: (ingress) => -ingress.getCreationTimestamp(),
         }}
         searchFilters={[(ingress) => ingress.getSearchFields(), (ingress) => ingress.getPorts()]}
-        renderHeaderTitle="Ingresses"
+        renderHeaderTitle={t("Ingresses")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-          { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-          { title: "LoadBalancers", className: "loadbalancers", id: columnId.loadBalancers },
-          { title: "Rules", className: "rules", id: columnId.rules },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+          { title: t("LoadBalancers"), className: "loadbalancers", id: columnId.loadBalancers },
+          { title: t("Rules"), className: "rules", id: columnId.rules },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(ingress) => {
           const loadBalancers = ingress.getLoadBalancers();

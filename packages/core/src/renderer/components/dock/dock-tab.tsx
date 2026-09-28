@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { Tooltip, TooltipPosition } from "@freelensapp/tooltip";
 import { cssNames, isMiddleClick, prevDefault } from "@freelensapp/utilities";
@@ -61,15 +62,15 @@ class NonInjectedDockTab extends React.Component<DockTabProps & Dependencies> {
         close={() => this.menuVisible.set(false)}
         toggleEvent="contextmenu"
       >
-        <MenuItem onClick={() => closeTab(tabId)}>Close</MenuItem>
+        <MenuItem onClick={() => closeTab(tabId)}>{t("Close")}</MenuItem>
         <MenuItem onClick={() => closeAllTabs()} disabled={closeAllDisabled}>
-          Close all tabs
+          {t("Close all tabs")}
         </MenuItem>
         <MenuItem onClick={() => closeOtherTabs(tabId)} disabled={closeOtherDisabled}>
-          Close other tabs
+          {t("Close other tabs")}
         </MenuItem>
         <MenuItem onClick={() => closeTabsToTheRight(tabId)} disabled={closeRightDisabled}>
-          Close tabs to the right
+          {t("Close tabs to the right")}
         </MenuItem>
       </Menu>
     );
@@ -103,7 +104,7 @@ class NonInjectedDockTab extends React.Component<DockTabProps & Dependencies> {
                   <Icon
                     small
                     material="close"
-                    tooltip={`Close ${this.props.isMac ? "⌘+W" : "Ctrl+W"}`}
+                    tooltip={t("Close {{shortcut}}", { shortcut: this.props.isMac ? "⌘+W" : "Ctrl+W" })}
                     onClick={close}
                     data-testid={`dock-tab-close-for-${id}`}
                   />

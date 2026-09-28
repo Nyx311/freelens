@@ -6,6 +6,7 @@
 
 import "./pod-tolerations.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Table, TableCell, TableHead, TableRow } from "../table";
 
 import type { Toleration } from "@freelensapp/kube-object";
@@ -57,19 +58,19 @@ export function PodTolerations({ tolerations }: PodTolerationsProps) {
     >
       <TableHead sticky={false}>
         <TableCell className="key" sortBy={sortBy.Key}>
-          Key
+          {t("Key")}
         </TableCell>
         <TableCell className="operator" sortBy={sortBy.Operator}>
-          Operator
+          {t("Operator")}
         </TableCell>
         <TableCell className="value" sortBy={sortBy.Value}>
-          Value
+          {t("Value")}
         </TableCell>
         <TableCell className="effect" sortBy={sortBy.Effect}>
-          Effect
+          {t("Effect")}
         </TableCell>
         <TableCell className="seconds" sortBy={sortBy.Seconds}>
-          Seconds
+          {t("Seconds")}
         </TableCell>
       </TableHead>
     </Table>

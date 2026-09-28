@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { mapValues } from "es-toolkit";
 import { observer } from "mobx-react";
@@ -47,8 +48,8 @@ const NonInjectedPodCharts = observer(({ selectedMetricsTimeRange }: Dependencie
     CPU: [
       {
         id: `${id}-cpuUsage`,
-        label: `Usage`,
-        tooltip: `Container CPU cores usage`,
+        label: t("Usage"),
+        tooltip: t("Container CPU cores usage"),
         borderColor: "#00a7a0",
         data: cpuUsage.map(([x, y]) => ({ x: x * 1000, y })),
       },
@@ -56,8 +57,8 @@ const NonInjectedPodCharts = observer(({ selectedMetricsTimeRange }: Dependencie
     Memory: [
       {
         id: `${id}-memoryUsage`,
-        label: `Usage`,
-        tooltip: `Container memory usage`,
+        label: t("Usage"),
+        tooltip: t("Container memory usage"),
         borderColor: "#c93dce",
         data: memoryUsage.map(([x, y]) => ({ x: x * 1000, y })),
       },
@@ -65,15 +66,15 @@ const NonInjectedPodCharts = observer(({ selectedMetricsTimeRange }: Dependencie
     Network: [
       {
         id: `${id}-networkReceive`,
-        label: `Receive`,
-        tooltip: `Bytes received by all containers`,
+        label: t("Receive"),
+        tooltip: t("Bytes received by all containers"),
         borderColor: "#64c5d6",
         data: networkReceive.map(([x, y]) => ({ x: x * 1000, y })),
       },
       {
         id: `${id}-networkTransmit`,
-        label: `Transmit`,
-        tooltip: `Bytes transmitted from all containers`,
+        label: t("Transmit"),
+        tooltip: t("Bytes transmitted from all containers"),
         borderColor: "#46cd9e",
         data: networkTransmit.map(([x, y]) => ({ x: x * 1000, y })),
       },
@@ -81,22 +82,22 @@ const NonInjectedPodCharts = observer(({ selectedMetricsTimeRange }: Dependencie
     Filesystem: [
       {
         id: `${id}-fsUsage`,
-        label: `Usage`,
-        tooltip: `Bytes consumed on this filesystem`,
+        label: t("Usage"),
+        tooltip: t("Bytes consumed on this filesystem"),
         borderColor: "#ffc63d",
         data: fsUsage.map(([x, y]) => ({ x: x * 1000, y })),
       },
       {
         id: `${id}-fsWrites`,
-        label: `Writes`,
-        tooltip: `Bytes written on this filesystem`,
+        label: t("Writes"),
+        tooltip: t("Bytes written on this filesystem"),
         borderColor: "#ff963d",
         data: fsWrites.map(([x, y]) => ({ x: x * 1000, y })),
       },
       {
         id: `${id}-fsReads`,
-        label: `Reads`,
-        tooltip: `Bytes read on this filesystem`,
+        label: t("Reads"),
+        tooltip: t("Bytes read on this filesystem"),
         borderColor: "#fff73d",
         data: fsReads.map(([x, y]) => ({ x: x * 1000, y })),
       },

@@ -8,6 +8,7 @@ import {
   clusterIconSettingsComponentInjectionToken,
   clusterIconSettingsMenuInjectionToken,
 } from "@freelensapp/cluster-settings";
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { computedInjectManyInjectionToken } from "@ogre-tools/injectable-extension-for-mobx";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -85,7 +86,7 @@ const NonInjectedClusterIconSetting = observer((props: ClusterIconSettingProps &
           autoCloseOnSelect={true}
           triggerIcon={{ material: "more_horiz" }}
         >
-          <MenuItem onClick={onUploadClick}>Upload Icon</MenuItem>
+          <MenuItem onClick={onUploadClick}>{t("Upload Icon")}</MenuItem>
           {props.menuItems.get().map((item) => (
             <MenuItem
               onClick={() => item.onClick(cluster.preferences)}

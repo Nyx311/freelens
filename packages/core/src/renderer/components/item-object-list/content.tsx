@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./item-list-layout.scss";
 
 import { Spinner } from "@freelensapp/spinner";
@@ -414,23 +415,17 @@ export class NonInjectedItemListLayoutContent<
     const tail =
       tailCount > 0 ? (
         <>
-          {", and "}
-          <b>{tailCount}</b>
-          {" more"}
+          {t(", and")} <b>{tailCount}</b> {t("more")}
         </>
       ) : null;
     const message =
       selectedCount <= 1 ? (
         <p>
-          {"Remove item "}
-          <b>{selectedNames}</b>?
+          {t("Remove item")} <b>{selectedNames}</b>?
         </p>
       ) : (
         <p>
-          {"Remove "}
-          <b>{selectedCount}</b>
-          {" items "}
-          <b>{selectedNames}</b>
+          {t("Remove")} <b>{selectedCount}</b> {t("items")} <b>{selectedNames}</b>
           {tail}?
         </p>
       );
@@ -444,7 +439,7 @@ export class NonInjectedItemListLayoutContent<
 
     openConfirmDialog({
       ok: onConfirm,
-      labelOk: "Remove",
+      labelOk: t("Remove"),
       message,
       ...dialogCustomProps,
     });
@@ -462,10 +457,10 @@ export class NonInjectedItemListLayoutContent<
     if (this.props.getFilters().length > 0) {
       return (
         <NoItems>
-          No items found.
+          {t("No items found.")}
           <p>
             <a onClick={() => this.props.pageFiltersStore.reset()} className="contrast">
-              Reset filters?
+              {t("Reset filters?")}
             </a>
           </p>
         </NoItems>

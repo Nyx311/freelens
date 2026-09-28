@@ -6,6 +6,7 @@
 
 import "./pod-details-statuses.scss";
 
+import { t } from "@freelensapp/i18n";
 import { kebabCase } from "es-toolkit";
 import { countBy } from "es-toolkit/compat";
 import React from "react";
@@ -27,7 +28,7 @@ export class PodDetailsStatuses extends React.Component<PodDetailsStatusesProps>
       <div className="PodDetailsStatuses">
         {Object.entries(statuses).map(([phase, count]) => (
           <span key={phase} className={kebabCase(phase)}>
-            {`${phase}: ${count}`}
+            {t("{{phase}}: {{count}}", { phase: t(phase), count })}
           </span>
         ))}
       </div>

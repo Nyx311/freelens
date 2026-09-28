@@ -5,7 +5,7 @@
  */
 
 import "./statefulsets.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import eventStoreInjectable from "../events/store.injectable";
@@ -51,23 +51,23 @@ const NonInjectedStatefulSets = observer((props: Dependencies) => {
           [columnId.age]: (statefulSet) => -statefulSet.getCreationTimestamp(),
         }}
         searchFilters={[(statefulSet) => statefulSet.getSearchFields()]}
-        renderHeaderTitle="Stateful Sets"
+        renderHeaderTitle={t("Stateful Sets")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Namespace",
+            title: t("Namespace"),
             className: "namespace",
             sortBy: columnId.namespace,
             id: columnId.namespace,
           },
-          { title: "Ready", className: "ready", sortBy: columnId.ready, id: columnId.ready },
+          { title: t("Ready"), className: "ready", sortBy: columnId.ready, id: columnId.ready },
           {
-            title: "Desired",
+            title: t("Desired"),
             className: "desired",
             sortBy: columnId.desired,
             id: columnId.desired,
           },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(statefulSet) => [
           <WithTooltip>{statefulSet.getName()}</WithTooltip>,

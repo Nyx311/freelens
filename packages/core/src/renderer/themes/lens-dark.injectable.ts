@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { lensThemeDeclarationInjectionToken } from "./declaration";
 
@@ -19,7 +20,7 @@ const lensDarkThemeInjectable: Injectable<LensTheme, ReadonlyDeep<LensTheme>> = 
     const theme: LensTheme = {
       name: "Dark",
       type: "dark" as const,
-      description: "Original Lens dark theme",
+      description: t("Original Lens dark theme"),
       author: "Mirantis",
       monacoTheme: "clouds-midnight" as const,
       colors: {

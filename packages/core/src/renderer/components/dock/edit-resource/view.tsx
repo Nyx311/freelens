@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -27,7 +28,7 @@ interface Dependencies {
 const NonInjectedEditResource = observer(({ model, tabId }: EditResourceProps & Dependencies) => (
   <div className="EditResource flex flex-col">
     {model.shouldShowErrorAboutNoResource ? (
-      <Notice>Resource not found</Notice>
+      <Notice>{t("Resource not found")}</Notice>
     ) : (
       <>
         <InfoPanel
@@ -35,7 +36,7 @@ const NonInjectedEditResource = observer(({ model, tabId }: EditResourceProps & 
           error={model.configuration.error.value.get()}
           submit={model.save}
           showNotifications={false}
-          submitLabel="Save"
+          submitLabel={t("Save")}
           submittingMessage="Applying..."
           submitTestId={`save-edit-resource-from-tab-for-${tabId}`}
           submitAndCloseTestId={`save-and-close-edit-resource-from-tab-for-${tabId}`}
@@ -43,15 +44,15 @@ const NonInjectedEditResource = observer(({ model, tabId }: EditResourceProps & 
           submittingTestId={`saving-edit-resource-from-tab-for-${tabId}`}
           controls={
             <div className="resource-info flex gap-2 items-center">
-              <span>Kind:</span>
+              <span>{t("Kind:")}</span>
               <Badge label={model.kind} />
-              <span>Name:</span>
+              <span>{t("Name:")}</span>
               <Badge label={model.name} />
-              <span>Namespace:</span>
+              <span>{t("Namespace:")}</span>
               <Badge label={model.namespace} />
-              <Checkbox label="Sort" value={model.sortKeys.value.get()} onChange={model.sortKeys.onChange} />
+              <Checkbox label={t("Sort")} value={model.sortKeys.value.get()} onChange={model.sortKeys.onChange} />
               <Checkbox
-                label="Managed Fields"
+                label={t("Managed Fields")}
                 value={model.managedFields.value.get()}
                 onChange={model.managedFields.onChange}
               />

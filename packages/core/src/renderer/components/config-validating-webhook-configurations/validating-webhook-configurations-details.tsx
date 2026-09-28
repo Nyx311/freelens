@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import React from "react";
 import { WebhookConfig } from "../config-mutating-webhook-configurations/webhook-config";
@@ -22,9 +23,9 @@ export class ValidatingWebhookDetails extends React.Component<ValidatingWebhookP
 
     return (
       <div className="ValidatingWebhookDetails">
-        <DrawerItem name="API version">{webhookConfig.apiVersion}</DrawerItem>
-        <DrawerTitle>Webhooks</DrawerTitle>
-        {webhookConfig.getWebhooks()?.length == 0 && <div style={{ opacity: 0.6 }}>No webhooks set</div>}
+        <DrawerItem name={t("API version")}>{webhookConfig.apiVersion}</DrawerItem>
+        <DrawerTitle>{t("Webhooks")}</DrawerTitle>
+        {webhookConfig.getWebhooks()?.length == 0 && <div style={{ opacity: 0.6 }}>{t("No webhooks set")}</div>}
         {webhookConfig.getWebhooks()?.map((webhook) => (
           <WebhookConfig webhook={webhook} key={webhook.name} />
         ))}

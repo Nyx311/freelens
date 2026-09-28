@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./event-details.scss";
 
 import { KubeEvent } from "@freelensapp/kube-object";
@@ -50,27 +51,27 @@ const NonInjectedEventDetails = observer(
 
     return (
       <div className={cssNames("EventDetails", className)}>
-        <DrawerItem name="Message">{message}</DrawerItem>
-        <DrawerItem name="Reason">{reason}</DrawerItem>
-        <DrawerItem name="Source">{event.getSource()}</DrawerItem>
-        <DrawerItem name="First seen">
+        <DrawerItem name={t("Message")}>{message}</DrawerItem>
+        <DrawerItem name={t("Reason")}>{reason}</DrawerItem>
+        <DrawerItem name={t("Source")}>{event.getSource()}</DrawerItem>
+        <DrawerItem name={t("First seen")}>
           <DurationAbsoluteTimestamp timestamp={event.firstTimestamp} />
         </DrawerItem>
-        <DrawerItem name="Last seen">
+        <DrawerItem name={t("Last seen")}>
           <DurationAbsoluteTimestamp timestamp={event.lastTimestamp} />
         </DrawerItem>
-        <DrawerItem name="Count">{count}</DrawerItem>
-        <DrawerItem name="Type" className="type">
+        <DrawerItem name={t("Count")}>{count}</DrawerItem>
+        <DrawerItem name={t("Type")} className="type">
           <span className={kebabCase(type)}>{type}</span>
         </DrawerItem>
 
-        <DrawerTitle>Involved object</DrawerTitle>
+        <DrawerTitle>{t("Involved object")}</DrawerTitle>
         <Table>
           <TableHead flat>
-            <TableCell>Name</TableCell>
-            <TableCell>Namespace</TableCell>
-            <TableCell>Kind</TableCell>
-            <TableCell>Field Path</TableCell>
+            <TableCell>{t("Name")}</TableCell>
+            <TableCell>{t("Namespace")}</TableCell>
+            <TableCell>{t("Kind")}</TableCell>
+            <TableCell>{t("Field Path")}</TableCell>
           </TableHead>
           <TableRow>
             <TableCell>

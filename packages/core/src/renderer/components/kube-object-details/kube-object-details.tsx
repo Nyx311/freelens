@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./kube-object-details.scss";
 
 import { Spinner } from "@freelensapp/spinner";
@@ -62,7 +63,7 @@ const NonInjectedKubeObjectDetails = observer((props: Dependencies) => {
       {isLoading && <Spinner center />}
       {currentKubeObject?.error && (
         <div className="m-auto">
-          Resource loading has failed:
+          {t("Resource loading has failed:")}
           <b>{currentKubeObject.error}</b>
         </div>
       )}

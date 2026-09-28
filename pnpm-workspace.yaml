@@ -110,6 +110,8 @@ catalog:
   gunzip-maybe: 1.4.2
   handlebars: 4.7.9
   http-proxy-node16: 1.0.6
+  i18next: 26.4.2
+  react-i18next: 17.0.15
   immer: 11.1.8
   joi: 18.2.3
   js-yaml: 5.2.2

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { withTimeout } from "../common/fetch/timeout-controller";
 import lensFetchInjectable, { type LensRequestInit } from "./fetch/lens-fetch.injectable";
@@ -44,9 +45,15 @@ const k8sRequestInjectable = getInjectable({
         const reason = body || response.statusText;
 
         throw Object.assign(
-          new Error(`Failed to ${init.method ?? "get"} ${pathnameAndQuery} for clusterId=${cluster.id}: ${reason}`, {
-            cause: response,
-          }),
+          new Error(
+            t("Failed to {{method}} {{path}} for clusterId={{clusterId}}: {{reason}}", {
+              method: init.method ?? "get",
+              path: pathnameAndQuery,
+              clusterId: cluster.id,
+              reason,
+            }),
+            { cause: response },
+          ),
           { statusCode: response.status, error: reason },
         );
       }

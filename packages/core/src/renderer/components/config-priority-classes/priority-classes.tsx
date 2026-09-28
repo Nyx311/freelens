@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./priority-classes.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -58,17 +59,32 @@ class NonInjectedPriorityClasses extends React.Component<PriorityClassesProps & 
             [columnId.age]: (pc) => -pc.getCreationTimestamp(),
           }}
           searchFilters={[(pc) => pc.getSearchFields()]}
-          renderHeaderTitle="Priority Classes"
+          renderHeaderTitle={t("Priority Classes")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Value", className: "value", sortBy: columnId.value, id: columnId.value },
             {
-              title: "Global Default",
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Value"),
+              className: "value",
+              sortBy: columnId.value,
+              id: columnId.value,
+            },
+            {
+              title: t("Global Default"),
               className: "global-default",
               sortBy: columnId.globalDefault,
               id: columnId.globalDefault,
             },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(pc) => [
             <WithTooltip>{pc.getName()}</WithTooltip>,

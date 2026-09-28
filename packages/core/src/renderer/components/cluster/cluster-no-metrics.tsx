@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -36,10 +37,10 @@ export function NonInjectedClusterNoMetrics({
   return (
     <div className={cssNames(styles.ClusterNoMetrics, className)} data-testid="no-metrics-message">
       <Icon material="info" />
-      <p>Metrics are not available due to missing or invalid Prometheus configuration.</p>
+      <p>{t("Metrics are not available due to missing or invalid Prometheus configuration.")}</p>
       <p>
         <span className={styles.link} onClick={openMetricSettingsPage}>
-          Open cluster settings
+          {t("Open cluster settings")}
         </span>
       </p>
     </div>

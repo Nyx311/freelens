@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./view.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -78,7 +79,7 @@ class NonInjectedCustomResourceDefinitions extends React.Component<Dependencies>
     const groupList = [
       {
         value: this.ALL_GROUPS,
-        label: this.ALL_GROUPS,
+        label: t("All groups"),
         isSelected: selectedGroups.has(this.ALL_GROUPS),
       },
     ];
@@ -106,10 +107,10 @@ class NonInjectedCustomResourceDefinitions extends React.Component<Dependencies>
     const selectedGroups = this.observableProps.selectedGroups.get();
 
     if (selectedGroups.size === 0) {
-      return this.ALL_GROUPS;
+      return t("All groups");
     }
 
-    const prefix = selectedGroups.size === 1 ? "Group" : "Groups";
+    const prefix = selectedGroups.size === 1 ? t("Group") : t("Groups");
 
     return `${prefix}: ${iter.join(selectedGroups.values(), ", ")}`;
   }
@@ -140,7 +141,7 @@ class NonInjectedCustomResourceDefinitions extends React.Component<Dependencies>
             (crd) => crd.getScope(),
             (crd) => -crd.getCreationTimestamp(),
           ]}
-          renderHeaderTitle="Custom Resources"
+          renderHeaderTitle={t("Custom Resources")}
           customizeHeader={({ filters, ...headerPlaceholders }) => ({
             // todo: move to global filters
             filters: (
@@ -168,12 +169,42 @@ class NonInjectedCustomResourceDefinitions extends React.Component<Dependencies>
             ...headerPlaceholders,
           })}
           renderTableHeader={[
-            { title: "Resource", className: "kind", sortBy: columnId.kind, id: columnId.kind },
-            { title: "Group", className: "group", sortBy: columnId.group, id: columnId.group },
-            { title: "Version", className: "version", sortBy: columnId.version, id: columnId.version },
-            { title: "Short Names", className: "short-names", sortBy: columnId.shortNames, id: columnId.shortNames },
-            { title: "Scope", className: "scope", sortBy: columnId.scope, id: columnId.scope },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            {
+              title: t("Resource"),
+              className: "kind",
+              sortBy: columnId.kind,
+              id: columnId.kind,
+            },
+            {
+              title: t("Group"),
+              className: "group",
+              sortBy: columnId.group,
+              id: columnId.group,
+            },
+            {
+              title: t("Version"),
+              className: "version",
+              sortBy: columnId.version,
+              id: columnId.version,
+            },
+            {
+              title: t("Short Names"),
+              className: "short-names",
+              sortBy: columnId.shortNames,
+              id: columnId.shortNames,
+            },
+            {
+              title: t("Scope"),
+              className: "scope",
+              sortBy: columnId.scope,
+              id: columnId.scope,
+            },
+            {
+              title: t("Age"),
+              className: "age",
+              sortBy: columnId.age,
+              id: columnId.age,
+            },
           ]}
           renderTableContents={(crd) => [
             <Link key="link" to={crd.getResourceUrl()} onClick={stopPropagation}>

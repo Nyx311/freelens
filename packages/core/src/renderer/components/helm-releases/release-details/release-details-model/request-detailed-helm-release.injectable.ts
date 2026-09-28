@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import requestHelmReleaseInjectable from "../../../../../features/helm-releases/renderer/request-helm-release.injectable";
 import requestListHelmReleasesInjectable from "../../../../../features/helm-releases/renderer/request-list-helm-releases.injectable";
@@ -46,7 +47,7 @@ const requestDetailedHelmReleaseInjectable = getInjectable({
       if (!release) {
         return {
           callWasSuccessful: false,
-          error: `Release ${releaseName} didn't exist in ${namespace} namespace.`,
+          error: t("Release {{releaseName}} didn't exist in {{namespace}} namespace.", { releaseName, namespace }),
         };
       }
 

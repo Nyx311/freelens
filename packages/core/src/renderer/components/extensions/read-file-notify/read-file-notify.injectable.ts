@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -27,7 +28,7 @@ const readFileNotifyInjectable = getInjectable({
           const message = getMessageFromError(error);
 
           logger.info(`[EXTENSION-INSTALL]: preloading ${filePath} has failed: ${message}`, { error });
-          showErrorNotification(`Error while reading "${filePath}": ${message}`);
+          showErrorNotification(t('Error while reading "{{filePath}}": {{error}}', { filePath, error: message }));
         }
       }
 

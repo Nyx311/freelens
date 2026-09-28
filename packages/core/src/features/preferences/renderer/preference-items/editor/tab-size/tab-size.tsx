@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Input, InputValidators } from "../../../../../../renderer/components/input";
@@ -18,7 +19,7 @@ interface Dependencies {
 
 const NonInjectedTabSize = observer(({ state: { editorConfiguration } }: Dependencies) => (
   <section>
-    <SubTitle title="Tab size" />
+    <SubTitle title={t("Tab size")} />
     <Input
       theme="round-black"
       type="number"

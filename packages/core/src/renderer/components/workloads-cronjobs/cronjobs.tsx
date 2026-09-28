@@ -5,7 +5,7 @@
  */
 
 import "./cronjobs.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { BadgeBoolean } from "../badge";
@@ -59,21 +59,21 @@ const NonInjectedCronJobs = observer((props: Dependencies) => {
           [columnId.age]: (cronJob) => -cronJob.getCreationTimestamp(),
         }}
         searchFilters={[(cronJob) => cronJob.getSearchFields(), (cronJob) => cronJob.getSchedule()]}
-        renderHeaderTitle="Cron Jobs"
+        renderHeaderTitle={t("Cron Jobs")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-          { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-          { title: "Schedule", className: "schedule", id: columnId.schedule },
-          { title: "Timezone", className: "timezone", id: columnId.timezone },
-          { title: "Resumed", className: "resumed", sortBy: columnId.resumed, id: columnId.resumed },
-          { title: "Active", className: "active", sortBy: columnId.active, id: columnId.active },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+          { title: t("Schedule"), className: "schedule", id: columnId.schedule },
+          { title: t("Timezone"), className: "timezone", id: columnId.timezone },
+          { title: t("Resumed"), className: "resumed", sortBy: columnId.resumed, id: columnId.resumed },
+          { title: t("Active"), className: "active", sortBy: columnId.active, id: columnId.active },
           {
-            title: "Last schedule",
+            title: t("Last schedule"),
             className: "last-schedule",
             sortBy: columnId.lastSchedule,
             id: columnId.lastSchedule,
           },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(cronJob) => [
           <WithTooltip>{cronJob.getName()}</WithTooltip>,

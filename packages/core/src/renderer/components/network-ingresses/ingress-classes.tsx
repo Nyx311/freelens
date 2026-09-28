@@ -6,6 +6,7 @@
 
 import "./ingress-classes.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -57,24 +58,24 @@ const NonInjectedIngressClasses = observer((props: Dependencies) => {
           (resource: IngressClass) => resource.getCtrlScope(),
           (resource: IngressClass) => resource.getCtrlKind(),
         ]}
-        renderHeaderTitle="Ingress Classes"
+        renderHeaderTitle={t("Ingress Classes")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Controller",
+            title: t("Controller"),
             className: "controller",
             sortBy: columnId.controller,
             id: columnId.controller,
           },
           {
-            title: "API Group",
+            title: t("API Group"),
             className: "apiGroup",
             sortBy: columnId.apiGroup,
             id: columnId.apiGroup,
           },
-          { title: "Scope", className: "scope", sortBy: columnId.scope, id: columnId.scope },
-          { title: "Kind", className: "kind", sortBy: columnId.kind, id: columnId.kind },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Scope"), className: "scope", sortBy: columnId.scope, id: columnId.scope },
+          { title: t("Kind"), className: "kind", sortBy: columnId.kind, id: columnId.kind },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(ingressClass: IngressClass) => [
           <div key={ingressClass.getId()} className="name">
@@ -83,7 +84,7 @@ const NonInjectedIngressClasses = observer((props: Dependencies) => {
               <Icon
                 small
                 material="star"
-                tooltip="Is default class for ingresses (when not specified)"
+                tooltip={t("Is default class for ingresses (when not specified)")}
                 className="set_default_icon"
               />
             )}

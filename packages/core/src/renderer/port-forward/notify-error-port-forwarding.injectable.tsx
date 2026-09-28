@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToPortForwardsInjectable from "../../common/front-end-routing/routes/cluster/network/port-forwards/navigate-to-port-forwards.injectable";
@@ -19,13 +20,13 @@ const notifyErrorPortForwardingInjectable = getInjectable({
     return (msg: string) => {
       const removeNotification = showErrorNotification(
         <div className="flex flex-col gap-2">
-          <b>Port Forwarding</b>
+          <b>{t("Port Forwarding")}</b>
           <p>{msg}</p>
           <div className="flex gap-2 grow shrink-0 basis-0">
             <Button
               active
               outlined
-              label="Check Port Forwarding"
+              label={t("Check Port Forwarding")}
               onClick={() => {
                 navigateToPortForwards();
                 removeNotification();

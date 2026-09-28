@@ -5,6 +5,7 @@
  */
 
 import assert from "node:assert";
+import { t } from "@freelensapp/i18n";
 import { isNumber } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import nonPromiseExecFileInjectable from "./non-promise-exec-file.injectable";
@@ -67,7 +68,7 @@ const execFileWithInputInjectable = getInjectable({
              */
             resolve({
               callWasSuccessful: false,
-              error: `Exited via ${signal}`,
+              error: t("Exited via {{signal}}", { signal }),
             });
 
             return;
@@ -76,7 +77,7 @@ const execFileWithInputInjectable = getInjectable({
           if (code !== 0) {
             resolve({
               callWasSuccessful: false,
-              error: stderr ? stderr : `Failed with error: ${signal}`,
+              error: stderr ? stderr : t("Failed with error: {{signal}}", { signal }),
             });
 
             return;

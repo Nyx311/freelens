@@ -6,6 +6,7 @@
 
 import "./deployments.scss";
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import React from "react";
@@ -72,24 +73,24 @@ class NonInjectedDeployments extends React.Component<Dependencies> {
             [columnId.condition]: (deployment) => deployment.getConditionsText(),
           }}
           searchFilters={[(deployment) => deployment.getSearchFields(), (deployment) => deployment.getConditionsText()]}
-          renderHeaderTitle="Deployments"
+          renderHeaderTitle={t("Deployments")}
           defaultHiddenTableColumns={[columnId.replicas]}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
             {
-              title: "Namespace",
+              title: t("Namespace"),
               className: "namespace",
               sortBy: columnId.namespace,
               id: columnId.namespace,
             },
-            { title: "Replicas", className: "replicas", sortBy: columnId.replicas, id: columnId.replicas },
-            { title: "Ready", className: "ready", sortBy: columnId.ready, id: columnId.ready },
-            { title: "Desired", className: "desired", sortBy: columnId.desired, id: columnId.desired },
-            { title: "Updated", className: "updated", sortBy: columnId.updated, id: columnId.updated },
-            { title: "Available", className: "available", sortBy: columnId.available, id: columnId.available },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Replicas"), className: "replicas", sortBy: columnId.replicas, id: columnId.replicas },
+            { title: t("Ready"), className: "ready", sortBy: columnId.ready, id: columnId.ready },
+            { title: t("Desired"), className: "desired", sortBy: columnId.desired, id: columnId.desired },
+            { title: t("Updated"), className: "updated", sortBy: columnId.updated, id: columnId.updated },
+            { title: t("Available"), className: "available", sortBy: columnId.available, id: columnId.available },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
             {
-              title: "Conditions",
+              title: t("Conditions"),
               className: "conditions scrollable",
               sortBy: columnId.condition,
               id: columnId.condition,

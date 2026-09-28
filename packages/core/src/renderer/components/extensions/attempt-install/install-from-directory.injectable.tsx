@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable, showInfoNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -57,9 +58,7 @@ const installFromDirectoryInjectable = getInjectable({
           logger.info(`[EXTENSION-INSTALL]: ${directory} is not an extension: ${message}`, { error });
           showErrorNotification(
             <p>
-              <em>{directory}</em>
-              {" is not an extension: "}
-              <em>{message}</em>
+              <em>{directory}</em> {t("is not an extension:")} <em>{message}</em>
             </p>,
           );
 
@@ -73,9 +72,8 @@ const installFromDirectoryInjectable = getInjectable({
         if (currentState !== ExtensionInstallationState.IDLE) {
           return void showErrorNotification(
             <p>
-              {"The "}
-              <em>{manifest.name}</em>
-              {` extension is currently ${currentState.toLowerCase()}.`}
+              {t("The")} <em>{manifest.name}</em>{" "}
+              {t("extension is currently {{state}}.", { state: currentState.toLowerCase() })}
             </p>,
           );
         }
@@ -85,12 +83,11 @@ const installFromDirectoryInjectable = getInjectable({
         if (installedExtension?.isEnabled) {
           return void showErrorNotification(
             <div className="flex flex-col gap-2">
-              <b>Extension is active:</b>
+              <b>{t("Extension is active:")}</b>
               <p>
-                <em>{`${manifest.name}@${installedExtension.manifest.version}`}</em>
-                {" is installed and active."}
+                <em>{`${manifest.name}@${installedExtension.manifest.version}`}</em> {t("is installed and active.")}
               </p>
-              <p>{"Disable or uninstall it first, then register this directory."}</p>
+              <p>{t("Disable or uninstall it first, then register this directory.")}</p>
             </div>,
           );
         }
@@ -99,18 +96,17 @@ const installFromDirectoryInjectable = getInjectable({
           message: (
             <div className="flex flex-col gap-2">
               <p>
-                {"Load the extension "}
-                <b>{displayName}</b>
-                {" from "}
-                <code>{directory}</code>?
+                {t("Load the extension")} <b>{displayName}</b> {t("from")} <code>{directory}</code>?
               </p>
               <p>
-                {"It stays where it is and is loaded from there, so it is not verified and changes with the directory."}
+                {t(
+                  "It stays where it is and is loaded from there, so it is not verified and changes with the directory.",
+                )}
               </p>
             </div>
           ),
-          labelCancel: "Cancel",
-          labelOk: "Install",
+          labelCancel: t("Cancel"),
+          labelOk: t("Install"),
         });
 
         if (!proceed) {
@@ -133,10 +129,7 @@ const installFromDirectoryInjectable = getInjectable({
 
           showInfoNotification(
             <p>
-              {"Extension "}
-              <b>{displayName}</b>
-              {" is now loaded from "}
-              <code>{directory}</code>.
+              {t("Extension")} <b>{displayName}</b> {t("is now loaded from")} <code>{directory}</code>.
             </p>,
           );
         } catch (error) {
@@ -145,10 +138,7 @@ const installFromDirectoryInjectable = getInjectable({
           logger.info(`[EXTENSION-INSTALL]: registering ${directory} has failed: ${message}`, { error });
           showErrorNotification(
             <p>
-              {"Installing extension "}
-              <b>{displayName}</b>
-              {" has failed: "}
-              <em>{message}</em>
+              {t("Installing extension")} <b>{displayName}</b> {t("has failed:")} <em>{message}</em>
             </p>,
           );
         } finally {

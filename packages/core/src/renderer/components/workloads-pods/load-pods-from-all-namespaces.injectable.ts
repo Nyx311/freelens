@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
 import clusterFrameContextForNamespacedResourcesInjectable from "../../cluster-frame-context/for-namespaced-resources.injectable";
@@ -19,7 +20,7 @@ const loadPodsFromAllNamespacesInjectable = getInjectable({
     return () => {
       podStore.loadAll({
         namespaces: context.allNamespaces,
-        onLoadFailure: (error) => showErrorNotification(`Can not load Pods. ${String(error)}`),
+        onLoadFailure: (error) => showErrorNotification(t("Can not load Pods. {{error}}", { error: String(error) })),
       });
     };
   },

@@ -7,6 +7,7 @@
 import assert from "node:assert";
 import https from "node:https";
 import net from "node:net";
+import { t } from "@freelensapp/i18n";
 import { apiKubePrefix, apiPrefix } from "../../common/vars";
 import { getBoolean } from "../utils/parse-query";
 import type http from "node:http";
@@ -180,7 +181,9 @@ export class LensProxy {
          * through all the ports possible and we will not be able to get a safe
          * port.
          */
-        throw new Error("Failed to start Freelens Proxy due to seeing too many unsafe ports. Please restart Freelens.");
+        throw new Error(
+          t("Failed to start Freelens Proxy due to seeing too many unsafe ports. Please restart Freelens."),
+        );
       } else {
         seenPorts.add(port);
       }
@@ -259,7 +262,7 @@ export class LensProxy {
       }
 
       try {
-        res.writeHead(500).end(`Oops, something went wrong.\n${error}`);
+        res.writeHead(500).end(t("Oops, something went wrong.\n{{error}}", { error }));
       } catch (e) {
         this.dependencies.logger.error(`[LENS-PROXY]: Failed to write headers: `, e);
       }

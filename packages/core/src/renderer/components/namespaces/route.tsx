@@ -5,7 +5,7 @@
  */
 
 import "./namespaces.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { Badge } from "../badge";
 import { KubeObjectAge } from "../kube-object/age";
@@ -81,12 +81,12 @@ const NonInjectedNamespacesRoute = ({
         [columnId.status]: (namespace) => namespace.getStatus(),
       }}
       searchFilters={[(namespace) => namespace.getSearchFields(), (namespace) => namespace.getStatus()]}
-      renderHeaderTitle="Namespaces"
+      renderHeaderTitle={t("Namespaces")}
       renderTableHeader={[
-        { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-        { title: "Labels", className: "labels scrollable", sortBy: columnId.labels, id: columnId.labels },
-        { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-        { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
+        { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+        { title: t("Labels"), className: "labels scrollable", sortBy: columnId.labels, id: columnId.labels },
+        { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
+        { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
       ]}
       renderTableContents={(namespace) => [
         <>
@@ -101,10 +101,10 @@ const NonInjectedNamespacesRoute = ({
           ))}
         </WithTooltip>,
         <KubeObjectAge key="age" object={namespace} />,
-        { title: namespace.getStatus(), className: namespace.getStatus().toLowerCase() },
+        { title: t(namespace.getStatus()), className: namespace.getStatus().toLowerCase() },
       ]}
       addRemoveButtons={{
-        addTooltip: "Add Namespace",
+        addTooltip: t("Add Namespace"),
         onAdd: openAddNamespaceDialog,
       }}
     />

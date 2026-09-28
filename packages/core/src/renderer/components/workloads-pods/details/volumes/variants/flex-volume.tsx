@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -26,10 +27,10 @@ const NonInjectedFlexVolume = (props: PodVolumeVariantSpecificProps<"flexVolume"
 
   return (
     <>
-      <DrawerItem name="Driver">{driver}</DrawerItem>
-      <DrawerItem name="Filesystem Type">{fsType || "-- system default --"}</DrawerItem>
-      <LocalRef pod={pod} title="Secret" kubeRef={secretRef} api={secretApi} />
-      <DrawerItem name="Readonly">{readOnly.toString()}</DrawerItem>
+      <DrawerItem name={t("Driver")}>{driver}</DrawerItem>
+      <DrawerItem name={t("Filesystem Type")}>{fsType || t("-- system default --")}</DrawerItem>
+      <LocalRef pod={pod} title={t("Secret")} kubeRef={secretRef} api={secretApi} />
+      <DrawerItem name={t("Readonly")}>{t(readOnly.toString())}</DrawerItem>
       {Object.entries(options).map(([key, value]) => (
         <DrawerItem key={key} name={`Option: ${key}`}>
           {value}

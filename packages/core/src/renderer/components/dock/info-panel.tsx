@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./info-panel.scss";
 
 import { Button } from "@freelensapp/button";
@@ -54,7 +55,7 @@ interface Dependencies {
 @observer
 class NonInjectedInfoPanel extends Component<InfoPanelProps & Dependencies> {
   static defaultProps: OptionalProps = {
-    submitLabel: "Submit",
+    submitLabel: t("Submit"),
     submittingMessage: "Submitting..",
     showButtons: true,
     showSubmitClose: true,
@@ -102,7 +103,7 @@ class NonInjectedInfoPanel extends Component<InfoPanelProps & Dependencies> {
       return result;
     } catch (error) {
       if (showNotifications) {
-        this.props.showCheckedErrorNotification(error, "Unknown error while submitting");
+        this.props.showCheckedErrorNotification(error, t("Unknown error while submitting"));
       }
 
       return false;
@@ -166,7 +167,7 @@ class NonInjectedInfoPanel extends Component<InfoPanelProps & Dependencies> {
         )}
         {showButtons && (
           <>
-            <Button plain label="Cancel" onClick={close} data-testid={this.props.cancelTestId} />
+            <Button plain label={t("Cancel")} onClick={close} data-testid={this.props.cancelTestId} />
             <Button
               active
               outlined={showSubmitClose}
@@ -180,7 +181,7 @@ class NonInjectedInfoPanel extends Component<InfoPanelProps & Dependencies> {
               <Button
                 primary
                 active
-                label={`${submitLabel} & Close`}
+                label={t("{{label}} & Close", { label: submitLabel })}
                 onClick={submitAndClose}
                 disabled={isDisabled}
                 data-testid={this.props.submitAndCloseTestId}

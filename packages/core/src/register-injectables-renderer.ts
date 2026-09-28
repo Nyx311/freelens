@@ -25,6 +25,7 @@ import { registerInjectables as registerFeaturesFeaturesHelmChartsChildFeaturesP
 import { registerInjectables as registerFeaturesFeaturesHelmReleasesRendererInjectables } from "./features/helm-releases/renderer/register-injectables";
 import { registerInjectables as registerFeaturesFeaturesHotbarInjectables } from "./features/hotbar/register-injectables";
 import { registerInjectables as registerFeaturesFeaturesHotbarStorageRendererInjectables } from "./features/hotbar/storage/renderer/register-injectables";
+import { registerInjectables as registerFeaturesFeaturesI18nRendererInjectables } from "./features/i18n/renderer/register-injectables";
 import { registerInjectables as registerFeaturesFeaturesLicensesInjectables } from "./features/licenses/register-injectables";
 import { registerInjectables as registerFeaturesFeaturesLicensesRendererInjectables } from "./features/licenses/renderer/register-injectables";
 import { registerInjectables as registerFeaturesFeaturesNamespaceFilteringRendererInjectables } from "./features/namespace-filtering/renderer/register-injectables";
@@ -71,6 +72,7 @@ export function registerInjectables(di: DiContainerForInjection): void {
   registerFeaturesFeaturesHelmReleasesRendererInjectables(di);
   registerFeaturesFeaturesHotbarInjectables(di);
   registerFeaturesFeaturesHotbarStorageRendererInjectables(di);
+  registerFeaturesFeaturesI18nRendererInjectables(di);
   registerFeaturesFeaturesLicensesRendererInjectables(di);
   registerFeaturesFeaturesLicensesInjectables(di);
   registerFeaturesFeaturesNamespaceFilteringRendererInjectables(di);

@@ -10,6 +10,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { TooltipPosition } from "@freelensapp/tooltip";
 import { prevDefault } from "@freelensapp/utilities";
@@ -37,7 +38,7 @@ interface Dependencies {
 
 const installInputValidator = unionInputValidatorsAsync(
   {
-    message: "Invalid URL, absolute path, or extension name",
+    message: t("Invalid URL, absolute path, or extension name"),
   },
   InputValidators.isUrl,
   InputValidators.isExtensionNameInstall,
@@ -69,7 +70,7 @@ const NonInjectedInstall = observer(
             <Input
               theme="round-black"
               disabled={installState.anyPreInstallingOrInstalling}
-              placeholder="Name, URL, or path to a package or directory"
+              placeholder={t("Name, URL, or path to a package or directory")}
               showErrorsAsTooltip={{ preferredPositions: TooltipPosition.BOTTOM }}
               validators={installPath ? installInputValidator : undefined}
               value={installPath}
@@ -81,7 +82,7 @@ const NonInjectedInstall = observer(
                   smallest
                   material="folder_open"
                   onClick={prevDefault(installFromSelectFileDialog)}
-                  tooltip="Browse"
+                  tooltip={t("Browse")}
                 />
               }
             />
@@ -90,7 +91,7 @@ const NonInjectedInstall = observer(
             <Button
               className={styles.button}
               primary
-              label="Install"
+              label={t("Install")}
               disabled={installState.anyPreInstallingOrInstalling}
               waiting={installState.anyPreInstallingOrInstalling}
               onClick={() => installExtensionFromInput(installPath)}
@@ -98,7 +99,7 @@ const NonInjectedInstall = observer(
           </div>
         </div>
         <small className={styles.proTip}>
-          <b>Pro-Tip</b>: you can drag and drop a tarball file, or an unpacked extension directory, to this area
+          <b>{t("Pro-Tip")}</b>: you can drag and drop a tarball file, or an unpacked extension directory, to this area
         </small>
       </section>
     );

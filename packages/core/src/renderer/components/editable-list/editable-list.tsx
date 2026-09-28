@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./editable-list.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -31,7 +32,7 @@ export interface EditableListProps<T> {
 }
 
 const defaultProps = {
-  placeholder: "Add new items...",
+  placeholder: t("Add new items..."),
   renderItem: (item: any, index: number) => <React.Fragment key={index}>{item}</React.Fragment>,
   inputTheme: "round",
 };

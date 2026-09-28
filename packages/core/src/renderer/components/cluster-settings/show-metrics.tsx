@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { makeObservable, observable, reaction } from "mobx";
 import { observer } from "mobx-react";
@@ -59,7 +60,7 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
     const metrics = Array.from(this.hiddenMetrics);
 
     if (!metrics.length) {
-      return <div className="flex-grow text-center">All metrics are visible on the UI</div>;
+      return <div className="flex-grow text-center">{t("All metrics are visible on the UI")}</div>;
     }
 
     return metrics.map((name) => {
@@ -68,7 +69,13 @@ export class ShowMetricsSetting extends React.Component<ShowMetricsSettingProps>
       return (
         <Badge key={name} flat expandable={false}>
           <span id={tooltipId}>{name}</span>
-          <Icon smallest material="clear" onClick={() => this.removeMetric(name)} tooltip="Remove" className="mx-3" />
+          <Icon
+            smallest
+            material="clear"
+            onClick={() => this.removeMetric(name)}
+            tooltip={t("Remove")}
+            className="mx-3"
+          />
         </Badge>
       );
     });

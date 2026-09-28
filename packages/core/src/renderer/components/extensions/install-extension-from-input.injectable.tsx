@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -72,15 +73,14 @@ const installExtensionFromInputInjectable = getInjectable({
           return await attemptInstallByInfo({ name, version });
         }
 
-        throw new Error(`Unknown format of input: ${input}`);
+        throw new Error(t("Unknown format of input: {{input}}", { input }));
       } catch (error) {
         const message = getMessageFromError(error);
 
         logger.info(`[EXTENSION-INSTALL]: installation has failed: ${message}`, { error, installPath: input });
         showErrorNotification(
           <p>
-            {"Installation has failed: "}
-            <b>{message}</b>
+            {t("Installation has failed:")} <b>{message}</b>
           </p>,
         );
       }

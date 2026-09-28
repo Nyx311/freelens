@@ -6,6 +6,7 @@
 
 import "./volume-claims.scss";
 
+import { t } from "@freelensapp/i18n";
 import { storageClassApiInjectable } from "@freelensapp/kube-api-specifics";
 import { Link } from "@freelensapp/routing";
 import { stopPropagation, unitsToBytes } from "@freelensapp/utilities";
@@ -70,20 +71,20 @@ class NonInjectedPersistentVolumeClaims extends React.Component<Dependencies> {
             (pvc) => pvc.getSearchFields(),
             (pvc) => pvc.getPods(podStore.items).map((pod) => pod.getName()),
           ]}
-          renderHeaderTitle="Persistent Volume Claims"
+          renderHeaderTitle={t("Persistent Volume Claims")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Namespace"), className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
             {
-              title: "Storage class",
+              title: t("Storage class"),
               className: "storageClass",
               sortBy: columnId.storageClass,
               id: columnId.storageClass,
             },
-            { title: "Size", className: "size", sortBy: columnId.size, id: columnId.size },
-            { title: "Pods", className: "pods", sortBy: columnId.pods, id: columnId.pods },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
+            { title: t("Size"), className: "size", sortBy: columnId.size, id: columnId.size },
+            { title: t("Pods"), className: "pods", sortBy: columnId.pods, id: columnId.pods },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
           ]}
           renderTableContents={(pvc) => {
             const pods = pvc.getPods(podStore.items);
@@ -109,7 +110,7 @@ class NonInjectedPersistentVolumeClaims extends React.Component<Dependencies> {
                 ))}
               </WithTooltip>,
               <KubeObjectAge key="age" object={pvc} />,
-              { title: pvc.getStatus(), className: pvc.getStatus().toLowerCase() },
+              { title: t(pvc.getStatus()), className: pvc.getStatus().toLowerCase() },
             ];
           }}
         />

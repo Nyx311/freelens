@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { WebLink } from "../../../../../common/catalog-entities";
 import { DrawerItem, DrawerTitle } from "../../../drawer";
@@ -17,7 +18,7 @@ const weblinkDetailsItemInjectable = getInjectable({
     components: {
       Details: ({ entity }) => (
         <>
-          <DrawerTitle>More Information</DrawerTitle>
+          <DrawerTitle>{t("More Information")}</DrawerTitle>
           <DrawerItem name="URL" data-testid={`weblink-url-for-${entity.getId()}`}>
             {entity.spec.url}
           </DrawerItem>

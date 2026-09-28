@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { displayMode } from "@freelensapp/utilities";
 import React from "react";
 import { DrawerItem, DrawerTitle } from "../../../../drawer";
@@ -12,15 +13,17 @@ import type { VolumeVariantComponent } from "../variant-helpers";
 
 export const Projected: VolumeVariantComponent<"projected"> = ({ variant: { sources, defaultMode } }) => (
   <>
-    {typeof defaultMode === "number" && <DrawerItem name="Default Mount Mode">{displayMode(defaultMode)}</DrawerItem>}
-    <DrawerItem name="Sources">
+    {typeof defaultMode === "number" && (
+      <DrawerItem name={t("Default Mount Mode")}>{displayMode(defaultMode)}</DrawerItem>
+    )}
+    <DrawerItem name={t("Sources")}>
       {sources?.map(({ secret, downwardAPI, configMap, serviceAccountToken }, index) => (
         <React.Fragment key={index}>
           {secret && (
             <>
-              <DrawerTitle size="sub-title">Secret</DrawerTitle>
-              <DrawerItem name="Name">{secret.name}</DrawerItem>
-              <DrawerItem name="Items">
+              <DrawerTitle size="sub-title">{t("Secret")}</DrawerTitle>
+              <DrawerItem name={t("Name")}>{secret.name}</DrawerItem>
+              <DrawerItem name={t("Items")}>
                 <ul>
                   {secret.items?.map(({ key, path, mode }) => (
                     <li key={key}>
@@ -34,8 +37,8 @@ export const Projected: VolumeVariantComponent<"projected"> = ({ variant: { sour
           )}
           {downwardAPI && (
             <>
-              <DrawerTitle size="sub-title">Downward API</DrawerTitle>
-              <DrawerItem name="Items">
+              <DrawerTitle size="sub-title">{t("Downward API")}</DrawerTitle>
+              <DrawerItem name={t("Items")}>
                 <ul>
                   {downwardAPI.items?.map(({ path }) => (
                     <li key={path}>{path}</li>
@@ -46,9 +49,9 @@ export const Projected: VolumeVariantComponent<"projected"> = ({ variant: { sour
           )}
           {configMap && (
             <>
-              <DrawerTitle size="sub-title">Config Map</DrawerTitle>
-              <DrawerItem name="Name">{configMap.name}</DrawerItem>
-              <DrawerItem name="Items">
+              <DrawerTitle size="sub-title">{t("Config Map")}</DrawerTitle>
+              <DrawerItem name={t("Name")}>{configMap.name}</DrawerItem>
+              <DrawerItem name={t("Items")}>
                 <ul>
                   {configMap.items?.map(({ key, path }) => (
                     <li key={key}>{`${key}⇢${path}`}</li>
@@ -59,14 +62,14 @@ export const Projected: VolumeVariantComponent<"projected"> = ({ variant: { sour
           )}
           {serviceAccountToken && (
             <>
-              <DrawerTitle size="sub-title">Service Account Token</DrawerTitle>
-              <DrawerItem name="Audience" hidden={!serviceAccountToken.audience}>
+              <DrawerTitle size="sub-title">{t("Service Account Token")}</DrawerTitle>
+              <DrawerItem name={t("Audience")} hidden={!serviceAccountToken.audience}>
                 {serviceAccountToken.audience}
               </DrawerItem>
-              <DrawerItem name="Expiration">
+              <DrawerItem name={t("Expiration")}>
                 {`${serviceAccountToken.expirationSeconds ?? 60 * 60 /* an hour */}s`}
               </DrawerItem>
-              <DrawerItem name="Path">{serviceAccountToken.path}</DrawerItem>
+              <DrawerItem name={t("Path")}>{serviceAccountToken.path}</DrawerItem>
             </>
           )}
         </React.Fragment>

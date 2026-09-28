@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./runtime-classes-tolerations.scss";
 
 import { Table, TableCell, TableHead, TableRow } from "../table";
@@ -57,19 +58,19 @@ export function RuntimeClassTolerations({ tolerations }: RuntimeClassTolerations
     >
       <TableHead sticky={false}>
         <TableCell className="key" sortBy={sortBy.Key}>
-          Key
+          {t("Key")}
         </TableCell>
         <TableCell className="operator" sortBy={sortBy.Operator}>
-          Operator
+          {t("Operator")}
         </TableCell>
         <TableCell className="value" sortBy={sortBy.Value}>
-          Value
+          {t("Value")}
         </TableCell>
         <TableCell className="effect" sortBy={sortBy.Effect}>
-          Effect
+          {t("Effect")}
         </TableCell>
         <TableCell className="seconds" sortBy={sortBy.Seconds}>
-          Seconds
+          {t("Seconds")}
         </TableCell>
       </TableHead>
     </Table>

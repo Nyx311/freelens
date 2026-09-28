@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { autorun, computed, makeObservable, observable } from "mobx";
@@ -92,7 +93,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
     return [
       {
         value: autoDetectPrometheus,
-        label: "Auto Detect Prometheus",
+        label: t("Auto Detect Prometheus"),
         isSelected: autoDetectPrometheus === this.selectedOption,
       },
       ...Array.from(this.loadedOptions, ([id, provider]) => ({
@@ -226,7 +227,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
     return (
       <>
         <section>
-          <SubTitle title="Prometheus" />
+          <SubTitle title={t("Prometheus")} />
           {this.loading ? (
             <Spinner />
           ) : (
@@ -242,8 +243,9 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                 themeName="lens"
               />
               <small className="hint">
-                What query format is used to fetch metrics from Prometheus. Select &quot;OpenShift&quot; for
-                OpenShift/OKD clusters where Prometheus requires bearer token authentication.
+                {t(
+                  'What query format is used to fetch metrics from Prometheus. Select "OpenShift" for OpenShift/OKD clusters where Prometheus requires bearer token authentication.',
+                )}
               </small>
             </>
           )}
@@ -252,7 +254,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
           <>
             <hr />
             <section>
-              <SubTitle title="Prometheus service address" />
+              <SubTitle title={t("Prometheus service address")} />
               <Input
                 theme="round-black"
                 value={this.path}
@@ -268,9 +270,9 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
             </section>
             <hr />
             <section>
-              <SubTitle title="Prometheus HTTPS requests" />
+              <SubTitle title={t("Prometheus HTTPS requests")} />
               <Checkbox
-                label={`Use HTTPS for Prometheus requests`}
+                label={t("Use HTTPS for Prometheus requests")}
                 value={this.useHttps}
                 onChange={(checked) => {
                   this.useHttps = checked;
@@ -285,7 +287,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
             </section>
             <hr />
             <section>
-              <SubTitle title="Custom path prefix" />
+              <SubTitle title={t("Custom path prefix")} />
               <Input
                 theme="round-black"
                 value={this.customPrefix}
@@ -294,15 +296,16 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                 placeholder="/prometheus"
               />
               <small className="hint">
-                An optional path prefix added to all Prometheus requests. Useful if Prometheus expects e.g. /prometheus
-                to be added to all requests.
+                {t(
+                  "An optional path prefix added to all Prometheus requests. Useful if Prometheus expects e.g. /prometheus to be added to all requests.",
+                )}
               </small>
             </section>
             {this.isOpenShift && (
               <>
                 <hr />
                 <section>
-                  <SubTitle title="Prometheus ingress/route" />
+                  <SubTitle title={t("Prometheus ingress/route")} />
                   <Input
                     theme="round-black"
                     value={this.directUrl}
@@ -319,7 +322,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                 </section>
                 <hr />
                 <section>
-                  <SubTitle title="Bearer token" />
+                  <SubTitle title={t("Bearer token")} />
                   <Input
                     theme="round-black"
                     type="password"
@@ -329,9 +332,9 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                     placeholder="eyJhbGciOi..."
                   />
                   <small className="hint">
-                    Service account bearer token for authenticating to Prometheus. On OpenShift, Prometheus requires
-                    authentication via kube-rbac-proxy. Generate a long-lived token with: oc create token
-                    &lt;service-account&gt; -n openshift-monitoring --duration=8760h
+                    {t(
+                      "Service account bearer token for authenticating to Prometheus. On OpenShift, Prometheus requires authentication via kube-rbac-proxy. Generate a long-lived token with: oc create token <service-account> -n openshift-monitoring --duration=8760h",
+                    )}
                   </small>
                 </section>
               </>
@@ -341,7 +344,7 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
         <>
           <hr />
           <section>
-            <SubTitle title="Prometheus request method" />
+            <SubTitle title={t("Prometheus request method")} />
             <Select
               id="cluster-prometheus-request-method-input"
               value={this.requestMethod}
@@ -356,13 +359,14 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
               themeName="lens"
             />
             <small className="hint">
-              Select how metrics queries are sent to Prometheus. Default is POST. Switch to GET only when your
-              Prometheus/proxy setup requires it.
+              {t(
+                "Select how metrics queries are sent to Prometheus. Default is POST. Switch to GET only when your Prometheus/proxy setup requires it.",
+              )}
             </small>
           </section>
           <hr />
           <section>
-            <SubTitle title="Filesystem mountpoints" />
+            <SubTitle title={t("Filesystem mountpoints")} />
             <Input
               theme="round-black"
               value={this.mountpoints}

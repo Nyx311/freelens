@@ -6,6 +6,7 @@
 
 import "./daemonset-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { DaemonSet } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -71,30 +72,30 @@ class NonInjectedDaemonSetDetails extends React.Component<DaemonSetDetailsProps 
     return (
       <div className="DaemonSetDetails">
         {selectors.length > 0 && (
-          <DrawerItem name="Selector" labelsOnly>
+          <DrawerItem name={t("Selector")} labelsOnly>
             {selectors.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {nodeSelector.length > 0 && (
-          <DrawerItem name="Node Selector" labelsOnly>
+          <DrawerItem name={t("Node Selector")} labelsOnly>
             {nodeSelector.map((label) => (
               <Badge key={label} label={label} />
             ))}
           </DrawerItem>
         )}
         {images.length > 0 && (
-          <DrawerItem name="Images">
+          <DrawerItem name={t("Images")}>
             {images.map((image) => (
               <p key={image}>{image}</p>
             ))}
           </DrawerItem>
         )}
-        <DrawerItem name="Strategy Type">{spec.updateStrategy.type}</DrawerItem>
+        <DrawerItem name={t("Strategy Type")}>{spec.updateStrategy.type}</DrawerItem>
         <PodDetailsTolerations workload={daemonSet} />
         <PodDetailsAffinities workload={daemonSet} />
-        <DrawerItem name="Pod Status" className="pod-status">
+        <DrawerItem name={t("Pod Status")} className="pod-status">
           <PodDetailsStatuses pods={childPods} />
         </DrawerItem>
         <PodDetailsList pods={childPods} owner={daemonSet} />

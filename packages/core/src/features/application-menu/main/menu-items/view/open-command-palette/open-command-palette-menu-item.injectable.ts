@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import broadcastMessageInjectable from "../../../../../../common/ipc/broadcast-message.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -19,7 +20,7 @@ const openCommandPaletteMenuItemInjectable = getInjectable({
       parentId: "view",
       id: "open-command-palette",
       orderNumber: 20,
-      label: "Command Palette...",
+      label: t("Command Palette..."),
       keyboardShortcut: "Shift+CmdOrCtrl+P",
 
       onClick(_m, _b, event) {

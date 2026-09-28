@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { disposer, noop } from "@freelensapp/utilities";
 import { observable, when } from "mobx";
 import * as proto from "../../../common/protocol-handler";
@@ -80,7 +81,7 @@ export class LensProtocolRouterMain extends proto.LensProtocolRouter {
         await this._routeToExtension(url);
       }
     } catch (error) {
-      this.dependencies.broadcastMessage(ProtocolHandlerInvalid, error ? String(error) : "unknown error", rawUrl);
+      this.dependencies.broadcastMessage(ProtocolHandlerInvalid, error ? String(error) : t("Unknown error"), rawUrl);
 
       if (error instanceof proto.RoutingError) {
         this.dependencies.logger.error(`${proto.LensProtocolRouter.LoggingPrefix}: ${error}`, { url: error.url });

@@ -6,6 +6,7 @@
 
 import "./volumes.scss";
 
+import { t } from "@freelensapp/i18n";
 import { persistentVolumeClaimApiInjectable, storageClassApiInjectable } from "@freelensapp/kube-api-specifics";
 import { Link } from "@freelensapp/routing";
 import { stopPropagation } from "@freelensapp/utilities";
@@ -60,19 +61,19 @@ class NonInjectedPersistentVolumes extends React.Component<Dependencies> {
             [columnId.age]: (volume) => -volume.getCreationTimestamp(),
           }}
           searchFilters={[(volume) => volume.getSearchFields(), (volume) => volume.getClaimRefName()]}
-          renderHeaderTitle="Persistent Volumes"
+          renderHeaderTitle={t("Persistent Volumes")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+            { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
             {
-              title: "Storage Class",
+              title: t("Storage Class"),
               className: "storageClass",
               sortBy: columnId.storageClass,
               id: columnId.storageClass,
             },
-            { title: "Capacity", className: "capacity", sortBy: columnId.capacity, id: columnId.capacity },
-            { title: "Claim", className: "claim", id: columnId.claim },
-            { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
-            { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
+            { title: t("Capacity"), className: "capacity", sortBy: columnId.capacity, id: columnId.capacity },
+            { title: t("Claim"), className: "claim", id: columnId.claim },
+            { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
+            { title: t("Status"), className: "status", sortBy: columnId.status, id: columnId.status },
           ]}
           renderTableContents={(volume) => {
             const { claimRef, storageClassName } = volume.spec;
@@ -97,7 +98,7 @@ class NonInjectedPersistentVolumes extends React.Component<Dependencies> {
                 </Link>
               ),
               <KubeObjectAge key="age" object={volume} />,
-              { title: volume.getStatus(), className: volume.getStatus().toLowerCase() },
+              { title: t(volume.getStatus()), className: volume.getStatus().toLowerCase() },
             ];
           }}
         />

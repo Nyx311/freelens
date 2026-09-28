@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { podListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { bytesToUnits } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -45,7 +46,7 @@ export const podsUsedMemoryColumnInjectable = getInjectable({
       apiVersion: "v1",
       priority: COLUMN_PRIORITY.MEMORY_USAGE,
       content: (pod: Pod) => <PodMemoryCell pod={pod} podStore={podStore} />,
-      header: { title: "Memory", className: "memory", sortBy: columnId, id: columnId },
+      header: { title: t("Memory"), className: "memory", sortBy: columnId, id: columnId },
       sortingCallBack: (pod: Pod) => {
         const { memory } = podStore.getPodKubeMetrics(pod);
 

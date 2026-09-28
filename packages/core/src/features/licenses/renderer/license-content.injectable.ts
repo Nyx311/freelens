@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { requestFromChannelInjectionToken } from "@freelensapp/messaging";
 import { getInjectable } from "@ogre-tools/injectable";
 import { asyncComputed } from "../../../common/utils/async-computed";
@@ -23,10 +24,10 @@ const licenseContentInjectable = getInjectable({
           // where it lives inside app.asar (issue #2240).
           return await requestFromChannel(licenseContentChannel);
         } catch (error) {
-          return `Error loading license file: ${error}`;
+          return t("Error loading license file: {{error}}", { error });
         }
       },
-      valueWhenPending: "Loading...",
+      valueWhenPending: t("Loading..."),
     });
   },
 });

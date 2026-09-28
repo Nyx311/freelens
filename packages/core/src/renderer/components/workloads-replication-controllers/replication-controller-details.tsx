@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { replicationControllerApiInjectable } from "@freelensapp/kube-api-specifics";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -70,11 +71,11 @@ class NonInjectedReplicationControllerDetails<
 
     return (
       <div className={styles.ReplicationControllerDetails}>
-        <DrawerTitle>Spec</DrawerTitle>
-        <DrawerItem name="Replicas">
+        <DrawerTitle>{t("Spec")}</DrawerTitle>
+        <DrawerItem name={t("Replicas")}>
           <div className={styles.replicas}>
             <div>{resource.getDesiredReplicas()}</div>
-            <div>Scale</div>
+            <div>{t("Scale")}</div>
             <Slider
               min={0}
               max={100}
@@ -86,18 +87,18 @@ class NonInjectedReplicationControllerDetails<
             />
           </div>
         </DrawerItem>
-        <DrawerItem name="Selectors" labelsOnly>
+        <DrawerItem name={t("Selectors")} labelsOnly>
           {resource.getSelectorLabels().map((label) => (
             <Badge key={label} label={label} />
           ))}
         </DrawerItem>
 
-        <DrawerTitle>Status</DrawerTitle>
-        <DrawerItem name="Replicas">{resource.getReplicas()}</DrawerItem>
-        <DrawerItem name="Available Replicas">{resource.getAvailableReplicas()}</DrawerItem>
-        <DrawerItem name="Labeled Replicas">{resource.getLabeledReplicas()}</DrawerItem>
-        <DrawerItem name="Controller Generation">{resource.getGeneration()}</DrawerItem>
-        <DrawerItem name="Minimum Pod Readiness">{`${resource.getMinReadySeconds()} seconds`}</DrawerItem>
+        <DrawerTitle>{t("Status")}</DrawerTitle>
+        <DrawerItem name={t("Replicas")}>{resource.getReplicas()}</DrawerItem>
+        <DrawerItem name={t("Available Replicas")}>{resource.getAvailableReplicas()}</DrawerItem>
+        <DrawerItem name={t("Labeled Replicas")}>{resource.getLabeledReplicas()}</DrawerItem>
+        <DrawerItem name={t("Controller Generation")}>{resource.getGeneration()}</DrawerItem>
+        <DrawerItem name={t("Minimum Pod Readiness")}>{`${resource.getMinReadySeconds()} seconds`}</DrawerItem>
       </div>
     );
   }

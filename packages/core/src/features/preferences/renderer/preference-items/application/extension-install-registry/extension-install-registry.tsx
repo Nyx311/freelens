@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { runInAction } from "mobx";
 import { observer } from "mobx-react";
@@ -27,11 +28,11 @@ interface Dependencies {
 const extensionInstallRegistryOptions = [
   {
     value: "default",
-    label: "Default Url",
+    label: t("Default Url"),
   },
   {
     value: "custom",
-    label: "Custom Url",
+    label: t("Custom Url"),
   },
 ] as const;
 
@@ -40,7 +41,7 @@ const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) =
 
   return (
     <section id="extensionRegistryUrl">
-      <SubTitle title="Extension Install Registry" />
+      <SubTitle title={t("Extension Install Registry")} />
       <Select
         id="extension-install-registry-input"
         options={extensionInstallRegistryOptions}
@@ -67,7 +68,7 @@ const NonInjectedExtensionInstallRegistry = observer(({ state }: Dependencies) =
         value={customUrl}
         onChange={setCustomUrl}
         onBlur={() => (state.extensionRegistryUrl.customUrl = customUrl)}
-        placeholder="Custom Extension Registry URL..."
+        placeholder={t("Custom Extension Registry URL...")}
         disabled={state.extensionRegistryUrl.location !== "custom"}
       />
     </section>

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./validating-webhook-configurations.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -35,7 +36,7 @@ const NonInjectedValidatingWebhookConfigurations = observer((props: Dependencies
           ...rest,
           searchProps: {
             ...searchProps,
-            placeholder: "Search...",
+            placeholder: t("Search..."),
           },
         })}
         tableId="config_validating_webhook_configurations"
@@ -47,15 +48,25 @@ const NonInjectedValidatingWebhookConfigurations = observer((props: Dependencies
           [columnId.age]: (item) => -item.getCreationTimestamp(),
         }}
         searchFilters={[(item) => item.getSearchFields(), (item) => item.getLabels()]}
-        renderHeaderTitle="Validating Webhook Configs"
+        renderHeaderTitle={t("Validating Webhook Configs")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Webhooks",
+            title: t("Name"),
+            className: "name",
+            sortBy: columnId.name,
+            id: columnId.name,
+          },
+          {
+            title: t("Webhooks"),
             sortBy: columnId.webhooks,
             id: columnId.webhooks,
           },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          {
+            title: t("Age"),
+            className: "age",
+            sortBy: columnId.age,
+            id: columnId.age,
+          },
         ]}
         renderTableContents={(item) => [
           <WithTooltip>{item.getName()}</WithTooltip>,

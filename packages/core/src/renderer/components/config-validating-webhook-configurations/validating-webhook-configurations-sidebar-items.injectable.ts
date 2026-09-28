@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import navigateToValidatingWebhookConfigurationsInjectable from "../../../common/front-end-routing/routes/cluster/config/validating-webhook-configurations/navigate-to-validating-webhook-configurations.injectable";
 import validatingWebhookConfigurationsRouteInjectable from "../../../common/front-end-routing/routes/cluster/config/validating-webhook-configurations/validating-webhook-configurations-route.injectable";
@@ -19,7 +20,7 @@ const validatingWebhookConfigurationsSidebarItemInjectable = getInjectable({
 
     return {
       parentId: configSidebarItemInjectable.id,
-      title: "Validating Webhook Configs",
+      title: t("Validating Webhook Configs"),
       onClick: di.inject(navigateToValidatingWebhookConfigurationsInjectable),
       isActive: di.inject(routeIsActiveInjectable, route),
       isVisible: route.isEnabled,

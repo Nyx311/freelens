@@ -5,6 +5,7 @@
  */
 
 import { sidebarItemInjectionToken } from "@freelensapp/cluster-sidebar";
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { getInjectable } from "@ogre-tools/injectable";
 import eventsRouteInjectable from "../../../common/front-end-routing/routes/cluster/events/events-route.injectable";
@@ -19,7 +20,7 @@ const eventsSidebarItemInjectable = getInjectable({
   id: id,
 
   instantiate: (di) => {
-    const title = "Events";
+    const title = t("Events");
     const route = di.inject(eventsRouteInjectable);
     const getClusterPageMenuOrder = di.inject(getClusterPageMenuOrderInjectable);
 

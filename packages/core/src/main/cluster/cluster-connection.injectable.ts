@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { disposer, isDefined, isRequestError, withConcurrencyLimit } from "@freelensapp/utilities";
 import { ApiException, type KubeConfig } from "@kubernetes/client-node";
@@ -157,7 +158,9 @@ class ClusterConnection {
       );
       this.dependencies.broadcastConnectionUpdate({
         level: "error",
-        message: `Authentication failed ${this.consecutiveAuthFailures} times, automatic reconnection paused: reconnect to try again`,
+        message: t("Authentication failed {{failures}} times, automatic reconnection paused: reconnect to try again", {
+          failures: this.consecutiveAuthFailures,
+        }),
       });
     } else {
       this.dependencies.logger.warn(
@@ -210,13 +213,13 @@ class ClusterConnection {
     if (await this.usesExecCredentialPlugin()) {
       this.dependencies.broadcastConnectionUpdate({
         level: "error",
-        message: "Connection timed out, the credential plugin may be waiting for an interactive login",
+        message: t("Connection timed out, the credential plugin may be waiting for an interactive login"),
       });
       this.onAuthFailure();
     } else {
       this.dependencies.broadcastConnectionUpdate({
         level: "error",
-        message: "Connection timed out",
+        message: t("Connection timed out"),
       });
     }
 
@@ -280,13 +283,13 @@ class ClusterConnection {
       try {
         this.dependencies.broadcastConnectionUpdate({
           level: "info",
-          message: "Starting connection ...",
+          message: t("Starting connection ..."),
         });
         await this.reconnect();
       } catch (error) {
         this.dependencies.broadcastConnectionUpdate({
           level: "error",
-          message: `Failed to start connection: ${error}`,
+          message: t("Failed to start connection: {{error}}", { error }),
         });
 
         return;
@@ -296,13 +299,13 @@ class ClusterConnection {
     try {
       this.dependencies.broadcastConnectionUpdate({
         level: "info",
-        message: "Refreshing connection status ...",
+        message: t("Refreshing connection status ..."),
       });
       await this.refreshConnectionStatus();
     } catch (error) {
       this.dependencies.broadcastConnectionUpdate({
         level: "error",
-        message: `Failed to connection status: ${error}`,
+        message: t("Failed to connection status: {{error}}", { error }),
       });
 
       return;
@@ -312,20 +315,20 @@ class ClusterConnection {
       try {
         this.dependencies.broadcastConnectionUpdate({
           level: "info",
-          message: "Refreshing cluster accessibility ...",
+          message: t("Refreshing cluster accessibility ..."),
         });
         await this.refreshAccessibility();
       } catch (error) {
         this.dependencies.broadcastConnectionUpdate({
           level: "error",
-          message: `Failed to refresh accessibility: ${error}`,
+          message: t("Failed to refresh accessibility: {{error}}", { error }),
         });
 
         return;
       }
       this.dependencies.broadcastConnectionUpdate({
         level: "info",
-        message: "Connected, waiting for view to load ...",
+        message: t("Connected, waiting for view to load ..."),
       });
     }
 
@@ -419,7 +422,7 @@ class ClusterConnection {
       );
       this.dependencies.broadcastConnectionUpdate({
         level: "error",
-        message: "Failed to list kube API resources, please reconnect...",
+        message: t("Failed to list kube API resources, please reconnect..."),
       });
 
       return [];
@@ -488,7 +491,7 @@ class ClusterConnection {
           if (error.statusCode >= 400 && error.statusCode < 500) {
             this.dependencies.broadcastConnectionUpdate({
               level: "error",
-              message: "Invalid credentials",
+              message: t("Invalid credentials"),
             });
             this.onAuthFailure();
 
@@ -500,7 +503,7 @@ class ClusterConnection {
           if (isCredentialPluginError(message)) {
             this.dependencies.broadcastConnectionUpdate({
               level: "error",
-              message: `Failed to fetch credentials: ${message}`,
+              message: t("Failed to fetch credentials: {{message}}", { message }),
             });
             this.onAuthFailure();
 
@@ -522,7 +525,7 @@ class ClusterConnection {
 
           this.dependencies.broadcastConnectionUpdate({
             level: "error",
-            message: "Failed to fetch credentials",
+            message: t("Failed to fetch credentials"),
           });
           this.onAuthFailure();
 
@@ -551,7 +554,7 @@ class ClusterConnection {
       } else {
         this.dependencies.broadcastConnectionUpdate({
           level: "error",
-          message: "Unknown error has occurred",
+          message: t("Unknown error has occurred"),
         });
       }
 

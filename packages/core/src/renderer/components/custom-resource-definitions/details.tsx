@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./details.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -57,21 +58,21 @@ class NonInjectedCustomResourceDefinitionDetails extends React.Component<
 
     return (
       <div className="CustomResourceDefinitionDetails">
-        <DrawerItem name="Group">{crd.getGroup()}</DrawerItem>
-        <DrawerItem name="Versions">
+        <DrawerItem name={t("Group")}>{crd.getGroup()}</DrawerItem>
+        <DrawerItem name={t("Versions")}>
           {crd.getVersions()?.map((version) => (
             <DrawerItem name="">
               {version}
               {version === crd.getVersion() && (
                 <>
                   {" "}
-                  <Icon small material="star" tooltip="Preferred Version" className="set_default_icon" />
+                  <Icon small material="star" tooltip={t("Preferred Version")} className="set_default_icon" />
                 </>
               )}
             </DrawerItem>
           ))}
         </DrawerItem>
-        <DrawerItem name="Stored Versions">
+        <DrawerItem name={t("Stored Versions")}>
           {crd
             .getStoredVersions()
             .split(", ")
@@ -79,22 +80,22 @@ class NonInjectedCustomResourceDefinitionDetails extends React.Component<
               <DrawerItem name="">{version}</DrawerItem>
             ))}
         </DrawerItem>
-        <DrawerItem name="Scope">{crd.getScope()}</DrawerItem>
-        <DrawerItem name="Resource">
+        <DrawerItem name={t("Scope")}>{crd.getScope()}</DrawerItem>
+        <DrawerItem name={t("Resource")}>
           <Link to={crd.getResourceUrl()}>{crd.getResourceTitle()}</Link>
         </DrawerItem>
-        <DrawerItem name="Conversion" className="flex gap-2 items-start">
+        <DrawerItem name={t("Conversion")} className="flex gap-2 items-start">
           <Input multiLine theme="round-black" className="grow shrink-0 basis-0" value={crd.getConversion()} readOnly />
         </DrawerItem>
         <KubeObjectConditionsDrawer object={crd} />
-        <DrawerTitle>Names</DrawerTitle>
+        <DrawerTitle>{t("Names")}</DrawerTitle>
         <Table selectable className="names">
           <TableHead>
-            <TableCell>plural</TableCell>
-            <TableCell>singular</TableCell>
-            <TableCell>kind</TableCell>
-            <TableCell>listKind</TableCell>
-            <TableCell>shortNames</TableCell>
+            <TableCell>{t("plural")}</TableCell>
+            <TableCell>{t("singular")}</TableCell>
+            <TableCell>{t("kind")}</TableCell>
+            <TableCell>{t("listKind")}</TableCell>
+            <TableCell>{t("shortNames")}</TableCell>
           </TableHead>
           <TableRow>
             <TableCell>
@@ -116,12 +117,12 @@ class NonInjectedCustomResourceDefinitionDetails extends React.Component<
         </Table>
         {printerColumns.length > 0 && (
           <>
-            <DrawerTitle>Additional Printer Columns</DrawerTitle>
+            <DrawerTitle>{t("Additional Printer Columns")}</DrawerTitle>
             <Table selectable className="printer-columns">
               <TableHead>
-                <TableCell className="name">Name</TableCell>
-                <TableCell className="type">Type</TableCell>
-                <TableCell className="json-path">JSON Path</TableCell>
+                <TableCell className="name">{t("Name")}</TableCell>
+                <TableCell className="type">{t("Type")}</TableCell>
+                <TableCell className="json-path">{t("JSON Path")}</TableCell>
               </TableHead>
               {printerColumns.map((column, index) => {
                 const { name, type, jsonPath } = column;
@@ -141,7 +142,7 @@ class NonInjectedCustomResourceDefinitionDetails extends React.Component<
         )}
         {validation && (
           <>
-            <DrawerTitle>Validation</DrawerTitle>
+            <DrawerTitle>{t("Validation")}</DrawerTitle>
             <MonacoEditor readOnly value={validation} style={{ height: 400 }} />
           </>
         )}

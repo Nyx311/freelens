@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import { Checkbox } from "../checkbox";
 import { SubTitle } from "../layout/sub-title";
@@ -19,17 +20,18 @@ export const NamespaceAuthCheckSetting = observer(function NamespaceAuthCheckSet
 }: NamespaceAuthCheckSettingProps) {
   return (
     <>
-      <SubTitle title="Performance" />
+      <SubTitle title={t("Performance")} />
       <Checkbox
-        label="Skip namespace authorization check"
+        label={t("Skip namespace authorization check")}
         value={cluster.preferences.skipNamespaceAuthorizationCheck ?? false}
         onChange={(checked) => {
           cluster.preferences.skipNamespaceAuthorizationCheck = checked;
         }}
       />
       <small className="hint">
-        Skip the per-namespace authorization check when connecting to this cluster. Speeds up connection but may show
-        resources you cannot access.
+        {t(
+          "Skip the per-namespace authorization check when connecting to this cluster. Speeds up connection but may show resources you cannot access.",
+        )}
       </small>
     </>
   );

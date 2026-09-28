@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { webContents } from "electron";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -16,7 +17,7 @@ const goBackMenuItemInjectable = getInjectable({
     parentId: "view",
     id: "go-back",
     orderNumber: 40,
-    label: "Back",
+    label: t("Back"),
     keyboardShortcut: "CmdOrCtrl+[",
 
     onClick: () => {

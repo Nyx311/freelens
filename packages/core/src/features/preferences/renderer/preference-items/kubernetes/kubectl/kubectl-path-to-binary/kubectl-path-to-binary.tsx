@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { useState } from "react";
@@ -29,7 +30,7 @@ const NonInjectedKubectlPathToBinary = observer(({ state, defaultPathForKubectlB
 
   return (
     <section>
-      <SubTitle title="Path to kubectl binary" />
+      <SubTitle title={t("Path to kubectl binary")} />
       <Input
         theme="round-black"
         placeholder={defaultPathForKubectlBinaries}
@@ -39,7 +40,7 @@ const NonInjectedKubectlPathToBinary = observer(({ state, defaultPathForKubectlB
         onBlur={save}
         disabled={state.downloadKubectlBinaries}
       />
-      <div className="hint">The path to the kubectl binary. Defaults to the bundled version.</div>
+      <div className="hint">{t("The path to the kubectl binary. Defaults to the bundled version.")}</div>
     </section>
   );
 });

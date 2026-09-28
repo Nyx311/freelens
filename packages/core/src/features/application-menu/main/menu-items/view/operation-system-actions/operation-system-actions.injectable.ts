@@ -11,6 +11,7 @@ export const actionForToggleDevTools = getApplicationMenuOperationSystemActionIn
   parentId: "view",
   orderNumber: 70,
   actionName: "toggleDevTools",
+  label: "Toggle Developer Tools",
 });
 
 export const actionForResetZoom = getApplicationMenuOperationSystemActionInjectable({
@@ -18,6 +19,7 @@ export const actionForResetZoom = getApplicationMenuOperationSystemActionInjecta
   parentId: "view",
   orderNumber: 90,
   actionName: "resetZoom",
+  label: "Reset Zoom",
 });
 
 export const actionForZoomIn = getApplicationMenuOperationSystemActionInjectable({
@@ -25,6 +27,7 @@ export const actionForZoomIn = getApplicationMenuOperationSystemActionInjectable
   parentId: "view",
   orderNumber: 100,
   actionName: "zoomIn",
+  label: "Zoom In",
 });
 
 export const actionForZoomOut = getApplicationMenuOperationSystemActionInjectable({
@@ -32,6 +35,7 @@ export const actionForZoomOut = getApplicationMenuOperationSystemActionInjectabl
   parentId: "view",
   orderNumber: 110,
   actionName: "zoomOut",
+  label: "Zoom Out",
 });
 
 export const actionForToggleFullScreen = getApplicationMenuOperationSystemActionInjectable({
@@ -39,4 +43,5 @@ export const actionForToggleFullScreen = getApplicationMenuOperationSystemAction
   parentId: "view",
   orderNumber: 130,
   actionName: "togglefullscreen",
+  label: "Toggle Full Screen",
 });

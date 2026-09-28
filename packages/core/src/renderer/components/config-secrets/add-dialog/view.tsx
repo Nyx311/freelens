@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./view.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -123,7 +124,7 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
       this.props.showDetails(newSecret?.selfLink);
       this.close();
     } catch (err) {
-      this.props.showCheckedErrorNotification(err, "Unknown error occurred while creating a Secret");
+      this.props.showCheckedErrorNotification(err, t("Unknown error occurred while creating a Secret"));
     }
   };
 
@@ -143,14 +144,14 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
     return (
       <>
         <SubTitle compact className="fields-title" title={upperFirst(field.toString())}>
-          <Icon small tooltip="Add field" material="add_circle_outline" onClick={() => this.addField(field)} />
+          <Icon small tooltip={t("Add field")} material="add_circle_outline" onClick={() => this.addField(field)} />
         </SubTitle>
         <div className="secret-fields">
           {this.getFields(field).map((item, index) => (
             <div key={index} className="secret-field flex gap-3 items-center">
               <Input
                 className="key flex-1"
-                placeholder="Name"
+                placeholder={t("Name")}
                 title={item.key}
                 tabIndex={item.required ? -1 : 0}
                 readOnly={item.required}
@@ -162,14 +163,14 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
                 maxRows={5}
                 required={item.required}
                 className="value flex-1"
-                placeholder="Value"
+                placeholder={t("Value")}
                 value={item.value}
                 onChange={(v) => (item.value = v)}
               />
               <Icon
                 small
                 disabled={item.required}
-                tooltip={item.required ? "Required field" : "Remove field"}
+                tooltip={item.required ? t("Required field") : t("Remove field")}
                 className="remove-icon"
                 material="remove_circle_outline"
                 onClick={() => this.removeField(field, index)}
@@ -184,7 +185,7 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
   render() {
     const { closeAddSecretDialog, isAddSecretDialogOpen, secretApi, showDetails, ...dialogProps } = this.props;
     const { namespace, name, type } = this;
-    const header = <h5>Create Secret</h5>;
+    const header = <h5>{t("Create Secret")}</h5>;
 
     void closeAddSecretDialog;
     void secretApi;
@@ -201,11 +202,11 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
         <Wizard header={header} done={this.close}>
           <WizardStep contentClass="space-y-3" nextLabel="Create" next={this.createSecret}>
             <div className="secret-name">
-              <SubTitle title="Secret name" />
+              <SubTitle title={t("Secret name")} />
               <Input
                 autoFocus
                 required
-                placeholder="Name"
+                placeholder={t("Name")}
                 trim
                 validators={systemName}
                 value={name}
@@ -214,7 +215,7 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
             </div>
             <div className="flex gap-3">
               <div className="secret-namespace flex-1">
-                <SubTitle title="Namespace" />
+                <SubTitle title={t("Namespace")} />
                 <NamespaceSelect
                   id="secret-namespace-input"
                   themeName="lens"
@@ -223,7 +224,7 @@ class NonInjectedAddSecretDialog extends React.Component<AddSecretDialogProps & 
                 />
               </div>
               <div className="secret-type flex-1">
-                <SubTitle title="Secret type" />
+                <SubTitle title={t("Secret type")} />
                 <Select
                   id="secret-input"
                   themeName="lens"

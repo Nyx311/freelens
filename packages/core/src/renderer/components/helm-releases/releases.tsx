@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "../item-object-list/item-list-layout.scss";
 import "./releases.scss";
 
@@ -69,9 +70,9 @@ class NonInjectedHelmReleases extends Component<Dependencies> {
     return (
       <div>
         <>
-          Remove <b>{releaseNames}</b>?
+          {t("Remove")} <b>{releaseNames}</b>?
         </>
-        <p className="warning">Note: StatefulSet Volumes won&apos;t be deleted automatically</p>
+        <p className="warning">{t("Note: StatefulSet Volumes won't be deleted automatically")}</p>
       </div>
     );
   }
@@ -156,20 +157,58 @@ class NonInjectedHelmReleases extends Component<Dependencies> {
             ),
             searchProps: {
               ...searchProps,
-              placeholder: "Search Releases...",
+              placeholder: t("Search Releases..."),
             },
             ...headerPlaceholders,
           })}
-          renderHeaderTitle="Releases"
+          renderHeaderTitle={t("Releases")}
           renderTableHeader={[
-            { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
-            { title: "Namespace", className: "namespace", sortBy: columnId.namespace, id: columnId.namespace },
-            { title: "Chart", className: "chart", sortBy: columnId.chart, id: columnId.chart },
-            { title: "Revision", className: "revision", sortBy: columnId.revision, id: columnId.revision },
-            { title: "Version", className: "version", id: columnId.version },
-            { title: "App Version", className: "app-version", id: columnId.appVersion },
-            { title: "Status", className: "status", sortBy: columnId.status, id: columnId.status },
-            { title: "Updated", className: "updated", sortBy: columnId.updated, id: columnId.updated },
+            {
+              title: t("Name"),
+              className: "name",
+              sortBy: columnId.name,
+              id: columnId.name,
+            },
+            {
+              title: t("Namespace"),
+              className: "namespace",
+              sortBy: columnId.namespace,
+              id: columnId.namespace,
+            },
+            {
+              title: t("Chart"),
+              className: "chart",
+              sortBy: columnId.chart,
+              id: columnId.chart,
+            },
+            {
+              title: t("Revision"),
+              className: "revision",
+              sortBy: columnId.revision,
+              id: columnId.revision,
+            },
+            {
+              title: t("Version"),
+              className: "version",
+              id: columnId.version,
+            },
+            {
+              title: t("App Version"),
+              className: "app-version",
+              id: columnId.appVersion,
+            },
+            {
+              title: t("Status"),
+              className: "status",
+              sortBy: columnId.status,
+              id: columnId.status,
+            },
+            {
+              title: t("Updated"),
+              className: "updated",
+              sortBy: columnId.updated,
+              id: columnId.updated,
+            },
           ]}
           renderTableContents={(release) => [
             <WithTooltip>{release.getName()}</WithTooltip>,

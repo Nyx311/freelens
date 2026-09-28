@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import isMacInjectable from "../../../../../../common/vars/is-mac.injectable";
 import applicationMenuItemInjectionToken from "../../application-menu-item-injection-token";
@@ -20,7 +21,7 @@ const closeWindowMenuItemInjectable = getInjectable({
       parentId: "file",
       orderNumber: 60,
       actionName: "close" as const,
-      label: "Close Window",
+      label: t("Close Window"),
       keyboardShortcut: "Shift+Cmd+W",
       isShown: isMac,
     };

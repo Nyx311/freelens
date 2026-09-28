@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getInjectable } from "@ogre-tools/injectable";
 import { preferenceItemInjectionToken } from "./preference-item-injection-token";
 
@@ -14,7 +15,7 @@ const extensionsPreferenceTabGroupInjectable = getInjectable({
     kind: "tab-group" as const,
     id: "extensions-tab-group",
     parentId: "preference-tabs" as const,
-    label: "Extensions",
+    label: t("Extensions"),
     orderNumber: 20,
     iconName: "extension",
   }),

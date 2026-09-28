@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { base64, cssNames, isObject } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -75,7 +76,7 @@ const NonInjectedSecretKey = (props: SecretKeyProps & Dependencies) => {
       <Icon
         className={cssNames("secret-button", { loading })}
         material="visibility"
-        tooltip="Show"
+        tooltip={t("Show")}
         disabled={loading}
         onClick={showKey}
         data-testid={`show-secret-button-for-${namespace}/${name}:${key}`}

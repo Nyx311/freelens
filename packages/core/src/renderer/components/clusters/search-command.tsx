@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { isKubernetesCluster, KubernetesCluster } from "../../../common/catalog-entities";
@@ -49,10 +50,10 @@ const NonInjectedClustersSearchCommand = observer(({ closeCommandOverlay, entiti
       .filter(isKubernetesCluster)
       .slice()
       .sort((prev, next) => sortByLastSeen(prev, next))
-      .map((entity) => ({ value: entity, label: `Cluster: ${entity.getName()}` }))}
+      .map((entity) => ({ value: entity, label: t("Cluster: {{name}}", { name: entity.getName() }) }))}
     autoFocus={true}
     escapeClearsValue={false}
-    placeholder="Search clusters by name ..."
+    placeholder={t("Search clusters by name ...")}
   />
 ));
 

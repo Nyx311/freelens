@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./limit-range-details.scss";
 
 import { LimitPart, LimitRange, Resource } from "@freelensapp/kube-object";
@@ -77,17 +78,17 @@ class NonInjectedLimitRangeDetails extends React.Component<LimitRangeDetailsProp
     return (
       <div className="LimitRangeDetails">
         {containerLimits.length > 0 && (
-          <DrawerItem name="Container Limits" labelsOnly>
+          <DrawerItem name={t("Container Limits")} labelsOnly>
             {renderLimitDetails(containerLimits, [Resource.CPU, Resource.MEMORY, Resource.EPHEMERAL_STORAGE])}
           </DrawerItem>
         )}
         {podLimits.length > 0 && (
-          <DrawerItem name="Pod Limits" labelsOnly>
+          <DrawerItem name={t("Pod Limits")} labelsOnly>
             {renderLimitDetails(podLimits, [Resource.CPU, Resource.MEMORY, Resource.EPHEMERAL_STORAGE])}
           </DrawerItem>
         )}
         {pvcLimits.length > 0 && (
-          <DrawerItem name="Persistent Volume Claim Limits" labelsOnly>
+          <DrawerItem name={t("Persistent Volume Claim Limits")} labelsOnly>
             {renderLimitDetails(pvcLimits, [Resource.STORAGE])}
           </DrawerItem>
         )}

@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import emitAppEventInjectable from "../../../common/app-event-bus/emit-event.injectable";
@@ -78,12 +79,12 @@ const openLocalShellSessionInjectable = getInjectable({
       // PTY exists, which is exactly the stretch that used to be silent.
       const status = terminalStatusReporterFor(args.websocket);
 
-      status.info("Starting cluster proxy ...");
+      status.info(t("Starting cluster proxy ..."));
       const proxyKubeconfigPath = await kubeconfigManager.ensurePath();
 
       const kubectlStatus = kubectlStatusOptionsFor(kubectl.kubectlVersion, status);
 
-      status.info(`Checking kubectl v${kubectl.kubectlVersion} ...`);
+      status.info(t("Checking kubectl v{{version}} ...", { version: kubectl.kubectlVersion }));
 
       const directoryContainingKubectl = await kubectl.binDir(kubectlStatus).finally(() => kubectlStatus.done());
 

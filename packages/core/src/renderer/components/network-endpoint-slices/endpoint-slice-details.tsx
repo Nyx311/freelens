@@ -5,6 +5,7 @@
 
 import "./endpoint-slice-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { EndpointSlice } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { Link } from "@freelensapp/routing";
@@ -54,10 +55,10 @@ class NonInjectedEndpointSliceDetails extends React.Component<EndpointSliceDetai
       endpointSlice.endpoints &&
       endpointSlice.ports && (
         <div className="EndpointSliceDetails">
-          <DrawerTitle>Endpoints</DrawerTitle>
+          <DrawerTitle>{t("Endpoints")}</DrawerTitle>
           {endpointSlice.endpoints && endpointSlice.endpoints.length > 0 && (
             <>
-              <div className="title flex gap-2">Addresses</div>
+              <div className="title flex gap-2">{t("Addresses")}</div>
               <Table
                 items={endpointSlice.endpoints}
                 selectable={false}
@@ -66,11 +67,11 @@ class NonInjectedEndpointSliceDetails extends React.Component<EndpointSliceDetai
               >
                 <TableHead>
                   <TableCell className="ip">IP</TableCell>
-                  <TableCell className="host">Hostname</TableCell>
-                  <TableCell className="node">Node</TableCell>
-                  <TableCell className="zone">Zone</TableCell>
-                  <TableCell className="target">Target</TableCell>
-                  <TableCell className="conditions">Conditions</TableCell>
+                  <TableCell className="host">{t("Hostname")}</TableCell>
+                  <TableCell className="node">{t("Node")}</TableCell>
+                  <TableCell className="zone">{t("Zone")}</TableCell>
+                  <TableCell className="target">{t("Target")}</TableCell>
+                  <TableCell className="conditions">{t("Conditions")}</TableCell>
                 </TableHead>
                 {endpointSlice.endpoints.map((endpoint) =>
                   endpoint.addresses.map((address) => (
@@ -100,13 +101,18 @@ class NonInjectedEndpointSliceDetails extends React.Component<EndpointSliceDetai
                       </TableCell>
                       <TableCell className="conditions">
                         {endpoint.conditions?.ready && (
-                          <Badge key="ready" label="Ready" tooltip="Ready" className="ready" />
+                          <Badge key="ready" label={t("Ready")} tooltip={t("Ready")} className="ready" />
                         )}
                         {endpoint.conditions?.serving && (
-                          <Badge key="serving" label="Serving" tooltip="Serving" className="serving" />
+                          <Badge key="serving" label={t("Serving")} tooltip={t("Serving")} className="serving" />
                         )}
                         {endpoint.conditions?.terminating && (
-                          <Badge key="terminating" label="Terminating" tooltip="Terminating" className="terminating" />
+                          <Badge
+                            key="terminating"
+                            label={t("Terminating")}
+                            tooltip={t("Terminating")}
+                            className="terminating"
+                          />
                         )}
                       </TableCell>
                     </TableRow>
@@ -118,12 +124,12 @@ class NonInjectedEndpointSliceDetails extends React.Component<EndpointSliceDetai
 
           {endpointSlice.ports && endpointSlice.ports.length > 0 && (
             <>
-              <div className="title flex gap-2">Ports</div>
+              <div className="title flex gap-2">{t("Ports")}</div>
               <Table selectable={false} virtual={false} scrollable={false} className="grow shrink-0 basis-0">
                 <TableHead>
-                  <TableCell className="port">Port</TableCell>
-                  <TableCell className="name">Name</TableCell>
-                  <TableCell className="protocol">Protocol</TableCell>
+                  <TableCell className="port">{t("Port")}</TableCell>
+                  <TableCell className="name">{t("Name")}</TableCell>
+                  <TableCell className="protocol">{t("Protocol")}</TableCell>
                 </TableHead>
                 {endpointSlice.ports?.map((port) => (
                   // The same port number may be exposed under several protocols, so the

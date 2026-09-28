@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { cssNames } from "@freelensapp/utilities";
 import styles from "./removable-item.module.scss";
@@ -29,7 +30,7 @@ export function RemovableItem({
     <div className={cssNames(styles.item, "flex gap-2 items-center justify-between", className)} {...rest}>
       {icon && <Icon material={icon} />}
       {children}
-      <Icon material="delete" onClick={onRemove} tooltip="Remove" data-testid={testId} />
+      <Icon material="delete" onClick={onRemove} tooltip={t("Remove")} data-testid={testId} />
     </div>
   );
 }

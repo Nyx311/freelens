@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { DrawerItem } from "../../../../drawer";
 
 import type { VolumeVariantComponent } from "../variant-helpers";
@@ -14,9 +15,9 @@ export const AzureDisk: VolumeVariantComponent<"azureDisk"> = ({
   <>
     <DrawerItem name={kind === "Managed" ? "Disk Name" : "VHD blob Name"}>{diskName}</DrawerItem>
     <DrawerItem name={kind === "Managed" ? "Resource ID" : "Disk URI"}>{diskURI}</DrawerItem>
-    <DrawerItem name="Kind">{kind}</DrawerItem>
-    <DrawerItem name="Caching Mode">{cachingMode}</DrawerItem>
-    <DrawerItem name="Filesystem Type">{fsType}</DrawerItem>
-    <DrawerItem name="Readonly">{readonly.toString()}</DrawerItem>
+    <DrawerItem name={t("Kind")}>{kind}</DrawerItem>
+    <DrawerItem name={t("Caching Mode")}>{cachingMode}</DrawerItem>
+    <DrawerItem name={t("Filesystem Type")}>{fsType}</DrawerItem>
+    <DrawerItem name={t("Readonly")}>{t(readonly.toString())}</DrawerItem>
   </>
 );

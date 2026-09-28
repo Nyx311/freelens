@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Input } from "../../../../../../renderer/components/input";
@@ -18,7 +19,7 @@ interface Dependencies {
 
 const NonInjectedEditorFontFamily = observer(({ state: { editorConfiguration } }: Dependencies) => (
   <section>
-    <SubTitle title="Font family" />
+    <SubTitle title={t("Font family")} />
     <Input
       theme="round-black"
       type="text"

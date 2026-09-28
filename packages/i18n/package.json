@@ -1,0 +1,15 @@
+{
+  "name": "@freelensapp/i18n",
+  "version": "2.0.0-0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/common/i18n.ts",
+  "types": "./src/common/i18n.ts",
+  "dependencies": {
+    "i18next": "catalog:"
+  },
+  "devDependencies": {
+    "vitest": "catalog:"
+  }
+}

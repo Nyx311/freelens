@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./resource-selector.scss";
 
 import { observer } from "mobx-react";
@@ -63,20 +64,20 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
       selectedPodId: option.value.getId(),
       selectedContainer: findOptimalDefaultContainerOfPod(option.value)?.name,
     });
-    model.renameTab(`Pod ${option.value.getName()}`);
+    model.renameTab(t("Pod {{name}}", { name: option.value.getName() }));
     model.reloadLogs();
   };
 
   const containerSelectOptions = [
     {
-      label: "Containers",
+      label: t("Containers"),
       options: pod.getContainers().map((container) => ({
         value: container,
         label: container.name,
       })),
     },
     {
-      label: "Init Containers",
+      label: t("Init Containers"),
       options: pod.getInitContainers().map((container) => ({
         value: container,
         label: container.name,
@@ -86,13 +87,13 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
 
   return (
     <div className="LogResourceSelector flex gap-2 items-center">
-      <span>Namespace</span> <Badge data-testid="namespace-badge" label={pod.getNs()} />
+      <span>{t("Namespace")}</span> <Badge data-testid="namespace-badge" label={pod.getNs()} />
       {owner && (
         <>
-          <span>Owner</span> <Badge data-testid="namespace-badge" label={`${owner.kind} ${owner.name}`} />
+          <span>{t("Owner")}</span> <Badge data-testid="namespace-badge" label={`${owner.kind} ${owner.name}`} />
         </>
       )}
-      <span>Pod</span>
+      <span>{t("Pod")}</span>
       <Select
         options={podOptions}
         value={pod}
@@ -101,7 +102,7 @@ export const LogResourceSelector = observer(({ model }: LogResourceSelectorProps
         className="pod-selector"
         menuClass="pod-selector-menu"
       />
-      <span>Container</span>
+      <span>{t("Container")}</span>
       <Select<Container, SelectOption<Container>, false>
         id="container-selector-input"
         options={containerSelectOptions}

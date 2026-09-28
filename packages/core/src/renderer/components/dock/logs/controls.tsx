@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { observer } from "mobx-react";
 import { Checkbox } from "../../checkbox";
 import styles from "./controls.module.scss";
@@ -46,20 +47,21 @@ export const LogControls = observer(({ model }: LogControlsProps) => {
       <div>
         {since && (
           <span>
-            Logs from <b>{new Date(since).toLocaleString()}</b>
+            {`${t("Logs from")} `}
+            <b>{new Date(since).toLocaleString()}</b>
           </span>
         )}
       </div>
       <div className="flex gap-2 items-center">
         <Checkbox
-          label="Show timestamps"
+          label={t("Show timestamps")}
           value={showTimestamps}
           onChange={toggleTimestamps}
           className="show-timestamps"
         />
-        <Checkbox label="Word wrap" value={showWordWrap} onChange={toggleWordWrap} className="show-word-wrap" />
+        <Checkbox label={t("Word wrap")} value={showWordWrap} onChange={toggleWordWrap} className="show-word-wrap" />
         <Checkbox
-          label="Show previous terminated container"
+          label={t("Show previous terminated container")}
           value={previous}
           onChange={togglePrevious}
           className="show-previous"

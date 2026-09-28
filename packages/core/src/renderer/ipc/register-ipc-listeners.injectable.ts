@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
 import { clusterListNamespaceForbiddenChannel } from "../../common/ipc/cluster";
@@ -23,7 +24,9 @@ const registerIpcListenersInjectable = getInjectable({
     return () => {
       ipcRenderer.on(clusterListNamespaceForbiddenChannel, listNamespacesForbiddenHandler);
       ipcRenderer.on(hotbarTooManyItemsChannel, () => {
-        showErrorNotification(`Cannot have more than ${defaultHotbarCells} items pinned to a hotbar`);
+        showErrorNotification(
+          t("Cannot have more than {{count}} items pinned to a hotbar", { count: defaultHotbarCells }),
+        );
       });
     };
   },

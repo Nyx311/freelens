@@ -6,6 +6,7 @@
 
 import "./port-forward-details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { podApiInjectable, serviceApiInjectable } from "@freelensapp/kube-api-specifics";
 import { Link } from "@freelensapp/routing";
 import { cssNames } from "@freelensapp/utilities";
@@ -55,15 +56,17 @@ class NonInjectedPortForwardDetails extends React.Component<PortForwardDetailsPr
 
     return (
       <div>
-        <DrawerItem name="Resource Name">{this.renderResourceName()}</DrawerItem>
-        <DrawerItem name="Namespace">{portForward.getNs()}</DrawerItem>
-        <DrawerItem name="Kind">{portForward.getKind()}</DrawerItem>
-        <DrawerItem name="Pod Port">{portForward.getPort()}</DrawerItem>
-        <DrawerItem name="Local Port">{portForward.getForwardPort()}</DrawerItem>
-        <DrawerItem name="Protocol">{portForward.getProtocol()}</DrawerItem>
-        <DrawerItem name="Address">{portForward.getAddress()}</DrawerItem>
-        <DrawerItem name="Status">
-          <span className={cssNames("status", portForward.getStatus().toLowerCase())}>{portForward.getStatus()}</span>
+        <DrawerItem name={t("Resource Name")}>{this.renderResourceName()}</DrawerItem>
+        <DrawerItem name={t("Namespace")}>{portForward.getNs()}</DrawerItem>
+        <DrawerItem name={t("Kind")}>{portForward.getKind()}</DrawerItem>
+        <DrawerItem name={t("Pod Port")}>{portForward.getPort()}</DrawerItem>
+        <DrawerItem name={t("Local Port")}>{portForward.getForwardPort()}</DrawerItem>
+        <DrawerItem name={t("Protocol")}>{portForward.getProtocol()}</DrawerItem>
+        <DrawerItem name={t("Address")}>{portForward.getAddress()}</DrawerItem>
+        <DrawerItem name={t("Status")}>
+          <span className={cssNames("status", portForward.getStatus().toLowerCase())}>
+            {t(portForward.getStatus())}
+          </span>
         </DrawerItem>
       </div>
     );

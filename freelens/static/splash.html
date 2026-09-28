@@ -211,5 +211,10 @@
         </div>
       </div>
     </div>
+    <script>
+    const languageParams = new URLSearchParams(window.location.search);
+    document.documentElement.lang = languageParams.get("language") || "en";
+    document.querySelector(".loading .text").textContent = languageParams.get("loadingText") || "Loading...";
+    </script>
   </body>
 </html>

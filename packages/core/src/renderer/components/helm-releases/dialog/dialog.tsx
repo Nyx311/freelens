@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./dialog.scss";
 
 import { showCheckedErrorNotificationInjectable } from "@freelensapp/notifications";
@@ -48,7 +49,12 @@ class NonInjectedReleaseRollbackDialog extends React.Component<ReleaseRollbackDi
   readonly revisionOptions = computed(() =>
     this.revisions.map((revision) => ({
       value: revision,
-      label: `${revision.revision} - ${revision.chart} - ${revision.app_version}, updated: ${new Date(revision.updated).toLocaleString()}`,
+      label: t("{{revision}} - {{chart}} - {{version}}, updated: {{updated}}", {
+        revision: revision.revision,
+        chart: revision.chart,
+        version: revision.app_version,
+        updated: new Date(revision.updated).toLocaleString(),
+      }),
     })),
   );
 
@@ -79,7 +85,7 @@ class NonInjectedReleaseRollbackDialog extends React.Component<ReleaseRollbackDi
       await this.props.rollbackRelease(release.getName(), release.getNs(), revision.revision);
       this.close();
     } catch (err) {
-      this.props.showCheckedErrorNotification(err, "Unknown error occurred while rolling back release");
+      this.props.showCheckedErrorNotification(err, t("Unknown error occurred while rolling back release"));
     }
   };
 
@@ -87,12 +93,12 @@ class NonInjectedReleaseRollbackDialog extends React.Component<ReleaseRollbackDi
     const revision = this.revision.get();
 
     if (!revision) {
-      return <p>No revisions to rollback.</p>;
+      return <p>{t("No revisions to rollback.")}</p>;
     }
 
     return (
       <div className="flex gap-2 items-center">
-        <b>Revision</b>
+        <b>{t("Revision")}</b>
         <Select
           id="revision-input"
           themeName="lens"
@@ -109,7 +115,7 @@ class NonInjectedReleaseRollbackDialog extends React.Component<ReleaseRollbackDi
       <Wizard
         header={
           <h5>
-            {"Rollback "}
+            {t("Rollback")}
             <b>{release.getName()}</b>
           </h5>
         }
@@ -117,7 +123,7 @@ class NonInjectedReleaseRollbackDialog extends React.Component<ReleaseRollbackDi
       >
         <WizardStep
           scrollable={false}
-          nextLabel="Rollback"
+          nextLabel={t("Rollback")}
           next={() => this.rollback(release)}
           loading={this.isLoading.get()}
         >

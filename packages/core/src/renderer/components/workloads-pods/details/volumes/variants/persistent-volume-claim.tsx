@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { persistentVolumeClaimApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { LocalRef } from "../variant-helpers";
@@ -25,7 +26,7 @@ const NonInjectedPersistentVolumeClaim = (
     persistentVolumeClaimApi,
   } = props;
 
-  return <LocalRef pod={pod} title="Name" kubeRef={{ name: claimName }} api={persistentVolumeClaimApi} />;
+  return <LocalRef pod={pod} title={t("Name")} kubeRef={{ name: claimName }} api={persistentVolumeClaimApi} />;
 };
 
 export const PersistentVolumeClaim = withInjectables<

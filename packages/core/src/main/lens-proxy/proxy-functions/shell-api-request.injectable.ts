@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import { WebSocketServer } from "ws";
@@ -56,7 +57,9 @@ const shellApiRequestInjectable = getInjectable({
             // Otherwise the tab is left showing a status line for a session
             // that will never start, next to a "Restart session" button with
             // no stated reason.
-            terminalStatusReporterFor(websocket).error(`Failed to open the shell session: ${messageOfError(error)}`);
+            terminalStatusReporterFor(websocket).error(
+              t("Failed to open the shell session: {{error}}", { error: messageOfError(error) }),
+            );
           });
         });
       }

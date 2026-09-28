@@ -5,6 +5,7 @@
  */
 
 import { Button } from "@freelensapp/button";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable, showInfoNotificationInjectable } from "@freelensapp/notifications";
 import { disposer } from "@freelensapp/utilities";
@@ -117,13 +118,10 @@ const attemptInstall =
       return void showErrorNotification(
         <div className="flex flex-col gap-2">
           <p>
-            {"Installing "}
-            <em>{request.fileName}</em>
-            {" has failed, skipping."}
+            {t("Installing")} <em>{request.fileName}</em> {t("has failed, skipping.")}
           </p>
           <p>
-            {"Reason: "}
-            <em>{failure}</em>
+            {t("Reason:")} <em>{failure}</em>
           </p>
         </div>,
       );
@@ -143,13 +141,11 @@ const attemptInstall =
 
       return void showErrorNotification(
         <div className="flex flex-col gap-2">
-          <b>Extension Install Collision:</b>
+          <b>{t("Extension Install Collision:")}</b>
           <p>
-            {"The "}
-            <em>{name}</em>
-            {` extension is currently ${curState.toLowerCase()}.`}
+            {t("The")} <em>{name}</em> {t("extension is currently {{state}}.", { state: curState.toLowerCase() })}
           </p>
-          <p>Will not proceed with this current install request.</p>
+          <p>{t("Will not proceed with this current install request.")}</p>
         </div>,
       );
     }
@@ -165,12 +161,11 @@ const attemptInstall =
 
       return void showErrorNotification(
         <div className="flex flex-col gap-2">
-          <b>Extension is active:</b>
+          <b>{t("Extension is active:")}</b>
           <p>
-            <em>{`${name}@${installedExtension.manifest.version}`}</em>
-            {" is installed and active."}
+            <em>{`${name}@${installedExtension.manifest.version}`}</em> {t("is installed and active.")}
           </p>
-          <p>{"Disable or uninstall it first, then install this version."}</p>
+          <p>{t("Disable or uninstall it first, then install this version.")}</p>
         </div>,
       );
     }
@@ -183,21 +178,19 @@ const attemptInstall =
         <div className="InstallingExtensionNotification flex gap-2 items-center">
           <div className="flex flex-col gap-2">
             <p>
-              {"Install extension "}
-              <b>{`${name}@${version}`}</b>?
+              {t("Install extension")} <b>{`${name}@${version}`}</b>?
             </p>
             <p>
-              {"Description: "}
-              <em>{description}</em>
+              {t("Description:")} <em>{description}</em>
             </p>
             <div className="remove-folder-warning" onClick={() => shell.openPath(extensionFolder)}>
-              <b>Warning:</b>
-              {` ${name}@${oldVersion} will be replaced by this installation.`}
+              <b>{t("Warning:")}</b>{" "}
+              {t("{{extension}} will be replaced by this installation.", { extension: `${name}@${oldVersion}` })}
             </div>
           </div>
           <Button
             autoFocus
-            label="Install"
+            label={t("Install")}
             onClick={async () => {
               removeNotification();
 

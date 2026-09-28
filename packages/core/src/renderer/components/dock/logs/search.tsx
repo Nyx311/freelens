@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./search.scss";
 
 import { Icon } from "@freelensapp/icon";
@@ -173,8 +174,8 @@ export const LogSearch = observer(
           onClear={onClear}
           onKeyDown={onKeyDown}
         />
-        <Icon material="keyboard_arrow_up" tooltip="Previous" onClick={onPrevOverlay} disabled={jumpDisabled} />
-        <Icon material="keyboard_arrow_down" tooltip="Next" onClick={onNextOverlay} disabled={jumpDisabled} />
+        <Icon material="keyboard_arrow_up" tooltip={t("Previous")} onClick={onPrevOverlay} disabled={jumpDisabled} />
+        <Icon material="keyboard_arrow_down" tooltip={t("Next")} onClick={onNextOverlay} disabled={jumpDisabled} />
       </div>
     );
   },

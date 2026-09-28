@@ -5,6 +5,7 @@
  */
 
 import { onLoadOfApplicationInjectionToken } from "@freelensapp/application";
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { getInjectable } from "@ogre-tools/injectable";
 import extensionDiscoveryInjectable from "../../../extensions/extension-discovery/extension-discovery.injectable";
@@ -51,7 +52,10 @@ const initializeExtensionsInjectable = getInjectable({
 
         extensionLoader.initExtensions(extensions);
       } catch (error: any) {
-        showErrorPopup("Freelens Error", `Could not load extensions${error?.message ? `: ${error.message}` : ""}`);
+        showErrorPopup(
+          t("Freelens Error"),
+          t("Could not load extensions{{details}}", { details: error?.message ? `: ${error.message}` : "" }),
+        );
 
         console.error(error);
         console.trace();

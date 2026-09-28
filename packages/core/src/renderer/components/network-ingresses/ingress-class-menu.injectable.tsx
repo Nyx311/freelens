@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { getInjectable } from "@ogre-tools/injectable";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -39,8 +40,8 @@ export function NonInjectedIngressClassMenu(props: IngressClassMenuProps & Depen
   return (
     <>
       <MenuItem onClick={markItemAsDefaultIngressClass}>
-        <Icon material="star" tooltip="Set as default" interactive={toolbar} />
-        <span className="title">Set as default</span>
+        <Icon material="star" tooltip={t("Set as default")} interactive={toolbar} />
+        <span className="title">{t("Set as default")}</span>
       </MenuItem>
     </>
   );

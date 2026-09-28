@@ -6,6 +6,7 @@
 
 import "./kube-object-list-layout.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Icon } from "@freelensapp/icon";
 import { kubeObjectListLayoutColumnInjectionToken } from "@freelensapp/list-layout";
 import { TooltipPosition } from "@freelensapp/tooltip";
@@ -258,7 +259,7 @@ class NonInjectedKubeObjectListLayout<
             ),
             searchProps: {
               ...searchProps,
-              placeholder: `Search ${resourceName}...`,
+              placeholder: t("Search {{resourceName}}...", { resourceName }),
             },
             info: (
               <>

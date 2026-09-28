@@ -6,6 +6,7 @@
 
 import "./details.scss";
 
+import { t } from "@freelensapp/i18n";
 import { ObservableHashSet, prevDefault } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import autoBindReact from "auto-bind/react";
@@ -60,13 +61,8 @@ class NonInjectedClusterRoleBindingDetails extends React.Component<ClusterRoleBi
 
     openConfirmDialog({
       ok: () => clusterRoleBindingStore.removeSubjects(clusterRoleBinding, selectedSubjects),
-      labelOk: `Remove`,
-      message: (
-        <p>
-          Remove selected bindings for
-          <b>{clusterRoleBinding.getName()}</b>?
-        </p>
-      ),
+      labelOk: t("Remove"),
+      message: <p>{t("Remove selected bindings for {{name}}?", { name: clusterRoleBinding.getName() })}</p>,
     });
   }
 
@@ -82,12 +78,12 @@ class NonInjectedClusterRoleBindingDetails extends React.Component<ClusterRoleBi
 
     return (
       <div className="ClusterRoleBindingDetails">
-        <DrawerTitle>Reference</DrawerTitle>
+        <DrawerTitle>{t("Reference")}</DrawerTitle>
         <Table>
           <TableHead>
-            <TableCell>Kind</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>API Group</TableCell>
+            <TableCell>{t("Kind")}</TableCell>
+            <TableCell>{t("Name")}</TableCell>
+            <TableCell>{t("API Group")}</TableCell>
           </TableHead>
           <TableRow>
             <TableCell>
@@ -102,14 +98,14 @@ class NonInjectedClusterRoleBindingDetails extends React.Component<ClusterRoleBi
           </TableRow>
         </Table>
 
-        <DrawerTitle>Bindings</DrawerTitle>
+        <DrawerTitle>{t("Bindings")}</DrawerTitle>
         {subjects.length > 0 && (
           <Table selectable className="bindings grow shrink-0 basis-0">
             <TableHead>
               <TableCell checkbox />
-              <TableCell className="type">Type</TableCell>
-              <TableCell className="binding">Name</TableCell>
-              <TableCell className="ns">Namespace</TableCell>
+              <TableCell className="type">{t("Type")}</TableCell>
+              <TableCell className="binding">{t("Name")}</TableCell>
+              <TableCell className="ns">{t("Namespace")}</TableCell>
             </TableHead>
             {subjects.map((subject, i) => {
               const { kind, name, namespace } = subject;
@@ -140,8 +136,8 @@ class NonInjectedClusterRoleBindingDetails extends React.Component<ClusterRoleBi
         <AddRemoveButtons
           onAdd={() => openClusterRoleBindingDialog(clusterRoleBinding)}
           onRemove={selectedSubjects.size ? this.removeSelectedSubjects : undefined}
-          addTooltip={`Add bindings to ${roleRef.name}`}
-          removeTooltip={`Remove selected bindings from ${roleRef.name}`}
+          addTooltip={t("Add bindings to {{name}}", { name: roleRef.name })}
+          removeTooltip={t("Remove selected bindings from {{name}}", { name: roleRef.name })}
         />
       </div>
     );

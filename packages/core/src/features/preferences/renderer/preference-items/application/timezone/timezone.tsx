@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { getAvailableTimezones } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
@@ -34,7 +35,7 @@ const NonInjectedTimezone = observer(({ state, currentTimezone }: Dependencies) 
 
   return (
     <section id="locale">
-      <SubTitle title="Locale Timezone" />
+      <SubTitle title={t("Locale Timezone")} />
       <Select
         id="timezone-input"
         options={options}

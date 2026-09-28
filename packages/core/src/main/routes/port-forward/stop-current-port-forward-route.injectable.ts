@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { apiPrefix } from "../../../common/vars";
 import { clusterRoute } from "../../router/route";
@@ -47,7 +48,7 @@ const stopCurrentPortForwardRouteInjectable = getRouteInjectable({
 
         return {
           error: {
-            message: `error stopping a forward port ${port}`,
+            message: t("error stopping a forward port {{port}}", { port }),
           },
         };
       }

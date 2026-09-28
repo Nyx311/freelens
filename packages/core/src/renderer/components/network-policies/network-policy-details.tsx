@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { NetworkPolicy } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -51,7 +52,7 @@ class NonInjectedNetworkPolicyDetails extends React.Component<NetworkPolicyDetai
       items.push(`except: ${except.join(", ")}`);
     }
 
-    return <DrawerItem name="ipBlock">{items.join(", ")}</DrawerItem>;
+    return <DrawerItem name={t("ipBlock")}>{items.join(", ")}</DrawerItem>;
   }
 
   renderMatchLabels(matchLabels: Record<string, string | undefined> | undefined) {
@@ -100,7 +101,7 @@ class NonInjectedNetworkPolicyDetails extends React.Component<NetworkPolicyDetai
         <ul className={styles.policySelectorList}>
           {this.renderMatchLabels(matchLabels)}
           {this.renderMatchExpressions(matchExpressions)}
-          {isEmpty(matchLabels) && isEmpty(matchExpressions) && <li>(empty)</li>}
+          {isEmpty(matchLabels) && isEmpty(matchExpressions) && <li>{t("(empty)")}</li>}
         </ul>
       </DrawerItem>
     );
@@ -131,7 +132,7 @@ class NonInjectedNetworkPolicyDetails extends React.Component<NetworkPolicyDetai
     }
 
     return (
-      <DrawerItem name="Ports">
+      <DrawerItem name={t("Ports")}>
         <ul>
           {ports.map(({ protocol = "TCP", port = "<all>", endPort }, index) => (
             <li key={index}>
@@ -162,19 +163,19 @@ class NonInjectedNetworkPolicyDetails extends React.Component<NetworkPolicyDetai
 
     return (
       <div className={styles.NetworkPolicyDetails}>
-        <DrawerItem name="Pod Selector" labelsOnly={selector.length > 0}>
+        <DrawerItem name={t("Pod Selector")} labelsOnly={selector.length > 0}>
           {selector.length > 0
             ? policy.getMatchLabels().map((label) => <Badge key={label} label={label} />)
-            : `(empty) (Allowing the specific traffic to all pods in this namespace)`}
+            : t("(empty) (Allowing the specific traffic to all pods in this namespace)")}
         </DrawerItem>
 
         {ingress && (
           <>
-            <DrawerTitle>Ingress</DrawerTitle>
+            <DrawerTitle>{t("Ingress")}</DrawerTitle>
             {ingress.map((ingress, i) => (
               <div key={i} data-testid={`ingress-${i}`}>
                 {this.renderNetworkPolicyPorts(ingress.ports)}
-                {this.renderNetworkPolicyPeers("From", ingress.from)}
+                {this.renderNetworkPolicyPeers(t("From"), ingress.from)}
               </div>
             ))}
           </>
@@ -182,11 +183,11 @@ class NonInjectedNetworkPolicyDetails extends React.Component<NetworkPolicyDetai
 
         {egress && (
           <>
-            <DrawerTitle>Egress</DrawerTitle>
+            <DrawerTitle>{t("Egress")}</DrawerTitle>
             {egress.map((egress, i) => (
               <div key={i} data-testid={`egress-${i}`}>
                 {this.renderNetworkPolicyPorts(egress.ports)}
-                {this.renderNetworkPolicyPeers("To", egress.to)}
+                {this.renderNetworkPolicyPeers(t("To"), egress.to)}
               </div>
             ))}
           </>

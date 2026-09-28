@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { EndpointSlice } from "@freelensapp/kube-object";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { prevDefault } from "@freelensapp/utilities";
@@ -41,10 +42,10 @@ class NonInjectedServiceDetailsEndpointSlices extends React.Component<
       <div className="EndpointSlicesList flex flex-col">
         <Table selectable virtual={false} scrollable={false} className="grow shrink-0 basis-0">
           <TableHead flat>
-            <TableCell className="name">Name</TableCell>
-            <TableCell className="addressType">Type</TableCell>
-            <TableCell className="endpoints">Ports</TableCell>
-            <TableCell className="endpoints">Endpoints</TableCell>
+            <TableCell className="name">{t("Name")}</TableCell>
+            <TableCell className="addressType">{t("Type")}</TableCell>
+            <TableCell className="endpoints">{t("Ports")}</TableCell>
+            <TableCell className="endpoints">{t("Endpoints")}</TableCell>
           </TableHead>
           {endpointSlices.map((endpointSlice) => (
             <TableRow

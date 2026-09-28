@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { object } from "@freelensapp/utilities";
 import { getInjectable } from "@ogre-tools/injectable";
 import proxyFetchInjectable from "./fetch/proxy-fetch.injectable";
@@ -52,9 +53,15 @@ async function fetchDirectMetrics(
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to ${requestMethod} ${url} for clusterId=${cluster.id}: ${response.statusText}`, {
-      cause: response,
-    });
+    throw new Error(
+      t("Failed to {{method}} {{url}} for clusterId={{clusterId}}: {{status}}", {
+        method: requestMethod,
+        url,
+        clusterId: cluster.id,
+        status: response.statusText,
+      }),
+      { cause: response },
+    );
   }
 
   return response.json();

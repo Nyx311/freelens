@@ -5,7 +5,7 @@
  */
 
 import "./daemonsets.scss";
-
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Badge } from "../badge";
@@ -59,22 +59,22 @@ const NonInjectedDaemonSets = observer((props: Dependencies) => {
           [columnId.age]: (daemonSet) => -daemonSet.getCreationTimestamp(),
         }}
         searchFilters={[(daemonSet) => daemonSet.getSearchFields(), (daemonSet) => daemonSet.getLabels()]}
-        renderHeaderTitle="Daemon Sets"
+        renderHeaderTitle={t("Daemon Sets")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
+          { title: t("Name"), className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Namespace",
+            title: t("Namespace"),
             className: "namespace",
             sortBy: columnId.namespace,
             id: columnId.namespace,
           },
-          { title: "Desired", className: "desired", sortBy: columnId.desired, id: columnId.desired },
-          { title: "Current", className: "current", sortBy: columnId.current, id: columnId.current },
-          { title: "Ready", className: "ready", sortBy: columnId.ready, id: columnId.ready },
-          { title: "Updated", className: "updated", sortBy: columnId.updated, id: columnId.updated },
-          { title: "Available", className: "available", sortBy: columnId.available, id: columnId.available },
-          { title: "Node Selector", className: "labels scrollable", id: columnId.labels },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          { title: t("Desired"), className: "desired", sortBy: columnId.desired, id: columnId.desired },
+          { title: t("Current"), className: "current", sortBy: columnId.current, id: columnId.current },
+          { title: t("Ready"), className: "ready", sortBy: columnId.ready, id: columnId.ready },
+          { title: t("Updated"), className: "updated", sortBy: columnId.updated, id: columnId.updated },
+          { title: t("Available"), className: "available", sortBy: columnId.available, id: columnId.available },
+          { title: t("Node Selector"), className: "labels scrollable", id: columnId.labels },
+          { title: t("Age"), className: "age", sortBy: columnId.age, id: columnId.age },
         ]}
         renderTableContents={(daemonSet) => [
           <WithTooltip>{daemonSet.getName()}</WithTooltip>,

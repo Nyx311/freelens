@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./validating-admission-policies.scss";
 
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -35,7 +36,7 @@ const NonInjectedValidatingAdmissionPolicies = observer((props: Dependencies) =>
           ...rest,
           searchProps: {
             ...searchProps,
-            placeholder: "Search...",
+            placeholder: t("Search..."),
           },
         })}
         tableId="config_validating_admission_policies"
@@ -47,15 +48,25 @@ const NonInjectedValidatingAdmissionPolicies = observer((props: Dependencies) =>
           [columnId.age]: (item) => -item.getCreationTimestamp(),
         }}
         searchFilters={[(item) => item.getSearchFields(), (item) => item.getLabels()]}
-        renderHeaderTitle="Validating Admission Policies"
+        renderHeaderTitle={t("Validating Admission Policies")}
         renderTableHeader={[
-          { title: "Name", className: "name", sortBy: columnId.name, id: columnId.name },
           {
-            title: "Validations",
+            title: t("Name"),
+            className: "name",
+            sortBy: columnId.name,
+            id: columnId.name,
+          },
+          {
+            title: t("Validations"),
             sortBy: columnId.validations,
             id: columnId.validations,
           },
-          { title: "Age", className: "age", sortBy: columnId.age, id: columnId.age },
+          {
+            title: t("Age"),
+            className: "age",
+            sortBy: columnId.age,
+            id: columnId.age,
+          },
         ]}
         renderTableContents={(item) => [
           <WithTooltip>{item.getName()}</WithTooltip>,

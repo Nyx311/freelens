@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Radio, RadioGroup } from "../radio";
@@ -40,8 +41,8 @@ const NonInjectedClusterMetricSwitchers = observer(
           value={selectedNodeRoleForMetrics.value.get()}
           onChange={selectedNodeRoleForMetrics.set}
         >
-          <Radio label="Master" value="master" disabled={!selectedNodeRoleForMetrics.hasMasterNodes.get()} />
-          <Radio label="Worker" value="worker" disabled={!selectedNodeRoleForMetrics.hasWorkerNodes.get()} />
+          <Radio label={t("Master")} value="master" disabled={!selectedNodeRoleForMetrics.hasMasterNodes.get()} />
+          <Radio label={t("Worker")} value="worker" disabled={!selectedNodeRoleForMetrics.hasWorkerNodes.get()} />
         </RadioGroup>
       </div>
       <div className={styles.timeRangeBox}>
@@ -54,8 +55,8 @@ const NonInjectedClusterMetricSwitchers = observer(
           value={selectedMetricsType.value.get()}
           onChange={selectedMetricsType.set}
         >
-          <Radio label="CPU" value="cpu" disabled={!hasCPUMetrics} />
-          <Radio label="Memory" value="memory" disabled={!hasMemoryMetrics} />
+          <Radio label={t("CPU")} value="cpu" disabled={!hasCPUMetrics} />
+          <Radio label={t("Memory")} value="memory" disabled={!hasMemoryMetrics} />
         </RadioGroup>
       </div>
     </div>

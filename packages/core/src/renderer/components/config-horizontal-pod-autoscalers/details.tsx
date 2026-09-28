@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import "./details.scss";
 
 import { HorizontalPodAutoscaler } from "@freelensapp/kube-object";
@@ -49,7 +50,7 @@ class NonInjectedHorizontalPodAutoscalerDetails extends React.Component<HpaDetai
 
     return (
       <>
-        on
+        {t("on")}
         <Link to={objectUrl}>{`${kind}/${name}`}</Link>
       </>
     );
@@ -68,10 +69,10 @@ class NonInjectedHorizontalPodAutoscalerDetails extends React.Component<HpaDetai
         case "Resource": {
           const metricSpec = metric.resource ?? metric.containerResource;
 
-          return `Resource ${metricSpec.name} on Pods`;
+          return t("Resource {{name}} on Pods", { name: metricSpec.name });
         }
         case "Pods":
-          return `${metricName ?? ""} on Pods`;
+          return t("{{metricName}} on Pods", { metricName: metricName ?? "" });
 
         case "Object": {
           return (
@@ -81,17 +82,20 @@ class NonInjectedHorizontalPodAutoscalerDetails extends React.Component<HpaDetai
           );
         }
         case "External":
-          return `${metricName ?? ""} on ${JSON.stringify(metric.external.metricSelector ?? metric.external.metric?.selector)}`;
+          return t("{{metricName}} on {{selector}}", {
+            metricName: metricName ?? "",
+            selector: JSON.stringify(metric.external.metricSelector ?? metric.external.metric?.selector),
+          });
         default:
-          return hpa.spec?.targetCPUUtilizationPercentage ? "CPU Utilization percentage" : "unknown";
+          return hpa.spec?.targetCPUUtilizationPercentage ? t("CPU Utilization percentage") : t("unknown");
       }
     };
 
     return (
       <Table data-testid="hpa-metrics">
         <TableHead flat>
-          <TableCell className="name">Name</TableCell>
-          <TableCell className="metrics">Current / Target</TableCell>
+          <TableCell className="name">{t("Name")}</TableCell>
+          <TableCell className="metrics">{t("Current / Target")}</TableCell>
         </TableHead>
         {this.props.getMetrics(hpa).map((metrics, index) => (
           <TableRow key={index}>
@@ -120,7 +124,7 @@ class NonInjectedHorizontalPodAutoscalerDetails extends React.Component<HpaDetai
 
     return (
       <div className="HpaDetails">
-        <DrawerItem name="Reference">
+        <DrawerItem name={t("Reference")}>
           {scaleTargetRef && (
             <Link to={getDetailsUrl(apiManager.lookupApiLink(scaleTargetRef, hpa))}>
               {scaleTargetRef.kind}/{scaleTargetRef.name}
@@ -128,14 +132,14 @@ class NonInjectedHorizontalPodAutoscalerDetails extends React.Component<HpaDetai
           )}
         </DrawerItem>
 
-        <DrawerItem name="Min Pods">{hpa.getMinPods()}</DrawerItem>
-        <DrawerItem name="Max Pods">{hpa.getMaxPods()}</DrawerItem>
-        <DrawerItem name="Replicas">{hpa.getReplicas()}</DrawerItem>
+        <DrawerItem name={t("Min Pods")}>{hpa.getMinPods()}</DrawerItem>
+        <DrawerItem name={t("Max Pods")}>{hpa.getMaxPods()}</DrawerItem>
+        <DrawerItem name={t("Replicas")}>{hpa.getReplicas()}</DrawerItem>
         <KubeObjectConditionsDrawer object={hpa} />
 
         {(hpa.getMetrics().length !== 0 || hpa.spec?.targetCPUUtilizationPercentage) && (
           <>
-            <DrawerTitle>Metrics</DrawerTitle>
+            <DrawerTitle>{t("Metrics")}</DrawerTitle>
             <div className="metrics">{this.renderMetrics()}</div>
           </>
         )}

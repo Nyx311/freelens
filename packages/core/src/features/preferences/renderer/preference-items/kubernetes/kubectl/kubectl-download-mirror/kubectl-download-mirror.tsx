@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { observer } from "mobx-react";
 import { Input, InputValidators } from "../../../../../../../renderer/components/input";
@@ -24,7 +25,7 @@ interface Dependencies {
 
 const downloadMirrorOptions = Array.from(packageMirrors, ([name, mirror]) => ({
   value: name,
-  label: mirror.label,
+  label: t(mirror.label),
 
   // TODO: Side-effect
   isDisabled: !mirror.platforms.has(process.platform),
@@ -32,10 +33,10 @@ const downloadMirrorOptions = Array.from(packageMirrors, ([name, mirror]) => ({
 
 const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => (
   <section>
-    <SubTitle title="Download mirror" />
+    <SubTitle title={t("Download mirror")} />
     <Select
       id="download-mirror-input"
-      placeholder="Download mirror for kubectl"
+      placeholder={t("Download mirror for kubectl")}
       options={downloadMirrorOptions}
       value={state.downloadMirror}
       onChange={(option) => (state.downloadMirror = option?.value ?? defaultPackageMirror)}
@@ -44,7 +45,7 @@ const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => (
     />
     {state.downloadMirror === customPackageMirror && (
       <div style={{ marginTop: 16 }}>
-        <SubTitle title="Custom mirror URL" />
+        <SubTitle title={t("Custom mirror URL")} />
         <Input
           theme="round-black"
           type="url"
@@ -54,7 +55,7 @@ const NonInjectedKubectlDownloadMirror = observer(({ state }: Dependencies) => (
           onChange={(value) => (state.downloadCustomMirror = value)}
           disabled={!state.downloadKubectlBinaries}
         />
-        <div className="hint">{"The base URL of your mirror. Freelens fills in the version and platform path."}</div>
+        <div className="hint">{t("The base URL of your mirror. Freelens fills in the version and platform path.")}</div>
       </div>
     )}
   </section>

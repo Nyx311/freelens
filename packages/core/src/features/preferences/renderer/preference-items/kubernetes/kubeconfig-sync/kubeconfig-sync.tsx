@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { Spinner } from "@freelensapp/spinner";
 import { iter, tuple } from "@freelensapp/utilities";
@@ -121,7 +122,7 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
     if (!entries.length) {
       return (
         <Notice className="mt-3">
-          <div className="flex-grow text-center">No files and folders have been synced yet</div>
+          <div className="flex-grow text-center">{t("No files and folders have been synced yet")}</div>
         </Notice>
       );
     }
@@ -134,16 +135,16 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
       return (
         <div className="flex gap-2 items-center mb-5">
           <PathPicker
-            message="Sync file(s)"
+            message={t("Sync file(s)")}
             onPick={this.onPick}
-            buttonLabel="Sync"
+            buttonLabel={t("Sync")}
             properties={["showHiddenFiles", "multiSelections", "openFile"]}
           />
-          <span>or</span>
+          <span>{t("or")}</span>
           <PathPicker
-            message="Sync folder(s)"
+            message={t("Sync folder(s)")}
             onPick={this.onPick}
-            buttonLabel="Sync"
+            buttonLabel={t("Sync")}
             properties={["showHiddenFiles", "multiSelections", "openDirectory"]}
           />
         </div>
@@ -153,9 +154,9 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
     return (
       <div className="self-start mb-5">
         <PathPicker
-          message="Sync Files and Folders"
+          message={t("Sync Files and Folders")}
           onPick={this.onPick}
-          buttonLabel="Sync"
+          buttonLabel={t("Sync")}
           properties={["showHiddenFiles", "multiSelections", "openFile", "openDirectory"]}
         />
       </div>
@@ -165,10 +166,10 @@ class NonInjectedKubeconfigSync extends React.Component<Dependencies> {
   render() {
     return (
       <section id="kube-sync">
-        <h2 data-testid="kubernetes-sync-header">Kubeconfig Syncs</h2>
+        <h2 data-testid="kubernetes-sync-header">{t("Kubeconfig Syncs")}</h2>
 
         {this.renderSyncButtons()}
-        <SubTitle title="Synced Items" className="pt-5" />
+        <SubTitle title={t("Synced Items")} className="pt-5" />
         {this.renderEntries()}
       </section>
     );

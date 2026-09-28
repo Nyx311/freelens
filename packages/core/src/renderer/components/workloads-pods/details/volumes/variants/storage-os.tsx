@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { secretApiInjectable } from "@freelensapp/kube-api-specifics";
 import { withInjectables } from "@ogre-tools/injectable-react";
 import { DrawerItem } from "../../../../drawer";
@@ -26,13 +27,13 @@ const NonInjectedStorageOs = (props: PodVolumeVariantSpecificProps<"storageos"> 
 
   return (
     <>
-      <DrawerItem name="Volume Name">{volumeName}</DrawerItem>
-      <DrawerItem name="Volume Namespace" hidden={volumeNamespace === "default"}>
-        {volumeNamespace === volumeName ? "- no default behaviour -" : volumeNamespace || pod.getNs()}
+      <DrawerItem name={t("Volume Name")}>{volumeName}</DrawerItem>
+      <DrawerItem name={t("Volume Namespace")} hidden={volumeNamespace === "default"}>
+        {volumeNamespace === volumeName ? t("- no default behaviour -") : volumeNamespace || pod.getNs()}
       </DrawerItem>
-      <DrawerItem name="Filesystem type">{fsType}</DrawerItem>
-      <DrawerItem name="Readonly">{readOnly.toString()}</DrawerItem>
-      <LocalRef pod={pod} title="Secret" kubeRef={secretRef} api={secretApi} />
+      <DrawerItem name={t("Filesystem type")}>{fsType}</DrawerItem>
+      <DrawerItem name={t("Readonly")}>{t(readOnly.toString())}</DrawerItem>
+      <LocalRef pod={pod} title={t("Secret")} kubeRef={secretRef} api={secretApi} />
     </>
   );
 };

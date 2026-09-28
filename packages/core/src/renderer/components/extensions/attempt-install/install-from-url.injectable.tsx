@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { loggerInjectionToken } from "@freelensapp/logger";
 import { showErrorNotificationInjectable } from "@freelensapp/notifications";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -65,7 +66,7 @@ const installFromUrlInjectable = getInjectable({
       const result = await downloadBinary(url, { timeout: 300_000 });
 
       if (!result.callWasSuccessful) {
-        showErrorNotification(`Failed to download extension: ${result.error}`);
+        showErrorNotification(t("Failed to download extension: {{error}}", { error: result.error }));
 
         return dispose();
       }

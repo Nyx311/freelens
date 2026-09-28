@@ -3,6 +3,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { action, computed, makeObservable } from "mobx";
 
 import type { StorageLayer } from "../../../renderer/utils/storage-helper";
@@ -52,7 +53,7 @@ export class StandaloneTerminalTabsStore {
   add(): StandaloneTerminalTab {
     const tab = {
       id: this.dependencies.createTabId(),
-      title: `Terminal ${this.tabs.length + 1}`,
+      title: t("Terminal {{number}}", { number: this.tabs.length + 1 }),
     };
 
     this.dependencies.storage.merge((state) => {

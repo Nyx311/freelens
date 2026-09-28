@@ -55,7 +55,7 @@ const NonInjectedLogsDialog = (props: LogsDialogProps & Dependencies) => {
             </div>
           }
         >
-          <code className="block">{logs || "There are no logs available."}</code>
+          <code className="block">{logs || t("There are no logs available.")}</code>
         </WizardStep>
       </Wizard>
     </Dialog>

@@ -61,7 +61,7 @@ export class ClusterFrameHandler {
 
     iframe.id = `cluster-frame-${cluster.id}`;
     iframe.name = cluster.contextName.get();
-    const frameUrl = new URL(getClusterFrameUrl(clusterId));
+    const frameUrl = new URL(getClusterFrameUrl(clusterId), location.href);
 
     frameUrl.searchParams.set("freelensLocale", i18n.language);
     iframe.setAttribute("src", frameUrl.href);

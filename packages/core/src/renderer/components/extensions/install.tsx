@@ -45,7 +45,10 @@ const installInputValidator = unionInputValidatorsAsync(
   InputValidators.isPath,
 );
 
-const installTitle = `Name, URL, or path to an extension package (${supportedExtensionFormats.join(", ")}) or to an unpacked extension directory`;
+const installTitle = t(
+  "Name, URL, or path to an extension package ({{formats}}) or to an unpacked extension directory",
+  { formats: supportedExtensionFormats.join(", ") },
+);
 
 const NonInjectedInstall = observer(
   ({ installExtensionFromInput, installFromSelectFileDialog, installState }: Dependencies) => {
@@ -99,7 +102,8 @@ const NonInjectedInstall = observer(
           </div>
         </div>
         <small className={styles.proTip}>
-          <b>{t("Pro-Tip")}</b>: you can drag and drop a tarball file, or an unpacked extension directory, to this area
+          <b>{t("Pro-Tip")}</b>
+          {`: ${t("you can drag and drop a tarball file, or an unpacked extension directory, to this area")}`}
         </small>
       </section>
     );

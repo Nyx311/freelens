@@ -4,6 +4,7 @@
  * Licensed under MIT License. See LICENSE in root directory for more information.
  */
 
+import { t } from "@freelensapp/i18n";
 import { clusterFrameChildComponentInjectionToken } from "@freelensapp/react-application";
 import { Redirect } from "@freelensapp/routing";
 import { getInjectable } from "@ogre-tools/injectable";
@@ -42,7 +43,9 @@ const NonInjectedClusterFrameLayout = observer((props: Dependencies) => {
       ) : (
         <div className={styles.centering}>
           <div className="error">
-            An error has occurred. No route can be found matching the current route, which is also the starting route.
+            {t(
+              "An error has occurred. No route can be found matching the current route, which is also the starting route.",
+            )}
           </div>
         </div>
       )}

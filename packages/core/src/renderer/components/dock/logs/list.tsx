@@ -6,6 +6,7 @@
 
 import "./list.scss";
 
+import { t } from "@freelensapp/i18n";
 import { Spinner } from "@freelensapp/spinner";
 import { array, cssNames, formatInTimeZone } from "@freelensapp/utilities";
 import { withInjectables } from "@ogre-tools/injectable-react";
@@ -482,7 +483,9 @@ class NonForwardedLogList extends React.Component<
     if (!this.logs.length) {
       return (
         <div className="LogList flex grow shrink-0 basis-0 items-center justify-center">
-          There are no logs available for container {this.props.model.logTabData.get()?.selectedContainer}
+          {t("There are no logs available for container {{container}}", {
+            container: this.props.model.logTabData.get()?.selectedContainer ?? "",
+          })}
         </div>
       );
     }

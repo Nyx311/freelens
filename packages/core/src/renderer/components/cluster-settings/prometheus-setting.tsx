@@ -314,10 +314,13 @@ class NonInjectedClusterPrometheusSetting extends React.Component<ClusterPrometh
                     placeholder="https://prometheus-k8s-openshift-monitoring.apps.example.com"
                   />
                   <small className="hint">
-                    The external URL (OpenShift Route or Ingress) to the Prometheus instance. This connects directly to
-                    Prometheus, bypassing the Kubernetes API service proxy which cannot forward authentication headers.
-                    Find the route with: oc get route prometheus-k8s -n openshift-monitoring -o
-                    jsonpath=&apos;https://&#123;.spec.host&#125;&apos;
+                    {t(
+                      "The external URL (OpenShift Route or Ingress) to the Prometheus instance. This connects directly to Prometheus, bypassing the Kubernetes API service proxy which cannot forward authentication headers. Find the route with: {{command}}",
+                      {
+                        command:
+                          "oc get route prometheus-k8s -n openshift-monitoring -o jsonpath='https://{.spec.host}'",
+                      },
+                    )}
                   </small>
                 </section>
                 <hr />
